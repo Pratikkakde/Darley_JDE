@@ -4,7 +4,7 @@ Author                  : Pratik Kakade
 Purpose                 : This Apex class is designed to handle Account triggers, providing methods for after insert and after update operations.
 Description             : This class provides methods to process Account records, including splitting address fields, handling record type changes, and 
                           syncing data with an external system.
-Version                 : 1.2
+Version                 : 1.3
 Change Log              : Modified by Pratik Kakade on 26 Feb 2024.
 Test Class for          : accountTriggerHandlerServiceClassTest
 CreateDate              : 1 Sept 2023
