@@ -1,0 +1,62 @@
+.b2b-quick-order__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.b2b-quick-order__container {
+    width: 100%;
+    padding: 40px;
+}
+
+.b2b-quick-order__title {
+    font-size: 36px;
+    font-weight: 700;
+    padding: 40px 40px 0;
+}
+
+.b2b-quick-order__body_text {
+    width: 70%;
+    font-size: 18px;
+    font-family: 'Century Gothic', 'Open Sans', 'Helvetica', 'Arial', 'sans-serif';
+    color: #000000;
+    padding-bottom: 40px;
+    padding-right: 69px;
+}
+
+.b2b-quick-order__body_group {
+    width: 100%;
+    padding: 50px 40px;
+}
+
+/* BUTTON */
+.b2b-quick-order__button {
+    text-align: center;
+    font-size: 18px;
+    width: 30%;
+    min-width: 120px;
+    height: 45px;
+    text-transform: uppercase;
+    background-color: #294694;
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+@media (max-width: 960px) {
+    .b2b-quick-order__body_group {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .b2b-quick-order__button {
+        width: 100%;
+    }
+
+    .b2b-quick-order__body_text {
+        width: 100%;
+    }
+}

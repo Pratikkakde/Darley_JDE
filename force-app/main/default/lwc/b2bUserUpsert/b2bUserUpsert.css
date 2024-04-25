@@ -1,0 +1,48 @@
+:host {
+    --dxp-s-form-element-label-font-size: 12px;
+
+    display: block;
+}
+
+.b2b-user-upsert__wrapper lightning-input:last-child {
+    margin-bottom: 0;
+}
+
+.b2b-user-upsert__wrapper .slds-modal__content {
+    position: relative;
+}
+
+.b2b-user-upsert__wrapper .slds-button[disabled] {
+    cursor: not-allowed;
+}
+
+.b2b-user-upsert__wrapper .slds-modal__footer {
+    display: flex;
+    justify-content: space-between;
+    grid-column-gap: 103px;
+    padding-top: 30px;
+}
+
+.b2b-user-upsert__wrapper .slds-modal__footer .slds-button {
+    width: 100%;
+    max-width: calc(50% - 103px / 2);
+    line-height: 38px;
+}
+
+.b2b-user-upsert__wrapper .slds-modal__footer .slds-button + .slds-button {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+}
+
+@media (max-width: 574.98px) {
+
+    .b2b-user-upsert__wrapper .slds-modal__footer {
+        flex-direction: column;
+        grid-row-gap: 1rem;
+    }
+
+    .b2b-user-upsert__wrapper .slds-modal__footer .slds-button {
+        max-width: 100%;
+    }
+
+}

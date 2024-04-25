@@ -1,0 +1,12 @@
+.b2b-company-logo__wrapper {
+    display: flex;
+    justify-content: var(--b2b-companyLogo-logoAlign, center);
+    margin-bottom: var(--b2b-companyLogo-logoMarginBottom, 0);
+}
+
+.b2b-company-logo__wrapper img {
+    display: block;
+    width: 100%;
+    max-width: var(--b2b-companyLogo-logoMaxWidth, 100%);
+    max-height: var(--b2b-companyLogo-logoMaxHeight, 100%);
+}

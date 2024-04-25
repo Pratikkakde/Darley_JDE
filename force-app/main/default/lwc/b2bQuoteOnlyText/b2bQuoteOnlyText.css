@@ -1,0 +1,8 @@
+.b2b-quote-only__text {
+    border: 0.1rem solid black;
+    padding: 0.5rem;
+}
+
+.bold-text {
+    font-weight: bold !important;
+}

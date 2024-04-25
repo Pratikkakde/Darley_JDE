@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Home Quick Order</masterLabel>
+    <description>B2B Home Quick Order</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="numberOfLines" type="Integer" label="Number of Lines" min="5" max="10" default="5"></property>
+            <property name="maxNumberOfLines" type="Integer" label="Max Number of Lines" min="10" max="50" default="10"></property>
+            <property name="templateDocumentId" type="String" label="'Template' Document Id" default="darleyquickorder22"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

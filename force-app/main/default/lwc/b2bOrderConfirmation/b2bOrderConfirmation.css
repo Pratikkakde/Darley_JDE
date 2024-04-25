@@ -1,0 +1,117 @@
+:host {
+    display: block;
+}
+
+.b2b-order-confirmation__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5.8125rem;
+    padding-bottom: 8.0625rem;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-order-confirmation__wrapper {
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+    }
+}
+
+.b2b-order-confirmation__container {
+    width: 100%;
+    max-width: 40rem;
+}
+
+/* IMAGE */
+.b2b-order-confirmation__image {
+    display: block;
+    margin: 0 auto;
+    max-width: var(--b2b-orderConfirmation-contentImageMaxWidth, 100px);
+}
+
+.b2b-order-confirmation__image + .b2b-order-confirmation__title {
+    margin-top: 3.4375rem;
+}
+
+/* TITLE */
+.b2b-order-confirmation__title {
+    font-size: 40px;
+    line-height: 60px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    color: #2E363A;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-order-confirmation__title {
+        font-size: 1.875rem;
+    }
+}
+
+.b2b-order-confirmation__title + .b2b-order-confirmation__number {
+    margin-top: 10px;
+}
+
+/* NUMBER */
+.b2b-order-confirmation__number {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    color: #2E363A;
+}
+
+.b2b-order-confirmation__title + .b2b-order-confirmation__buttons,
+.b2b-order-confirmation__number + .b2b-order-confirmation__buttons {
+    margin-top: 50px;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-order-confirmation__number {
+        font-size: 1.125rem;
+    }
+    
+    .b2b-order-confirmation__title + .b2b-order-confirmation__buttons,
+    .b2b-order-confirmation__number + .b2b-order-confirmation__buttons {
+        margin-top: 2.5rem;
+    }
+}
+
+/* BUTTONS */
+.b2b-order-confirmation__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column-gap: 40px;
+    grid-row-gap: 1rem;
+}
+
+@media (max-width: 574.98px) {
+    .b2b-order-confirmation__buttons {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 768px) {
+    .b2b-order-confirmation__buttons .slds-button {
+        width: 100%;
+        max-width: 250px;
+        font-size: 18px;
+        line-height: 50px;
+        font-weight: 700;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .b2b-order-confirmation__buttons .slds-button {
+        width: 100%;
+        max-width: 12.5rem;
+        font-size: 16px;
+        line-height: 43px;
+    }
+}
+
+.b2b-order-confirmation__buttons .slds-button + .slds-button {
+    margin-left: 0;
+}

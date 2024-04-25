@@ -1,0 +1,89 @@
+:host {
+    display: block;
+}
+
+/* WRAPPER */
+.b2b-pagination__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* BUTTON */
+.b2b-pagination__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--b2b-pagination-buttonWidth, 40px);
+    min-width: var(--b2b-pagination-buttonWidth, 40px);
+    height: var(--b2b-pagination-buttonWidth, 40px);
+    padding: 0;
+    font-size: var(--b2b-pagination-buttonFontSize, 14px);
+    color: #231F20;
+    border-width: var(--b2b-pagination-buttonBorderWidth, 1px);
+    border-style: var(--b2b-pagination-buttonBorderStyle, solid);
+    border-color: var(--b2b-pagination-buttonBorderColor, transparent);
+    border-radius: 50%;
+    background-color: var(--b2b-pagination-buttonBackgroundColor, transparent);
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.1s, border-color 0.1s, background-color 0.1s;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-pagination__button {
+        width: var(--b2b-pagination-buttonWidth-mobile, 32px);
+        min-width: var(--b2b-pagination-buttonWidth-mobile, 32px);
+        height: var(--b2b-pagination-buttonWidth-mobile, 32px);
+    }
+}
+
+.b2b-pagination__button + .b2b-pagination__button {
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 574.98px) {
+    .b2b-pagination__button + .b2b-pagination__button {
+        margin-left: 0;
+    }     
+}
+
+.b2b-pagination__button:hover {
+    border-color: var(--b2b-pagination-buttonBorderColorHover, var(--b2b-colorBorder, #DDDBDA));
+}
+
+.b2b-pagination__button[data-active="true"],
+.b2b-pagination__button[data-active="true"]:hover {
+    font-weight: 700;
+    border-color: var(--b2b-pagination-buttonActiveBorderColor, #E8E8E8);
+    background-color: var(--b2b-pagination-buttonActiveBackgroundColor, #E8E8E8);
+    cursor: default;
+}
+
+.b2b-pagination__button[disabled] {
+    font-weight: 400;
+    color: var(--b2b-pagination-buttonDisabledColor, var(--b2b-colorBorder, #DDDBDA));
+    border-color: var(--b2b-pagination-buttonDisabledBorderColor, transparent);
+    background-color: var(--b2b-pagination-buttonDisabledBackgroundColor, transparent);
+    cursor: default;
+}
+
+/* ICON */
+.b2b-pagination__icon {
+    display: block;
+    width: 7px;
+    height: 13px;
+    fill: var(--b2b-colorText, #000000);
+    transition: fill 0.1s;
+}
+
+[disabled] .b2b-pagination__icon {
+    fill: var(--b2b-colorBorder, #DDDBDA);
+}
+
+/* SEPARATOR */
+.b2b-pagination__separator,
+.b2b-pagination__separator:hover {
+    border-color: transparent;
+    cursor: default;
+}

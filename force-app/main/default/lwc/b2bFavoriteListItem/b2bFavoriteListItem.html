@@ -1,0 +1,158 @@
+<template>
+    <div class="b2b-favorite-list-item__wrapper">
+
+        <!-- LOADING SPINNER -->
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+        </template>
+
+        <div class="b2b-favorite-list-item__container">
+
+            <!-- IMAGE -->
+            <template if:false={showItemError}>
+                <a
+                    href={getProductLink}
+                    title={getProductTitle}
+                    target="_blank"
+                    class="b2b-favorite-list-item__image-wrapper"
+                >
+                    <template if:true={image}>
+                        <img src={image} alt={name} class="b2b-favorite-list-item__image">
+                    </template>
+                    <template if:false={image}>
+                        <svg
+                            viewBox="0 0 150 143"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="b2b-favorite-list-item__image-default"
+                        >
+                            <path d="M37.1027 59.5577H143.31C147.005 59.5577 150 62.553 150 66.2479V135.659C150 139.354 147.005 142.349 143.31 142.349H37.1027C33.4078 142.349 30.4124 139.354 30.4124 135.659V66.2479C30.4124 62.553 33.4078 59.5577 37.1027 59.5577ZM46.3017 127.296H135.783V103.058L124.856 78.792L99.9469 88.3917L80.6025 107.95L60.0355 82.1553L46.3017 114.492V127.296ZM69.0875 46.1773H24.5585C20.8636 46.1773 17.8683 49.1726 17.8683 52.8675V93.2844L0.40529 45.3052C-0.858441 41.8331 0.931774 37.994 4.40385 36.7303L104.206 0.40529C107.678 -0.858441 111.517 0.931774 112.781 4.40385L127.985 46.1773H112.118L110.51 41.7599L91.9423 22.6947L71.819 40.2347L69.0875 46.1773Z"></path>
+                        </svg>
+                    </template>
+                </a>
+            </template>
+            <template if:true={showItemError}>
+                <div class="b2b-favorite-list-item__image-empty"></div>
+            </template>
+
+            <!-- FIELDS -->
+            <div class="b2b-favorite-list-item__fields">
+
+                <!-- NAME -->
+                <div class="b2b-favorite-list-item__name">
+                    <a href={getProductLink} title={getProductTitle} target="_blank">{getName}</a>
+                </div>
+
+                <!-- SKU -->
+                <template if:true={sku}>
+                    <div class="b2b-favorite-list-item__field b2b-favorite-list-item__sku dxp-text-body-small">
+                        <span class="b2b-favorite-list-item__field-label">{labels.sku}:</span>
+                        <span class="b2b-favorite-list-item__field-value">{sku}</span>
+                    </div>
+                </template>
+
+                <!-- VARIATION -->
+                <template for:each={variationAttributeSet} for:item="item" for:index="index">
+                    <div key={item.index} class="b2b-favorite-list-item__field dxp-text-body-small">
+                        <span class="b2b-favorite-list-item__field-label">{item.label}:</span>
+                        <span class="b2b-favorite-list-item__field-value">{item.value}</span>
+                    </div>
+                </template>
+
+            </div>
+
+            <!-- PRICES -->
+            <div class="b2b-favorite-list-item__prices">
+                <template if:true={showPrice}>
+
+                    <!-- UNIT PRICE -->
+                    <lightning-formatted-number
+                        value={unitPrice}
+                        format-style="currency"
+                        currency-code={currencyIsoCode}
+                        class="b2b-favorite-list-item__unit-price"
+                    ></lightning-formatted-number>
+
+                    <!-- LIST PRICE -->
+                    <template if:true={showListPrice}>
+                        <lightning-formatted-number
+                            value={listPrice}
+                            format-style="currency"
+                            currency-code={currencyIsoCode}
+                            class="b2b-favorite-list-item__list-price"
+                        ></lightning-formatted-number>
+                    </template>
+
+                </template>
+
+                <!-- PRICE UNAVAILABLE -->
+                <template if:true={showPriceUnavailable}>
+                    <span class="b2b-favorite-list-item__price-unavailable">{labels.priceUnavailable}</span>
+                </template>
+
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="b2b-favorite-list-item__actions">
+
+                <!-- REMOVE -->
+                <template if:true={isMobileView}>
+                    <lightning-button
+                        variant="base"
+                        label={labels.delete}
+                        disabled={isRemoveButtonDisabled}
+                        onclick={handleClickRemove}
+                    ></lightning-button>
+                </template>
+                <template if:false={isMobileView}>
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        variant="container"
+                        size="medium"
+                        alternative-text={labels.delete}
+                        title={labels.delete}
+                        disabled={isRemoveButtonDisabled}
+                        onclick={handleClickRemove}
+                    ></lightning-button-icon>
+                </template>
+
+                <!-- ADD TO CART -->
+                <template if:false={showItemError}>
+                    <lightning-button
+                        variant="brand-outline"
+                        label={labels.addToCart}
+                        disabled={isAddToCartButtonDisabled}
+                        onclick={handleClickAdd}
+                    ></lightning-button>
+                </template>
+
+            </div>
+
+        </div>
+
+        <!-- PRODUCT INFO -->
+        <template if:true={showItemInfo}>
+            <div class="b2b-favorite-list-item__item-info">
+                <span>{labels.quoteInfoMessage}</span>
+            </div>
+        </template>
+
+        <!-- PRODUCT ERROR -->
+        <template if:true={showItemError}>
+            <div class="b2b-favorite-list-item__item-error">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0.922852C5.90771 0.922852 0.923096 5.90747 0.923096 11.9998C0.923096 18.0921 5.90771 23.0767 12 23.0767C18.0923 23.0767 23.0769 18.0921 23.0769 11.9998C23.0769 5.90747 18.0923 0.922852 12 0.922852ZM3.69233 11.9998C3.69233 7.43054 7.43079 3.69208 12 3.69208C13.8 3.69208 15.4616 4.24593 16.8 5.21516L5.2154 16.7998C4.24617 15.4613 3.69233 13.7998 3.69233 11.9998ZM12 20.3075C10.2 20.3075 8.53848 19.7536 7.20002 18.7844L18.7846 7.19977C19.7539 8.53824 20.3077 10.1998 20.3077 11.9998C20.3077 16.569 16.5692 20.3075 12 20.3075Z"></path>
+                </svg>
+                <span>{getItemErrorMessage}</span>
+            </div>
+        </template>
+
+    </div>
+
+    <!-- MODAL -->
+    <c-b2b-modal
+        is-loading={isModalLoading}
+        onclose={handleCloseModal}
+        onsubmit={handleSubmitModal}
+    ></c-b2b-modal>
+
+</template>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Theme Login</masterLabel>
+    <description>B2B Theme Login</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Theme_Layout</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <!-- BACKGROUND -->
+            <property name="showBackgroundImage" type="Boolean" label="Show 'Background' Image" default="false"></property>
+            <property name="backgroundImage" type="ContentReference" label="'Background' Image" filter="cms_image"></property>
+            <property name="backgroundColor" type="Color" label="'Background' Color" default="rgb(0, 16, 32)"></property>
+            <property name="background" type="String" label="Background (CSS)" default="radial-gradient(76.68% 146.15% at 49.34% -20.07%, #0070B0 0%, #004F7F 31%, #00223B 78%, #001020 100%)"></property>
+
+            <!-- CONTAINER -->
+            <property name="containerMaxWidth" type="Integer" label="'Container' Max-Width (px)" min="100" max="1440" default="385"></property>
+            <property name="containerBackgroundColor" type="Color" label="'Container' Background Color" default="rgb(255, 255, 255)"></property>
+            <property name="containerHorizontalPosition" type="String" label="'Container' Horizontal Position" datasource="Left,Center,Right" default="Center"></property>
+            <property name="containerVerticalPosition" type="String" label="'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Middle"></property>
+            <property name="containerHorizontalPadding" type="String" label="'Container' Horizontal Padding: Desktop (CSS)" default="3.125rem"></property>
+            <property name="containerVerticalPadding" type="String" label="'Container' Vertical Padding: Desktop (CSS)" default="2.5rem"></property>
+            <property name="containerHorizontalPaddingMobile" type="String" label="'Container' Horizontal Padding: Mobile (CSS)" default="1.25rem"></property>
+            <property name="containerVerticalPaddingMobile" type="String" label="'Container' Vertical Padding: Mobile (CSS)" default="1.5rem"></property>
+            <property name="containerBorderWidth" type="Integer" label="'Container' Border Width (px)" min="0" max="10" default="0"></property>
+            <property name="containerBorderRadius" type="Integer" label="'Container' Border Radius (px)" min="0" max="50" default="4"></property>
+            <property name="containerBorderColor" type="Color" label="'Container' Border Color"></property>
+            <property name="containerBoxShadow" type="String" label="'Container' Box Shadow (CSS)" default="0px 2px 10px rgba(0, 0, 0, 0.15)"></property>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,23 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class={wrapperClass}>
+            <template if:true={getUseAsLink}>
+                <a href={getNavigateLink}>
+                    <img
+                        src={getLogoImage}
+                        alt={getAlternativeText}
+                        title={getAlternativeText}
+                    >
+                </a>
+            </template>
+            <template if:false={getUseAsLink}>
+                <img
+                    src={getLogoImage}
+                    alt={getAlternativeText}
+                    title={getAlternativeText}
+                >
+            </template>
+        </div>
+    </template>
+</template>

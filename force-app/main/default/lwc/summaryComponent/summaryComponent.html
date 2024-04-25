@@ -1,0 +1,107 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 05-12-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+  <div class="slds-grid slds-wrap">
+    <div class="slds-col slds-size_1-of-2">
+      <lightning-icon icon-name="action:back"  class ="iconColor" alternative-text="Connected" size="x-small" title="Back" onclick={backToShowProduct}></lightning-icon>
+  </div>
+  <div class="slds-col slds-size_1-of-2">
+    <p style = "font-size:large; font-weight:bolder;">Pump Summary</p>
+  </div>
+
+  </div>
+  <div style=" overflow:auto;  padding-left:3%">
+    <lightning-card class="slds-p-top_small" variant="Narrow" title ="Pump Name">
+
+     <Strong style="padding-left :20px;font-size: large;">{pumpname}</Strong> 
+    </lightning-card>
+  </div>
+  
+  <br>
+                    
+  
+  
+  
+  <div style="height:450px; overflow:auto;  padding-left:3%">
+    <!-- <div class="slds-p-top_small" >  -->
+      <template for:each={SummaryDatas} for:item="selectionRule" >
+          <lightning-card class="slds-p-top_small bgcolor slds-m-around_small " variant="Narrow" key={selectionRule.id}  title={selectionRule.name}>
+            <table class=" slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped"  cellpadding="5" cellspacing="5"  style="border-collapse:collapse;">
+              <thead>
+                      <tr class = "slds-line-height_reset">
+                      <th class =""  scope="col"  style = " font-weight : bold; width:60%">
+                        <div class ="slds-truncate" title="Product Name" >  Product Name 
+                        </div> 
+                      </th>
+                      <th class =""  scope="col"  style = " font-weight : bold; width:20%">
+                        <div class ="slds-truncate" title="Product Code" >  Product Code 
+                        </div> 
+                      </th>
+                      <th class =""  scope="col"   style = " font-weight : bold; width:20%">
+                        <div class ="slds-truncate" title="Price" >  Price 
+                        </div> 
+                      </th>
+                  </tr>
+              </thead>
+                            
+                        <tbody>
+      
+        <template for:each={selectionRule.selectedlist} for:item="selectionRuleProductName" >
+        
+        <tr class ="slds-hint-parent" key={selectionRuleProductName.id}>
+          
+        <td data-label="Product Name" scope ="row">
+          <div class = "slds-truncate">
+            
+             {selectionRuleProductName.name}
+            </div>
+          </td>
+          <td data-label ="Product Code" scope ="row" >
+            <div class = "slds-truncate">
+           {selectionRuleProductName.component}
+            </div>
+          </td>
+          <td data-label ="Price" scope ="row">
+            ${selectionRuleProductName.price}
+          </td>
+      </tr>
+      
+      </template>
+      </tbody>
+      </table>
+        </lightning-card>
+  
+          </template>
+                    
+    <!-- </div>  -->
+  
+  <!-- optional start -->
+  
+     
+    <!-- end -->
+  
+  
+  </div>
+
+  <br>
+    <div class="slds-float_right ">
+    <div class = " slds-col slds-size_1-of-1 " style = "width:150px; margin-left :1350px" >
+  <lightning-card class="slds-p-around_medium   slds-m-around_small PriceCss "  >
+    Total Price: ${totalPrice}
+  </lightning-card>
+</div>
+</div>
+  <br>
+    <div class="slds-float_right ">
+      <lightning-button variant="brand" label="Next" title="Primary action" class="slds-modal__setMargin nxtbtn" onclick={nextButton}></lightning-button>
+              </div>
+  
+  
+  
+  </template>

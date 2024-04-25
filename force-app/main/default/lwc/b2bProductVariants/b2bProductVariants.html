@@ -1,0 +1,18 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class="b2b-product-variants__wrapper">
+            <template for:each={variations} for:item="item">
+                <div key={item.id} class="b2b-product-variants__item">
+                    <c-b2b-select
+                        data-id={item.id}
+                        label={item.label}
+                        value={item.value}
+                        options={item.options}
+                        onchange={handleChangeVariant}
+                    ></c-b2b-select>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

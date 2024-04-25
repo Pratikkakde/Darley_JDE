@@ -1,0 +1,36 @@
+:host {
+    display: block;
+}
+
+.b2b-checkout__section {
+    padding: 25px 50px 50px 50px;
+}
+
+@media(max-width: 574.98px) {
+    .b2b-checkout__section {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+.b2b-checkout-info__wrapper {
+    position: relative;
+}
+
+.b2b-checkout-info__message {
+    max-width: 253px;
+    font-size: 12px;
+}
+
+.b2b-checkout-info__message + .b2b-checkout-info__instructions {
+    margin-top: 1rem;
+}
+
+.b2b-checkout-method{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    color: #231F20;
+}

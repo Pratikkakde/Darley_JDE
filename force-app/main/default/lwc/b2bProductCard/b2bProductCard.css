@@ -1,0 +1,112 @@
+:host {
+    --dxp-s-link-text-decoration-focus: none;
+    --dxp-s-link-text-decoration-hover: none;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.b2b-product-card__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 15rem 1fr;
+    border: 1px solid #CECBCB;
+    transition: border-color 0.1s;
+}
+
+.b2b-product-card__wrapper:hover {
+    border-color: #ED1B2D;
+}
+
+/* IMAGE */
+.b2b-product-card__image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.b2b-product-card__image img {
+    position: relative;
+    max-width: calc(100% - 2rem);
+    max-height: calc(100% - 2rem);
+}
+
+.b2b-product-card__image-default {
+    width: 3.75rem;
+    height: 3.75rem;
+    fill: #DDDBDA;
+}
+
+/* CONTENT */
+.b2b-product-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    grid-row-gap: 1rem;
+    padding: 0.5rem 1rem 2rem 1rem;
+}
+
+/* INFO */
+.b2b-product-card__info {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: 100%;
+}
+
+/* FIELDS */
+.b2b-product-card__fields {
+    height: 100%;
+}
+
+/* NAME */
+.b2b-product-card__name {
+    line-height: 1.3;
+    font-weight: 700;
+    text-align: center;
+    word-break: break-word;
+    color: var(--b2b-color-text);
+}
+
+/* SKU */
+.b2b-product-card__sku {
+    margin-top: 0.25rem;
+    font-size: 0.625rem;
+    line-height: 1.3;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* PRICE */
+.b2b-product-card__price {
+    margin-top: 10px;
+    font-size: 1.125rem;
+    line-height: 1.4;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ACTIONS */
+.b2b-product-card__actions {
+    width: 100%;
+}
+
+.b2b-product-card__button {
+    width: 100%;
+    text-align: center;
+}
+
+.b2b-product-card__button .slds-button {
+    width: 100%;
+    max-width: 140px;
+    line-height: 38px;
+    transition: color 0.1s, border-color 0.1s, background-color 0.1s;
+}

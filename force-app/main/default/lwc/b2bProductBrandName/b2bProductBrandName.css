@@ -1,0 +1,13 @@
+:host {
+    display: block;
+    margin-bottom: 0 !important;
+}
+
+.b2b-product-brand-name__wrapper {
+    margin-bottom: 8px;
+}
+
+.b2b-product-brand-name__link,
+.b2b-product-brand-name__label {
+    font-size: var(--b2b-product-brand-name-font-size, 14px);
+}

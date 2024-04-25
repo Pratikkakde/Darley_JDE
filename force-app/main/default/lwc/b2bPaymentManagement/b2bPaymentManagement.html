@@ -1,0 +1,103 @@
+<template>
+    <div class={wrapperClass}>
+
+        <!-- TITLE -->
+        <div class="b2b-payment-management__title">{labels.title}</div>
+
+        <!-- CARDS -->
+        <div class="b2b-payment-management__cards">
+
+            <!-- LOADING SPINNER -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+            </template>
+
+            <!-- ADD CREDIT CARD -->
+            <button
+                class="b2b-payment-management__card-add"
+                title={labels.clickToAddCreditCard}
+                onclick={handleClickAddCreditCard}
+            >
+                <svg viewBox="0 0 67 64" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M31.4371 15.984C31.4371 15.3361 31.362 14.0399 33.3967 14.0399C35.5071 14.0399 35.281 15.9117 35.281 15.9117L35.4319 30.1677L49.6773 30.0959C49.6773 30.0959 51.7877 29.9518 51.7877 31.9678C51.7877 33.9119 49.7525 33.6959 49.7525 33.6959L35.5071 33.7677L35.5823 47.0877C35.5823 47.0877 35.8084 49.1755 33.6228 49.1755C31.5123 49.1755 31.5876 47.1595 31.5876 47.1595V33.8395L17.1914 33.9836C17.1914 33.9836 14.7793 34.1278 14.7793 31.9676C14.7793 30.2395 17.1157 30.3836 17.1157 30.3836L31.6626 30.3118L31.4371 15.984ZM31.6632 0.0720002C14.1768 0.935846 0.23291 14.904 0.23291 31.752C0.23291 49.176 15.0813 63.36 33.3214 63.36C51.5616 63.36 66.5607 49.176 66.5607 31.752C66.5607 14.328 51.6369 0 33.3214 0C32.7936 0.0723214 32.1905 0 31.6632 0.0723214V0.0720002Z"></path>
+                </svg>
+                <span class="b2b-text-action">{labels.addCreditCard}</span>
+            </button>
+
+            <!-- LIST OF CARD -->
+            <template for:each={list} for:item="item" for:index="index">
+                <c-b2b-payment-card
+                    key={item.index}
+                    card={item}
+                    ondelete={handleClickDelete}
+                    ondefault={handleClickDefault}
+                ></c-b2b-payment-card>
+            </template>
+
+        </div>
+
+        <!-- MODAL -->
+        <template if:true={modal.show}>
+            <section class="b2b-payment-management__modal-wrapper slds-modal slds-fade-in-open" data-type={modal.type}>
+                <div class="slds-modal__container">
+
+                    <!-- HEADER -->
+                    <header class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close" 
+                            title={labels.close}
+                            onclick={handleClickModalClose}
+                        >
+                            <lightning-icon
+                                icon-name="utility:close"
+                                alternative-text={labels.close}
+                                variant="inverse"
+                            ></lightning-icon>
+                        </button>
+                        <h2>
+                            <template if:true={isModalTypeDelete}>{labels.deleteCard}</template>
+                            <template if:true={isModalTypeAdd}>{labels.addCreditCard}</template>
+                        </h2>
+                    </header>
+
+                    <div class="slds-modal__content">
+
+                        <!-- DELETE -->
+                        <template if:true={isModalTypeDelete}>
+                            <p class="b2b-text">{labels.areYouSureYouWantToDelete} <strong>{modal.cardType}</strong> {labels.endingIn} <strong>{modal.cardNumber}</strong>?</p>
+                        </template>
+
+                        <!-- ADD -->
+                        <template if:true={isModalTypeAdd}>
+                            <c-b2b-add-card-form
+                                public-key={publicKey}
+                                public-exponent={publicExponent}
+                                onclose={handleClickModalClose}
+                                onrefresh={handleChangeAddCard}
+                        ></c-b2b-add-card-form>
+                        </template>
+
+                    </div>
+
+                    <template if:true={isModalTypeDelete}>
+                        <div class="slds-modal__footer">
+                            <button
+                                class="b2b-button slds-button slds-button_outline-brand"
+                                disabled={isLoading}
+                                onclick={handleClickModalClose}
+                            >{labels.cancel}</button>
+                            <button
+                                class="b2b-button slds-button slds-button_brand"
+                                disabled={isLoading}
+                                onclick={handleClickModalDelete}
+                            >{labels.confirm}</button>
+                        </div>
+                    </template>
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </div>
+</template>

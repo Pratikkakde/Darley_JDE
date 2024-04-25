@@ -1,0 +1,309 @@
+/* DXP SEARCH SEARCH RESULTS */
+
+dxp_search-search-results {
+    margin-top: -65px;
+    margin-bottom: 0px !important;
+}
+
+@media (max-width: 1023.98px) {
+
+    dxp_search-search-results {
+        margin-top: -35px;
+    }
+
+}
+
+@media (max-width: 767.98px) {
+
+    dxp_search-search-results {
+        margin-top: -25px;
+    }
+
+}
+
+/* HEADER */
+
+b2b_search_results_tiles-results-tiles > section {
+    margin-bottom: 38px !important;
+    padding-bottom: 13px;
+}
+
+@media (max-width: 1023.98px) {
+
+    b2b_search_results_tiles-results-tiles > section {
+        margin-bottom: 24px !important;
+        padding-bottom: 8px;
+    }
+
+}
+
+@media (max-width: 767.98px) {
+
+    b2b_search_results_tiles-results-tiles > section {
+        margin-bottom: 18px !important;
+    }
+
+}
+
+/* TITLE */
+
+dxp_search-search-results b2b_search_results_tiles-list-header > span {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    white-space: unset !important;
+}
+
+/* SORT MENU */
+
+dxp_search-search-results b2b_search_results_tiles-sort-menu lightning-combobox .slds-combobox__input {
+    width: 100vw;
+    max-width: 190px;
+    font-size: 12px;
+    color: #6D6E71;
+    border-radius: 0;
+}
+
+dxp_search-search-results b2b_search_results_tiles-sort-menu lightning-combobox .slds-combobox__input:focus,
+dxp_search-search-results b2b_search_results_tiles-sort-menu lightning-combobox .slds-combobox__input:active {
+    border-color: rgba(237, 27, 45, 1);
+    box-shadow: 0 0 3px rgba(237, 27, 45, 1);
+}
+
+@media (max-width: 767.98px) {
+
+    dxp_search-search-results b2b_search_results_tiles-sort-menu lightning-combobox .slds-combobox__input {
+        width: 100%;
+        max-width: 100%;
+        line-height: 32px;
+    }
+
+}
+
+/* FILTER */
+
+b2b_search_facets-filters-panel .filters-header .filters-title {
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+b2b_search_facets-filters-panel .filters-header .clear-all .slds-button {
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration-line: underline;
+    box-shadow: unset !important;
+    border: 0 !important;
+    transition: color 0.1s;
+}
+
+b2b_search_facets-filters-panel .category-tree-section {
+    margin-top: 0 !important;
+}
+
+b2b_search_facets-category-tree > h2,
+b2b_search_facets-facet h2.facet-name {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+b2b_search_facets-category-tree .slds-truncate,
+b2b_search_facets-facet .slds-truncate {
+    white-space: unset !important;
+}
+
+b2b_search_facets-category-tree .selected-category,
+b2b_search_facets-category-tree .category-item {
+    font-size: 14px;
+}
+
+b2b_search_facets-category-tree .selected-category {
+    font-weight: 600 !important;
+}
+
+b2b_search_facets-category-tree ul.categories li:not(:first-child) {
+    padding-top: 14px !important;
+}
+
+b2b_search_facets-facet .facet-header {
+    margin-bottom: 4px;
+}
+
+b2b_search_facets-facet .facet-header .slds-button_icon {
+    box-shadow: unset !important;
+    border: 0 !important;
+}
+
+b2b_search_facets-facet .facet-body {
+    padding-left: 1rem;
+}
+
+b2b_search_facets-facet b2b_search_facets-facet-item {
+    padding-top: 14px !important;
+}
+
+b2b_search_facets-facet b2b_search_facets-facet-item lightning-input {
+    margin-bottom: 0 !important;
+}
+
+b2b_search_facets-facet b2b_search_facets-facet-item .slds-form-element__label {
+    font-size: 14px;
+}
+
+b2b_search_facets-facet b2b_search_facets-facet-item .slds-checkbox_faux {
+    cursor: pointer;
+}
+
+/* PRODUCT GRID */
+
+b2b_search_results_tiles-product-grid .product-grid-container {
+    padding-top: 0 !important;
+}
+
+/* PRODUCT */
+
+@media (min-width: 1024px) {
+
+    b2b_search_product_card-product-card .imageArea img {
+        max-width: 180px;
+        max-height: 180px;
+    }
+
+}
+
+b2b_search_product_card-product-card .fieldsArea a {
+    padding-top: 12px;
+    text-decoration: none !important;
+}
+
+b2b_search_product_card-product-card .fieldsArea a,
+b2b_search_product_card-product-card .fieldsArea a .slds-text-heading_medium {
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none !important;
+    text-align: center;
+    white-space: unset;
+    transition: color 0.1s;
+}
+
+b2b_search_product_card-product-card .fieldsArea a:hover,
+b2b_search_product_card-product-card .fieldsArea a:hover .slds-text-heading_medium {
+    color: #ED1B2D !important;
+}
+
+b2b_search_product_card-product-card .priceArea {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    padding-top: 18px;
+    padding-bottom: 12px;
+    line-height: 21px;
+}
+
+b2b_search_product_card-product-card .priceArea .price-container {
+    line-height: 21px;
+}
+
+b2b_search_product_card-product-card .priceArea .price-container > div > div.slds-grid.slds-wrap {
+    flex-direction: column;
+}
+
+b2b_search_product_card-product-card .priceArea b2b_buyer_pricing-formatted-price {
+    padding-right: 0 !important;
+}
+
+b2b_search_product_card-product-card .priceArea b2b_buyer_pricing-formatted-price.listing-price,
+b2b_search_product_card-product-card .priceArea b2b_buyer_pricing-formatted-price.negotiated-price {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 21px;
+}
+
+b2b_search_product_card-product-card .priceArea b2b_buyer_pricing-formatted-price.listing-price {
+    font-weight: 400 !important;
+}
+
+b2b_search_product_card-product-card .priceArea .price-unavailable {
+    font-size: 12px;
+    color: #706E6B;
+}
+
+b2b_search_product_card-product-card .callToActionArea .slds-button {
+    width: 100vw;
+    max-width: 145px;
+    max-height: 32px;
+    text-transform: none;
+    line-height: 30px !important;
+    transition: color 0.1s, border-color 0.1s;
+}
+
+b2b_search_product_card-product-card .callToActionArea .slds-button.slds-button_brand:hover {
+    border-color: rgba(237, 27, 45, 1) !important;
+}
+
+/* PAGINATION */
+
+b2b_search_results_tiles-paging-control .slds-button,
+b2b_search_results_tiles-paging-control .range-symbol-container {
+    width: 45px !important;
+    height: 45px !important;
+    margin: 0 4px;
+    font-size: 14px;
+}
+
+@media (max-width: 767.98px) {
+
+    b2b_search_results_tiles-paging-control .slds-button,
+    b2b_search_results_tiles-paging-control .range-symbol-container {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 12px;
+    }
+
+}
+
+b2b_search_results_tiles-paging-control .range-symbol-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    font-size: 14px;
+}
+
+b2b_search_results_tiles-paging-control .nav-button-current,
+b2b_search_results_tiles-paging-control .nav-button-current:focus,
+b2b_search_results_tiles-paging-control .nav-button-current:active,
+b2b_search_results_tiles-paging-control .nav-button-current:hover {
+    color: #231F20;
+    border-color: #D6D9DB;
+    background-color: #D6D9DB;
+}
+
+b2b_search_results_tiles-paging-control .nav-button,
+b2b_search_results_tiles-paging-control .nav-direction {
+    border: 1px solid rgb(255, 255, 255);
+    transition: color 0.1s, border-color 0.1s, background-color 0.1s !important;
+}
+
+b2b_search_results_tiles-paging-control .nav-direction svg.slds-icon {
+    fill: currentColor;
+}
+
+b2b_search_results_tiles-paging-control .nav-direction:hover,
+b2b_search_results_tiles-paging-control .nav-direction:focus,
+b2b_search_results_tiles-paging-control .nav-direction:active,
+b2b_search_results_tiles-paging-control .nav-button:hover,
+b2b_search_results_tiles-paging-control .nav-button:focus,
+b2b_search_results_tiles-paging-control .nav-button:active {
+    color: rgba(237, 27, 45, 1);
+    border: 1px solid rgba(237, 27, 45, 1);
+    background-color: rgb(255, 255, 255);
+}
+
+b2b_search_results_tiles-paging-control .nav-direction:disabled {
+    color: #D6D9DB;
+    border: 1px solid transparent !important;
+    transition: color 0.1s, border-color 0.1s, background-color 0.1s;
+}

@@ -1,0 +1,73 @@
+:host {
+    display: block;
+}
+
+.b2b-theme__wrapper {
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    width: 100%;
+    max-width: 100%;
+    height: calc(var(--b2b-theme-login-1vh, 1vh) * 100);
+    background-color: var(--b2b-theme-login-background-color, var(--dxp-g-root, #ffffff));
+    background: var(--b2b-theme-login-background);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: auto;
+}
+
+/* HEADER */
+.b2b-theme__header {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* BODY */
+.b2b-theme__body {
+    position: relative;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    justify-content: var(--b2b-theme-login-container-horizontal-position);
+    align-items: var(--b2b-theme-login-container-vertical-position);
+    width: 100%;
+    max-width: 100%;
+    padding-top: var(--dxp-s-section-content-spacing-block-start, 2rem);
+    padding-bottom: var(--dxp-s-section-content-spacing-block-end, 2rem);
+}
+
+@media (max-width: 767.98px) {
+    .b2b-theme__body {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+/* CONTAINER */
+.b2b-theme__container {
+    width: 100%;
+    max-width: var(--b2b-theme-login-container-max-width);
+    padding: var(--b2b-theme-login-container-vertical-padding) var(--b2b-theme-login-container-horizontal-padding);
+    border-width: var(--b2b-theme-login-container-border-width);
+    border-color: var(--b2b-theme-login-container-border-color);
+    border-radius: var(--b2b-theme-login-container-border-radius);
+    background-color: var(--b2b-theme-login-container-background-color);
+    box-shadow: var(--b2b-theme-login-container-box-shadow);
+}
+
+@media (max-width: 767.98px) {
+    .b2b-theme__container {
+        padding: var(--b2b-theme-login-container-vertical-padding-mobile) var(--b2b-theme-login-container-horizontal-padding-mobile);
+    }
+}
+
+/* FOOTER */
+.b2b-theme__footer {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    width: 100%;
+    max-width: 100%;
+}

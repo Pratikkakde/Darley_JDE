@@ -1,0 +1,238 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class="b2b-checkout__section">
+
+        <!-- UPDATING SPINNER -->
+        <template if:true={isUpdateLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+        </template>
+
+        <!-- TITLE -->
+        <div class="b2b-checkout__section-title">
+            <div class="b2b-checkout__section-title-wrapper">
+                <div class="b2b-checkout__section-title-number">{getTitleNumber}</div>
+                <div class="b2b-checkout__section-title-label">{getTitleLabel}</div>
+            </div>
+        </div>
+
+        <!-- ACTION -->
+        <div class="b2b-checkout__section-action">
+            <template if:true={showChangeViewButton}>
+                <div
+                    class="b2b-checkout__section-action-item"
+                    title={labels.clickToChangeAddresses}
+                    onclick={handleClickChange}
+                >{labels.change}</div>
+            </template>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="b2b-checkout__section-content">
+
+            <!-- ADDRESSES VIEW -->
+            <template if:true={showAddressesView}>
+                <div class="b2b-checkout-addresses__view">
+
+                    <!-- SHIPPING ADDRESS VIEW -->
+                    <span
+                        class="b2b-checkout__section-action-item b2b-billing-title__padding b2b-checkout__shipping_address"
+                    >{labels.shippingAddress}</span>
+                    <template if:true={getShippingName}>
+                        <div class="b2b-checkout-addresses__view-name">{getShippingName}</div>
+                    </template>
+                    <template if:true={getShippingAddress}>
+                        <div class="b2b-checkout-addresses__view-address">{getShippingAddress}</div>
+                    </template>
+
+                    <!-- SAME BILLING ADDRESS VIEW -->
+                    <div class="b2b-checkout-addresses__view-address">
+                        <span
+                            class="b2b-checkout__section-action-item b2b-billing-title__padding b2b-checkout__billing_address"
+                        >{labels.billingAddress}</span>
+                        <template if:true={sameAddresses}>
+                            <span class="b2b-checkout__section-action-item b2b-billing-title__padding b2b-checkout__billing_address">:</span>
+                            <span class="slds-m-left_xx-small">{labels.sameAsShippingAddress}</span>
+                        </template>
+                    </div>
+
+                    <!-- BILLING ADDRESS VIEW -->
+                    <template if:false={sameAddresses}>
+                        <template if:true={getBillingName}>
+                            <div class="b2b-checkout-addresses__view-name">{getBillingName}</div>
+                        </template>
+                        <template if:true={getBillingAddress}>
+                            <div class="b2b-checkout-addresses__view-address">{getBillingAddress}</div>
+                        </template>
+                    </template>
+                
+                </div>
+            </template>
+
+            <!-- ADDRESSES CHANGE -->
+            <template if:true={showAddressesChange}>
+                <div class="b2b-checkout-addresses__change">
+
+                    <!-- TABS -->
+                    <template if:true={getTabOptions.length}>
+                        <div class="b2b-checkout__tabs">
+                            <template for:each={getTabOptions} for:item="item" for:index="index">
+                                <button
+                                    key={item.index}
+                                    data-value={item.value}
+                                    class={item.class}
+                                    onclick={handleClickOnTab}
+                                >{item.label}</button>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- LIST -->
+                    <fieldset class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <template for:each={getAddressOptions} for:item="item" for:index="index">
+                                <span key={item.index} class="slds-radio">
+                                    <input
+                                        id={item.id}
+                                        name="address"
+                                        type="radio"
+                                        value={item.id}
+                                        checked={item.checked}
+                                        onchange={handleChangeAddress}
+                                    />
+                                    <label
+                                        for={item.id}
+                                        class="slds-radio__label"
+                                        title={labels.clickToChooseAddress}
+                                    >
+                                        <span class="slds-radio_faux"></span>
+                                        <span class="slds-form-element__label">
+
+                                            <!-- NAME -->
+                                            <template if:true={item.name}>
+                                                <div class="b2b-checkout-addresses__address-name">{item.name}</div>
+                                            </template>
+
+                                            <!-- ADDRESS -->
+                                            <div class="b2b-checkout-addresses__address-content">
+                                                <template if:true={item.address}>
+                                                    <div class="b2b-checkout-addresses__address-address">{item.address}</div>
+                                                </template>
+                                                <lightning-button-icon
+                                                    data-id={item.id}
+                                                    icon-name="utility:edit"
+                                                    title={labels.clickToEditAddress}
+                                                    variant="bare"
+                                                    onclick={handleClickToEditAddress}
+                                                ></lightning-button-icon>
+                                            </div>
+
+                                        </span>
+                                    </label>
+                                </span>
+                            </template>
+                        </div>
+                    </fieldset>
+
+                    <!-- BUTTONS -->
+                    <div class="b2b-checkout-addresses__button-add-another">
+                        <lightning-button
+                            variant="base"
+                            label={getAddAnotherButtonLabel}
+                            icon-name="utility:add"
+                            onclick={handleClickAddAnotherButton}
+                        ></lightning-button>
+                    </div>
+
+                    <div class="b2b-checkout-addresses__button-use-address">
+                        <button
+                            class="b2b-button slds-button slds-button_brand"
+                            onclick={handleClickUseAddress}
+                        >{labels.useThisAddress}</button>
+                    </div>
+
+                </div>
+            </template>
+
+        </div>
+
+        <!-- FORM -->
+        <div class="b2b-checkout__section-form">
+            <template if:true={isEdit}>
+                <div class="b2b-checkout__section-form-wrapper">
+                    <div class="b2b-row">
+                        <div class="b2b-col b2b-col-full b2b-address-sub-title">{addressSubtitle}</div>
+                       
+                        <!-- ADDRESS NAME -->
+                        <div class="b2b-col b2b-col-full b2b-checkout-addresses__col-address-name">
+                            <lightning-input
+                                data-name="addressName"
+                                type="text"
+                                max-length={maxLength.addressName}
+                                label={labels.addressName}
+                                value={addressName}
+                                required
+                                disabled={isUpdateLoading}
+                                onchange={handleNameChange}
+                            ></lightning-input>
+                        
+                            <!-- GOOGLE -->
+                            <lightning-input-address
+                                data-name="inputAddress"
+                                variant="label-hidden"
+                                address-label ="Address Info"
+                                address-lookup-label="Address" 
+                                address-lookup-placeholder ="Search on google"
+                                street-label="Street Address"
+                                city-label="City"
+                                country-label="Country"
+                                province-label="State/Province"
+                                postal-code-label="ZIP/PostalCode"
+                                street={street}
+                                city={city}
+                                province={stateCode}
+                                country={countryCode}
+                                postal-code={postalCode}
+                                country-options={getCountryOptions}
+                                province-options={getProvinceOptions}
+                                show-address-lookup
+                                message-when-value-missing={labels.requiredField}
+                                onchange={handleChangeAddressForm}
+                            ></lightning-input-address>
+                        </div>
+                       
+                        <!-- SAVE AS DEFAULT -->
+                        <div class="b2b-col b2b-col-full b2b-checkout-addresses__col-default-address">
+                            <lightning-checkbox-group
+                                data-name="saveAsDefaultAddress"
+                                variant="label-hidden"
+                                options={saveAsDefaultAddressOptions}
+                                value={saveAsDefaultAddress}
+                                disabled={isUpdateLoading}
+                                onchange={handleChangeSaveAsDefaultAddress}
+                            ></lightning-checkbox-group>
+                        </div>
+    
+                        <!-- BUTTONS -->
+                        <div class="b2b-col b2b-col-full b2b-checkout-addresses__col-buttons">
+
+                            <!-- CANCEL -->
+                            <template if:true={showCancelButton}>
+                                <button
+                                    disabled={isUpdateLoading}
+                                    class="b2b-button slds-button slds-button_outline-brand"
+                                    onclick={handleClickCancelAddress}
+                                >{labels.cancel}</button>
+                            </template>
+
+                            <!-- ADD YOUR ADDRESS -->
+                            <button
+                                class="b2b-button slds-button slds-button_brand"
+                                onclick={handleClickAddAddress}
+                            >{getAddYourAddressLabel}</button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

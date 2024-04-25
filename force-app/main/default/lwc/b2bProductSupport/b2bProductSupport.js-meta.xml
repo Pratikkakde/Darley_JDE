@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Product Support</masterLabel>
+    <description>B2B Product Support</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}"></property>
+
+            <!-- FAQ -->
+            <property name="showFaqSection" type="Boolean" label="Show 'FAQ' Section" default="true"></property>
+            <property name="showFaqTitle" type="Boolean" label="Show 'FAQ' Title" default="true"></property>
+            <property name="faqTitle" type="String" label="'FAQ' Title" default="FAQ"></property>
+            <property name="faqAnchor" type="String" label="'FAQ' Anchor" default="faq"></property>
+
+            <!-- ARTICLES -->
+            <property name="showArticlesSection" type="Boolean" label="Show 'Articles' Section" default="true"></property>
+            <property name="showArticlesTitle" type="Boolean" label="Show 'Articles' Title" default="true"></property>
+            <property name="articlesTitle" type="String" label="'Articles' Title" default="Articles"></property>
+            <property name="articlesAnchor" type="String" label="'Articles' Anchor" default="articles"></property>
+
+            <!-- DOCUMENTS -->
+            <property name="showDocumentsSection" type="Boolean" label="Show 'Documents' Section" default="true"></property>
+            <property name="showDocumentsTitle" type="Boolean" label="Show 'Documents' Title" default="true"></property>
+            <property name="documentsTitle" type="String" label="'Documents' Title" default="Documents"></property>
+            <property name="documentsAnchor" type="String" label="'Documents' Anchor" default="documents"></property>
+
+            <!-- SHIPPING -->
+            <property name="showShippingSection" type="Boolean" label="Show 'Shipping' Section" default="true"></property>
+            <property name="showShippingTitle" type="Boolean" label="Show 'Shipping' Title" default="true"></property>
+            <property name="shippingTitle" type="String" label="'Shipping' Title" default="Shipping / Transportation Details"></property>
+            <property name="shippingAnchor" type="String" label="'Shipping' Anchor" default="shipping"></property>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

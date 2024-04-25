@@ -1,0 +1,27 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class={wrapper}>
+
+            <c-b2b-quantity
+                label={labels.inputLabel}
+                disabled={isQuantityDisabled}
+                editable={editable}
+                required={required}
+                increment={increment}
+                min-quantity={min}
+                max-quantity={max}
+                value={quantity}
+                ruletext={ruletext}
+                onchange={handleChangeQuantity}
+            ></c-b2b-quantity>
+
+            <button
+                class="slds-button slds-button_brand"
+                disabled={isAddToCartDisabled}
+                onclick={handleClickAddToCart}
+            >{labels.buttonLabel}</button>
+
+        </div>
+    </template>
+</template>

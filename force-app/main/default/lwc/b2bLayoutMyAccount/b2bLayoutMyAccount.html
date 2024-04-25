@@ -1,0 +1,25 @@
+<template>
+    <div data-layout="my-account" class="b2b-layout__wrapper">
+
+        <!-- HEADER -->
+        <div data-f6-region class="b2b-layout__header">
+            <slot name="contentHeader"></slot>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="b2b-layout__row">
+            <div data-f6-region class="b2b-layout__sidebar">
+                <slot name="sidebar"></slot>
+            </div>
+            <div data-f6-region class="b2b-layout__content">
+                <slot name="content"></slot>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div data-f6-region class="b2b-layout__footer">
+            <slot name="contentFooter"></slot>
+        </div>
+
+    </div>
+</template>

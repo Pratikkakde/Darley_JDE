@@ -1,0 +1,35 @@
+<template>
+    <c-b2b-modal
+        is-loading={isModalLoading}
+        onclose={handleCloseModal}
+        onsubmit={handleSubmitModal}
+    >
+        <div slot="content">
+
+            <!-- UPDATE LOADING -->
+            <template if:true={isModalLoading}>
+                <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+            </template>
+
+            <!-- SUBTITLE -->
+            <template if:true={showSubtitle}>
+                <p class="b2b-favorite-list-upsert__subtitle dxp-text-body-small">{labels.subtitle}</p>
+            </template>
+
+            <!-- LIST NAME -->
+            <lightning-input
+                type="text"
+                data-name="listName"
+                name="listName"
+                label={labels.listName}
+                max-length={maxLength.listName}
+                value={listName}
+                disabled={isModalLoading}
+                required
+                message-when-value-missing={labels.requiredField}
+                onchange={handleChangeFormElement}
+            ></lightning-input>
+
+        </div>
+    </c-b2b-modal>
+</template>

@@ -1,0 +1,40 @@
+:host {
+    --lwc-colorTextPlaceholder: rgb(112, 110, 107);
+}
+
+/* DROPDOWN */
+.b2b-quick-order-search-product__dropdown-item {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 6px 12px;
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid rgb(221, 219, 218, 0.5);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.b2b-quick-order-search-product__dropdown-item:last-child {
+    border-bottom: 0;
+}
+
+.b2b-quick-order-search-product__dropdown-name {
+    display: block;
+    font-size: 14px;
+    line-height: 1.2;
+    transition: color 0.1s;
+}
+
+.b2b-quick-order-search-product__dropdown-sku {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #4F4C4D;
+    transition: color 0.1s;
+}
+
+.b2b-quick-order-search-product__dropdown-item:hover .b2b-quick-order-search-product__dropdown-name,
+.b2b-quick-order-search-product__dropdown-item:hover .b2b-quick-order-search-product__dropdown-sku {
+    color: var(--b2b-colorAction);
+}

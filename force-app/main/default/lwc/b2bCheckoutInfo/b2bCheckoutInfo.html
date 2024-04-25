@@ -1,0 +1,43 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+        <div class="b2b-checkout__section">
+
+            <!-- UPDATING SPINNER -->
+            <template if:true={isUpdateLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+            </template>
+
+            <!-- TITLE -->
+            <div class="b2b-checkout__section-title">
+                <div class="b2b-checkout__section-title-wrapper">
+                    <div class="b2b-checkout__section-title-number">{getTitleNumber}</div>
+                    <div class="b2b-checkout__section-title-label">{getTitleLabel}</div>
+                </div>
+            </div>
+
+            <!-- ACTION -->
+            <div class="b2b-checkout__section-action"></div>
+
+            <!-- CONTENT -->
+            <div class="b2b-checkout__section-content b2b-checkout-info__wrapper">
+                <div class="b2b-checkout-method">{getMethod}</div>
+                <!-- MESSAGE -->
+<!--                <div class="b2b-checkout-info__message">{labels.message}</div>-->
+
+                <!-- SPECIAL INSTRUCTIONS -->
+<!--                <div class="b2b-checkout-info__instructions">-->
+<!--                    <lightning-textarea-->
+<!--                        data-name="special_instructions"-->
+<!--                        label={labels.specialInstructions}-->
+<!--                        max-length={maxLength.specialInstructions}-->
+<!--                        value={specialInstructions}-->
+<!--                        onblur={handleBlurSpecialInstructions}-->
+<!--                    ></lightning-textarea>-->
+<!--                </div>-->
+
+            </div>
+
+        </div>
+    </div>
+</template>

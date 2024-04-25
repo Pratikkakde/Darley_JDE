@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Category Banner</masterLabel>
+    <description>B2B Category Banner</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}"></property>
+            <property name="showCategoryBanner" type="Boolean" label="Show 'Category Banner'" default="true"></property>
+            <property name="categoryBannerHeight" type="Integer" label="'Category Banner' Height (px)" default="250" min="50" max="500"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

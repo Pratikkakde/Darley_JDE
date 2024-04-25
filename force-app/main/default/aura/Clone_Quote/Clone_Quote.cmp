@@ -1,0 +1,50 @@
+<aura:component controller="Quote_Clone"
+    implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global">
+    <aura:attribute name="showModal1" type="Boolean" default="false" />
+    <aura:attribute name="showModal" type="Boolean" default="false" />
+    <aura:attribute name="QuoteName" type="String" />
+    <aura:attribute name="OpportunityName" type="String" />
+    <aura:attribute name="selItem" type="object" access="public" />
+
+    <aura:attribute name="quoteId" type="String" />
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="quoteLineItems" type="List" default="[]" description="List of quote line items" />
+    <aura:attribute name="quoteLineItems1" type="List" default="[]" description="List of quote line items" />
+
+
+    <aura:if isTrue="{!v.showModal1}">
+
+        <div class="slds-m-bottom_small">
+            <lightning:input name="input8" label="Quote Name" value="{!v.QuoteName}" />
+        </div>
+
+        <c:LokupCmp objectName="Opportunity" field_API_text="Name" field_API_val="Id" limit="10" field_API_search="Name"
+            lookupIcon="standard:opportunity" selItem="{!v.selItem}" placeholder="search Opportunities" />
+
+        <div class="slds-m-top_small">
+            <lightning:button variant="brand" label="Finish" onclick="{! c.handleClick }" />
+            <lightning:navigation aura:id="navigation" />
+        </div>
+    </aura:if>
+
+    <aura:if isTrue="{!v.showModal}">
+        <div class="modal" aura:id="modal" role="dialog">
+            <!-- Modal content here -->
+            <p><b>This quoteline items are are Inactive and will not be cloned.</b></p>
+
+            <ul class="slds-list--dotted">
+                <aura:iteration items="{!v.quoteLineItems}" var="item">
+                    <li class="slds-item">{!item.Product2.Name}</li>
+                </aura:iteration>
+            </ul>
+            <p><b>Do you want to clone them? </b></p>
+
+
+        </div>
+        <div class="slds-m-top_small">
+            <lightning:button variant="brand" label="Clone" onclick="{! c.handleClickFinish }" />
+        </div>
+    </aura:if>
+</aura:component>

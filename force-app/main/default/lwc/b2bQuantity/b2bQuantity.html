@@ -1,0 +1,84 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+
+        <!-- EDITABLE -->
+        <template if:true={editable}>
+            <div class={formElementClass}>
+
+                <!-- LABEL -->
+                <template if:true={showElementLabel}>
+                    <label for={componentId} class="slds-form-element__label">
+                        <template if:true={required}>
+                            <abbr class="slds-required" title="required">*</abbr>
+                        </template>
+                        <template if:true={label}>
+                            <span>{label}</span>
+                        </template>
+
+                        <!-- RULE TEXT -->
+                        <template if:true={ruletext}>
+                            <lightning-helptext content={ruletext}></lightning-helptext>
+                        </template>
+
+                    </label>
+                </template>
+
+                <!-- CONTROLS -->
+                <div class="slds-form-element__control">
+
+                    <!-- DECREMENT BUTTON -->
+                    <button
+                        class="slds-button slds-button_icon slds-button_icon-border-filled"
+                        title={decrementButtonTitle}
+                        disabled={decrementButtonDisabled}
+                        onclick={handleClickDecrement}
+                    >
+                        <svg viewBox="0 0 11 3" xmlns="http://www.w3.org/2000/svg" class="slds-button__icon">
+                            <path d="M10.6675 0.404V2.96H0.67748V0.404H10.6675Z"></path>
+                        </svg>
+                        <span class="slds-assistive-text">{labels.decrement}</span>
+                    </button>
+
+                    <!-- QUANTITY INPUT -->
+                    <input
+                        id={componentId}
+                        data-id={componentId}
+                        type="number"
+                        step={getStep}
+                        min={getMinQuantity}
+                        max={getAvailableQuantity}
+                        class="slds-input"
+                        value={value}
+                        disabled={disabled}
+                        readonly={readonly}
+                        oninput={handleInput}
+                        onblur={handleBlur}
+                        onchange={handleChange}
+                    />
+
+                    <!-- INCREMENT BUTTON -->
+                    <button
+                        class="slds-button slds-button_icon slds-button_icon-border-filled"
+                        title={incrementButtonTitle}
+                        disabled={incrementButtonDisabled}
+                        onclick={handleClickIncrement}
+                    >
+                        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" class="slds-button__icon">
+                            <path d="M9.48663 6.086H6.35463V9.29H3.43863V6.086H0.306629V3.332H3.43863V0.11H6.35463V3.332H9.48663V6.086Z"></path>
+                        </svg>
+                        <span class="slds-assistive-text">{labels.increment}</span>
+                    </button>
+                </div>
+
+                <!-- ERROR -->
+                <template if:true={showError}>
+                    <div class="slds-form-element__help">{getErrorMessage}</div>
+                </template>
+
+            </div>
+        </template>
+        <template if:false={editable}>{getQuantityLabel}</template>
+
+    </div>
+</template>

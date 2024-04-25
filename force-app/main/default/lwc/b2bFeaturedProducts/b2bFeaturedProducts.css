@@ -1,0 +1,25 @@
+:host {
+    margin-top: 20px;
+    display: block;
+}
+
+.b2b-featured-products__wrapper {
+    max-width: var(--b2b-theme-containerMaxWidth);
+    margin: 0 auto;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-featured-products__wrapper {
+        margin-bottom: 2rem;
+    }
+}
+
+.dxp-text-heading-xlarge {
+    margin-bottom: 40px;
+}
+
+@media (max-width: 767.98px) {
+    .dxp-text-heading-xlarge {
+        margin-bottom: 1.5rem;
+    }
+}

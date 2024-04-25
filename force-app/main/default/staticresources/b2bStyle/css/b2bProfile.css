@@ -1,0 +1,22 @@
+/* B2B PROFILE PHOTO */
+
+c-b2b-profile-photo lightning-input .slds-file-selector {
+    display: flex;
+    width: 100%;
+}
+
+c-b2b-profile-photo lightning-input .slds-file-selector lightning-primitive-file-droppable-zone {
+    width: 100%;
+}
+
+c-b2b-profile-photo lightning-input .slds-file-selector__button {
+    text-transform: none;
+    font-size: 13px;
+    line-height: 30px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+c-b2b-profile-photo lightning-input .slds-file-selector__text {
+    font-size: 0.8125rem;
+}

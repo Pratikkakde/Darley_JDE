@@ -1,0 +1,43 @@
+.slds-theme_success {
+    --dxp-g-success: rgb(46, 132, 74);
+    --dxp-g-success-contrast: var(--dxp-g-success-contrast-2);
+}
+
+.slds-theme_error {
+    --dxp-g-destructive: rgb(234, 0, 30);
+    --dxp-g-destructive-contrast: var(--dxp-g-destructive-contrast-1);
+}
+
+.slds-theme_warning {
+    --dxp-g-warning: rgb(254, 147, 57);
+    --dxp-g-warning-contrast: var(--dxp-g-warning-contrast-1);
+}
+
+.slds-theme_info {
+    --dxp-g-neutral: rgb(116, 116, 116);
+    --dxp-g-neutral-contrast: var(--dxp-g-neutral-contrast-3);
+}
+
+.b2b-toast__wrapper {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.slds-notify_container {
+    position: relative;
+}
+
+.slds-notify_toast {
+    padding-left: 0.875rem;
+}
+
+.slds-text-heading_small {
+    --dxp-s-body-font-size: 1rem;
+}
+
+.slds-notify__close {
+    transform: translateY(0px) !important;
+}

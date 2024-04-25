@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>B2B Quick Order Banner</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <property name="showBackgroundImage" type="Boolean" label="Show 'Background' Image" default="true"></property>
+            <property name="backgroundImage" label="'Background' Image" type="ContentReference" filter="cms_image"/>
+            <property name="backgroundColor" type="Color" label="'Background' Color" default="rgb(243, 243, 243)"></property>
+            <property name="backgroundMinHeight" type="String" label="'Background' Height" default="202px"></property>
+            <property name="bannerNavigateTo" type="String" label="'Banner' Navigate To" default="/quickorder"/>
+
+            <!-- CONTAINER -->
+            <property name="containerMaxWidth" type="Integer" label="'Container' Max-Width (px)" min="100" max="1920" default="760"></property>
+            <property name="containerColor" type="Color" label="'Container' Color" default="rgba(243, 243, 243, 0)"></property>
+            <property name="containerHorizontalPosition" type="String" label="'Container' Horizontal Position" datasource="Left,Center,Right" default="Center"/>
+            <property name="containerVerticalPosition" type="String" label="'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Middle"/>
+            <property name="containerBorderRadius" type="Integer" label="'Container' Border Radius (px)" min="0" max="50"></property>
+
+            <!-- TITLE -->
+            <property name="showTitle" type="Boolean" label="Show 'Title'" default="true"></property>
+            <property name="titleColor" type="Color" label="'Title' Color" default="rgb(41, 70, 148)"></property>
+            <property name="titleAlign" type="String" label="'Title' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="titleSize" type="String" label="'Title' Size" default="2.25rem"></property>
+            
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

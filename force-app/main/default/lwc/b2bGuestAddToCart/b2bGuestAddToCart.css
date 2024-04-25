@@ -1,0 +1,26 @@
+:host {
+    margin: 0;
+}
+
+.b2b-guest-add-to-cart__wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+@media screen and (max-width: 400px) {
+
+    .b2b-guest-add-to-cart__wrapper {
+        flex-direction: column;
+    }
+
+}
+
+.slds-button {
+    font-size: 14px;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Order Confirmation</masterLabel>
+    <description>B2B Order Confirmation</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" label="Record Id" type="String" default="{!recordId}"></property>
+            <property name="showContentImage" label="Show 'Content Image'" type="Boolean" default="true"></property>
+            <property name="contentImage" label="Content Image" type="ContentReference" filter="cms_image"></property>
+            <property name="contentImageMaxWidth" label="'Content Image' Max-Width" type="String"></property>
+            <property name="title" type="String" label="Title"></property>
+            <property name="titleColor" type="Color" label="'Title' Color"></property>
+            <property name="orderNumberLabel" type="String" label="Order Number Label"></property>
+            <property name="orderNumberColor" type="Color" label="'Order Number' Color"></property>
+            <property name="buttonContinueLabel" type="String" label="Button 'Continue' Label"></property>
+            <property name="buttonOrderLabel" type="String" label="Button 'Order' Label"></property>
+            <property name="showBackgroundImage" label="Show 'Background Image'" type="Boolean" default="false"></property>
+            <property name="backgroundImage" label="Background Image" type="ContentReference" filter="cms_image"></property>
+            <property name="enableSubscriptions" type="Boolean" label="Enable Subscriptions" default="false"/>
+            <property name="subscriptionNumberLabel" type="String" label="Subscription Number Label" default="You have successfully subscribed for Order, Subscription Number "></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

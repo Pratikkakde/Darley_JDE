@@ -1,0 +1,24 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class={wrapperClass}>
+            <div class="b2b-cookie__content">
+                <!-- MESSAGE -->
+                <div class="b2b-cookie__message">{labels.notificationMessage}</div>
+
+                <!-- BUTTON -->
+                <div class="b2b-cookie__buttons">
+                    <button
+                        class="slds-button slds-button_brand"
+                        onclick={handleClickButton}
+                    >{getSubmitLabel}</button>
+                    <a
+                        href={getPrivacyPolicyLink}
+                        class="slds-button slds-button_brand"
+                    >{getPrivacyPolicyLabel}</a>
+                </div>
+                
+            </div>
+        </div>
+    </template>
+</template>

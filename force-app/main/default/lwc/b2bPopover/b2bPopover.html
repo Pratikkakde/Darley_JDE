@@ -1,0 +1,61 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <section
+        class={wrapperClass}
+        onclick={handleClickWrapper}
+    >
+
+        <!-- BUTTON TRIGGER -->
+        <button
+            aria-haspopup={showPopover}
+            class="b2b-popover__button-trigger"
+            onclick={handleClickButtonTrigger}
+        >
+            <slot name="label">{label}</slot>
+        </button>
+
+        <template if:true={showPopover}>
+            <div
+                role="dialog"
+                aria-describedby={componentId}
+                aria-label={label}
+                class={popoverClass}
+                data-showheader={showHeader}
+            >
+                <!-- BUTTON CLOSE -->
+                <lightning-button-icon
+                    icon-name="utility:close"
+                    variant="bare"
+                    size="medium"
+                    alternative-text={labels.buttonCloseTitle}
+                    title={labels.buttonCloseTitle}
+                    class="slds-float_right slds-popover__close"
+                    onclick={handleClickButtonClose}
+                ></lightning-button-icon>
+
+                <!-- HEADER -->
+                <template if:true={showHeader}>
+                    <header class="slds-popover__header">
+                        <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__body">
+                                <h2 class="b2b-popover__title">{title}</h2>
+                            </div>
+                        </div>
+                    </header>
+                </template>
+
+                <!-- BODY -->
+                <slot
+                    id={componentId}
+                    name="body"
+                    class="slds-popover__body"
+                ></slot>
+
+                <!-- FOOTER -->
+                <slot name="footer" class="slds-popover__footer"></slot>
+
+            </div>
+        </template>
+
+    </section>
+</template>

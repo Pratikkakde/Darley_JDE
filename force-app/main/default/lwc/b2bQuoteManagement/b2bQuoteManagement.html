@@ -1,0 +1,113 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+
+    <div class={wrapper}>
+        <div class="b2b-quotes-header-section">
+            <div class="b2b-quotes-title">{LABELS.QUOTES}</div>
+            <div class="slds-grid slds-m-vertical_medium b2b-quotes-filter-section">
+                <div class="b2b-quote-list__panel">
+
+                        <!-- SEARCH -->
+                    <div class="b2b-quote-list__panel-search">
+                        <div class="b2b-search">
+                            <lightning-input
+                                type="search"
+                                variant="label-hidden"
+                                placeholder={LABELS.SEARCH}
+                                class="search"
+                                value={search}
+                                onchange={handleChangeSearch}
+                            ></lightning-input>
+                        </div>
+                    </div>
+                    <div class="b2b-quote-list__panel-actions">
+                        <lightning-combobox
+                                variant="label-hidden"
+                                label=""
+                                value={selectedStatus}
+                                options={statusOptions}
+                                class="b2b-status"
+                                onchange={handleStatusChange}
+                                disabled={isDisabledFilter}
+                        ></lightning-combobox>
+
+                        <lightning-input
+                                type="date"
+                                data-name="dateFrom"
+                                label={LABELS.DATE_FROM}
+                                max={dateTo}
+                                value={dateFrom}
+                                placeholder={LABELS.DATE_FROM}
+                                class="b2b-date-from"
+                                onchange={handleDateFromChange}
+                                disabled={isDisabledFilter}
+                        ></lightning-input>
+
+                        <lightning-input
+                                type="date"
+                                data-name="dateTo"
+                                label={LABELS.DATE_TO}
+                                min={dateFrom}
+                                value={dateTo}
+                                placeholder={LABELS.DATE_TO}
+                                class="b2b-date-to"
+                                onchange={handleDateToChange}
+                                disabled={isDisabledFilter}
+                        ></lightning-input>
+
+                        <div class="slds-p-top_x-small">
+                            <a class="b2b-quote-list__clear-all" onclick={handleClearAll}>{LABELS.CLEAR_ALL}</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="sort-mobile-section">
+                <lightning-combobox
+                        variant="label-hidden"
+                        label=""
+                        value={lastSortField}
+                        options={sortFieldOptions}
+                        class="sort-field-select filter-input"
+                        onchange={handleSortFieldChange}
+                        disabled={isDisabledFilter}
+                ></lightning-combobox>
+
+                <lightning-combobox
+                        variant="label-hidden"
+                        label=""
+                        value={lastSortOrder}
+                        options={sortOrderOptions}
+                        class="sort-order-select filter-input"
+                        onchange={handleSortOrderChange}
+                        disabled={isDisabledFilter}
+                ></lightning-combobox>
+            </div>
+
+            <div if:true={isFullSpinnerRunning} class="slds-spinner_container"></div>
+        </div>
+
+        <div class="table-container">
+            <c-b2b-table
+                    table-headers={tableQuotesHeaders}
+                    table-data={list}
+                    table-view-data={listView}
+                    table-view-mobile-data={listMobileView}
+                    is-loading={isLoading}
+                    onsorted={handleSortClick}
+                    onexpand={handleClickQuoteTitle}
+            ></c-b2b-table>
+        </div>
+
+        <!-- PAGINATION -->
+        <c-b2b-pagination
+                current-page={currentPage}
+                max-page={maxPage}
+                is-pagination-disabled={isPaginationDisabled}
+                class="pagination"
+                onchange={handleChangePage}
+        ></c-b2b-pagination>
+    </div>
+
+</template>

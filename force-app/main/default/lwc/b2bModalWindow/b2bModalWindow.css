@@ -1,0 +1,25 @@
+.headerStyle {
+    font-weight: 300;
+    font-size: 1.25rem;
+    line-height: 1.25;
+}
+
+.buttonsAlign {
+    text-align: center;
+}
+
+div.slds-card__body {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.modal-container {
+    min-width: 20rem !important;
+}
+
+@media screen and (max-width: 768px) {
+    .modal-container {
+        width: 85% !important;
+        margin: 0 auto !important;
+    }
+}

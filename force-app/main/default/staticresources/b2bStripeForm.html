@@ -1,0 +1,476 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://js.stripe.com/v3/"></script>
+
+        <style>
+            :root {
+                --b2b-colorText: rgb(0, 0, 0);
+                --b2b-colorAction: rgba(19, 156, 216, 1);
+                --b2b-colorActionHover: rgb(15, 122, 169);
+                --b2b-colorActionHover2: rgba(243, 250, 253, 1);
+                --b2b-colorWhite: rgb(255, 255, 255);
+                --b2b-colorError: rgb(226, 75, 50);
+                --b2b-colorRequired: rgb(220, 77, 71);
+                --b2b-colorDisabled: rgb(201, 199, 197);
+                --b2b-borderRadius: 5px;
+                --b2b-placeholder: rgb(112, 110, 107);
+                --b2b-border: rgb(221, 219, 218);
+            }
+
+            html,
+            body {
+                display: block;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+                font-family: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
+                background-color: transparent;
+            }
+
+            .stripe-form__form {
+                display: block;
+                width: 100%;
+                margin: 0;
+                background-color: transparent;
+            }
+
+            /* CARD NAME */
+            .stripe-form__card-name input {
+                width: 100%;
+                margin-bottom: 1rem;
+                padding: 7px 1rem;
+                font-size: 14px;
+                border: 1px solid var(--b2b-border);
+                border-radius: var(--b2b-borderRadius);
+            }
+
+            /* LABEL */
+            .stripe-form__label {
+                display: block;
+                padding-bottom: 4px;
+                font-size: 12px;
+                line-height: 18px;
+                color: var(--b2b-colorText);
+            }
+
+            .stripe-form__required {
+                color: var(--b2b-colorRequired);
+            }
+
+            /* ELEMENTS */
+            .stripe-form__elements {
+                margin-bottom: 1rem;
+            }
+
+            .stripe-form__element {
+                padding: 8px 1rem;
+                border: 1px solid var(--b2b-border);
+                border-radius: var(--b2b-borderRadius);
+            }
+
+            .stripe-form__errors {
+                font-size: 13px;
+                color: var(--b2b-colorError);
+            }
+
+            .stripe-form__element + .stripe-form__errors {
+                margin-top: 0.5rem;
+            }
+
+            .StripeElement--webkit-autofill {
+                background-color: rgb(232, 240, 254) !important;
+            }
+
+            /* DEFAULT */
+            .stripe-form__default input {
+                margin: 0;
+                width: 14px;
+                height: 14px;
+                cursor: pointer;
+                transform: translateY(2px);
+            }
+
+            .stripe-form__default label {
+                font-size: 14px;
+                color: var(--b2b-colorText);
+                cursor: pointer;
+            }
+
+            .stripe-form__default input + label {
+                margin-left: 0.25rem;
+            }
+
+            /* BUTTONS */
+            .stripe-form__buttons {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin-top: 1.5rem;
+            }
+
+            @media (max-width: 319.98px) {
+                .stripe-form__buttons {
+                    flex-direction: column;
+                }
+            }
+
+            .stripe-form__buttons .b2b-button {
+                display: block;
+                min-width: 100px;
+                padding: 12px;
+                font-size: 14px;
+                line-height: 1;
+                font-weight: 700;
+                text-align: center;
+                text-transform: uppercase;
+                white-space: nowrap;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: var(--b2b-borderRadius);
+                background-clip: border-box;
+                user-select: none;
+                cursor: pointer;
+                transition: background-color 0.1s, color 0.1s, border-color 0.1s;
+            }
+
+            .stripe-form__buttons .b2b-button_brand {
+                color: var(--b2b-colorWhite);
+                border-color: var(--b2b-colorAction);
+                background-color: var(--b2b-colorAction);
+            }
+
+            .stripe-form__buttons .b2b-button_brand:hover {
+                border-color: var(--b2b-colorActionHover);
+                background-color: var(--b2b-colorActionHover);
+            }
+
+            .stripe-form__buttons .b2b-button_brand:disabled {
+                border-color: var(--b2b-colorDisabled);
+                background-color: var(--b2b-colorDisabled);
+            }
+
+            .stripe-form__buttons .b2b-button_outline {
+                color: var(--b2b-colorAction);
+                border-color: var(--b2b-colorAction);
+                background-color: var(--b2b-colorWhite);
+            }
+
+            .stripe-form__buttons .b2b-button_outline:hover {
+                color: var(--b2b-colorActionHover);
+                border-color: var(--b2b-colorActionHover);
+                background-color: var(--b2b-colorActionHover2);
+            }
+
+            .stripe-form__buttons .button_outline:disabled {
+                color: var(--b2b-colorDisabled);
+                border-color: var(--b2b-colorDisabled);
+                background-color: var(--b2b-colorWhite);
+            }
+
+            .stripe-form__buttons .b2b-button + .b2b-button {
+                margin-left: 1.5rem;
+            }
+
+            @media (max-width: 319.98px) {
+                .stripe-form__buttons .b2b-button {
+                    width: 100%;
+                }
+
+                .stripe-form__buttons .b2b-button + .b2b-button {
+                    margin-top: 1rem;
+                    margin-left: 0;
+                }
+            }
+        </style>
+
+    </head>
+    <body>
+        <form id="payment_form" class="stripe-form__form">
+
+            <!-- CARD NAME -->
+            <div class="stripe-form__card-name">
+                <label for="card_name" class="stripe-form__label">
+                    <span>Card Name</span>
+                </label>
+                <input
+                    id="card_name"
+                    type="text"
+                    maxlength="30"
+                >
+            </div>
+
+            <!-- CARD ELEMENTS -->
+            <div class="stripe-form__elements">
+                <label for="card_element" class="required stripe-form__label">
+                    <span class="stripe-form__required">*</span>
+                    <span>Card Number</span>
+                </label>
+                <div id="card_element" class="stripe-form__element"></div>
+                <div id="card_error" class="stripe-form__errors"></div>
+            </div>
+
+            <!-- DEFAULT CARD -->
+            <div class="stripe-form__default">
+                <input id="default_card" type="checkbox" name="default_card">
+                <label for="default_card">Save as Default Card</label>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="stripe-form__buttons">
+
+                <!-- CANCEL -->
+                <button
+                    id="cancel_button"
+                    type="reset"
+                    class="b2b-button b2b-button_outline"
+                >Cancel</button>
+
+                <!-- ADD -->
+                <button
+                    id="add_button"
+                    type="submit"
+                    class="b2b-button b2b-button_brand"
+                    disabled
+                >Save</button>
+
+            </div>
+
+        </form>
+
+        <script>
+            const FRAME_LOADED = 'DOMContentLoaded';
+            const RESIZE = 'resize';
+            const CARD_CREATED = 'createPaymentMethod';
+            const SHOW_SPINNER = 'showSpinner';
+            const CANCEL_CREATING = 'cancelCreating';
+            const CREATE_FAILED = 'createFailed';
+            const SEND_PUBLIC_KEY = 'handlePubKey';
+
+            const CARD_NAME_ELEMENT = document.getElementById('card_name');
+            const CARD_ERROR_ELEMENT = document.getElementById('card_error');
+            const DEFAULT_ELEMENT = document.getElementById('default_card');
+            const ADD_BUTTON_ELEMENT = document.getElementById('add_button');
+            const CANCEL_BUTTON_ELEMENT = document.getElementById('cancel_button');
+            const PAYMENT_FORM_ELEMENT = document.getElementById('payment_form');
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                window.parent.postMessage({
+                    methodType: FRAME_LOADED,
+                    isIframeLoaded: true,
+                }, window.location.origin);
+
+                window.addEventListener('message', async (event) => {
+                    let data = event.data;
+                    if (typeof(event.data) === 'string' && event.data.length > 0) {
+                        data = JSON.parse(event.data);
+                    }
+
+                    if (event.origin === data.originUrl) {
+                        if (
+                            data.methodType === SEND_PUBLIC_KEY &&
+                            data.publicKey
+                        ) {
+                            main(data.publicKey, data.buttonLabel, data.hideCardName);
+
+                        } else if (event.data.methodType === RESIZE) {
+                            updateIframeHeigth();
+                        }
+    
+                        if (data.isCheckout) {
+                            addStyleInCheckoutPage();
+                        }
+                    }
+
+                });
+
+                window.addEventListener(RESIZE, () => {
+                    updateIframeHeigth();
+                });
+            });
+
+            function main(publicKey, buttonLabel, hideCardName) {
+                if (!publicKey) return;
+
+                if (buttonLabel) {
+                    ADD_BUTTON_ELEMENT.innerText = buttonLabel;
+                }
+
+                if (hideCardName) {
+                    CARD_NAME_ELEMENT.style.display = 'none';
+                }
+
+                // INITIAL STRIPE
+                const stripe = Stripe(publicKey);
+                const elements = stripe.elements();
+                elements.update({ locale: 'en' });
+
+                // MOUNT ELEMENT
+                let cardElement = elements.create('card', { style: {
+                    base: {
+                        iconColor: '#000000',
+                        color: '#000000',
+                        fontWeight: '400',
+                        fontFamily: `'Helvetica Neue', 'Arial', 'Helvetica', sans-serif`,
+                        fontSize: '14px',
+                        lineHeight: '14px',
+                        fontSmoothing: 'antialiased',
+                        ':-webkit-autofill': {
+                            color: '#000000',
+                        },
+                        '::placeholder': {
+                            color: '#706E6B',
+                        },
+                    },
+                    invalid: {
+                        iconColor: 'rgb(226, 75, 50)',
+                        color: 'rgb(226, 75, 50)',
+                    }
+                }});
+                cardElement.mount('#card_element');
+
+                // HANDLE CHANGE ELEMENT
+                cardElement.on('change', (event) => {
+                    CARD_ERROR_ELEMENT.textContent = event.error ? event.error.message : '';
+                    ADD_BUTTON_ELEMENT.disabled = !event.complete;
+                    updateIframeHeigth();
+                });
+
+                // SUBMIT STRIPE FORM
+                PAYMENT_FORM_ELEMENT.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    window.parent.postMessage({
+                        methodType: SHOW_SPINNER,
+                    }, window.location.origin);
+                    ADD_BUTTON_ELEMENT.disabled = true;
+                    CANCEL_BUTTON_ELEMENT.disabled = true;
+
+                    let cardName = CARD_NAME_ELEMENT.value;
+
+                    let cardPaymentObjectParams = {};
+                    cardPaymentObjectParams.type = 'card';
+                    cardPaymentObjectParams.card = cardElement;
+
+                    if (cardName) {
+                        cardPaymentObjectParams.billing_details = {
+                            name: cardName
+                        }
+                    }
+                    updateIframeHeigth();
+
+                    // CREATE STRIPE PAYMENT METHOD
+                    stripe.createPaymentMethod(cardPaymentObjectParams)
+                        .then(stripePaymentMethodHandler);
+                });
+
+                // CLICK CANCEL BUTTON
+                CANCEL_BUTTON_ELEMENT.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    window.parent.postMessage({
+                        isError: true,
+                        methodType: CANCEL_CREATING,
+                    }, window.location.origin);
+                    updateIframeHeigth();
+                });
+
+                // HANDLE STRIPE RESPONSE
+                const stripePaymentMethodHandler = async (result) => {
+                    if (result.error) {
+                        console.error('error', result.error);
+                        CARD_ERROR_ELEMENT.textContent = result.error ? result.error.message : '';
+
+                        window.parent.postMessage({
+                            isError: true,
+                            methodType: CREATE_FAILED,
+                        }, window.location.origin);
+                        updateIframeHeigth();
+
+                    } else {
+                        window.parent.postMessage({
+                            isError: false,
+                            methodType: CARD_CREATED,
+                            paymentMethodId: result.paymentMethod.id,
+                            cardName: result.paymentMethod.billing_details.name,
+                            cardBrand: result.paymentMethod.card.brand,
+                            cardLast4: result.paymentMethod.card.last4,
+                            cardMonth: result.paymentMethod.card.exp_month,
+                            cardYear: result.paymentMethod.card.exp_year,
+                            cardFunding: result.paymentMethod.card.funding,
+                            setAsDefault: DEFAULT_ELEMENT.checked ? true : false,
+                        }, window.location.origin);
+
+                        // CLEAR FORM
+                        CARD_NAME_ELEMENT.value = '';
+                        cardElement.clear();
+                        updateIframeHeigth();
+                    }
+                    ADD_BUTTON_ELEMENT.disabled = true;
+                    CANCEL_BUTTON_ELEMENT.disabled = false;
+                }
+            }
+
+            function addStyleInCheckoutPage() {
+                const styleElement = document.createElement('style');
+                styleElement.setAttribute('data-name', 'custom-checkout-styles');
+
+                let styleText = `
+                    .stripe-form__buttons {
+                        grid-column-gap: 1rem;
+                        grid-row-gap: 1rem;
+                    }
+
+                    .stripe-form__buttons .b2b-button,
+                    .stripe-form__buttons .b2b-button + .b2b-button {
+                        margin-top: 0 !important;
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                    }
+
+                    .stripe-form__buttons #cancel_button {
+                        order: 2;
+                    }
+
+                    .stripe-form__buttons #add_button {
+                        order: 1;
+                    }
+
+                    @media (min-width: 320px) {
+                        .stripe-form__buttons {
+                            justify-content: flex-start;
+                            flex-direction: row;
+                        }
+
+                        .stripe-form__buttons .b2b-button {
+                            width: auto;
+                        }
+                    }
+
+                    @media (max-width: 319.98px) {
+                        .stripe-form__buttons .b2b-button {
+                            width: 100%;
+                        }
+                    }
+                `;
+
+                styleElement.innerText = styleText.replace(/ +(?= )|\n/g, '');
+                let customStyleElement = document.body.querySelector(`style[data-name="custom-checkout-styles"]`);
+                if (customStyleElement) {
+                    document.body.removeChild(customStyleElement);
+                }
+                document.body.appendChild(styleElement);
+            }
+
+            function updateIframeHeigth() {
+                window.parent.postMessage({
+                    methodType: RESIZE,
+                    formHeight: PAYMENT_FORM_ELEMENT.getBoundingClientRect().height + 2 || 224
+                }, window.location.origin);
+            }
+
+        </script>
+
+    </body>
+</html>

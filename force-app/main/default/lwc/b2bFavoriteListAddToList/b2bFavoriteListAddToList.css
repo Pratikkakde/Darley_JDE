@@ -1,0 +1,87 @@
+:host {
+    display: block;
+}
+
+@media (max-width: 574.98px) {
+
+    :host {
+        margin-bottom: 1.5rem;
+    }
+
+}
+
+/* BUTTON */
+
+.b2b-favorite-list-add-to-list__button {
+    padding: 0 8px;
+    white-space: nowrap;
+}
+
+@media (max-width: 399.98px) {
+
+    .b2b-favorite-list-add-to-list__button {
+        width: 100%;
+    }
+
+}
+
+/* PRODUCT INFO */
+
+.b2b-favorite-list-add-to-list__product-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.b2b-favorite-list-add-to-list__product-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-gap: 2rem;
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+}
+
+.b2b-favorite-list-add-to-list__product-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.b2b-favorite-list-add-to-list__product-image svg {
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    fill: rgb(219, 219, 219);
+}
+
+.b2b-favorite-list-add-to-list__product-name {
+    width: calc(100% - 100px - 2rem);
+    font-weight: 500;
+}
+
+/* FORM */
+.b2b-favorite-list-add-to-list__form {
+    margin-top: 20px;
+}
+
+.b2b-favorite-list-add-to-list__create fieldset.slds-form-element + lightning-input {
+    padding-left: 25px;
+}
+
+.b2b-favorite-list-add-to-list__create-label {
+    margin-bottom: 10px;
+}
+
+.b2b-favorite-list-add-to-list__exist {
+    margin-top: 20px;
+}
+
+.b2b-favorite-list-add-to-list__exist c-b2b-select {
+    padding-left: 25px;
+}
+
+.slds-radio__label {
+    cursor: pointer;
+}

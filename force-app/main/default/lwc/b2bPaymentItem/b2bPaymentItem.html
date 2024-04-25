@@ -1,0 +1,39 @@
+<template>
+    <template if:true={showComponent}>
+        <div class="b2b-payment-item__wrapper">
+
+            <!-- ICON -->
+            <template if:true={payment.icon}>
+                <div class="b2b-payment-item__icon">
+                    <c-b2b-payment-icon
+                        icon-name={payment.icon}
+                    ></c-b2b-payment-icon>
+                </div>
+            </template>
+
+            <!-- BODY -->
+            <div class="b2b-payment-item__body">
+
+                <!-- NAME -->
+                <template if:true={payment.name}>
+                    <div class="b2b-payment-item__text">
+                        <template if:true={payment.cardName}>
+                            <div class="b2b-payment-item__name">{payment.cardName}</div>
+                        </template>
+                        <span class="b2b-payment-item__name">{payment.name}</span>
+                        <template if:true={payment.label}>
+                            &nbsp;<span class="b2b-payment-item__label">{payment.label}</span>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- DATE -->
+                <template if:true={getShowDate}>
+                    <div class="b2b-payment-item__date">{payment.month}/{payment.year}</div>
+                </template>
+
+            </div>
+
+        </div>
+    </template>
+</template>

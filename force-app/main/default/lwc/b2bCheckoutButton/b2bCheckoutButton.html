@@ -1,0 +1,10 @@
+<template>
+    <template if:true={isButtonAvailable}>
+        <a
+                onclick={clickOnProceed}
+                target="_self"
+                data-disabled={isButtonDisabled}
+                class="slds-button slds-button_brand slds-size_full"
+        >{labels.proceedToCheckout}</a>
+    </template>
+</template>

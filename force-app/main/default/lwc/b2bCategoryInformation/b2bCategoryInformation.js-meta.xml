@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Category Information</masterLabel>
+    <description>B2B Category Information</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}"></property>
+            <property name="showCategoryInformation" type="Boolean" label="Show 'Category Information'" default="true"></property>
+            <property name="titleColor" type="Color" label="'Title' Color"></property>
+            <property name="titleAlign" type="String" label="'Title' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="descriptionColor" type="Color" label="'Description' Color"></property>
+            <property name="descriptionAlign" type="String" label="'Description' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="additionalDescriptionColor" type="Color" label="'Additional Description' Color"></property>
+            <property name="additionalDescriptionAlign" type="String" label="'Additional Description' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="buttonLabel" type="String" label="'Button' Label"></property>
+            <property name="buttonVariant" type="String" label="'Button' Variant" datasource="Base,Neutral,Brand,Outline-Brand,Destructive,Text-Destructive,Success" default="Brand"></property>
+            <property name="buttonAlign" type="String" label="'Button' Align" datasource="Left,Center,Right" default="Left"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,9 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+
+    <div class="b2b-quote-only__text" if:true={showQuoteOnlyText}>
+        <lightning-formatted-text value="Your shopping cart includes an item(s) that must be quoted for accurate pricing and freight charges. Please click on " ></lightning-formatted-text>
+        <lightning-formatted-text value="REQUEST FOR QUOTE" class="bold-text"></lightning-formatted-text>
+        <lightning-formatted-text value=", and you will receive your quote in one business day." ></lightning-formatted-text>
+    </div>
+</template>

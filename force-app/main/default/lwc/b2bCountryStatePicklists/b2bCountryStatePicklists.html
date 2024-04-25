@@ -1,0 +1,53 @@
+<template>
+    <div class="country-state-picklist-container slds-grid b2b-mobile-column-direction">
+        <div class={countryClass}>
+            <label class="field-label">
+                <span>* </span>
+                {LABELS.country}
+            </label>
+
+            <div class={countryPicklistCssStyles}>
+                <div class="slds-select_container">
+                    <select class={selectCssStyles} onchange={handleCountryChange} name="country" required>
+                        <template for:each={countryPicklistValues} for:item="option">
+                            <option key={option.label} class="uiInputSelectOption" value={option.value} selected={option.selected}>
+                                {option.label}
+                            </option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+
+            <template if:true={hasCountryError}>
+                <div role=alert class="slds-form-element__help">
+                    {LABELS.completeField}
+                </div>
+            </template>
+        </div>
+
+        <div class={stateClass}>
+            <label class="field-label state">
+                <span>* </span>
+                {LABELS.state}
+            </label>
+
+            <div class="slds-form-element__control state-select">
+                <div class="slds-select_container">
+                    <select class={selectCssStyles} onchange={handleStateChange} name="state" disabled={isCountyNotSelectedOrStateEmpty}>
+                        <template for:each={stateDependedValues} for:item="option">
+                            <option key={option.label} class="uiInputSelectOption" value={option.value} selected={option.selected}>
+                                {option.label}
+                            </option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+
+            <template if:true={hasStateError}>
+                <div role="alert" class="slds-form-element__help">
+                    {LABELS.completeField}
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

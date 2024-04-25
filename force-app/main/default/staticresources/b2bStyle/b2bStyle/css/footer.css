@@ -1,0 +1,17 @@
+/* FOOTER */
+
+b2c_lite_commerce-commerce-footer {
+    --dxp-c-component-wrapper-spacer-size: 0;
+    --dxp-c-footer-container-spacing-block-start: 0;
+    --dxp-c-footer-container-spacing-inline-end: 0;
+    --dxp-c-footer-container-spacing-block-end: 0;
+    --dxp-c-footer-container-spacing-inline-start: 0;
+    --dxp-c-component-wrapper-spacer-size-mobile: 0;
+    --dxp-c-footer-container-spacing-inline-end-mobile: 0;
+    --dxp-c-footer-container-spacing-inline-start-mobile: 0;
+}
+
+footer.b2c_lite_commerce-commerceFooter_commerceFooter {
+    background-color: var(--b2b-footer-backgroundColor, var(--dxp-g-root-contrast, #000000)) !important;
+    padding:0 !important;
+}

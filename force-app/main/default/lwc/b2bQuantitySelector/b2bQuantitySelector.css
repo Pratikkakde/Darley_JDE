@@ -1,0 +1,30 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+button {
+    background-color: #FFFFFF;
+    border: none;
+    width: 25px;
+}
+
+.b2b-qty-container {
+    border: 1px solid #DDD8DA;
+    height: 2.7rem;
+}
+
+input:hover,
+input:focus,
+input {
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid #DDD8DA !important;
+    border-right: 1px solid #DDD8DA !important;
+    border-radius: 0 !important;
+    height: 100%;
+    width: 4rem;
+    text-align: center;
+    outline: 0;
+}

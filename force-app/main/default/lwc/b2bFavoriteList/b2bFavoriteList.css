@@ -1,0 +1,78 @@
+:host {
+    display: block;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.b2b-favorite-list__wrapper {
+    height: 100%;
+}
+
+/* HEADER */
+
+.b2b-favorite-list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-column-gap: 1rem;
+    margin-bottom: 1.3125rem;
+}
+
+.b2b-favorite-list__title {
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-favorite-list__header {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .b2b-favorite-list__header-actions {
+        margin-top: 0.375rem;
+    }
+    
+}
+
+.b2b-favorite-list__header-actions .b2b-button_action {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* PANEL */
+
+.b2b-favorite-list__panel {
+    margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 767.98px) {
+
+    .b2b-favorite-list__panel {
+        margin-bottom: 1.25rem;
+    }
+
+}
+
+.b2b-favorite-list__panel lightning-combobox {
+    max-width: 30rem;
+    margin-bottom: 0;
+}
+
+/* BODY */
+
+.b2b-favorite-list__body {
+    position: relative;
+    min-height: 4rem;
+}
+
+/* EMPTY MESSAGE */
+
+.b2b-favorite-list__empty-message {
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.b2b-favorite-list__empty-message p + p {
+    margin-top: 2rem;
+}

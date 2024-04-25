@@ -1,0 +1,8 @@
+:host {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.b2b-product-variants__item + .b2b-product-variants__item {
+    margin-top: 1rem;
+}

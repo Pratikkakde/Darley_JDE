@@ -1,0 +1,25 @@
+<apex:page contentType="text/plain">
+    User-agent: *
+    Disallow: /# disallow indexing of all pages
+    Disallow: /login/
+    Disallow: /SelfRegister/
+    Disallow: /CheckPasswordResetEmail/
+    Disallow: /ForgotPassword/
+    Disallow: /cart/
+    Disallow: /checkout/
+    Disallow: /myprofile/
+    Disallow: /addresses/
+    Disallow: /addressForm/
+    Disallow: /account/
+    Disallow: /OrderSummary/
+    Disallow: /user-management/
+    Disallow: /payment-methods/
+    Disallow: /quote-management/
+    Disallow: /quote-detail/
+    Disallow: /quick-order/
+    Disallow: /favorite-list/
+    #Allow: /shop/
+    #Allow: /contact-us/
+    #Allow: /global-search/
+    Sitemap: https://darley.my.site.com/shop/sitemap.xml
+</apex:page>

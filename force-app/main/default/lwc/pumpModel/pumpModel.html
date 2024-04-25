@@ -1,0 +1,30 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-31-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+ 
+  <template if:true={showparent}>
+   <c-quick-action-modal   back={backdata} reqdata={requireddata} optdata={optionaldatalist} onarrayradiotosumm={handleonarrayradiotosumm}  oppid={recordId} product-i-d={PumpId}
+      ></c-quick-action-modal>
+    
+  </template>
+ 
+
+
+  
+   
+  <template if:true={showsummary}>
+  
+    <c-summary-component onshowparent={handleparent} pumpname={pumpName} oppid={recordId} arrayfromrelated={arrayFromRelated} pumpid={PumpId} onhidechild={handlechildPrice}   reqdata={requireddata} optdata={optionaldatalist} stringarray ={keyvalueArray}> </c-summary-component>
+  
+  
+  </template>
+
+  <template if:true={showpriceProduct}>
+    <c-price-productcmp pumpid={PumpId} choosen={arrayFromRelated} summdata={fromSummary} pumpname={pumpName}  oppid={recordId} ></c-price-productcmp>
+    </template>
+</template>

@@ -1,0 +1,209 @@
+:host {
+    display: block;
+}
+
+/* TITLE */
+.b2b-payment-management__title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #231F20;
+}
+
+/* CARDS */
+.b2b-payment-management__cards {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(237px, 1fr));
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
+}
+
+@media (max-width: 1439.98px) {
+    .b2b-payment-management__cards {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+    }
+}
+
+@media (max-width: 1324.98px) {
+    .b2b-payment-management__cards {
+        grid-template-columns: repeat(2, minmax(237px, 1fr));
+        grid-column-gap: 1.5rem;
+        grid-row-gap: 1.5rem;
+    }
+}
+
+@media (max-width: 1069.98px) {
+    .b2b-payment-management__cards {
+        grid-template-columns: 100%;
+    }
+}
+
+@media (max-width: 1023.98px) {
+    .b2b-payment-management__cards {
+        grid-template-columns: repeat(3, minmax(237px, 1fr));
+    }
+}
+
+@media (max-width: 899.98px) {
+    .b2b-payment-management__cards {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+    }
+}
+
+@media (max-width: 879.98px) {
+    .b2b-payment-management__cards {
+        grid-template-columns: repeat(2, minmax(237px, 1fr));
+        grid-column-gap: 1.5rem;
+        grid-row-gap: 1.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .b2b-payment-management__cards {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+    }
+}
+
+@media (max-width: 574.98px) {
+    .b2b-payment-management__cards {
+        grid-template-columns: 100%;
+    }
+}
+
+/* ADD BUTTON */
+.b2b-payment-management__card-add {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration-line: underline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2.875rem 1rem;
+    background-color: var(--b2b-colorWhite);
+    border: 1px dashed var(--b2b-colorBorder);
+    border-radius: 0;
+}
+
+.b2b-payment-management__card-add svg {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+    fill: var(--b2b-colorBorder);
+    transition: fill 0.1s;
+}
+
+.b2b-payment-management__card-add:hover {
+    border: 1px dashed var(--b2b-colorAction);
+}
+
+.b2b-payment-management__card-add:hover svg {
+    fill: var(--b2b-colorAction);
+}
+
+.b2b-payment-management__card-add:hover,
+.b2b-payment-management__card-add:hover .b2b-text-action {
+    color: var(--b2b-colorAction);
+}
+
+/* MODAL */
+.b2b-payment-management__modal-wrapper {
+    z-index: 9600;
+}
+
+.b2b-payment-management__modal-wrapper + .slds-backdrop {
+    z-index: 9599;
+}
+
+.b2b-payment-management__modal-wrapper .slds-modal__header .slds-modal__close:active,
+.b2b-payment-management__modal-wrapper .slds-modal__header .slds-modal__close:focus {
+    box-shadow: unset;
+    border-color: transparent;
+}
+
+.b2b-payment-management__modal-wrapper[data-type="add"] .slds-modal__content {
+    padding-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+    .b2b-payment-management__modal-wrapper[data-type="delete"] .slds-modal__container {
+        width: auto;
+        max-width: 35rem;
+        min-width: 30rem;
+    }
+}
+
+.b2b-payment-management__modal-wrapper[data-type="add"] .slds-modal__container {
+    width: 100%;
+    min-width: 600px;
+}
+
+@media (max-width: 991.98px) {
+    .b2b-payment-management__modal-wrapper[data-type="add"] .slds-modal__container {
+        width: 100%;
+        max-width: calc(100% - 2rem);
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .b2b-payment-management__modal-wrapper[data-type="add"] .slds-modal__container {
+        width: 100%;
+        min-width: calc(100% - 2rem);
+    }
+}
+
+@media (max-width: 547.98px) {
+    .b2b-payment-management__modal-wrapper[data-type="add"] .slds-modal__container {
+        max-width: calc(100% - 1rem);
+    }
+}
+
+.b2b-payment-management__modal-title {
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.375;
+    font-weight: 700;
+}
+
+.b2b-payment-management__modal-description p {
+    font-size: 18px;
+    padding-bottom: 36px;
+}
+
+.b2b-payment-management__modal-buttons {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.b2b-payment-management__modal-buttons .b2b-button {
+    min-width: 165px;
+}
+
+.b2b-payment-management__modal-buttons .b2b-button + .b2b-button {
+    margin-left: 1.5rem;
+}
+
+@media (max-width: 574.98px) {
+    .b2b-payment-management__modal-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .b2b-payment-management__modal-buttons .slds-button {
+        width: 100%;
+    }
+
+    .b2b-payment-management__modal-buttons .b2b-button + .b2b-button {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+}

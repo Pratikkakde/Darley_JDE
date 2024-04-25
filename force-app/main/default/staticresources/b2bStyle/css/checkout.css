@@ -1,0 +1,114 @@
+/* CHECKOUT */
+
+[data-theme-name="checkout"] .b2b-theme__header {
+    padding-left: var(--b2b-theme-contentHorizontalPaddings);
+    padding-right: var(--b2b-theme-contentHorizontalPaddings);
+    box-shadow: var(--b2b-theme-headerShadow);
+    background: var(--b2b-theme-headerColor);
+}
+
+[data-theme-name="checkout"] .b2b-theme__body {
+    background-color: rgba(243, 243, 243, 1);
+}
+
+[data-theme-name="checkout"] .b2b-theme__footer {
+    background-color: var(--b2b-footer-backgroundColor, var(--dxp-g-root-contrast, #000000));
+}
+
+[data-theme-name="checkout"] .b2b-theme__footer .columns-content {
+    max-width: var(--b2b-theme-containerMaxWidth, 100%);
+    margin: 0 auto;
+    padding-left: var(--b2b-theme-contentHorizontalPaddings);
+    padding-right: var(--b2b-theme-contentHorizontalPaddings);
+    padding-top: var(--b2b-theme-contentVerticalPaddings);
+    padding-bottom: var(--b2b-theme-contentVerticalPaddings);
+}
+
+@media screen and (max-width: 767.98px) {
+
+    [data-theme-name="checkout"] .b2b-theme__footer .columns-content {
+        padding-top: calc(var(--b2b-theme-contentVerticalPaddings) * 2);
+        padding-bottom: calc(var(--b2b-theme-contentVerticalPaddings) * 2);
+    }
+
+}
+
+/* B2B CHECKOUT ADDRESSES */
+
+c-b2b-checkout-addresses lightning-input-address .slds-form-element__row {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* COUNTRY */
+c-b2b-checkout-addresses lightning-input-address .slds-form-element__row:nth-child(3) lightning-combobox .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* STREET ADDRESS */
+c-b2b-checkout-addresses lightning-input-address .slds-form-element__row:nth-child(4) lightning-textarea .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* CITY */
+c-b2b-checkout-addresses lightning-input-address .slds-form-element__row:nth-child(5) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* ZIP / POSTALCODE */
+c-b2b-checkout-addresses lightning-input-address .slds-form-element__row:nth-child(6) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+} 
+
+@media screen and (max-width: 768px) {
+   c-b2b-checkout-addresses lightning-input-address .slds-form-element__row{
+        display: flex;
+        flex-direction: column;
+    }
+
+   c-b2b-checkout-addresses lightning-input-address .slds-form-element__row .slds-form-element {
+        width:100%;
+    }
+
+   c-b2b-checkout-addresses lightning-input-address .slds-form-element__row .slds-form-element + .slds-form-element {
+        width:100%;
+        padding-left: 0 !important;
+        margin-top: 1rem !important;
+    }
+}
+
+
+/* CHECKOUT BUTTON */
+
+commerce_cart-checkout-button div {
+    padding: 0 !important;
+}
+
+commerce_cart-checkout-button .slds-button {
+    border-radius: 0 !important;
+}
+
+commerce_cart-checkout-button .slds-button:hover,
+commerce_cart-checkout-button .slds-button:focus {
+    border-color: var(--dxp-s-button-color-hover);
+}
+
+
+/* SHOPPING CART */
+
+commerce_builder-b2b-cart-contents {
+    position: relative !important;
+    min-height: 4rem !important;
+}
+
+commerce_builder-b2b-cart-contents .cart-spinner {
+    position: absolute !important;
+}

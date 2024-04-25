@@ -1,0 +1,62 @@
+:host {
+    display: block;
+}
+
+.b2b-product-support__wrapper {
+    padding-top: 1rem;
+}
+
+.b2b-product-support__title {
+    margin-bottom: 0.75rem;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.b2b-product-support__row {
+    display: flex;
+    flex-wrap: wrap;
+    grid-row-gap: calc(var(--b2b-theme-contentVerticalPaddings) * 2);
+    width: calc(100% + var(--b2b-theme-contentHorizontalPaddings, 0));
+    margin-left: calc(var(--b2b-theme-contentHorizontalPaddings, 0) / 2 * -1);
+    margin-right: calc(var(--b2b-theme-contentHorizontalPaddings, 0) / 2 * -1);
+}
+
+.b2b-product-support__col {
+    width: 50%;
+    padding: 0 calc(var(--b2b-theme-contentHorizontalPaddings, 0) / 2);
+}
+
+@media (max-width: 1023.98px) {
+    
+    .b2b-product-support__col {
+        width: 100%;
+    }
+
+}
+
+.b2b-product-support__anchor {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.b2b-product-support__link-wrapper + .b2b-product-support__link-wrapper {
+    margin-top: 0.5rem;
+}
+
+.b2b-product-support__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    grid-column-gap: 0.75rem;
+}
+
+.b2b-product-support__link-icon {
+    width: 18px;
+    height: auto;
+    transition: fill 0.1s;
+}
+
+.b2b-product-support__link:hover .b2b-product-support__link-icon {
+    fill: var(--dxp-s-link-text-color-hover, var(--dxp-g-brand-1));
+}

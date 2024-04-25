@@ -1,0 +1,170 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+
+        <!-- TITLE -->
+        <div class="b2b-user-management__title dxp-text-heading-small">{labels.title}</div>
+
+        <!-- ERROR MESSAGE-->
+        <c-b2b-alert
+            show={showFatalError}
+            variant="error"
+            message={errorMessage}
+        ></c-b2b-alert>
+
+        <template if:false={showFatalError}>
+
+            <!-- PANEL -->
+            <div class="b2b-user-management__panel">
+                <div class="b2b-user-management__panel-row">
+                    <div class="b2b-user-management__panel-search">
+    
+                        <!-- SEARCH -->
+                        <lightning-input
+                            variant="label-hidden"
+                            type="search"
+                            placeholder={labels.search}
+                            disabled={isPaneldisabled}
+                            onchange={handleChangeSearch}
+                        ></lightning-input>
+    
+                    </div>
+                    <div class="b2b-user-management__panel-sort">
+    
+                        <!-- SORT -->
+                        <lightning-combobox
+                            label={labels.sortBy}
+                            variant="label-inline"
+                            value={sort}
+                            options={sortOptions}
+                            disabled={isPaneldisabled}
+                            onchange={handleChangeSort}
+                        ></lightning-combobox>
+    
+                    </div>
+                </div>
+                <div class="b2b-user-management__panel-status">
+    
+                    <!-- STATUS -->
+                    <template for:each={statusOptions} for:item="item">
+                        <button
+                            key={item.value}
+                            data-value={item.value}
+                            class={item.class}
+                            disabled={isPaneldisabled}
+                            onclick={handleClickStatus}
+                        >{item.label}</button>
+                    </template>
+    
+                </div>
+            </div>
+
+            <!-- LIST -->
+            <div class="b2b-user-management__list">
+                <div class="b2b-container">
+                    <div class="b2b-row">
+
+                        <!-- UPDATE LOADING -->
+                        <template if:true={isUpdateLoading}>
+                            <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                        </template>
+    
+                        <!-- ADD BUTTON -->
+                        <div class="b2b-col">
+                            <button
+                                name="shipping"
+                                class="b2b-user-management__add-button"
+                                disabled={isPaneldisabled}
+                                onclick={handleClickAdd}
+                            >
+                                <svg class="b2b-user-management__add-button-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M30.1284 16.2574C30.1284 15.6095 30.0566 14.3133 32.0003 14.3133C34.0163 14.3133 33.8003 16.1852 33.8003 16.1852L33.9444 30.4412L47.5525 30.3694C47.5525 30.3694 49.5685 30.2252 49.5685 32.2412C49.5685 34.1853 47.6243 33.9694 47.6243 33.9694L34.0163 34.0412L34.0881 47.3612C34.0881 47.3612 34.3041 49.4489 32.2162 49.4489C30.2002 49.4489 30.2721 47.4329 30.2721 47.4329V34.1129L16.5201 34.2571C16.5201 34.2571 14.2158 34.4012 14.2158 32.2411C14.2158 30.5129 16.4477 30.6571 16.4477 30.6571L30.3437 30.5852L30.1284 16.2574ZM30.3444 0.345438C13.6403 1.20928 0.320312 15.1774 0.320312 32.0254C0.320312 49.4494 14.5043 63.6334 31.9284 63.6334C49.3524 63.6334 63.6804 49.4494 63.6804 32.0254C63.6804 14.6014 49.4244 0.273438 31.9284 0.273438C31.4241 0.345759 30.8481 0.273438 30.3444 0.345759V0.345438Z"></path>
+                                </svg>
+                                <span class="b2b-button_action">{labels.addUser}</span>
+                            </button>
+                        </div>
+    
+                        <!-- SPINNER TILE -->
+                        <template if:true={isLoading}>
+                            <div class="b2b-col">
+                                <div class="b2b-user-management__spinner-tile">
+                                    <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- LIST OF CARD -->
+                        <template for:each={getList} for:item="item">
+                            <div key={item.userId} class="b2b-col">
+                                <c-b2b-user-card
+                                    user={item}
+                                    disabled={isUpdateLoading}
+                                    onedit={handleClickEdit}
+                                    onactivate={handleClickActivate}
+                                    onresetpassword={handleClickResetPassword}
+                                    onmanagepermissions={handleClickManagePermissions}
+                                ></c-b2b-user-card>
+                            </div>
+                        </template>
+
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- DEACTIVATE MODAL -->
+        <template if:true={deactivateModal.show}>
+            <section class="b2b-user-management__modal-wrapper slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+
+                    <!-- HEADER -->
+                    <header class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close"
+                            title={labels.close}
+                            onclick={handleClickDeactivateModalClose}
+                        >
+                            <lightning-icon
+                                icon-name="utility:close"
+                                alternative-text={labels.close}
+                                variant="inverse"
+                            ></lightning-icon>
+                        </button>
+                        <h2 class="b2b-user-management__modal-title">{labels.deactivateModalTitle}</h2>
+                    </header>
+
+                    <!-- CONTENT -->
+                    <div class="slds-modal__content">
+                        <p>{labels.deactivateModalMessage}</p>
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="slds-modal__footer b2b-modal__footer">
+                        <button
+                            class="slds-button slds-button_outline-brand b2b-modal__button"
+                            onclick={handleClickDeactivateModalClose}
+                        >{labels.deactivateModalClose}</button>
+                        <button
+                            class="slds-button slds-button_brand b2b-modal__button"
+                            onclick={handleClickDeactivateModalSubmit}
+                        >{labels.deactivateModalSubmit}</button>
+                    </div>
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </div>
+
+    <!-- B2B USER UPSERT -->
+    <c-b2b-user-upsert
+        onclose={handleCloseUserUpsert}
+    ></c-b2b-user-upsert>
+
+    <!-- B2B USER MANAGE PERMISSIONS -->
+    <c-b2b-user-manage-permissions
+        onclose={handleCloseManagePermissions}
+    ></c-b2b-user-manage-permissions>
+
+</template>

@@ -1,0 +1,64 @@
+:host {
+    display: block;
+    margin-bottom: 0;
+}
+
+.b2b-cookie__wrapper {
+    position: fixed;
+    width: 100%;
+    max-width: var(--b2b-cookie-containerMaxWidth);
+    top: var(--b2b-cookie-topPosition);
+    left: var(--b2b-cookie-leftPosition);
+    bottom: var(--b2b-cookie-bottomPosition);
+    right: var(--b2b-cookie-rightPosition);
+    transform: var(--b2b-cookie-transformPosition);
+    z-index: 8999;
+}
+
+.b2b-cookie__content {
+    position: relative;
+    padding: 1.125rem 1.875rem;
+    background-color: var(--b2b-cookie-backgroundColor);
+    border-radius: var(--b2b-cookie-borderRadius);
+}
+
+lightning-button-icon {
+    position: absolute;
+    top: 0;
+    right: 6px;
+}
+
+.b2b-cookie__message {
+    margin-bottom: 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+    font-weight: 300;
+    color: var(--b2b-cookie-textColor);
+}
+
+.b2b-cookie__buttons {
+    display: flex;
+    justify-content: var(--b2b-cookie-buttonAlignment);
+    flex-wrap: wrap;
+    grid-column-gap: 0.5rem;
+    grid-row-gap: 1rem;
+}
+
+.b2b-cookie__buttons .slds-button {
+    min-width: 200px;
+    margin: 0 !important;
+    border-color: var(--dxp-g-brand);
+    background-color: var(--dxp-g-brand);
+}
+
+.b2b-cookie__buttons .slds-button:hover,
+.b2b-cookie__buttons .slds-button:focus {
+    border-color: var(--dxp-g-brand-1);
+    background-color: var(--dxp-g-brand-1);
+}
+
+@media (max-width: 479.98px) {
+    .b2b-cookie__buttons .slds-button {
+        width: 100%;
+    }
+}

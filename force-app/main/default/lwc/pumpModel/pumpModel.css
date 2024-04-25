@@ -1,0 +1,6 @@
+lightning-button.selectbtn{
+    --sds-c-button-shadow-focus: 0 1 3px black;
+    --sds-c-button-brand-color-background :#6D67E4;
+    --sds-c-button-text-color: #f4f7f9;
+    margin-left: 850px;
+ }

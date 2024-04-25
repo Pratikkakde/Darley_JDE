@@ -1,0 +1,47 @@
+<template>
+    <template if:true={showComponent}>
+        <div class={getWrapperClass} role="alert">
+
+            <!-- ALERT ASSISTIVE TEXT -->
+            <span class="slds-assistive-text">{getVariant}</span>
+
+            <!-- ICON -->
+            <template if:true={showIcon}>
+                <div class="b2b-alert__icon">
+                    <lightning-icon
+                        icon-name={getIconName}
+                        size="x-small"
+                        alternative-text={getIconName}
+                    ></lightning-icon>
+                </div>
+            </template>
+
+            <!-- CONTENT -->
+            <div class="b2b-alert__content">
+                <template if:true={showRichtext}>
+                    <lightning-formatted-rich-text
+                        value={richtext}
+                    ></lightning-formatted-rich-text>
+                </template>
+                <template if:false={showRichtext}>
+                    <slot name="content">{message}</slot>
+                </template>
+            </div>
+
+            <!-- CLOSE BUTTON -->
+            <template if:true={showCloseButton}>
+                <div class="b2b-alert__close-button slds-notify__close">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        size="medium"
+                        variant="bare"
+                        title={labels.closeButtonTitle}
+                        alternative-text={labels.closeButtonTitle}
+                        onclick={handleClickButtonClose}
+                    ></lightning-button-icon>
+                </div>
+            </template>
+
+        </div>
+    </template>
+</template>

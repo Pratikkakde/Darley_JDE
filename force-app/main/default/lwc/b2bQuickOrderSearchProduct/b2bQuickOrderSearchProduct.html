@@ -1,0 +1,56 @@
+<template>
+    <div class={wrapperClass}>
+
+        <!-- FORM -->
+        <template if:true={showForm}>
+            <div class={getSearchClass}>
+                <lightning-input
+                    type="search"
+                    variant="label-hidden"
+                    is-loading={isUpdateLoading}
+                    placeholder={labels.placeholder}
+                    value={search}
+                    disabled={disabled}
+                    onfocus={handleFocusSearch}
+                    onfocusout={handleFocusoutSearch}
+                    onchange={handleChangeSearch}
+                ></lightning-input>
+
+                <!-- OPTIONS -->
+                <template if:true={showDropdown}>
+                    <div class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid">
+                        <div class="slds-listbox slds-listbox_vertical">
+                            <template for:each={options} for:item="item" for:index="index">
+                                <button
+                                    key={item.index}
+                                    data-id={item.id}
+                                    data-name={item.name}
+                                    class="b2b-quick-order-search-product__dropdown-item slds-dropdown__item"
+                                    onmousedown={handleClickDropdownItem}
+                                >
+                                    <span class="b2b-quick-order-search-product__dropdown-name">{item.name}</span>
+                                    <span class="b2b-quick-order-search-product__dropdown-sku">{labels.skuLabel} {item.sku}</span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- ERROR -->
+                <template if:true={showError}>
+                    <div class="slds-form-element__help">{labels.notFound}</div>
+                </template>
+
+            </div>
+        </template>
+
+        <!-- VIEW -->
+        <template if:true={showView}>
+            <div class="b2b-quick-order-search-product__product-wrapper">
+                <span class="b2b-quick-order-search-product__dropdown-name">{productName}</span>
+                <span class="b2b-quick-order-search-product__dropdown-sku">{labels.skuLabel} {productSku}</span>
+            </div>
+        </template>
+
+    </div>
+</template>

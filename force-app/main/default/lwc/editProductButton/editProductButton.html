@@ -1,0 +1,120 @@
+<template>
+    <div if:true={showSpinner}>
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+</div>
+    <lightning-card class="card">
+        <h3 slot="title">
+            <lightning-icon icon-name="standard:quotes" size="small"></lightning-icon> &nbsp;
+           
+            <lightning-button variant="base" value={caseItem} label="Quote Line Item " title="Settlement Name"
+                onclick={navigateToRelatedList} class="button slds-button"
+                style="font-weight: bold;font-size: 16px; color:#181818 "></lightning-button>
+            ({length})
+            
+            <button class="slds-button slds-button_icon slds-button_icon-border  slds-float_right" title="Refresh"
+                style="margin-right: 20px;" onclick={refreshTimeline}>
+                <svg class="slds-button__icon" aria-hidden="true">
+                    
+                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.28.0#refresh"></use>
+                </svg>
+           </button>
+        </h3>
+        
+           <p style="    font-weight: 600; padding-bottom: 10px;" >
+            To create an exact duplicate, click Clone Quote above. <br/>
+            To create a copy of this quote with UPDATED PRICING, select Copy Quote.
+        </p>
+        
+       
+       
+
+        <div
+            class="slds-scrollable__x slds-table_bordered slds-table_col-bordered slds-table_col-bordered slds-table_striped ">
+            <lightning-datatable
+             column-widths-mode="auto"
+              data={quotelineList} 
+              columns={columns}
+               key-field="Id"
+                onsave={handleSave} 
+                draft-values={draftValues} 
+                onrowaction={callRowAction}
+                 onresize={handleResize}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+
+   
+   
+  <!-- <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Example table of Opportunities with vertical borders">
+  
+        <thead>
+         <tr>
+                <th class="slds-cell-wrap" scope="col">
+                   Line Number
+                </th>
+                <th class="slds-cell-wrap" scope="col">
+                    Quantity
+                </th>
+                <th class="slds-cell-wrap" scope="col">
+                    Product
+                </th>
+                <th class="slds-cell-wrap" scope="col">
+                    Temp Product Code
+                </th>
+                 <th class="slds-cell-wrap" scope="col">
+                    Temp Item Description
+                </th>
+                <th class="slds-cell-wrap" scope="col">
+                    Cost 22
+                </th>
+                <th class="slds-cell-wrap" scope="col">
+                    Mark-Up
+                </th>
+                <th class="slds-cell-wrap" scope="col">
+                    Sales Price
+                </th>
+                <th class="slds-cell-wrap" scope="col">
+                  Internal Notes
+                </th>
+           </tr>
+        </thead>
+        <tbody>
+            <template if:true={quotelineList}>
+     <template for:each={quotelineList} for:item="qli" for:index="index">
+            <tr key={qli.Id}>
+         
+                <td data-label=" Line Number">
+                    <div class="slds-cell-wrap">{qli.LineNumber}</div>
+                </td>
+                
+                <td data-label="Event Name">
+                    <div class="slds-cell-wrap">{qli.quantity}</div>
+                </td>
+                <td data-label="Client Name">
+                    <div class="slds-cell-wrap">{qli.product}</div>
+                </td>
+                <td data-label="Status">
+                    <div class="slds-cell-wrap">{qli.tempProductCode}</div>
+                </td>
+                <td data-label="Hold Position">
+                    <div class="slds-cell-wrap">{qli.tempItemDesc}</div>
+                </td>
+                <td data-label="Performance Slot">
+                    <div class="slds-cell-wrap">{qli.cost22}</div>
+                </td>
+                <td data-label="Performance Slot">
+                    <div class="slds-cell-wrap">{qli.markup}</div>
+                </td>
+                <td data-label="Backline">
+                    <div class="slds-cell-wrap">{qli.UnitPrice}</div>
+                </td>
+                <td data-label="Backline">
+                    <div class="slds-cell-wrap">{qli.internalNotes}</div>
+                </td>
+               </tr>
+            </template>
+            </template>
+ </tbody>
+  </table> -->
+</template>

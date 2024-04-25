@@ -1,0 +1,5 @@
+<apex:component access="global">
+    <apex:attribute name="orderId" type="String" description="Order Id"/>
+
+    <div>Please follow the <a href="{!$Setup.B2BSettings__c.OrganizationURL__c + '/' + orderId}" style="color: #3297F0; text-decoration: none;" target="_blank">link</a> to review the order.</div>
+</apex:component>

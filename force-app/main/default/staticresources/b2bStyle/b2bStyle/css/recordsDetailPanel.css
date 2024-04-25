@@ -1,0 +1,49 @@
+/* RECORDS DETAIL PANEL */
+
+dxp_records-detail-panel {
+    border: 0 !important;
+    box-shadow: unset !important;
+}
+
+dxp_records-detail-panel .slds-card__header {
+    margin-bottom: 41px;
+}
+
+dxp_records-detail-panel .slds-card__body {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+dxp_records-detail-panel dxp_records-section .slds-section__title .slds-button {
+    --slds-c-icon-color-foreground-default: var(--dxp-g-root-contrast);
+    margin: 1.5rem 0 1rem 0;
+    padding: 0;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 400;
+    text-transform: none;
+    border: 0 !important;
+    box-shadow: none !important;
+    transition: color 0.1s;
+}
+
+dxp_records-detail-panel dxp_records-section .slds-section__title .slds-icon {
+    transition: fill 0.1s;
+}
+
+dxp_records-detail-panel dxp_records-section .slds-section__title .slds-button:hover,
+dxp_records-detail-panel dxp_records-section .slds-section__title .slds-button:focus {
+    --slds-c-icon-color-foreground-default: var(--dxp-g-brand-1);
+    color: var(--dxp-g-brand-1) !important;
+}
+
+dxp_records-detail-panel lightning-form-field .slds-form-element__label {
+    margin-bottom: 4px !important;
+    font-size: 0.75rem;
+}
+
+dxp_records-detail-panel lightning-form-field .slds-form-element__control {
+    min-height: 1.5625rem;
+    padding: 0;
+    line-height: 1.3125rem;
+}

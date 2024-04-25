@@ -1,0 +1,2247 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/shop/sfsites/c/resource/SLDSmin/">
+    <script src="/shop/sfsites/c/resource/IMask"></script>
+    <style>
+        @font-face {
+            font-family: 'Poppins';
+            font-weight: 700;
+            font-style: normal;
+            src: url('/shop/sfsites/c/resource/b2bStyle/poppins/Poppins-Bold.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Poppins';
+            font-weight: 600;
+            font-style: normal;
+            src: url('/shop/sfsites/c/resource/b2bStyle/poppins/Poppins-SemiBold.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Poppins';
+            font-weight: 500;
+            font-style: normal;
+            src: url("/shop/sfsites/c/resource/b2bStyle/poppins/Poppins-Medium.ttf") format("truetype");
+        }
+
+        @font-face {
+            font-family: 'Poppins';
+            font-weight: 400;
+            font-style: normal;
+            src: url('/shop/sfsites/c/resource/b2bStyle/poppins/Poppins-Regular.ttf') format('truetype');
+        }
+          
+        :root {
+            --font-family: Poppins, Arial, Helvetica, sans-serif;
+            --color-text: #231F20;
+            --color-placeholder: rgba(0, 0, 0, 0.6);
+            --color-disabled: rgb(179, 179, 179);
+            --color-border: rgb(221, 219, 218);
+            --color-borderFocus: rgb(218, 41, 28);
+            --color-borderError: rgb(194, 57, 52);
+            --color-buttonColor: rgb(255, 255, 255);
+            --color-buttonBackground: rgb(18, 26, 26);
+            --shadow-focus-color: rgb(182, 34, 23);
+            --shadow-buttonFocus: 2px 2px 0 rgba(18, 26, 26, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: white !important;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            color: var(--color-text);
+            background-color: transparent;
+            overflow: hidden;
+        }
+
+        body > div:first-child[tabindex="-1"] {
+            opacity: 0;
+        }
+
+        .b2b-static-payment__wrapper {
+            margin: 2px;
+        }
+        
+        /* CHECKOUT SECTION */
+
+        .b2b-checkout__section-content c-b2b-payment-item + .b2b-checkout-payment__invoice-my-company {
+            margin-top: 1.5rem;
+        }
+
+        /* SECTION */
+        .b2b-checkout__section {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 50px 25px 50px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .b2b-checkout__section-title {
+            order: 1;
+            width: 35%;
+        }
+
+        .b2b-checkout__section-content {
+            position: relative;
+            order: 2;
+            width: 57%;
+            padding: 5px 0.5rem 0 0.5rem;
+        }
+
+        .b2b-checkout__section-form {
+            position: relative;
+            order: 4;
+            width: 100%;
+        }
+
+        /* SECTION TITLE */
+        .b2b-checkout__section-title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .b2b-checkout__section-title-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+            line-height: 1;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: #231F20;
+            border-radius: 50%;
+        }
+
+        .b2b-checkout__section-title-label {
+            margin-left: 1rem;
+            font-size: 18px;
+            line-height: 1;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .b2b-checkout__section-action {
+            padding-top: 5px;
+            line-height: 1;
+            text-align: right;
+            order: 3;
+            width: 8%;
+            top: 61px;
+            position: relative;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 150%;
+            text-align: right;
+            text-decoration-line: underline;
+            color: #231F20;
+            cursor: pointer;
+        }
+
+        .b2b-checkout__section-action-item {
+            --dxp-c-link-text-decoration: underline;
+            display: inline-block;
+            font-size: 14px;
+            line-height: 1;
+            font-weight: 700;
+            text-decoration-line: underline;
+            color: var(--b2b-colorAction);
+            cursor: pointer;
+            transition: color 0.1s;
+        }
+
+        .b2b-checkout__section-action-item:hover {
+            color: var(--b2b-colorActionDarker);
+        }
+
+        .b2b-place-order-button {
+            min-width: 250px;
+            line-height: 52px;
+            background-color: #231F20;
+            border-color: #231F20;
+            color: #fff;
+            font-style: normal;
+            font-family: 'Poppins';
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            text-transform: capitalize;
+            border-radius: 0;
+        }
+
+        .b2b-place-order-button:disabled {
+            color: rgb(255, 255, 255);
+            border-color: rgb(221, 219, 218);
+            background-color: rgb(221, 219, 218);
+            cursor: not-allowed;
+        }
+
+        .b2b-place-order-button:hover:disabled {
+            background-color: rgb(221, 219, 218);
+            border-color: rgb(221, 219, 218);
+        }
+
+        .b2b-place-order-button:hover {
+            background-color: rgb(218, 41, 28);
+            border-color: rgb(218, 41, 28);
+        }
+
+        .b2b-checkout__body-total {
+            display:-webkit-box;
+            display:-ms-flexbox;
+            display:flex;
+            align-items: center;
+            padding: 0 50px 25px 50px;
+        }
+
+        .b2b-checkout-total {
+            margin-left: 36px;
+            color: #231F20;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 26px;
+        }
+
+        .b2b-help-icon {
+            top: -5px;
+            border: none;
+        }
+
+        .b2b-help-icon:focus {
+            box-shadow: none;
+        }
+
+        .b2b-help-icon:active {
+            border: none;
+        }
+
+        .slds-popover__body,
+        .slds-popover {
+            background-color: rgb(35, 31, 32);
+        }
+
+        .slds-popover__body {
+            box-shadow: 0px 2px 3px rgb(0 0 0 / 16%);
+            border-radius: 4px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 14px;
+        }
+
+        /* TABS */
+        .b2b-static-payment__tabs {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            align-items: center;
+            column-gap: 12px;
+            row-gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .b2b-static-payment__tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            padding: 12px 9px;
+            border-radius: 11px;
+            border: 1px solid #C6C6C6;
+            background-color: transparent;
+            cursor: pointer;
+            transition: border-color 0.4s, opacity 0.4s;
+            font-weight: 500;
+            font-size: 10px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .b2b-static-payment__tab.b2b-static-payment__tab-active {
+            border: 1px solid #ED1B2D;
+        }
+
+        .b2b-static-payment__tab:focus {
+            box-shadow: 0 0 3px #ED1B2D;
+        }
+
+        .b2b-static-payment__tab:disabled {
+            filter: grayscale(100%);
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+
+        .b2b-static-payment__tab i {
+            display: block;
+            width: 64px;
+            height: 16px;
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        i.b2b-static-payment__tab_credit-card {
+            background-image: url('/shop/sfsites/c/resource/b2bStaticPaymentIcons/creditCardLogo.svg');
+        }
+
+        i.b2b-static-payment__tab_amazon-pay {
+            background-image: url('/shop/sfsites/c/resource/b2bStaticPaymentIcons/amazonLogo.svg');
+        }
+
+        i.darley-dollar-image {
+            background-image: url('/shop/sfsites/c/resource/b2bStaticPaymentIcons/darleyDollar.svg');
+        }
+
+        /*CHECKBOX*/
+        .slds-checkbox_faux:after,
+        .slds-checkbox_faux:before {
+            border-bottom-color: rgb(218, 41, 28) !important;
+            border-left-color: rgb(218, 41, 28) !important;
+        }
+
+        .slds-checkbox [type=checkbox]:focus + .slds-checkbox_faux,
+        .slds-checkbox [type=checkbox]:focus ~ .slds-checkbox_faux,
+        .slds-checkbox [type=checkbox]:focus + .slds-checkbox__label .slds-checkbox_faux {
+            box-shadow: 0 0 3px rgb(218 41 28) !important;
+            border-color: rgb(218 41 28) !important;
+        }
+
+        .dollar-checkbox-label {
+            display: flex !important;
+            color: #236192 !important;
+            font-family: 'Poppins' !important;
+            font-style: normal !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
+            line-height: 16px !important;
+        }
+
+        .darley-dollar-image {
+            display: inline-block;
+            width: 14px;
+            height: 16px;
+            position: relative;
+            top: 4px;
+        }
+
+        /* CONTENT */
+        .b2b-static-payment__content,
+        .b2b-static-payment__content[data-show="false"] {
+            display: none;
+        }
+
+        .b2b-static-payment__content[data-show="true"] {
+            display: block;
+        }
+
+        #paypal_button_container {
+            min-height: 54px;
+            max-width: 400px;
+            margin-top: 6rem;
+        }
+
+        /* GENERAL */
+        .general-payment__input {
+            padding: 0 16px 0 12px;
+            width: 100%;
+            min-height: calc(1.875rem + (1px * 2));
+            line-height: 1.875rem;
+            border: 1px solid var(--color-border);
+            background-color: #FFFFFF;
+            -webkit-transition: border 0.1s linear, background-color 0.1s linear;
+            transition: border 0.1s linear, background-color 0.1s linear;
+            display: inline-block;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-size: 14px;
+            font-weight: 400;
+            outline: none;
+        }
+
+        .general-payment__input:focus,
+        .general-payment__input:active,
+        .general-payment__input:focus-visible {
+            border-color: var(--color-borderFocus);
+            box-shadow: 0 0 3px var(--shadow-focus-color);
+        }
+
+        .general-payment__input-error {
+            border-color: var(--color-borderError);
+            border-width: 0.666667px;
+            box-shadow: #ea001e 0 0 0 1px inset;
+        }
+
+        .general-payment__input-error:focus,
+        .general-payment__input-error:active,
+        .general-payment__input-error:focus-visible {
+            box-shadow: #c23934 0 0 0 1px inset, 0 0 3px rgb(218 41 28);
+        }
+
+        .general__error {
+            color: rgb(194, 57, 52);
+            margin-top: 0.125rem;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .general__label-required {
+            color: var(--color-borderError);
+            margin: 0 0.125rem;
+            text-decoration: none;
+            cursor: help;
+        }
+
+        .general__label {
+            display: block;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+        }
+
+        /* PAY WITH PO */
+        .b2b-static-payment__tab[data-id="pay-with-po"] {
+            display: none;
+        }
+
+        .b2b-static-payment__tab_pay-with-po {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+        }
+
+        .pay-with-po__label-required {
+            color: var(--color-borderError);
+            margin: 0 0.125rem;
+            text-decoration: none;
+            cursor: help;
+        }
+
+        .pay-with-po__label {
+            display: block;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+        }
+
+        .pay-with-po-form {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* APPLE / GOOGLE PAY */
+        #payment_request_button {
+            margin-top: 2.5rem;
+            max-width: 400px;
+        }
+
+        /* PAYPAL */
+        body div[id*="paypal-overlay"].paypal-checkout-sandbox {
+            opacity: 0 !important;
+            transition: opacity 0 !important;
+            animation-duration: 0 !important;
+            animation-name: unset !important;
+        }
+
+        .b2b-static-payment__3d-secure-form iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .stripe-credit-card-form__form iframe {
+            width: 100%;
+            height: 400px;
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--color-border);
+            margin-bottom: -1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stripe-credit-card-form__form.hidden iframe {
+            display: none;
+        }
+
+        #paypal_button_message {
+            margin-top: 2.5rem;
+        }
+
+        .slds-checkbox__label {
+            display: flex;
+            align-items: center;
+        }
+
+        .dollar-checkbox-label {
+            padding: 0;
+            margin: 0;
+            align-items: self-end;
+        }
+
+        .b2b-checkbox-label > span {
+            vertical-align: text-bottom;
+        }
+
+        /* CLASSES FOR SCREEN WIDTH LESS 1200px */
+        .b2b_media_max_width_1200 .b2b-checkout__section-title {
+            width: calc(100% - 80px);
+        }
+
+        .b2b_media_max_width_1200 .b2b-checkout__section-content {
+            order: 3;
+            width: 100%;
+            padding: 1rem 0 0 0;
+        }
+
+        .b2b_media_max_width_1200 .b2b-checkout__section-action {
+            order: 2;
+            width: 80px;
+            top: 97px;
+        }
+
+        /* CLASSES FOR SCREEN WIDTH LESS 992px */
+        .b2b_media_max_width_992 .b2b-checkout__section {
+            /*display: grid;`*/
+            /*grid-template-columns: 100%;*/
+            /*grid-template-rows: repeat(2, auto);*/
+            /*grid-gap: 1rem;*/
+
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid transparent;
+        }
+
+        .b2b_media_max_width_992 .b2b-checkout__title {
+            margin-bottom: 1.75rem;
+        }
+
+        .b2b_media_max_width_992 .b2b-checkout__section-content {
+            width: calc(100% - 80px);
+            padding-left: 0;
+        }
+
+        .b2b_media_max_width_992 .b2b-checkout__section-action {
+            width: 80px;
+        }
+
+        .b2b_media_max_width_992 .b2b-checkout__section-content:has(div#selected-card[style*="display: none;"]) {
+            width: 100%;
+        }
+
+        /* CLASSES FOR SCREEN WIDTH LESS 575px */
+        .b2b_media_max_width_575 .b2b-checkout__section-title-number {
+            display: none;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__section-title-label {
+            margin-left: 0;
+            font-size: 16px;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__section-action {
+            padding-top: 0;
+            width: 80px;
+            top: 71px;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__title {
+            padding: 1.5rem 1.5rem 0 1.5rem;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__section {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .b2b_media_max_width_575 .b2b-static-payment__tabs {
+            flex-wrap: nowrap;
+            column-gap: 6px;
+        }
+
+        .b2b_media_max_width_575 .dollar-checkbox-label {
+            min-width: 210px;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__section-title {
+            width: 100%;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__section-content {
+            width: calc(100% - 80px);
+            padding: 1rem 0 0 0;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__section-content:has(div#selected-card[style*="display: none;"]) {
+            width: 100%;
+        }
+
+        .b2b_media_max_width_575 .b2b-button-cancel-from-new {
+            width: 100%;
+        }
+
+        .b2b_media_max_width_575 .b2b-static-payment__wrapper {
+            margin: 0;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout-total {
+            margin-left: 0;
+            justify-content: center;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__body-total > div,
+        .b2b_media_max_width_575 .b2b-place-order-button,
+        .b2b_media_max_width_575 .b2b-button-use-card {
+            width: 100%;
+        }
+
+        .b2b_media_max_width_575 .b2b-checkout__body-total {
+            display:-webkit-box;
+            display:-ms-flexbox;
+            display:flex;
+            -webkit-box-orient:vertical;
+            -webkit-box-direction:reverse;
+            -ms-flex-direction:column-reverse;
+            flex-direction:column-reverse;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .b2b-checkout__section-action {
+            text-decoration-color: rgb(218, 41, 28);
+            color: rgb(218, 41, 28);
+        }
+
+        .b2b-checkout__section-action:hover {
+            text-decoration-color: rgb(182, 34, 23);
+            color: rgb(182, 34, 23);
+        }
+
+        .b2b-hide {
+            display: none !important;
+        }
+
+        .b2b-payment-item__wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .b2b-payment-item__body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .b2b-payment-item__icon {
+            margin-right: 12px;
+        }
+
+        .b2b-payment-item__text {
+            font-size: 14px;
+            line-height: 16px;
+        }
+
+        .b2b-payment-item__name {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 14px;
+            color: #000000;
+        }
+
+        .b2b-payment-item__label {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 14px;
+
+            color: #000000;
+        }
+
+        .b2b-payment-item__name_list {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 14px;
+            color: #231F20;
+        }
+
+        .b2b-payment-item__label_list {
+            display: block;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 14px;
+            color: #231F20;
+        }
+
+        .b2b-payment-item__label_list:first-letter {
+            text-transform: uppercase;
+        }
+
+        .b2b-payment-item__change {
+            margin-left: 6px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            color: #231F20;
+        }
+
+        .b2b-payment-icon__wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            overflow: hidden;
+        }
+
+        .b2b-payment-icon__wrapper svg {
+            display: block;
+            width: 100%;
+        }
+
+        /* RADIO LIST */
+        .b2b-checkout-payment__list .slds-radio {
+            line-height: 1;
+        }
+
+        .b2b-checkout-payment__list .slds-radio + .slds-radio {
+            margin-top: 10px;
+        }
+
+        .b2b-checkout-payment__list .slds-radio .slds-radio__label {
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .b2b-checkout-payment__list .slds-radio .slds-radio_faux {
+            display: block;
+            line-height: 1;
+        }
+
+        .b2b-checkout-payment__list .slds-radio .slds-form-element__label {
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .b2b-checkout-payment__list .slds-form-element__control {
+            max-width: 450px;
+        }
+
+        .b2b-payment-credit-card-icon[data-type="AmericanExpress"] #b2b-cards-view-american-express-icon,
+        .b2b-payment-credit-card-icon[data-type="MasterCard"] #b2b-cards-view-master-card-icon,
+        .b2b-payment-credit-card-icon[data-type="Visa"] #b2b-cards-view-visa-icon,
+        .b2b-payment-credit-card-icon[data-type="Diners"] #b2b-cards-view-diners-icon,
+        .b2b-payment-credit-card-icon[data-type="discover"] #b2b-cards-view-discover-icon,
+        .b2b-payment-credit-card-icon[data-type="CreditCard"] #b2b-cards-view-credit-card-icon {
+            display: block !important;
+        }
+
+        .b2b-payflow-container {
+
+        }
+
+        .field-container input {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .field-container {
+            padding-bottom: 19px;
+            position: relative;
+        }
+
+        .form-container {
+            display: grid;
+        }
+
+        .ccicon {
+            height: 25px;
+            position: absolute;
+            right: 1px;
+            top: 21px;
+            width: 60px;
+        }
+
+        .credit-card-list-icon {
+            height: 25px;
+            right: 1px;
+            top: 21px;
+            width: 60px;
+        }
+
+        .credit-card-expiration-date {
+            width: 115px;
+            margin-right: 25px;
+        }
+
+        .credit-card-cvv-cvc {
+            width: 78px;
+        }
+
+        /*CREDIT CARD ADD NEW BUTTON*/
+        .b2b-checkout-payment__button-add {
+            margin: 1rem 0;
+        }
+
+        .b2b-checkout-payment__button-add[data-view-mode="true"] {
+            margin: 0 0 1rem 0;
+        }
+
+        .b2b-checkout-payment__button-add .slds-button {
+            transition: color 0.1s;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 150%;
+
+            text-decoration-line: underline;
+            color: #231F20;
+        }
+
+        .b2b-checkout-payment__button-add svg {
+            display: inline-block;
+            fill: #AAAAAA;
+            transition: fill 0.1s;
+        }
+
+        .b2b-checkout-payment__button-add svg:nth-child(1) {
+            margin-right: 9px;
+        }
+
+        .b2b-checkout-payment__button-add svg:nth-child(2) {
+            width: 32px;
+            height: 21px;
+            margin-right: 11px;
+        }
+
+        .b2b-checkout-payment__button-add .slds-button:hover,
+        .b2b-checkout-payment__button-add .slds-button:active,
+        .b2b-checkout-payment__button-add .slds-button:focus {
+            color: rgba(19, 95, 144, 1);
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .b2b-checkout-payment__button-add .slds-button:hover svg,
+        .b2b-checkout-payment__button-add .slds-button:active svg,
+        .b2b-checkout-payment__button-add .slds-button:focus svg {
+            fill: rgba(19, 95, 144, 1);
+        }
+
+        .b2b-button-use-card,
+        .b2b-button-cancel-from-new {
+            align-items: center;
+            background-color: rgb(35, 31, 32);
+            border-bottom-color: rgb(35, 31, 32);
+            color: rgb(255, 255, 255);
+            box-shadow: none;
+            cursor: pointer;
+            font-family: 'Poppins';
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 0;
+            padding: 7px 30px;
+        }
+
+        .b2b-button-use-card:active,
+        .b2b-button-use-card:focus,
+        .b2b-button-use-card:hover,
+        .b2b-button-cancel-from-new:active,
+        .b2b-button-cancel-from-new:focus,
+        .b2b-button-cancel-from-new:hover {
+            background-color: rgb(218, 41, 28);
+            border-bottom-color: rgb(218, 41, 28);
+            border-top-color: rgb(218, 41, 28);
+            border-right-color: rgb(218, 41, 28);
+            border-left-color: rgb(218, 41, 28);
+            box-shadow: none !important;
+        }
+
+        .b2b-checkout-payment__button-use {
+            margin-top: 32px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="payment_wrapper">
+<div class="b2b-checkout__section">
+    <!-- SPINNER -->
+    <div style="display: none;" id="payment-method-spinner" class="b2b-payment-method-spinner">
+        <div class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="b2b-checkout__section-title">
+        <div class="b2b-checkout__section-title-wrapper">
+            <div class="b2b-checkout__section-title-number">3</div>
+            <div class="b2b-checkout__section-title-label">Payment</div>
+        </div>
+    </div>
+
+    <!-- ACTION -->
+    <div class="b2b-checkout__section-action">
+        <div style="display: none;" id="credit-card-view-change">Change</div>
+    </div>
+
+    <div class="b2b-checkout__section-content">
+    <div class="b2b-static-payment__wrapper">
+
+        <!-- TABS -->
+        <div class="b2b-static-payment__tabs">
+            <button data-id="pay-with-po" class="b2b-static-payment__tab">
+                <i class="b2b-static-payment__tab_pay-with-po">Pay with PO</i>
+            </button>
+
+            <button data-id="credit-card" class="b2b-static-payment__tab disabled">
+                <i class="b2b-static-payment__tab_credit-card"></i>
+            </button>
+
+            <button data-id="amazon-pay" class="b2b-static-payment__tab disabled">
+                <i class="b2b-static-payment__tab_amazon-pay"></i>
+            </button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="b2b-static-payment__contents">
+
+            <!-- PAY WITH PO -->
+            <div data-id="pay-with-po" data-show="false" class="b2b-static-payment__content">
+                <div id="pay-with-po-form" class="pay-with-po-form">
+                    <label for="pay-with-po__po_number" class="pay-with-po__label">
+                        <abbr title="required" class="pay-with-po__label-required">*</abbr>
+                        P.O. Number
+                    </label>
+                    <div class="slds-form-element__control slds-grow">
+                        <input
+                                required
+                                maxlength="80"
+                                id="pay-with-po__po_number"
+                                name="pay-with-po__po_number"
+                                type="text"
+                                class="general-payment__input"
+                        >
+                        <div id="po_number_error" class="general__error"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- #PAY WITH PO -->
+
+            <!-- CREDIT CART -->
+            <div data-id="credit-card" data-show="false" class="b2b-static-payment__content">
+                <div id="existed-cards" style="display: none;">
+
+                    <!-- LIST -->
+                    <div class="b2b-checkout-payment__list">
+                        <fieldset class="slds-form-element">
+                            <div id="credit-card-list-container" class="slds-form-element__control"></div>
+                        </fieldset>
+                    </div>
+                    <!-- #LIST -->
+
+                    <!-- BUTTONS -->
+                    <div class="b2b-checkout-payment__button-add">
+                        <button id="credit-card-add-new" type="button" class="slds-button">
+                            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" class="slds-button__icon slds-button__icon_left">
+                                <path d="M30 29h16.5c.8 0 1.5-.7 1.5-1.5v-3c0-.8-.7-1.5-1.5-1.5H30c-.6 0-1-.4-1-1V5.5c0-.8-.7-1.5-1.5-1.5h-3c-.8 0-1.5.7-1.5 1.5V22c0 .6-.4 1-1 1H5.5c-.8 0-1.5.7-1.5 1.5v3c0 .8.7 1.5 1.5 1.5H22c.6 0 1 .4 1 1v16.5c0 .8.7 1.5 1.5 1.5h3c.8 0 1.5-.7 1.5-1.5V30c0-.6.4-1 1-1z"></path>
+                            </svg>
+                            <svg viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg" class="slds-button__icon slds-button__icon_left">
+                                <path d="M24.918 0.179688H5.125C2.45312 0.179688 0.988281 1.63281 0.988281 4.29297V5.28906H29.0547V4.29297C29.0547 1.64453 27.5898 0.179688 24.918 0.179688ZM6.03906 17.0312C5.34766 17.0312 4.87891 16.5625 4.87891 15.9062V13.7383C4.87891 13.082 5.34766 12.6133 6.03906 12.6133H8.91016C9.60156 12.6133 10.0586 13.082 10.0586 13.7383V15.9062C10.0586 16.5625 9.60156 17.0312 8.91016 17.0312H6.03906ZM5.125 20.9219H24.918C27.5898 20.9219 29.0547 19.4688 29.0547 16.8086V8.17188H0.988281V16.8086C0.988281 19.4688 2.45312 20.9219 5.125 20.9219Z"></path>
+                            </svg>
+                            Add another credit card
+                        </button>
+                    </div>
+
+                    <div class="b2b-checkout-payment__button-use">
+                        <button id="use_this_credit_card" class="b2b-button slds-button slds-button_brand b2b-button-use-card">Use this Credit Card</button>
+                    </div>
+                    <!-- #BUTTONS -->
+                </div>
+
+                <div id="selected-card" style="display: none;" class="b2b-payment-item__wrapper b2b-payment-credit-card-icon">
+
+                    <!-- ICON -->
+                    <div class="b2b-payment-item__icon">
+                        <div class="b2b-payment-icon__wrapper">
+                                <!-- AmericanExpress -->
+                                <svg id="b2b-cards-view-american-express-icon" class="credit-card-list-icon b2b-hide" width="750" height="471" viewBox="0 0 750 471" xmlns="http://www.w3.org/2000/svg"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><rect id="Rectangle-1" fill="#2557D6" x="0" y="0" width="750" height="471" rx="40"></rect><path d="M0.002688,221.18508 L36.026849,221.18508 L44.149579,201.67506 L62.334596,201.67506 L70.436042,221.18508 L141.31637,221.18508 L141.31637,206.26909 L147.64322,221.24866 L184.43894,221.24866 L190.76579,206.04654 L190.76579,221.18508 L366.91701,221.18508 L366.83451,189.15941 L370.2427,189.15941 C372.62924,189.24161 373.3263,189.46144 373.3263,193.38516 L373.3263,221.18508 L464.43232,221.18508 L464.43232,213.72973 C471.78082,217.6508 483.21064,221.18508 498.25086,221.18508 L536.57908,221.18508 L544.78163,201.67506 L562.96664,201.67506 L570.98828,221.18508 L644.84844,221.18508 L644.84844,202.65269 L656.0335,221.18508 L715.22061,221.18508 L715.22061,98.67789 L656.64543,98.67789 L656.64543,113.14614 L648.44288,98.67789 L588.33787,98.67789 L588.33787,113.14614 L580.80579,98.67789 L499.61839,98.67789 C486.02818,98.67789 474.08221,100.5669 464.43232,105.83121 L464.43232,98.67789 L408.40596,98.67789 L408.40596,105.83121 C402.26536,100.40529 393.89786,98.67789 384.59383,98.67789 L179.90796,98.67789 L166.17407,130.3194 L152.07037,98.67789 L87.59937,98.67789 L87.59937,113.14614 L80.516924,98.67789 L25.533518,98.67789 L-2.99999999e-06,156.92445 L-2.99999999e-06,221.18508 L0.002597,221.18508 L0.002688,221.18508 Z M227.39957,203.51436 L205.78472,203.51436 L205.70492,134.72064 L175.13228,203.51436 L156.62,203.51436 L125.96754,134.6597 L125.96754,203.51436 L83.084427,203.51436 L74.982981,183.92222 L31.083524,183.92222 L22.8996,203.51436 L4.7e-05,203.51436 L37.756241,115.67692 L69.08183,115.67692 L104.94103,198.84086 L104.94103,115.67692 L139.35289,115.67692 L166.94569,175.26406 L192.29297,115.67692 L227.39657,115.67692 L227.39657,203.51436 L227.39957,203.51436 Z M67.777214,165.69287 L53.346265,130.67606 L38.997794,165.69287 L67.777214,165.69287 Z M313.41947,203.51436 L242.98611,203.51436 L242.98611,115.67692 L313.41947,115.67692 L313.41947,133.96821 L264.07116,133.96821 L264.07116,149.8009 L312.23551,149.8009 L312.23551,167.80606 L264.07116,167.80606 L264.07116,185.34759 L313.41947,185.34759 L313.41947,203.51436 Z M412.67528,139.33321 C412.67528,153.33782 403.28877,160.57326 397.81863,162.74575 C402.43206,164.49434 406.37237,167.58351 408.24808,170.14281 C411.22525,174.51164 411.73875,178.41416 411.73875,186.25897 L411.73875,203.51436 L390.47278,203.51436 L390.39298,192.43732 C390.39298,187.1518 390.90115,179.55074 387.0646,175.32499 C383.98366,172.23581 379.28774,171.56552 371.69714,171.56552 L349.06363,171.56552 L349.06363,203.51436 L327.98125,203.51436 L327.98125,115.67692 L376.47552,115.67692 C387.25084,115.67692 395.18999,115.9604 402.00639,119.88413 C408.67644,123.80786 412.67529,129.53581 412.67529,139.33321 L412.67528,139.33321 Z M386.02277,152.37632 C383.1254,154.12756 379.69859,154.18584 375.59333,154.18584 L349.97998,154.18584 L349.97998,134.67583 L375.94186,134.67583 C379.61611,134.67583 383.44999,134.8401 385.94029,136.26016 C388.67536,137.53981 390.36749,140.26337 390.36749,144.02548 C390.36749,147.86443 388.75784,150.95361 386.02277,152.37632 Z M446.48908,203.51436 L424.97569,203.51436 L424.97569,115.67692 L446.48908,115.67692 L446.48908,203.51436 Z M696.22856,203.51436 L666.35032,203.51436 L626.38585,137.58727 L626.38585,203.51436 L583.44687,203.51436 L575.24166,183.92222 L531.44331,183.92222 L523.48287,203.51436 L498.81137,203.51436 C488.56284,203.51436 475.58722,201.25709 468.23872,193.79909 C460.82903,186.3411 456.97386,176.23903 456.97386,160.26593 C456.97386,147.23895 459.27791,135.33 468.33983,125.91941 C475.15621,118.90916 485.83044,115.67692 500.35982,115.67692 L520.77174,115.67692 L520.77174,134.49809 L500.78818,134.49809 C493.0938,134.49809 488.74909,135.63733 484.564,139.70147 C480.96957,143.4 478.50322,150.39171 478.50322,159.59829 C478.50322,169.00887 480.38158,175.79393 484.30061,180.22633 C487.5465,183.70232 493.445,184.75677 498.99495,184.75677 L508.46393,184.75677 L538.17987,115.67957 L569.77152,115.67957 L605.46843,198.76138 L605.46843,115.67957 L637.5709,115.67957 L674.6327,176.85368 L674.6327,115.67957 L696.22856,115.67957 L696.22856,203.51436 Z M568.07051,165.69287 L553.47993,130.67606 L538.96916,165.69287 L568.07051,165.69287 Z" id="Path" fill="#FFFFFF"></path><path d="M749.95644,343.76716 C744.83485,351.22516 734.85504,355.00582 721.34464,355.00582 L680.62723,355.00582 L680.62723,336.1661 L721.17969,336.1661 C725.20248,336.1661 728.01736,335.63887 729.71215,333.99096 C731.18079,332.63183 732.2051,330.65804 732.2051,328.26036 C732.2051,325.70107 731.18079,323.66899 729.62967,322.45028 C728.09984,321.10969 725.87294,320.50033 722.20135,320.50033 C702.40402,319.83005 677.70592,321.10969 677.70592,293.30714 C677.70592,280.56363 685.83131,267.14983 707.95664,267.14983 L749.95379,267.14983 L749.95644,249.66925 L710.93382,249.66925 C699.15812,249.66925 690.60438,252.47759 684.54626,256.84375 L684.54626,249.66925 L626.83044,249.66925 C617.60091,249.66925 606.76706,251.94771 601.64279,256.84375 L601.64279,249.66925 L498.57751,249.66925 L498.57751,256.84375 C490.37496,250.95154 476.53466,249.66925 470.14663,249.66925 L402.16366,249.66925 L402.16366,256.84375 C395.67452,250.58593 381.24357,249.66925 372.44772,249.66925 L296.3633,249.66925 L278.95252,268.43213 L262.64586,249.66925 L148.99149,249.66925 L148.99149,372.26121 L260.50676,372.26121 L278.447,353.20159 L295.34697,372.26121 L364.08554,372.32211 L364.08554,343.48364 L370.84339,343.48364 C379.96384,343.62405 390.72054,343.25845 400.21079,339.17311 L400.21079,372.25852 L456.90762,372.25852 L456.90762,340.30704 L459.64268,340.30704 C463.13336,340.30704 463.47657,340.45011 463.47657,343.92344 L463.47657,372.25587 L635.71144,372.25587 C646.64639,372.25587 658.07621,369.46873 664.40571,364.41107 L664.40571,372.25587 L719.03792,372.25587 C730.40656,372.25587 741.50913,370.66889 749.95644,366.60475 L749.95644,343.76712 L749.95644,343.76716 Z M408.45301,296.61266 C408.45301,321.01872 390.16689,326.05784 371.7371,326.05784 L345.42935,326.05784 L345.42935,355.52685 L304.44855,355.52685 L278.48667,326.44199 L251.5058,355.52685 L167.9904,355.52685 L167.9904,267.66822 L252.79086,267.66822 L278.73144,296.46694 L305.55002,267.66822 L372.92106,267.66822 C389.6534,267.66822 408.45301,272.28078 408.45301,296.61266 Z M240.82781,337.04655 L188.9892,337.04655 L188.9892,319.56596 L235.27785,319.56596 L235.27785,301.64028 L188.9892,301.64028 L188.9892,285.66718 L241.84947,285.66718 L264.91132,311.27077 L240.82781,337.04655 Z M324.3545,347.10668 L291.9833,311.3189 L324.3545,276.6677 L324.3545,347.10668 Z M372.2272,308.04117 L344.98027,308.04117 L344.98027,285.66718 L372.47197,285.66718 C380.08388,285.66718 385.36777,288.75636 385.36777,296.43956 C385.36777,304.03796 380.32865,308.04117 372.2272,308.04117 Z M514.97053,267.66815 L585.34004,267.66815 L585.34004,285.83764 L535.96778,285.83764 L535.96778,301.81074 L584.1348,301.81074 L584.1348,319.73642 L535.96778,319.73642 L535.96778,337.21701 L585.34004,337.29641 L585.34004,355.52678 L514.97053,355.52678 L514.97053,267.66815 Z M487.91724,314.6973 C492.61049,316.42205 496.44703,319.51387 498.24559,322.07317 C501.22276,326.36251 501.65378,330.36571 501.73891,338.10985 L501.73891,355.52685 L480.5714,355.52685 L480.5714,344.53458 C480.5714,339.24908 481.08223,331.42282 477.1632,327.33748 C474.08226,324.19002 469.38635,323.4376 461.69463,323.4376 L439.16223,323.4376 L439.16223,355.52685 L417.97609,355.52685 L417.97609,267.66822 L466.65393,267.66822 C477.32816,267.66822 485.10236,268.13716 492.02251,271.81449 C498.6766,275.8177 502.86168,281.30191 502.86168,291.3245 C502.85868,305.34765 493.46719,312.50362 487.91724,314.6973 Z M475.99899,303.59022 C473.17879,305.25668 469.69077,305.39975 465.58817,305.39975 L439.97483,305.39975 L439.97483,285.66718 L465.9367,285.66718 C469.69077,285.66718 473.4475,285.74658 475.99899,287.25416 C478.7314,288.67687 480.36499,291.39779 480.36499,295.15725 C480.36499,298.91672 478.7314,301.94496 475.99899,303.59022 Z M666.33539,309.1866 C670.44067,313.41766 672.64095,318.7588 672.64095,327.80112 C672.64095,346.70178 660.78278,355.5242 639.51948,355.5242 L598.45353,355.5242 L598.45353,336.68449 L639.35453,336.68449 C643.35337,336.68449 646.18954,336.15726 647.9668,334.50934 C649.41681,333.15021 650.45709,331.17643 650.45709,328.77875 C650.45709,326.21944 649.33167,324.18738 647.88433,322.96866 C646.27201,321.62807 644.04778,321.01872 640.37619,321.01872 C620.65868,320.34843 595.9659,321.62807 595.9659,293.82551 C595.9659,281.08201 604.00615,267.66822 626.11019,267.66822 L668.37872,267.66822 L668.37872,286.36752 L629.70196,286.36752 C625.86809,286.36752 623.37512,286.51059 621.25464,287.9545 C618.94527,289.37721 618.08856,291.48876 618.08856,294.2759 C618.08856,297.59028 620.04941,299.8449 622.702,300.81987 C624.92624,301.59084 627.31543,301.81603 630.9072,301.81603 L642.25722,302.12071 C653.703,302.39889 661.55967,304.37003 666.33539,309.1866 Z M750,285.66718 L711.57335,285.66718 C707.7368,285.66718 705.18797,285.81025 703.04088,287.25416 C700.81665,288.67687 699.95995,290.78843 699.95995,293.57558 C699.95995,296.88994 701.83831,299.14456 704.57071,300.11953 C706.79495,300.8905 709.18415,301.1157 712.6961,301.1157 L724.12327,301.42038 C735.65419,301.70387 743.35123,303.67765 748.04448,308.49157 C748.89852,309.16186 749.41202,309.91428 750,310.6667 L750,285.66718 Z" id="path13" fill="#FFFFFF"></path></g></g></svg>
+
+                                <!-- MasterCard -->
+                                <svg id="b2b-cards-view-master-card-icon" class="credit-card-list-icon b2b-hide" xmlns="http://www.w3.org/2000/svg" width="750" height="471" viewBox="0 0 750 471"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><rect id="Rectangle-1" fill="#000000" x="0" y="0" width="750" height="471" rx="40"></rect><g id="Group" transform="translate(133.000000, 48.000000)"><path d="M88.13,373.67 L88.13,348.82 C88.13,339.29 82.33,333.08 72.81,333.08 C67.81,333.08 62.46,334.74 58.73,340.08 C55.83,335.52 51.73,333.08 45.48,333.08 C40.7599149,332.876008 36.2525337,335.054575 33.48,338.88 L33.48,333.88 L25.61,333.88 L25.61,373.64 L33.48,373.64 L33.48,350.89 C33.48,343.89 37.62,340.54 43.42,340.54 C49.22,340.54 52.53,344.27 52.53,350.89 L52.53,373.67 L60.4,373.67 L60.4,350.89 C60.4,343.89 64.54,340.54 70.34,340.54 C76.14,340.54 79.45,344.27 79.45,350.89 L79.45,373.67 L88.13,373.67 Z M217.35,334.32 L202.85,334.32 L202.85,322.32 L195,322.32 L195,334.32 L186.72,334.32 L186.72,341.32 L195,341.32 L195,360 C195,369.11 198.31,374.5 208.25,374.5 C212.015784,374.421483 215.705651,373.426077 219,371.6 L216.51,364.6 C214.275685,365.996557 211.684475,366.715565 209.05,366.67 C204.91,366.67 202.84,364.18 202.84,360.04 L202.84,341 L217.34,341 L217.34,334.37 L217.35,334.32 Z M291.07,333.08 C286.709355,332.982846 282.618836,335.185726 280.3,338.88 L280.3,333.88 L272.43,333.88 L272.43,373.64 L280.3,373.64 L280.3,351.31 C280.3,344.68 283.61,340.54 289,340.54 C290.818809,340.613783 292.62352,340.892205 294.38,341.37 L296.87,333.91 C294.971013,333.43126 293.02704,333.153071 291.07,333.08 Z M179.66,337.22 C175.52,334.32 169.72,333.08 163.51,333.08 C153.57,333.08 147.36,337.64 147.36,345.51 C147.36,352.14 151.92,355.86 160.61,357.11 L164.75,357.52 C169.31,358.35 172.21,360.01 172.21,362.08 C172.21,364.98 168.9,367.08 162.68,367.08 C157.930627,367.177716 153.278889,365.724267 149.43,362.94 L145.29,369.15 C151.09,373.29 158.13,374.15 162.29,374.15 C173.89,374.15 180.1,368.77 180.1,361.31 C180.1,354.31 175.1,350.96 166.43,349.71 L162.29,349.3 C158.56,348.89 155.29,347.64 155.29,345.16 C155.29,342.26 158.6,340.16 163.16,340.16 C168.16,340.16 173.1,342.23 175.59,343.47 L179.66,337.22 Z M299.77,353.79 C299.77,365.79 307.64,374.5 320.48,374.5 C326.28,374.5 330.42,373.26 334.56,369.94 L330.42,363.73 C327.488758,366.10388 323.841703,367.41823 320.07,367.46 C313.07,367.46 307.64,362.08 307.64,354.21 C307.64,346.34 313,341 320.07,341 C323.841703,341.04177 327.488758,342.35612 330.42,344.73 L334.56,338.52 C330.42,335.21 326.28,333.96 320.48,333.96 C308.05,333.13 299.77,341.83 299.77,353.84 L299.77,353.79 Z M244.27,333.08 C232.67,333.08 224.8,341.36 224.8,353.79 C224.8,366.22 233.08,374.5 245.09,374.5 C250.932775,374.623408 256.638486,372.722682 261.24,369.12 L257.1,363.32 C253.772132,365.898743 249.708598,367.349004 245.5,367.46 C240.12,367.46 234.32,364.15 233.5,357.11 L262.91,357.11 L262.91,353.8 C262.91,341.37 255.45,333.09 244.27,333.09 L244.27,333.08 Z M243.86,340.54 C249.66,340.54 253.8,344.27 254.21,350.48 L232.68,350.48 C233.92,344.68 237.68,340.54 243.86,340.54 Z M136.59,353.79 L136.59,333.91 L128.72,333.91 L128.72,338.91 C125.82,335.18 121.72,333.11 115.88,333.11 C104.7,333.11 96.41,341.81 96.41,353.82 C96.41,365.83 104.69,374.53 115.88,374.53 C121.68,374.53 125.82,372.46 128.72,368.73 L128.72,373.73 L136.59,373.73 L136.59,353.79 Z M104.7,353.79 C104.7,346.33 109.26,340.54 117.13,340.54 C124.59,340.54 129.13,346.34 129.13,353.79 C129.13,361.66 124.13,367.04 117.13,367.04 C109.26,367.45 104.7,361.24 104.7,353.79 Z M410.78,333.08 C406.419355,332.982846 402.328836,335.185726 400.01,338.88 L400.01,333.88 L392.14,333.88 L392.14,373.64 L400,373.64 L400,351.31 C400,344.68 403.31,340.54 408.7,340.54 C410.518809,340.613783 412.32352,340.892205 414.08,341.37 L416.57,333.91 C414.671013,333.43126 412.72704,333.153071 410.77,333.08 L410.78,333.08 Z M380.13,353.79 L380.13,333.91 L372.26,333.91 L372.26,338.91 C369.36,335.18 365.26,333.11 359.42,333.11 C348.24,333.11 339.95,341.81 339.95,353.82 C339.95,365.83 348.23,374.53 359.42,374.53 C365.22,374.53 369.36,372.46 372.26,368.73 L372.26,373.73 L380.13,373.73 L380.13,353.79 Z M348.24,353.79 C348.24,346.33 352.8,340.54 360.67,340.54 C368.13,340.54 372.67,346.34 372.67,353.79 C372.67,361.66 367.67,367.04 360.67,367.04 C352.8,367.45 348.24,361.24 348.24,353.79 Z M460.07,353.79 L460.07,318.17 L452.2,318.17 L452.2,338.88 C449.3,335.15 445.2,333.08 439.36,333.08 C428.18,333.08 419.89,341.78 419.89,353.79 C419.89,365.8 428.17,374.5 439.36,374.5 C445.16,374.5 449.3,372.43 452.2,368.7 L452.2,373.7 L460.07,373.7 L460.07,353.79 Z M428.18,353.79 C428.18,346.33 432.74,340.54 440.61,340.54 C448.07,340.54 452.61,346.34 452.61,353.79 C452.61,361.66 447.61,367.04 440.61,367.04 C432.73,367.46 428.17,361.25 428.17,353.79 L428.18,353.79 Z" id="Shape" fill="#FFFFFF"></path><g><rect id="Rectangle-path" fill="#FF5F00" x="170.55" y="32.39" width="143.72" height="234.42"></rect><path d="M185.05,149.6 C185.05997,103.912554 205.96046,60.7376085 241.79,32.39 C180.662018,-15.6713968 92.8620037,-8.68523415 40.103462,48.4380037 C-12.6550796,105.561241 -12.6550796,193.638759 40.103462,250.761996 C92.8620037,307.885234 180.662018,314.871397 241.79,266.81 C205.96046,238.462391 185.05997,195.287446 185.05,149.6 Z" id="Shape" fill="#EB001B"></path> <path d="M483.26,149.6 C483.30134,206.646679 450.756789,258.706022 399.455617,283.656273 C348.154445,308.606523 287.109181,302.064451 242.26,266.81 C278.098424,238.46936 299.001593,195.290092 299.001593,149.6 C299.001593,103.909908 278.098424,60.7306402 242.26,32.39 C287.109181,-2.86445052 348.154445,-9.40652324 399.455617,15.5437274 C450.756789,40.493978 483.30134,92.5533211 483.26,149.6 Z" id="Shape" fill="#F79E1B"></path></g></g></g></g></svg>
+
+                                <!-- Visa -->
+                                <svg id="b2b-cards-view-visa-icon" class="credit-card-list-icon b2b-hide" xmlns="http://www.w3.org/2000/svg" width="750" height="471" viewBox="0 0 750 471"> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><rect id="Rectangle-1" fill="#0E4595" x="0" y="0" width="750" height="471" rx="40"></rect><polygon id="Shape" fill="#FFFFFF" points="278.1975 334.2275 311.5585 138.4655 364.9175 138.4655 331.5335 334.2275"></polygon><path d="M524.3075,142.6875 C513.7355,138.7215 497.1715,134.4655 476.4845,134.4655 C423.7605,134.4655 386.6205,161.0165 386.3045,199.0695 C386.0075,227.1985 412.8185,242.8905 433.0585,252.2545 C453.8275,261.8495 460.8105,267.9695 460.7115,276.5375 C460.5795,289.6595 444.1255,295.6545 428.7885,295.6545 C407.4315,295.6545 396.0855,292.6875 378.5625,285.3785 L371.6865,282.2665 L364.1975,326.0905 C376.6605,331.5545 399.7065,336.2895 423.6355,336.5345 C479.7245,336.5345 516.1365,310.2875 516.5505,269.6525 C516.7515,247.3835 502.5355,230.4355 471.7515,216.4645 C453.1005,207.4085 441.6785,201.3655 441.7995,192.1955 C441.7995,184.0585 451.4675,175.3575 472.3565,175.3575 C489.8055,175.0865 502.4445,178.8915 512.2925,182.8575 L517.0745,185.1165 L524.3075,142.6875" id="path13" fill="#FFFFFF"></path><path d="M661.6145,138.4655 L620.3835,138.4655 C607.6105,138.4655 598.0525,141.9515 592.4425,154.6995 L513.1975,334.1025 L569.2285,334.1025 C569.2285,334.1025 578.3905,309.9805 580.4625,304.6845 C586.5855,304.6845 641.0165,304.7685 648.7985,304.7685 C650.3945,311.6215 655.2905,334.1025 655.2905,334.1025 L704.8025,334.1025 L661.6145,138.4655 Z M596.1975,264.8725 C600.6105,253.5935 617.4565,210.1495 617.4565,210.1495 C617.1415,210.6705 621.8365,198.8155 624.5315,191.4655 L628.1385,208.3435 C628.1385,208.3435 638.3555,255.0725 640.4905,264.8715 L596.1975,264.8715 L596.1975,264.8725 Z" id="Path" fill="#FFFFFF"></path><path d="M232.9025,138.4655 L180.6625,271.9605 L175.0965,244.8315 C165.3715,213.5575 135.0715,179.6755 101.1975,162.7125 L148.9645,333.9155 L205.4195,333.8505 L289.4235,138.4655 L232.9025,138.4655" id="path16" fill="#FFFFFF"></path><path d="M131.9195,138.4655 L45.8785,138.4655 L45.1975,142.5385 C112.1365,158.7425 156.4295,197.9015 174.8155,244.9525 L156.1065,154.9925 C152.8765,142.5965 143.5085,138.8975 131.9195,138.4655" id="path18" fill="#F2AE14"></path></g></g></svg>
+
+                                <!-- Diners -->
+                                <svg id="b2b-cards-view-diners-icon" class="credit-card-list-icon b2b-hide" xmlns="http://www.w3.org/2000/svg" width="750" height="471" viewBox="0 0 750 471"> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="diners" fill-rule="nonzero"> <rect id="rectangle" fill="#0079BE" x="0" y="0" width="750" height="471" rx="40"></rect> <path d="M584.933911,237.947339 C584.933911,138.53154 501.952976,69.8140806 411.038924,69.8471464 L332.79674,69.8471464 C240.793699,69.8140806 165.066089,138.552041 165.066089,237.947339 C165.066089,328.877778 240.793699,403.587432 332.79674,403.150963 L411.038924,403.150963 C501.952976,403.586771 584.933911,328.857939 584.933911,237.947339 Z" id="Shape-path" fill="#FFFFFF"></path> <path d="M333.280302,83.9308394 C249.210378,83.9572921 181.085889,152.238282 181.066089,236.510581 C181.085889,320.768331 249.209719,389.042708 333.280302,389.069161 C417.370025,389.042708 485.508375,320.768331 485.520254,236.510581 C485.507715,152.238282 417.370025,83.9572921 333.280302,83.9308394 Z" id="Shape-path" fill="#0079BE"></path> <path d="M237.066089,236.09774 C237.145288,194.917524 262.812421,159.801587 299.006443,145.847134 L299.006443,326.327183 C262.812421,312.380667 237.144628,277.283907 237.066089,236.09774 Z M368.066089,326.372814 L368.066089,145.847134 C404.273312,159.767859 429.980043,194.903637 430.046043,236.103692 C429.980043,277.316312 404.273312,312.425636 368.066089,326.372814 Z" id="Path" fill="#FFFFFF"></path></g></g></svg>
+
+                                <!-- Discover -->
+                                <svg id="b2b-cards-view-discover-icon" class="credit-card-list-icon b2b-hide" xmlns="http://www.w3.org/2000/svg" width="750" height="471" viewBox="0 0 320 210"><path fill="#38495C" d="M0 15c0,-8.28 6.72,-15 15,-15l290 0c8.28,0 15,6.72 15,15l0 180c0,8.29 -6.72,15 -15,15l-290 0c-8.28,0 -15,-6.71 -15,-15l0 -180z"></path><path fill="#FFFFFF" d="M250.26 103.28l-1.95 0 0 -10.46 2.06 0c4.17,0 6.44,1.75 6.44,5.12 0,3.47 -2.27,5.34 -6.55,5.34zm-180.1 10.05c-2.1,1.92 -4.84,2.75 -9.17,2.75l-1.8 0 0 -22.86 1.8 0c4.33,0 6.96,0.79 9.17,2.8 2.32,2.08 3.71,5.3 3.71,8.61 0,3.32 -1.39,6.63 -3.71,8.7zm-7.82 -25.96l-9.84 0 0 34.56 9.78 0c5.2,0 8.96,-1.23 12.26,-3.99 3.92,-3.26 6.24,-8.18 6.24,-13.26 0,-10.21 -7.58,-17.31 -18.44,-17.31zm21.52 34.56l6.7 0 0 -34.56 -6.7 0 0 34.56zm23.09 -21.3c-4.03,-1.49 -5.2,-2.48 -5.2,-4.35 0,-2.18 2.1,-3.83 4.98,-3.83 2.02,0 3.66,0.83 5.41,2.8l3.51 -4.62c-2.89,-2.54 -6.33,-3.83 -10.1,-3.83 -6.08,0 -10.71,4.24 -10.71,9.9 0,4.76 2.15,7.2 8.45,9.48 2.62,0.93 3.96,1.55 4.63,1.97 1.34,0.88 2.01,2.12 2.01,3.57 0,2.8 -2.21,4.88 -5.2,4.88 -3.2,0 -5.77,-1.61 -7.32,-4.61l-4.32 4.19c3.08,4.57 6.79,6.58 11.89,6.58 6.96,0 11.85,-4.66 11.85,-11.35 0,-5.49 -2.26,-7.97 -9.88,-10.78zm11.99 4.05c0,10.15 7.93,18.03 18.13,18.03 2.89,0 5.36,-0.57 8.4,-2.01l0 -7.94c-2.67,2.7 -5.05,3.79 -8.09,3.79 -6.74,0 -11.54,-4.92 -11.54,-11.92 0,-6.64 4.95,-11.88 11.23,-11.88 3.2,0 5.62,1.15 8.4,3.89l0 -7.93c-2.94,-1.5 -5.36,-2.12 -8.24,-2.12 -10.15,0 -18.29,8.04 -18.29,18.09zm79.66 5.91l-9.16 -23.22 -7.32 0 14.58 35.45 3.61 0 14.83 -35.45 -7.26 0 -9.28 23.22zm19.58 11.34l18.99 0 0 -5.85 -12.3 0 0 -9.33 11.85 0 0 -5.85 -11.85 0 0 -7.67 12.3 0 0 -5.86 -18.99 0 0 34.56zm45.53 -24.36c0,-6.47 -4.43,-10.2 -12.16,-10.2l-9.94 0 0 34.56 6.7 0 0 -13.88 0.87 0 9.27 13.88 8.24 0 -10.81 -14.56c5.05,-1.03 7.83,-4.5 7.83,-9.8z"></path><path fill="#E27539" d="M184.21 104.77c0,10.16 -8.18,18.39 -18.28,18.39 -10.09,0 -18.27,-8.23 -18.27,-18.39 0,-10.16 8.18,-18.39 18.27,-18.39 10.1,0 18.28,8.23 18.28,18.39z"></path></svg>
+
+                                <!-- Default -->
+                                <svg id="b2b-cards-view-credit-card-icon" class="credit-card-list-icon b2b-hide" width="32" height="19" viewBox="0 0 32 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78169 5.64504e-06H30.2188C30.6911 0.000450272 31.1439 0.182535 31.4778 0.5058C31.8117 0.829288 31.9993 1.26773 31.9997 1.72505V4.10818L0.000917164 4.10796V1.72392C0.00137645 1.26682 0.18944 0.828405 0.523319 0.505351C0.857198 0.182085 1.31003 0.000221972 1.78213 0L1.78169 5.64504e-06ZM30.2188 18.9997H1.78169C1.30934 18.9992 0.856533 18.8176 0.522402 18.4943C0.188523 18.1711 0.00045852 17.7326 0 17.2753V5.85228H32V17.2747C31.9995 17.7321 31.8117 18.1705 31.4776 18.494C31.1435 18.8175 30.6907 18.9996 30.2183 19L30.2188 18.9997ZM11.5182 15.0378C11.5182 14.8064 11.4233 14.5843 11.2543 14.4206C11.0853 14.2568 10.8559 14.1649 10.6169 14.1649H3.68676C3.44473 14.1601 3.21074 14.2499 3.03784 14.4139C2.8647 14.5782 2.76733 14.8028 2.76733 15.0373C2.76733 15.2717 2.86469 15.4965 3.03784 15.6605C3.21075 15.8246 3.44474 15.9144 3.68676 15.9098H10.6163C10.8556 15.9098 11.085 15.8177 11.254 15.6539C11.4232 15.4898 11.5181 15.2677 11.5178 15.036L11.5182 15.0378ZM15.7153 10.4694C15.7155 10.2377 15.6207 10.0154 15.4517 9.85158C15.2827 9.68773 15.0533 9.59568 14.814 9.59568H3.68722H3.68745C3.36529 9.59568 3.06792 9.76198 2.90697 10.0321C2.74577 10.302 2.74577 10.6346 2.90697 10.9045C3.06794 11.1746 3.36531 11.341 3.68745 11.341H14.8136C15.0522 11.3407 15.2809 11.2489 15.4499 11.0857C15.6189 10.9227 15.7142 10.7015 15.7151 10.4705L15.7153 10.4694Z" fill="#AAAAAA"/>
+                                </svg>
+                        </div>
+                    </div>
+
+                    <!-- BODY -->
+                    <div class="b2b-payment-item__body">
+
+                        <!-- NAME -->
+                        <div class="b2b-payment-item__text">
+                            <div id="card_view_name" class="b2b-payment-item__name"></div>
+                            <span id="card_view_type_and_number" class="b2b-payment-item__label"></span>
+                        </div>
+
+                        <div class="b2b-payment-item__change"></div>
+                    </div>
+
+                </div>
+
+                <div id="new-card" style="display: none;" class="credit-card__form">
+                    <div class="b2b-credit-card-container">
+                        <div class="b2b-credit-card-column">
+                            <div class="b2b-payflow-container">
+                                <div class="form-container">
+                                    <div class="field-container">
+                                        <label for="card_method_name" class="general__label">
+                                            <abbr title="required" class="general__label-required">*</abbr> Card Name
+                                        </label>
+                                        <input
+                                                id="card_method_name"
+                                                name="ccname"
+                                                type="text"
+                                                maxlength="30"
+                                                autocomplete="cc-name"
+                                                class="general-payment__input"
+                                        >
+                                        <div id="card_method_name_error" class="general__error"></div>
+                                    </div>
+                                    <div class="field-container">
+                                        <label for="cardnumber" class="general__label">
+                                            <abbr title="required" class="general__label-required">*</abbr> Card Number
+                                        </label>
+                                        <input id="cardnumber" class="general-payment__input" type="text" pattern="[0-9]*" inputmode="numeric">
+                                        <svg id="ccicon" class="ccicon" viewBox="0 0 32 19" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78169 5.64504e-06H30.2188C30.6911 0.000450272 31.1439 0.182535 31.4778 0.5058C31.8117 0.829288 31.9993 1.26773 31.9997 1.72505V4.10818L0.000917164 4.10796V1.72392C0.00137645 1.26682 0.18944 0.828405 0.523319 0.505351C0.857198 0.182085 1.31003 0.000221972 1.78213 0L1.78169 5.64504e-06ZM30.2188 18.9997H1.78169C1.30934 18.9992 0.856533 18.8176 0.522402 18.4943C0.188523 18.1711 0.00045852 17.7326 0 17.2753V5.85228H32V17.2747C31.9995 17.7321 31.8117 18.1705 31.4776 18.494C31.1435 18.8175 30.6907 18.9996 30.2183 19L30.2188 18.9997ZM11.5182 15.0378C11.5182 14.8064 11.4233 14.5843 11.2543 14.4206C11.0853 14.2568 10.8559 14.1649 10.6169 14.1649H3.68676C3.44473 14.1601 3.21074 14.2499 3.03784 14.4139C2.8647 14.5782 2.76733 14.8028 2.76733 15.0373C2.76733 15.2717 2.86469 15.4965 3.03784 15.6605C3.21075 15.8246 3.44474 15.9144 3.68676 15.9098H10.6163C10.8556 15.9098 11.085 15.8177 11.254 15.6539C11.4232 15.4898 11.5181 15.2677 11.5178 15.036L11.5182 15.0378ZM15.7153 10.4694C15.7155 10.2377 15.6207 10.0154 15.4517 9.85158C15.2827 9.68773 15.0533 9.59568 14.814 9.59568H3.68722H3.68745C3.36529 9.59568 3.06792 9.76198 2.90697 10.0321C2.74577 10.302 2.74577 10.6346 2.90697 10.9045C3.06794 11.1746 3.36531 11.341 3.68745 11.341H14.8136C15.0522 11.3407 15.2809 11.2489 15.4499 11.0857C15.6189 10.9227 15.7142 10.7015 15.7151 10.4705L15.7153 10.4694Z" fill="#AAAAAA"/>
+
+                                        </svg>
+                                        <div id="card_method_number_error" class="general__error"></div>
+                                    </div>
+                                    <div class="slds-grid">
+                                        <div class="field-container">
+                                            <label for="expirationdate" class="general__label">
+                                                <abbr title="required" class="general__label-required">*</abbr> Expiration Date
+                                            </label>
+                                            <!-- pattern="[0-9]*" -->
+                                            <input id="expirationdate" class="general-payment__input credit-card-expiration-date" type="text" inputmode="numeric">
+                                            <div id="expirationdate_error" class="general__error"></div>
+                                        </div>
+                                        <div class="field-container">
+                                            <label for="securitycode" class="general__label">
+                                                <abbr title="required" class="general__label-required">*</abbr> CVV/CVC
+                                            </label>
+                                            <input id="securitycode" class="general-payment__input credit-card-cvv-cvc" type="text" pattern="[0-9]*" inputmode="numeric">
+                                            <div id="securitycode_error" class="general__error"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="b2b-checkout-payment__cancel-from-new">
+                                        <button style="display: none;" id="cancel_from_new_card_button" class="b2b-button slds-button slds-button_brand b2b-button-cancel-from-new">Cancel</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CREDIT CART -->
+
+            <!-- AMAZON PAY -->
+            <div data-id="amazon-pay" data-show="false" class="b2b-static-payment__content">
+                <div id="AmazonPayButton"   ></div>
+                <script src="https://static-na.payments-amazon.com/checkout.js"></script>
+            </div>
+            <!-- #AMAZON PAY -->
+
+            <!-- DARLEY DOLLAR-->
+            <div id="darley-dollar-container" style="display: none;" class="slds-m-top--medium">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <div class="slds-checkbox">
+                            <input type="checkbox" name="options" id="darley-dollar-checkbox" value="darley-dollar-checkbox" />
+                            <label class="slds-checkbox__label" for="darley-dollar-checkbox">
+                                <span class="slds-checkbox_faux"></span>
+                                <div class="slds-wrap slds-form-element__label dollar-checkbox-label">
+                                    <div class="b2b-checkbox-label slds-m-right--small">
+                                        <span>Apply Darley Dollars</span>
+                                        <button
+                                            id="darley-dollar-icon-button"
+                                            class="slds-button slds-button_icon slds-button slds-button_icon b2b-help-icon"
+                                            aria-describedby="darley-dollar-help"
+                                            aria-disabled="true"
+                                            style="position: relative;"
+                                        >
+                                            <svg class="slds-button__icon" width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.49899 9.99952C2.66906 9.98825 0.420169 7.67176 0.502173 4.84976C0.580504 2.15367 2.7889 -0.0191092 5.53879 0.000126744C8.30814 0.0194241 10.5273 2.28133 10.4997 5.04037C10.4723 7.79111 8.21695 10.0277 5.49877 9.99974L5.49899 9.99952ZM5.60509 4.28799C5.09819 4.30464 4.64504 4.48002 4.22655 4.7566C4.19119 4.77999 4.15728 4.80886 4.13046 4.84156C4.03495 4.95811 4.06767 5.05673 4.21161 5.09429C4.26696 5.10872 4.32376 5.11863 4.37818 5.13605C4.60814 5.2094 4.67016 5.3221 4.61181 5.56042C4.47001 6.13977 4.32539 6.71851 4.18598 7.29856C4.08262 7.72898 4.3007 8.08087 4.71405 8.1128C5.32576 8.15994 5.87169 7.95817 6.36278 7.60399C6.4148 7.56651 6.45512 7.47327 6.44957 7.41034C6.44624 7.37217 6.34544 7.34066 6.28641 7.31009C6.26156 7.2972 6.2314 7.29481 6.20373 7.28729C5.93012 7.2142 5.85896 7.09987 5.92526 6.82705C6.06245 6.26128 6.20825 5.69755 6.3364 5.12975C6.36681 4.99535 6.36886 4.84088 6.33478 4.70828C6.25849 4.41301 6 4.27648 5.60511 4.288L5.60509 4.28799ZM6.87769 2.55507C6.87846 2.03284 6.47466 1.62086 5.95873 1.61743C5.43408 1.61384 5.01286 2.03078 5.01721 2.54899C5.02165 3.06541 5.4322 3.47083 5.95283 3.47262C6.46041 3.47416 6.87684 3.06106 6.87769 2.55505V2.55507Z" fill="#ED1B2D"/>
+                                            </svg>
+                                            <div style="position:absolute; display: none; width: 150px; top: 25px; right: -17px;" class="slds-popover slds-popover_tooltip slds-nubbin_top-right" role="tooltip" id="darley-dollar-help">
+                                                <div class="slds-popover__body">A maximum of 25% of your purchase can be paid with Darley Dollars. Some exclusions may apply.</div>
+                                            </div>
+                                        </button>
+                                    </div>
+
+                                    <div>
+                                        <i class="darley-dollar-image"></i>
+                                        <span id="darley-dollar-amount"></span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #DARLEY DOLLAR-->
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<!-- BODY TOTAL -->
+<div class="b2b-checkout__body-total">
+
+    <!-- PLACE YOUR ORDER -->
+    <div>
+        <button
+                id="place_order_button"
+                title="Place Order"
+                class="slds-button b2b-button slds-button_brand b2b-place-order-button"
+        >Place Order</button>
+    </div>
+    <div class="b2b-checkout-total slds-grid slds-grid--vertical-align-center">
+        <div>Payment Total:</div><div class="slds-m-left_xx-small" id="checkout_total"></div>
+    </div>
+
+</div>
+
+    <script>
+        const FRAME_LOADED = 'frame_loaded';
+        const INVOICE_VALID = 'invoice_valid';
+        const UPDATE_PO_NUMBER = 'update_po_number';
+        const UPDATE_PAYMENT_METHOD = 'update_payment_method';
+        const SET_PO_NUMBER = 'set_po_number';
+        const SET_DARLEY_DOLLAR_AMOUNT = 'set_darley_dollar_amount';
+        const SET_HAS_DARLEY_DOLLAR = 'set_has_darley_dollar';
+        const CLICK_PLACE_ORDER = 'click_place_order';
+        const CLICK_AMAZON_PAY = 'click_amazon_pay';
+        const SET_DISABLED_PLACE_ORDER_BUTTON = 'set_disabled_place_order_button';
+        const HIDE_SPINNER = 'hide_spinner';
+        const SHOW_SPINNER = 'show_spinner';
+        const SET_TOTAL = 'set_total';
+        const SET_AMAZON = 'set_amazonSignature';
+        const SET_EXISTED_CARDS = 'set_existed_cards';
+        const INIT_DATA = 'init_data';
+        const UPDATE_AMAZON_MODE = 'update_amazon_mode';
+        const SELECT_CREDIT_CARD = 'select_credit_card';
+
+        const RESIZE = 'resize';
+        const SEND_PUBLIC_KEYS = 'send_public_keys';
+        const CHECKOUT_VALID = 'checkout_valid';
+        const CHANGE_TOTAL = 'change_total';
+        const CHANGE_CLIENT_SECRET = 'change_client_secret';
+        const SUBMIT_BUTTON_DISABLED = 'submit_button_disabled';
+        const CHANGE_CHECKOUT_DATA = 'change_checkout_data';
+
+        let VIEW = {
+            paymentWrapper: document.getElementById('payment_wrapper'),
+            tabs: document.querySelectorAll('.b2b-static-payment__tab'),
+            content: document.querySelectorAll('.b2b-static-payment__content'),
+
+            poNumber: document.getElementById('pay-with-po__po_number'),
+            poNumberError: document.getElementById('po_number_error'),
+
+            amazonPayButton :  document.getElementById('AmazonPayButton'),
+
+            darleyDollarContainer: document.getElementById('darley-dollar-container'),
+            darleyDollarAmount: document.getElementById('darley-dollar-amount'),
+            hasDarleyDollar: document.getElementById('darley-dollar-checkbox'),
+
+            placeOrderButton: document.getElementById('place_order_button'),
+            spinner: document.getElementById('payment-method-spinner'),
+            total: document.getElementById('checkout_total'),
+
+            darleyDollarHelp: document.getElementById('darley-dollar-help'),
+            darleyDollarIconButton: document.getElementById('darley-dollar-icon-button'),
+
+            cardHolder: document.getElementById('card_holder_name'),
+            cardHolderError: document.getElementById('card_holder_name_error'),
+
+            cardMethodName: document.getElementById('card_method_name'),
+            cardMethodNameError: document.getElementById('card_method_name_error'),
+
+            cardMethodNumber: document.getElementById('cardnumber'),
+            cardMethodNumberError: document.getElementById('card_method_number_error'),
+            ccicon: document.getElementById('ccicon'),
+
+            cardExpirationDate: document.getElementById('expirationdate'),
+            cardExpirationDateError: document.getElementById('expirationdate_error'),
+
+            cardSecurityCode: document.getElementById('securitycode'),
+            cardSecurityCodeError: document.getElementById('securitycode_error'),
+
+            creditCardModeView: document.getElementById('selected-card'),
+            creditCardModeList: document.getElementById('existed-cards'),
+            creditCardModeNew: document.getElementById('new-card'),
+
+            cardViewName: document.getElementById('card_view_name'),
+            cardViewTypeAndNumber: document.getElementById('card_view_type_and_number'),
+            cardViewChange: document.getElementById('credit-card-view-change'),
+            creditCardAddNew: document.getElementById('credit-card-add-new'),
+            creditCartListContainer: document.getElementById('credit-card-list-container'),
+            useThisCreditCard: document.getElementById('use_this_credit_card'),
+            cancelFromNewCard: document.getElementById('cancel_from_new_card_button'),
+
+            initCssMedia: function () {
+                this.paymentWrapper.removeAttribute('class');
+                var screenWidth = window.screen.width;
+
+                if (screenWidth >= 1200) {
+                    this.paymentWrapper.className = 'b2b_media_desktop';
+                } else if (screenWidth >= 992) {
+                    this.paymentWrapper.className = 'b2b_media_max_width_1200';
+                } else if (screenWidth >= 575) {
+                    this.paymentWrapper.className = 'b2b_media_max_width_992';
+                } else {
+                    this.paymentWrapper.className = 'b2b_media_max_width_575'
+                }
+            },
+
+            showInvoiceTab: function() {
+                let payPalButton = document.querySelector('.b2b-static-payment__tab[data-id="pay-with-po"]');
+                if (payPalButton) {
+                    payPalButton.style.display = 'flex';
+                }
+            },
+
+            setPoNumber: function(poNumber) {
+                this.poNumber.value = poNumber;
+                MODEL.validatePlaceOrderButtonDisabled();
+                this.setPlaceOrderButtonDisabled();
+            },
+
+            setDarleyDollarAmount: function(darleyDollarAmount) {
+                if (darleyDollarAmount && typeof darleyDollarAmount === 'number' && darleyDollarAmount !== 0) {
+                    this.darleyDollarContainer.style.display = 'block';
+                    this.darleyDollarAmount.innerHTML = darleyDollarAmount.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                }
+            },
+
+            setHasDarleyDollars: function(hasDarleyDollars) {
+                this.hasDarleyDollar.checked = hasDarleyDollars;
+            },
+
+            setPlaceOrderButtonDisabled: function () {
+                this.placeOrderButton.disabled = MODEL.isDisabledPlaceOrderLwc || MODEL.isDisabledPlaceOrderIframe;
+            },
+
+            showSpinner: function () {
+                this.spinner.style.display = 'block';
+                MODEL.isDisabledPlaceOrderIframe = true;
+                this.setPlaceOrderButtonDisabled();
+            },
+
+            hideSpinner: function () {
+                this.spinner.style.display = 'none';
+                MODEL.validatePlaceOrderButtonDisabled();
+                this.setPlaceOrderButtonDisabled();
+            },
+
+            showDarleyDollarHelp: function () {
+                this.darleyDollarHelp.style.display = 'block';
+            },
+
+            hideDarleyDollarHelp: function () {
+                this.darleyDollarHelp.style.display = 'none';
+            },
+
+            setTotal: function(total) {
+                if (total !== undefined && (typeof total === 'number')) {
+                    this.total.innerText = '$' + total.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    MODEL.total = total.toFixed(2);
+                }
+            },
+
+            changeTab: function() {
+                this.tabs.forEach((element) => {
+                    element.classList.remove('b2b-static-payment__tab-active');
+                    if (element.dataset.id === MODEL.currentTab) {
+                        element.classList.add('b2b-static-payment__tab-active');
+                    }
+                });
+
+                VIEW.setPayButtonName();
+                MODEL.validatePlaceOrderButtonDisabled();
+                this.setPlaceOrderButtonDisabled();
+            },
+
+            setPayButtonName() {
+                VIEW.placeOrderButton.innerText = MODEL.currentTab === 'amazon-pay' ? MODEL.AMAZON_BUTTON_LABEL : 'Place Order';
+            },
+
+            unDisabledTab: function(tabId) {
+                if (tabId && typeof(tabId) === 'string' && tabId.length) {
+                    this.tabs.forEach((element) => {
+                        if (element.dataset.id === tabId) {
+                            element.disabled = false;
+                        }
+                    });
+                }
+            },
+
+            changeContent: function() {
+                this.content.forEach((element) => {
+                    element.setAttribute('data-show', 'false');
+                    if (
+                        element.dataset.id === MODEL.currentTab ||
+                        (
+                            (MODEL.currentTab === 'apple' || MODEL.currentTab === 'google') &&
+                            element.dataset.id === 'payment-request'
+                        )
+                    ) {
+                        element.setAttribute('data-show', 'true');
+                    }
+                });
+
+                if (MODEL.currentTab === 'credit-card' && MODEL.creditCardMode === 'view') {
+                    VIEW.cardViewChange.style.display = 'block';
+                } else {
+                    VIEW.cardViewChange.style.display = 'none';
+                }
+            },
+
+            setSubmitButtonDisabled: function() {
+                if (
+                    MODEL.isCreditCardFormValid &&
+                    MODEL.isCheckoutValid &&
+                    MODEL.currentTab === 'credit-card'
+                ) {
+                    this.submitButton.disabled = false;
+                } else {
+                    this.submitButton.disabled = true;
+                }
+
+                MODEL.dispatchEvent(SUBMIT_BUTTON_DISABLED, {
+                    isDisabled: this.submitButton.disabled,
+                });
+                MODEL.sentState();
+            },
+
+            initCreditCardSection: function () {
+                //Mask the Credit Card Number Input
+
+                var cardnumber_mask = new IMask(VIEW.cardMethodNumber, {
+                    mask: [
+                        {
+                            mask: '0000 000000 00000',
+                            regex: '^3[47]\\d{0,13}',
+                            cardtype: 'american express'
+                        },
+                        {
+                            mask: '0000 0000 0000 0000',
+                            regex: '^(?:6011|65\\d{0,2}|64[4-9]\\d?)\\d{0,12}',
+                            cardtype: 'discover'
+                        },
+                        {
+                            mask: '0000 0000 0000 0000',
+                            regex: '^(5[1-5]\\d{0,2}|22[2-9]\\d{0,1}|2[3-7]\\d{0,2})\\d{0,12}',
+                            cardtype: 'mastercard'
+                        },
+                        {
+                            mask: '0000 0000 0000 0000',
+                            regex: '^4\\d{0,15}',
+                            cardtype: 'visa'
+                        },
+                        {
+                            mask: '0000 000000 0000',
+                            regex: '^3(?:0([0-5]|9)|[689]\\d?)\\d{0,11}',
+                            cardtype: 'diners'
+                        },
+                        {
+                            mask: '0000 0000 0000 0000',
+                            cardtype: 'creditcard'
+                        }
+                    ],
+                    dispatch: function (appended, dynamicMasked) {
+                        var number = (dynamicMasked.value + appended).replace(/\D/g, '');
+
+                        for (var i = 0; i < dynamicMasked.compiledMasks.length; i++) {
+                            let re = new RegExp(dynamicMasked.compiledMasks[i].regex);
+                            if (number.match(re) != null) {
+                                return dynamicMasked.compiledMasks[i];
+                            }
+                        }
+                    }
+                });
+
+                //Mask the Expiration Date
+                var expirationdate_mask = new IMask(VIEW.cardExpirationDate, {
+                    mask: 'MM{/}YY',
+                    lazy: false,
+                    blocks: {
+                        YY: {
+                            mask: IMask.MaskedRange,
+                            from: 0,
+                            to: 99,
+                            placeholderChar: 'Y'
+                        },
+                        MM: {
+                            mask: IMask.MaskedRange,
+                            from: 1,
+                            to: 12,
+                            placeholderChar: 'M'
+                        }
+                    }
+                });
+
+                //Mask the security code
+                var securitycode_mask = new IMask(VIEW.cardSecurityCode, {
+                    mask: '0000',
+                });
+
+                // SVGICONS
+                let americanExpress = `<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="AmericanExpress" fill-rule="nonzero"> <rect id="Rectangle-1" fill="#2557D6" x="0" y="0" width="750" height="471" rx="40"></rect> <path d="M0.002688,221.18508 L36.026849,221.18508 L44.149579,201.67506 L62.334596,201.67506 L70.436042,221.18508 L141.31637,221.18508 L141.31637,206.26909 L147.64322,221.24866 L184.43894,221.24866 L190.76579,206.04654 L190.76579,221.18508 L366.91701,221.18508 L366.83451,189.15941 L370.2427,189.15941 C372.62924,189.24161 373.3263,189.46144 373.3263,193.38516 L373.3263,221.18508 L464.43232,221.18508 L464.43232,213.72973 C471.78082,217.6508 483.21064,221.18508 498.25086,221.18508 L536.57908,221.18508 L544.78163,201.67506 L562.96664,201.67506 L570.98828,221.18508 L644.84844,221.18508 L644.84844,202.65269 L656.0335,221.18508 L715.22061,221.18508 L715.22061,98.67789 L656.64543,98.67789 L656.64543,113.14614 L648.44288,98.67789 L588.33787,98.67789 L588.33787,113.14614 L580.80579,98.67789 L499.61839,98.67789 C486.02818,98.67789 474.08221,100.5669 464.43232,105.83121 L464.43232,98.67789 L408.40596,98.67789 L408.40596,105.83121 C402.26536,100.40529 393.89786,98.67789 384.59383,98.67789 L179.90796,98.67789 L166.17407,130.3194 L152.07037,98.67789 L87.59937,98.67789 L87.59937,113.14614 L80.516924,98.67789 L25.533518,98.67789 L-2.99999999e-06,156.92445 L-2.99999999e-06,221.18508 L0.002597,221.18508 L0.002688,221.18508 Z M227.39957,203.51436 L205.78472,203.51436 L205.70492,134.72064 L175.13228,203.51436 L156.62,203.51436 L125.96754,134.6597 L125.96754,203.51436 L83.084427,203.51436 L74.982981,183.92222 L31.083524,183.92222 L22.8996,203.51436 L4.7e-05,203.51436 L37.756241,115.67692 L69.08183,115.67692 L104.94103,198.84086 L104.94103,115.67692 L139.35289,115.67692 L166.94569,175.26406 L192.29297,115.67692 L227.39657,115.67692 L227.39657,203.51436 L227.39957,203.51436 Z M67.777214,165.69287 L53.346265,130.67606 L38.997794,165.69287 L67.777214,165.69287 Z M313.41947,203.51436 L242.98611,203.51436 L242.98611,115.67692 L313.41947,115.67692 L313.41947,133.96821 L264.07116,133.96821 L264.07116,149.8009 L312.23551,149.8009 L312.23551,167.80606 L264.07116,167.80606 L264.07116,185.34759 L313.41947,185.34759 L313.41947,203.51436 Z M412.67528,139.33321 C412.67528,153.33782 403.28877,160.57326 397.81863,162.74575 C402.43206,164.49434 406.37237,167.58351 408.24808,170.14281 C411.22525,174.51164 411.73875,178.41416 411.73875,186.25897 L411.73875,203.51436 L390.47278,203.51436 L390.39298,192.43732 C390.39298,187.1518 390.90115,179.55074 387.0646,175.32499 C383.98366,172.23581 379.28774,171.56552 371.69714,171.56552 L349.06363,171.56552 L349.06363,203.51436 L327.98125,203.51436 L327.98125,115.67692 L376.47552,115.67692 C387.25084,115.67692 395.18999,115.9604 402.00639,119.88413 C408.67644,123.80786 412.67529,129.53581 412.67529,139.33321 L412.67528,139.33321 Z M386.02277,152.37632 C383.1254,154.12756 379.69859,154.18584 375.59333,154.18584 L349.97998,154.18584 L349.97998,134.67583 L375.94186,134.67583 C379.61611,134.67583 383.44999,134.8401 385.94029,136.26016 C388.67536,137.53981 390.36749,140.26337 390.36749,144.02548 C390.36749,147.86443 388.75784,150.95361 386.02277,152.37632 Z M446.48908,203.51436 L424.97569,203.51436 L424.97569,115.67692 L446.48908,115.67692 L446.48908,203.51436 Z M696.22856,203.51436 L666.35032,203.51436 L626.38585,137.58727 L626.38585,203.51436 L583.44687,203.51436 L575.24166,183.92222 L531.44331,183.92222 L523.48287,203.51436 L498.81137,203.51436 C488.56284,203.51436 475.58722,201.25709 468.23872,193.79909 C460.82903,186.3411 456.97386,176.23903 456.97386,160.26593 C456.97386,147.23895 459.27791,135.33 468.33983,125.91941 C475.15621,118.90916 485.83044,115.67692 500.35982,115.67692 L520.77174,115.67692 L520.77174,134.49809 L500.78818,134.49809 C493.0938,134.49809 488.74909,135.63733 484.564,139.70147 C480.96957,143.4 478.50322,150.39171 478.50322,159.59829 C478.50322,169.00887 480.38158,175.79393 484.30061,180.22633 C487.5465,183.70232 493.445,184.75677 498.99495,184.75677 L508.46393,184.75677 L538.17987,115.67957 L569.77152,115.67957 L605.46843,198.76138 L605.46843,115.67957 L637.5709,115.67957 L674.6327,176.85368 L674.6327,115.67957 L696.22856,115.67957 L696.22856,203.51436 Z M568.07051,165.69287 L553.47993,130.67606 L538.96916,165.69287 L568.07051,165.69287 Z" id="Path" fill="#FFFFFF"></path> <path d="M749.95644,343.76716 C744.83485,351.22516 734.85504,355.00582 721.34464,355.00582 L680.62723,355.00582 L680.62723,336.1661 L721.17969,336.1661 C725.20248,336.1661 728.01736,335.63887 729.71215,333.99096 C731.18079,332.63183 732.2051,330.65804 732.2051,328.26036 C732.2051,325.70107 731.18079,323.66899 729.62967,322.45028 C728.09984,321.10969 725.87294,320.50033 722.20135,320.50033 C702.40402,319.83005 677.70592,321.10969 677.70592,293.30714 C677.70592,280.56363 685.83131,267.14983 707.95664,267.14983 L749.95379,267.14983 L749.95644,249.66925 L710.93382,249.66925 C699.15812,249.66925 690.60438,252.47759 684.54626,256.84375 L684.54626,249.66925 L626.83044,249.66925 C617.60091,249.66925 606.76706,251.94771 601.64279,256.84375 L601.64279,249.66925 L498.57751,249.66925 L498.57751,256.84375 C490.37496,250.95154 476.53466,249.66925 470.14663,249.66925 L402.16366,249.66925 L402.16366,256.84375 C395.67452,250.58593 381.24357,249.66925 372.44772,249.66925 L296.3633,249.66925 L278.95252,268.43213 L262.64586,249.66925 L148.99149,249.66925 L148.99149,372.26121 L260.50676,372.26121 L278.447,353.20159 L295.34697,372.26121 L364.08554,372.32211 L364.08554,343.48364 L370.84339,343.48364 C379.96384,343.62405 390.72054,343.25845 400.21079,339.17311 L400.21079,372.25852 L456.90762,372.25852 L456.90762,340.30704 L459.64268,340.30704 C463.13336,340.30704 463.47657,340.45011 463.47657,343.92344 L463.47657,372.25587 L635.71144,372.25587 C646.64639,372.25587 658.07621,369.46873 664.40571,364.41107 L664.40571,372.25587 L719.03792,372.25587 C730.40656,372.25587 741.50913,370.66889 749.95644,366.60475 L749.95644,343.76712 L749.95644,343.76716 Z M408.45301,296.61266 C408.45301,321.01872 390.16689,326.05784 371.7371,326.05784 L345.42935,326.05784 L345.42935,355.52685 L304.44855,355.52685 L278.48667,326.44199 L251.5058,355.52685 L167.9904,355.52685 L167.9904,267.66822 L252.79086,267.66822 L278.73144,296.46694 L305.55002,267.66822 L372.92106,267.66822 C389.6534,267.66822 408.45301,272.28078 408.45301,296.61266 Z M240.82781,337.04655 L188.9892,337.04655 L188.9892,319.56596 L235.27785,319.56596 L235.27785,301.64028 L188.9892,301.64028 L188.9892,285.66718 L241.84947,285.66718 L264.91132,311.27077 L240.82781,337.04655 Z M324.3545,347.10668 L291.9833,311.3189 L324.3545,276.6677 L324.3545,347.10668 Z M372.2272,308.04117 L344.98027,308.04117 L344.98027,285.66718 L372.47197,285.66718 C380.08388,285.66718 385.36777,288.75636 385.36777,296.43956 C385.36777,304.03796 380.32865,308.04117 372.2272,308.04117 Z M514.97053,267.66815 L585.34004,267.66815 L585.34004,285.83764 L535.96778,285.83764 L535.96778,301.81074 L584.1348,301.81074 L584.1348,319.73642 L535.96778,319.73642 L535.96778,337.21701 L585.34004,337.29641 L585.34004,355.52678 L514.97053,355.52678 L514.97053,267.66815 Z M487.91724,314.6973 C492.61049,316.42205 496.44703,319.51387 498.24559,322.07317 C501.22276,326.36251 501.65378,330.36571 501.73891,338.10985 L501.73891,355.52685 L480.5714,355.52685 L480.5714,344.53458 C480.5714,339.24908 481.08223,331.42282 477.1632,327.33748 C474.08226,324.19002 469.38635,323.4376 461.69463,323.4376 L439.16223,323.4376 L439.16223,355.52685 L417.97609,355.52685 L417.97609,267.66822 L466.65393,267.66822 C477.32816,267.66822 485.10236,268.13716 492.02251,271.81449 C498.6766,275.8177 502.86168,281.30191 502.86168,291.3245 C502.85868,305.34765 493.46719,312.50362 487.91724,314.6973 Z M475.99899,303.59022 C473.17879,305.25668 469.69077,305.39975 465.58817,305.39975 L439.97483,305.39975 L439.97483,285.66718 L465.9367,285.66718 C469.69077,285.66718 473.4475,285.74658 475.99899,287.25416 C478.7314,288.67687 480.36499,291.39779 480.36499,295.15725 C480.36499,298.91672 478.7314,301.94496 475.99899,303.59022 Z M666.33539,309.1866 C670.44067,313.41766 672.64095,318.7588 672.64095,327.80112 C672.64095,346.70178 660.78278,355.5242 639.51948,355.5242 L598.45353,355.5242 L598.45353,336.68449 L639.35453,336.68449 C643.35337,336.68449 646.18954,336.15726 647.9668,334.50934 C649.41681,333.15021 650.45709,331.17643 650.45709,328.77875 C650.45709,326.21944 649.33167,324.18738 647.88433,322.96866 C646.27201,321.62807 644.04778,321.01872 640.37619,321.01872 C620.65868,320.34843 595.9659,321.62807 595.9659,293.82551 C595.9659,281.08201 604.00615,267.66822 626.11019,267.66822 L668.37872,267.66822 L668.37872,286.36752 L629.70196,286.36752 C625.86809,286.36752 623.37512,286.51059 621.25464,287.9545 C618.94527,289.37721 618.08856,291.48876 618.08856,294.2759 C618.08856,297.59028 620.04941,299.8449 622.702,300.81987 C624.92624,301.59084 627.31543,301.81603 630.9072,301.81603 L642.25722,302.12071 C653.703,302.39889 661.55967,304.37003 666.33539,309.1866 Z M750,285.66718 L711.57335,285.66718 C707.7368,285.66718 705.18797,285.81025 703.04088,287.25416 C700.81665,288.67687 699.95995,290.78843 699.95995,293.57558 C699.95995,296.88994 701.83831,299.14456 704.57071,300.11953 C706.79495,300.8905 709.18415,301.1157 712.6961,301.1157 L724.12327,301.42038 C735.65419,301.70387 743.35123,303.67765 748.04448,308.49157 C748.89852,309.16186 749.41202,309.91428 750,310.6667 L750,285.66718 Z" id="path13" fill="#FFFFFF"></path> </g> </g>`;
+                let visa = `<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="visa" fill-rule="nonzero"> <rect id="Rectangle-1" fill="#0E4595" x="0" y="0" width="750" height="471" rx="40"></rect> <polygon id="Shape" fill="#FFFFFF" points="278.1975 334.2275 311.5585 138.4655 364.9175 138.4655 331.5335 334.2275"></polygon> <path d="M524.3075,142.6875 C513.7355,138.7215 497.1715,134.4655 476.4845,134.4655 C423.7605,134.4655 386.6205,161.0165 386.3045,199.0695 C386.0075,227.1985 412.8185,242.8905 433.0585,252.2545 C453.8275,261.8495 460.8105,267.9695 460.7115,276.5375 C460.5795,289.6595 444.1255,295.6545 428.7885,295.6545 C407.4315,295.6545 396.0855,292.6875 378.5625,285.3785 L371.6865,282.2665 L364.1975,326.0905 C376.6605,331.5545 399.7065,336.2895 423.6355,336.5345 C479.7245,336.5345 516.1365,310.2875 516.5505,269.6525 C516.7515,247.3835 502.5355,230.4355 471.7515,216.4645 C453.1005,207.4085 441.6785,201.3655 441.7995,192.1955 C441.7995,184.0585 451.4675,175.3575 472.3565,175.3575 C489.8055,175.0865 502.4445,178.8915 512.2925,182.8575 L517.0745,185.1165 L524.3075,142.6875" id="path13" fill="#FFFFFF"></path> <path d="M661.6145,138.4655 L620.3835,138.4655 C607.6105,138.4655 598.0525,141.9515 592.4425,154.6995 L513.1975,334.1025 L569.2285,334.1025 C569.2285,334.1025 578.3905,309.9805 580.4625,304.6845 C586.5855,304.6845 641.0165,304.7685 648.7985,304.7685 C650.3945,311.6215 655.2905,334.1025 655.2905,334.1025 L704.8025,334.1025 L661.6145,138.4655 Z M596.1975,264.8725 C600.6105,253.5935 617.4565,210.1495 617.4565,210.1495 C617.1415,210.6705 621.8365,198.8155 624.5315,191.4655 L628.1385,208.3435 C628.1385,208.3435 638.3555,255.0725 640.4905,264.8715 L596.1975,264.8715 L596.1975,264.8725 Z" id="Path" fill="#FFFFFF"></path> <path d="M232.9025,138.4655 L180.6625,271.9605 L175.0965,244.8315 C165.3715,213.5575 135.0715,179.6755 101.1975,162.7125 L148.9645,333.9155 L205.4195,333.8505 L289.4235,138.4655 L232.9025,138.4655" id="path16" fill="#FFFFFF"></path> <path d="M131.9195,138.4655 L45.8785,138.4655 L45.1975,142.5385 C112.1365,158.7425 156.4295,197.9015 174.8155,244.9525 L156.1065,154.9925 C152.8765,142.5965 143.5085,138.8975 131.9195,138.4655" id="path18" fill="#F2AE14"></path> </g> </g>`;
+                let mastercard = `<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="mastercard" fill-rule="nonzero"> <rect id="Rectangle-1" fill="#000000" x="0" y="0" width="750" height="471" rx="40"></rect> <g id="Group" transform="translate(133.000000, 48.000000)"> <path d="M88.13,373.67 L88.13,348.82 C88.13,339.29 82.33,333.08 72.81,333.08 C67.81,333.08 62.46,334.74 58.73,340.08 C55.83,335.52 51.73,333.08 45.48,333.08 C40.7599149,332.876008 36.2525337,335.054575 33.48,338.88 L33.48,333.88 L25.61,333.88 L25.61,373.64 L33.48,373.64 L33.48,350.89 C33.48,343.89 37.62,340.54 43.42,340.54 C49.22,340.54 52.53,344.27 52.53,350.89 L52.53,373.67 L60.4,373.67 L60.4,350.89 C60.4,343.89 64.54,340.54 70.34,340.54 C76.14,340.54 79.45,344.27 79.45,350.89 L79.45,373.67 L88.13,373.67 Z M217.35,334.32 L202.85,334.32 L202.85,322.32 L195,322.32 L195,334.32 L186.72,334.32 L186.72,341.32 L195,341.32 L195,360 C195,369.11 198.31,374.5 208.25,374.5 C212.015784,374.421483 215.705651,373.426077 219,371.6 L216.51,364.6 C214.275685,365.996557 211.684475,366.715565 209.05,366.67 C204.91,366.67 202.84,364.18 202.84,360.04 L202.84,341 L217.34,341 L217.34,334.37 L217.35,334.32 Z M291.07,333.08 C286.709355,332.982846 282.618836,335.185726 280.3,338.88 L280.3,333.88 L272.43,333.88 L272.43,373.64 L280.3,373.64 L280.3,351.31 C280.3,344.68 283.61,340.54 289,340.54 C290.818809,340.613783 292.62352,340.892205 294.38,341.37 L296.87,333.91 C294.971013,333.43126 293.02704,333.153071 291.07,333.08 Z M179.66,337.22 C175.52,334.32 169.72,333.08 163.51,333.08 C153.57,333.08 147.36,337.64 147.36,345.51 C147.36,352.14 151.92,355.86 160.61,357.11 L164.75,357.52 C169.31,358.35 172.21,360.01 172.21,362.08 C172.21,364.98 168.9,367.08 162.68,367.08 C157.930627,367.177716 153.278889,365.724267 149.43,362.94 L145.29,369.15 C151.09,373.29 158.13,374.15 162.29,374.15 C173.89,374.15 180.1,368.77 180.1,361.31 C180.1,354.31 175.1,350.96 166.43,349.71 L162.29,349.3 C158.56,348.89 155.29,347.64 155.29,345.16 C155.29,342.26 158.6,340.16 163.16,340.16 C168.16,340.16 173.1,342.23 175.59,343.47 L179.66,337.22 Z M299.77,353.79 C299.77,365.79 307.64,374.5 320.48,374.5 C326.28,374.5 330.42,373.26 334.56,369.94 L330.42,363.73 C327.488758,366.10388 323.841703,367.41823 320.07,367.46 C313.07,367.46 307.64,362.08 307.64,354.21 C307.64,346.34 313,341 320.07,341 C323.841703,341.04177 327.488758,342.35612 330.42,344.73 L334.56,338.52 C330.42,335.21 326.28,333.96 320.48,333.96 C308.05,333.13 299.77,341.83 299.77,353.84 L299.77,353.79 Z M244.27,333.08 C232.67,333.08 224.8,341.36 224.8,353.79 C224.8,366.22 233.08,374.5 245.09,374.5 C250.932775,374.623408 256.638486,372.722682 261.24,369.12 L257.1,363.32 C253.772132,365.898743 249.708598,367.349004 245.5,367.46 C240.12,367.46 234.32,364.15 233.5,357.11 L262.91,357.11 L262.91,353.8 C262.91,341.37 255.45,333.09 244.27,333.09 L244.27,333.08 Z M243.86,340.54 C249.66,340.54 253.8,344.27 254.21,350.48 L232.68,350.48 C233.92,344.68 237.68,340.54 243.86,340.54 Z M136.59,353.79 L136.59,333.91 L128.72,333.91 L128.72,338.91 C125.82,335.18 121.72,333.11 115.88,333.11 C104.7,333.11 96.41,341.81 96.41,353.82 C96.41,365.83 104.69,374.53 115.88,374.53 C121.68,374.53 125.82,372.46 128.72,368.73 L128.72,373.73 L136.59,373.73 L136.59,353.79 Z M104.7,353.79 C104.7,346.33 109.26,340.54 117.13,340.54 C124.59,340.54 129.13,346.34 129.13,353.79 C129.13,361.66 124.13,367.04 117.13,367.04 C109.26,367.45 104.7,361.24 104.7,353.79 Z M410.78,333.08 C406.419355,332.982846 402.328836,335.185726 400.01,338.88 L400.01,333.88 L392.14,333.88 L392.14,373.64 L400,373.64 L400,351.31 C400,344.68 403.31,340.54 408.7,340.54 C410.518809,340.613783 412.32352,340.892205 414.08,341.37 L416.57,333.91 C414.671013,333.43126 412.72704,333.153071 410.77,333.08 L410.78,333.08 Z M380.13,353.79 L380.13,333.91 L372.26,333.91 L372.26,338.91 C369.36,335.18 365.26,333.11 359.42,333.11 C348.24,333.11 339.95,341.81 339.95,353.82 C339.95,365.83 348.23,374.53 359.42,374.53 C365.22,374.53 369.36,372.46 372.26,368.73 L372.26,373.73 L380.13,373.73 L380.13,353.79 Z M348.24,353.79 C348.24,346.33 352.8,340.54 360.67,340.54 C368.13,340.54 372.67,346.34 372.67,353.79 C372.67,361.66 367.67,367.04 360.67,367.04 C352.8,367.45 348.24,361.24 348.24,353.79 Z M460.07,353.79 L460.07,318.17 L452.2,318.17 L452.2,338.88 C449.3,335.15 445.2,333.08 439.36,333.08 C428.18,333.08 419.89,341.78 419.89,353.79 C419.89,365.8 428.17,374.5 439.36,374.5 C445.16,374.5 449.3,372.43 452.2,368.7 L452.2,373.7 L460.07,373.7 L460.07,353.79 Z M428.18,353.79 C428.18,346.33 432.74,340.54 440.61,340.54 C448.07,340.54 452.61,346.34 452.61,353.79 C452.61,361.66 447.61,367.04 440.61,367.04 C432.73,367.46 428.17,361.25 428.17,353.79 L428.18,353.79 Z" id="Shape" fill="#FFFFFF"></path> <g> <rect id="Rectangle-path" fill="#FF5F00" x="170.55" y="32.39" width="143.72" height="234.42"></rect> <path d="M185.05,149.6 C185.05997,103.912554 205.96046,60.7376085 241.79,32.39 C180.662018,-15.6713968 92.8620037,-8.68523415 40.103462,48.4380037 C-12.6550796,105.561241 -12.6550796,193.638759 40.103462,250.761996 C92.8620037,307.885234 180.662018,314.871397 241.79,266.81 C205.96046,238.462391 185.05997,195.287446 185.05,149.6 Z" id="Shape" fill="#EB001B"></path> <path d="M483.26,149.6 C483.30134,206.646679 450.756789,258.706022 399.455617,283.656273 C348.154445,308.606523 287.109181,302.064451 242.26,266.81 C278.098424,238.46936 299.001593,195.290092 299.001593,149.6 C299.001593,103.909908 278.098424,60.7306402 242.26,32.39 C287.109181,-2.86445052 348.154445,-9.40652324 399.455617,15.5437274 C450.756789,40.493978 483.30134,92.5533211 483.26,149.6 Z" id="Shape" fill="#F79E1B"></path> </g> </g> </g> </g>`;
+                let creditcard = `<path fill-rule="evenodd" clip-rule="evenodd" d="M1.78169 5.64504e-06H30.2188C30.6911 0.000450272 31.1439 0.182535 31.4778 0.5058C31.8117 0.829288 31.9993 1.26773 31.9997 1.72505V4.10818L0.000917164 4.10796V1.72392C0.00137645 1.26682 0.18944 0.828405 0.523319 0.505351C0.857198 0.182085 1.31003 0.000221972 1.78213 0L1.78169 5.64504e-06ZM30.2188 18.9997H1.78169C1.30934 18.9992 0.856533 18.8176 0.522402 18.4943C0.188523 18.1711 0.00045852 17.7326 0 17.2753V5.85228H32V17.2747C31.9995 17.7321 31.8117 18.1705 31.4776 18.494C31.1435 18.8175 30.6907 18.9996 30.2183 19L30.2188 18.9997ZM11.5182 15.0378C11.5182 14.8064 11.4233 14.5843 11.2543 14.4206C11.0853 14.2568 10.8559 14.1649 10.6169 14.1649H3.68676C3.44473 14.1601 3.21074 14.2499 3.03784 14.4139C2.8647 14.5782 2.76733 14.8028 2.76733 15.0373C2.76733 15.2717 2.86469 15.4965 3.03784 15.6605C3.21075 15.8246 3.44474 15.9144 3.68676 15.9098H10.6163C10.8556 15.9098 11.085 15.8177 11.254 15.6539C11.4232 15.4898 11.5181 15.2677 11.5178 15.036L11.5182 15.0378ZM15.7153 10.4694C15.7155 10.2377 15.6207 10.0154 15.4517 9.85158C15.2827 9.68773 15.0533 9.59568 14.814 9.59568H3.68722H3.68745C3.36529 9.59568 3.06792 9.76198 2.90697 10.0321C2.74577 10.302 2.74577 10.6346 2.90697 10.9045C3.06794 11.1746 3.36531 11.341 3.68745 11.341H14.8136C15.0522 11.3407 15.2809 11.2489 15.4499 11.0857C15.6189 10.9227 15.7142 10.7015 15.7151 10.4705L15.7153 10.4694Z" fill="#AAAAAA"/>`;
+                let diners = `<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="diners" fill-rule="nonzero"> <rect id="rectangle" fill="#0079BE" x="0" y="0" width="750" height="471" rx="40"></rect> <path d="M584.933911,237.947339 C584.933911,138.53154 501.952976,69.8140806 411.038924,69.8471464 L332.79674,69.8471464 C240.793699,69.8140806 165.066089,138.552041 165.066089,237.947339 C165.066089,328.877778 240.793699,403.587432 332.79674,403.150963 L411.038924,403.150963 C501.952976,403.586771 584.933911,328.857939 584.933911,237.947339 Z" id="Shape-path" fill="#FFFFFF"></path> <path d="M333.280302,83.9308394 C249.210378,83.9572921 181.085889,152.238282 181.066089,236.510581 C181.085889,320.768331 249.209719,389.042708 333.280302,389.069161 C417.370025,389.042708 485.508375,320.768331 485.520254,236.510581 C485.507715,152.238282 417.370025,83.9572921 333.280302,83.9308394 Z" id="Shape-path" fill="#0079BE"></path> <path d="M237.066089,236.09774 C237.145288,194.917524 262.812421,159.801587 299.006443,145.847134 L299.006443,326.327183 C262.812421,312.380667 237.144628,277.283907 237.066089,236.09774 Z M368.066089,326.372814 L368.066089,145.847134 C404.273312,159.767859 429.980043,194.903637 430.046043,236.103692 C429.980043,277.316312 404.273312,312.425636 368.066089,326.372814 Z" id="Path" fill="#FFFFFF"></path> </g> </g>`;
+                let discover = `<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="discover" fill-rule="nonzero"> <path fill="#38495C" d="M0 15c0,-8.28 6.72,-15 15,-15l290 0c8.28,0 15,6.72 15,15l0 180c0,8.29 -6.72,15 -15,15l-290 0c-8.28,0 -15,-6.71 -15,-15l0 -180z"></path><path fill="#FFFFFF" d="M250.26 103.28l-1.95 0 0 -10.46 2.06 0c4.17,0 6.44,1.75 6.44,5.12 0,3.47 -2.27,5.34 -6.55,5.34zm-180.1 10.05c-2.1,1.92 -4.84,2.75 -9.17,2.75l-1.8 0 0 -22.86 1.8 0c4.33,0 6.96,0.79 9.17,2.8 2.32,2.08 3.71,5.3 3.71,8.61 0,3.32 -1.39,6.63 -3.71,8.7zm-7.82 -25.96l-9.84 0 0 34.56 9.78 0c5.2,0 8.96,-1.23 12.26,-3.99 3.92,-3.26 6.24,-8.18 6.24,-13.26 0,-10.21 -7.58,-17.31 -18.44,-17.31zm21.52 34.56l6.7 0 0 -34.56 -6.7 0 0 34.56zm23.09 -21.3c-4.03,-1.49 -5.2,-2.48 -5.2,-4.35 0,-2.18 2.1,-3.83 4.98,-3.83 2.02,0 3.66,0.83 5.41,2.8l3.51 -4.62c-2.89,-2.54 -6.33,-3.83 -10.1,-3.83 -6.08,0 -10.71,4.24 -10.71,9.9 0,4.76 2.15,7.2 8.45,9.48 2.62,0.93 3.96,1.55 4.63,1.97 1.34,0.88 2.01,2.12 2.01,3.57 0,2.8 -2.21,4.88 -5.2,4.88 -3.2,0 -5.77,-1.61 -7.32,-4.61l-4.32 4.19c3.08,4.57 6.79,6.58 11.89,6.58 6.96,0 11.85,-4.66 11.85,-11.35 0,-5.49 -2.26,-7.97 -9.88,-10.78zm11.99 4.05c0,10.15 7.93,18.03 18.13,18.03 2.89,0 5.36,-0.57 8.4,-2.01l0 -7.94c-2.67,2.7 -5.05,3.79 -8.09,3.79 -6.74,0 -11.54,-4.92 -11.54,-11.92 0,-6.64 4.95,-11.88 11.23,-11.88 3.2,0 5.62,1.15 8.4,3.89l0 -7.93c-2.94,-1.5 -5.36,-2.12 -8.24,-2.12 -10.15,0 -18.29,8.04 -18.29,18.09zm79.66 5.91l-9.16 -23.22 -7.32 0 14.58 35.45 3.61 0 14.83 -35.45 -7.26 0 -9.28 23.22zm19.58 11.34l18.99 0 0 -5.85 -12.3 0 0 -9.33 11.85 0 0 -5.85 -11.85 0 0 -7.67 12.3 0 0 -5.86 -18.99 0 0 34.56zm45.53 -24.36c0,-6.47 -4.43,-10.2 -12.16,-10.2l-9.94 0 0 34.56 6.7 0 0 -13.88 0.87 0 9.27 13.88 8.24 0 -10.81 -14.56c5.05,-1.03 7.83,-4.5 7.83,-9.8z"></path><path fill="#E27539" d="M184.21 104.77c0,10.16 -8.18,18.39 -18.28,18.39 -10.09,0 -18.27,-8.23 -18.27,-18.39 0,-10.16 8.18,-18.39 18.27,-18.39 10.1,0 18.28,8.23 18.28,18.39z"></path></g> </g>`;
+
+                //pop in the appropriate card icon when detected
+                cardnumber_mask.on("accept", function () {
+                    switch (cardnumber_mask.masked.currentMask.cardtype) {
+                        case 'american express':
+                            VIEW.ccicon.innerHTML = americanExpress;
+                            VIEW.ccicon.setAttribute('viewBox', '0 0 750 471');
+                            MODEL.creditCardType = 'AmericanExpress';
+                            break;
+                        case 'visa':
+                            VIEW.ccicon.innerHTML = visa;
+                            VIEW.ccicon.setAttribute('viewBox', '0 0 750 471');
+                            MODEL.creditCardType = 'Visa';
+                            break;
+                        case 'mastercard':
+                            VIEW.ccicon.innerHTML = mastercard;
+                            VIEW.ccicon.setAttribute('viewBox', '0 0 750 471');
+                            MODEL.creditCardType = 'MasterCard';
+                            break;
+                        case 'diners':
+                            VIEW.ccicon.innerHTML = diners;
+                            VIEW.ccicon.setAttribute('viewBox', '0 0 750 471');
+                            MODEL.creditCardType = 'Diners';
+                            break;
+                        case 'discover':
+                            VIEW.ccicon.innerHTML = discover;
+                            VIEW.ccicon.setAttribute('viewBox', '0 0 320 210');
+                            MODEL.creditCardType = 'discover';
+                            break;
+                        default:
+                            VIEW.ccicon.innerHTML = creditcard;
+                            VIEW.ccicon.setAttribute('viewBox', '0 0 30 19');
+                            MODEL.creditCardType = 'CreditCard';
+                            break;
+                    }
+                });
+
+            },
+
+            initCreditCardMode: function () {
+                if (MODEL.existedCards && MODEL.existedCards.length > 0) {
+                    MODEL.creditCardMode = 'view';
+                    CONTROLLER.initSelectedCard();
+                } else {
+                    MODEL.creditCardMode = 'new';
+                }
+                VIEW.setCreditCardMode();
+            },
+
+            setCreditCardMode: function () {
+                if (MODEL.creditCardMode === 'view') {
+                    VIEW.cardViewName.innerText = MODEL.selectedCard.name;
+                    VIEW.cardViewTypeAndNumber.innerText = MODEL.selectedCard.cardType + ' ending in ' + MODEL.selectedCard.lastFour;
+                    VIEW.creditCardModeView.setAttribute('data-type',  VIEW.cartIconId(MODEL.selectedCard.cardType));
+
+                    if (MODEL.currentTab === 'credit-card') {
+                        VIEW.cardViewChange.style.display = 'block';
+                    }
+
+                    VIEW.creditCardModeView.style.display = 'flex';
+                    VIEW.creditCardModeList.style.display = 'none';
+                    VIEW.creditCardModeNew.style.display = 'none';
+                } else if (MODEL.creditCardMode === 'new') {
+                    if (MODEL.existedCards && MODEL.existedCards.length > 0) {
+                        VIEW.cancelFromNewCard.style.display = 'block';
+                    }
+
+                    VIEW.cardViewChange.style.display = 'none';
+                    VIEW.creditCardModeView.style.display = 'none';
+                    VIEW.creditCardModeList.style.display = 'none';
+                    VIEW.creditCardModeNew.style.display = 'block';
+                } else if (MODEL.creditCardMode === 'list') {
+                    VIEW.cardViewChange.style.display = 'none';
+                    VIEW.creditCardModeView.style.display = 'none';
+                    VIEW.creditCardModeList.style.display = 'block';
+                    VIEW.creditCardModeNew.style.display = 'none';
+                }
+
+                setTimeout(() => {
+                    MODEL.updateIframeHeigth();
+                }, 0);
+            },
+
+            disabledForm: function() {
+                this.cardHolder.disabled = true;
+                this.zipCode.disabled = true;
+                this.cardNumber.update({ disabled: true });
+                this.cardExpiry.update({ disabled: true });
+                this.cardCvc.update({ disabled: true });
+                this.submitButton.disabled = true;
+                MODEL.dispatchEvent(SUBMIT_BUTTON_DISABLED, {
+                    isDisabled: this.submitButton.disabled,
+                });
+            },
+            cartIconId: function(cardtype){
+                var VALID_TYPES = new Set();
+                VALID_TYPES.add("AmericanExpress");
+                VALID_TYPES.add("MasterCard");
+                VALID_TYPES.add("Visa");
+                VALID_TYPES.add("Diners");
+                VALID_TYPES.add("discover");
+                VALID_TYPES.add("CreditCard");
+                if (VALID_TYPES.has(cardtype)){
+                    return cardtype;
+                }else{
+                    return "CreditCard";
+                }
+            }
+        };
+
+        let MODEL = {
+            AMAZON_BUTTON_LABEL: null,
+            hasInvoicePayment: null,
+            poNumber:null,
+            poNumberOld: null,
+            isPONumberBlur: false,
+            isPONumberValid: true,
+
+            darleyDollarAmount: null,
+            hasDarleyDollar: false,
+
+            isDisabledPlaceOrderLwc: true,
+            isDisabledPlaceOrderIframe: true,
+
+            creditCardMode: null,
+            selectedCard: null,
+            selectedCardId: null,
+            expirationDateMin: null,
+
+            creditCardName: null,
+            creditCardType: null,
+            isCreditCardNameValid: false,
+            creditCardNumber: null,
+            isCreditCardNumberValid: false,
+            creditCardExpirationDate: null,
+            isCardExpirationDateValid: false,
+            isCardSecurityCodeValid: false,
+            creditCardCvv: null,
+
+            existedCards: [],
+
+            publicKey: null,
+            paypalClientId: null,
+            currentTab: null,
+            isCheckoutValid: false,
+            checkoutInnerWidth: 100,
+            checkoutData: null,
+
+            isCreditCardFormValid: false,
+            cardHolder: null,
+            isCardHolderBlur: false,
+            isCardHolderValid: false,
+            total: null,
+
+            paymentMethodCode: {
+                'pay-with-po': 'Invoice',
+                'credit-card': 'Credit Card',
+                'amazon-pay': 'Amazon Pay'
+            },
+
+            setInvoicePayment: function(hasInvoicePayment) {
+                this.hasInvoicePayment = hasInvoicePayment || false;
+            },
+
+            sentPONumber: function() {
+                this.dispatchEvent(UPDATE_PO_NUMBER, {
+                    currentTab: this.currentTab,
+                    poNumber: this.poNumber,
+                    isCheckoutValid: this.isCheckoutValid
+                });
+            },
+
+            setHasDarleyDollar: function (hasDarleyDollar) {
+                this.hasDarleyDollar = hasDarleyDollar;
+                this.dispatchEvent(SET_HAS_DARLEY_DOLLAR, {
+                    currentTab: this.currentTab,
+                    hasDarleyDollar: this.hasDarleyDollar
+                });
+            },
+
+            clickPlaceOrder: function () {
+                var creditCard = {}
+                if (MODEL.currentTab === 'credit-card' && MODEL.creditCardMode === 'new') {
+                    creditCard.name = MODEL.creditCardName;
+                    creditCard.cardType = MODEL.creditCardType;
+                    creditCard.isDefault = false;
+                    creditCard.cardNumber = CONTROLLER.encodeMessage(MODEL.creditCardNumber);
+                    creditCard.expirationDate = CONTROLLER.encodeMessage(MODEL.creditCardExpirationDate);
+                    creditCard.cvv = CONTROLLER.encodeMessage(MODEL.creditCardCvv);
+                    creditCard.lastFour = MODEL.creditCardNumber ? MODEL.creditCardNumber.substring(MODEL.creditCardNumber.length - 4) : '';
+                } else if (MODEL.currentTab === 'credit-card' && MODEL.creditCardMode !== 'new') {
+                    creditCard.id = MODEL.selectedCard.id;
+                }
+                creditCard.amount = MODEL.total;
+                creditCard.isSaveCard = false;
+                this.dispatchEvent(CLICK_PLACE_ORDER, {
+                    currentTab: this.currentTab,
+                    mode: MODEL.creditCardMode,
+                    card: creditCard
+                });
+            },
+
+            validatePlaceOrderButtonDisabled: function () {
+                if (this.currentTab === 'pay-with-po') {
+                    this.isDisabledPlaceOrderIframe = !!!this.poNumber;
+                } else if (this.currentTab === 'credit-card' && this.creditCardMode === 'new') {
+                    this.isDisabledPlaceOrderIframe = !this.isCreditCardNameValid || !this.isCreditCardNumberValid || !this.isCardExpirationDateValid || !this.isCardSecurityCodeValid;
+                } else if (this.currentTab === 'credit-card' && this.creditCardMode === 'view') {
+                    this.isDisabledPlaceOrderIframe = false;
+                } else if (this.currentTab === 'credit-card' && this.creditCardMode === 'list') {
+                    this.isDisabledPlaceOrderIframe = true;
+                } else if (this.currentTab === 'amazon-pay') {
+                    this.isDisabledPlaceOrderIframe = false;
+                }
+            },
+
+            initialization: function() {
+                VIEW.initCreditCardSection();
+
+                setTimeout(() => {
+                    MODEL.updateIframeHeigth();
+                }, 0);
+            },
+
+            setCurrentTab: function(tabId) {
+                if (tabId !== this.currentTab) {
+                    this.currentTab = tabId || null;
+                    VIEW.changeTab();
+                    VIEW.changeContent();
+
+                    MODEL.dispatchEvent(UPDATE_PAYMENT_METHOD, {
+                        paymentMethod: MODEL.paymentMethodCode[MODEL.currentTab],
+                        currentTab: MODEL.currentTab
+                    });
+
+                    setTimeout(() => {
+                        this.updateIframeHeigth();
+                    }, 0);
+                }
+            },
+
+            setCheckoutInnerWidth: function(innerWidth) {
+                this.checkoutInnerWidth = innerWidth || 100;
+            },
+
+            dispatchEvent: function(methodType, data) {
+                window.parent.postMessage(
+                    Object.assign({}, { methodType }, data),
+                    window.location.origin
+                );
+            },
+
+            updateIframeHeigth: function() {
+                this.dispatchEvent(RESIZE, {
+                    formHeight: VIEW.paymentWrapper.getBoundingClientRect().height || 280,
+                });
+            },
+
+            checkFormValidity: function() {
+                if (
+                    this.isCardHolderValid &&
+                    this.isZipCodeValid &&
+                    this.isCardNumberValid &&
+                    this.isCardExpiryValid &&
+                    this.isCardCvcValid
+                ) {
+                    this.isCreditCardFormValid = true;
+                } else {
+                    this.isCreditCardFormValid = false;
+                }
+
+                VIEW.setSubmitButtonDisabled();
+                this.updateIframeHeigth();
+            },
+        };
+
+        let CONTROLLER = {
+            documentLoaded: function(event) {
+                MODEL.dispatchEvent(FRAME_LOADED);
+                VIEW.initCssMedia();
+            },
+
+            resizeWindow: function(event) {
+                VIEW.initCssMedia();
+                MODEL.updateIframeHeigth();
+                VIEW.hideDarleyDollarHelp();
+            },
+
+            windowMessage: function(event) {
+                if (event.origin === event.data.originUrl) {
+                    if (event.data.methodType === INIT_DATA) {
+                        CONTROLLER.MODULE = event.data.publicKey;
+                        CONTROLLER.PUBLIC_EXPONENT = event.data.publicExponent;
+
+                        MODEL.setInvoicePayment(event.data.hasInvoicePayment);
+                        MODEL.poNumber = event.data.poNumber;
+                        MODEL.poNumberOld = event.data.poNumber;
+                        VIEW.setPoNumber(event.data.poNumber);
+                        MODEL.AMAZON_BUTTON_LABEL = event.data.amazonButtonLabel;
+
+                        MODEL.darleyDollarAmount = event.data.darleyDollarAmount;
+                        VIEW.setDarleyDollarAmount(event.data.darleyDollarAmount);
+                        VIEW.setHasDarleyDollars(event.data.hasDarleyDollar);
+
+                        VIEW.setTotal(event.data.total);
+                        MODEL.existedCards = event.data.cards;
+                        MODEL.selectedCardId = event.data.selectedCreditCardId;
+                        MODEL.expirationDateMin = event.data.expirationDateMin;
+                        VIEW.initCreditCardMode();
+
+                        MODEL.currentTab = Object.keys(MODEL.paymentMethodCode).find( code => MODEL.paymentMethodCode[code] === event.data.paymentMethod);
+                        if (MODEL.hasInvoicePayment) {
+                            VIEW.showInvoiceTab();
+                        }
+
+                        //INIT METHOD
+                        VIEW.changeTab();
+                        VIEW.changeContent();
+                        MODEL.initialization();
+                    } else if (event.data.methodType === INVOICE_VALID) {
+                        MODEL.setInvoicePayment(event.data.hasInvoicePayment);
+                        MODEL.initialization();
+                    } else if (event.data.methodType === SET_PO_NUMBER) {
+                        VIEW.hideSpinner();
+                        MODEL.poNumber = event.data.poNumber;
+                        MODEL.poNumberOld = event.data.poNumber;
+                        VIEW.setPoNumber(event.data.poNumber);
+                    } else if (event.data.methodType === SET_DARLEY_DOLLAR_AMOUNT) {
+                        MODEL.darleyDollarAmount = event.data.darleyDollarAmount;
+                        VIEW.setDarleyDollarAmount(event.data.darleyDollarAmount);
+                    } else if (event.data.methodType === SET_DISABLED_PLACE_ORDER_BUTTON) {
+                        MODEL.isDisabledPlaceOrderLwc = event.data.isDisabledPlaceOrder;
+                        VIEW.setPlaceOrderButtonDisabled();
+                    } else if (event.data.methodType === SHOW_SPINNER) {
+                        VIEW.showSpinner();
+                    } else if (event.data.methodType === HIDE_SPINNER) {
+                        VIEW.hideSpinner();
+                    } else if (event.data.methodType === SET_TOTAL) {
+                        VIEW.setTotal(event.data.total);
+                    } else if (event.data.methodType === SET_EXISTED_CARDS) {
+                        MODEL.existedCards = event.data.cards;
+                        VIEW.initCreditCardMode();
+                    } else if (event.data.methodType === UPDATE_AMAZON_MODE) {
+                        MODEL.AMAZON_BUTTON_LABEL = event.data.amazonButtonLabel;
+                        VIEW.setPayButtonName();
+                    } else if (event.data.methodType === RESIZE) {
+                        MODEL.setCheckoutInnerWidth(event.data.innerWidth);
+                        MODEL.updateIframeHeigth();
+                    }
+                }
+            },
+
+            handleClickTab: function(event) {
+                let dataId = event.currentTarget.dataset.id;
+                if (dataId) {
+                    MODEL.setCurrentTab(dataId);
+                }
+            },
+
+            handleChangePONumber: function (event) {
+                MODEL.poNumber = event.target.value;
+
+                if (event.type === 'blur') {
+                    if (MODEL.poNumber) {
+                        MODEL.poNumber = MODEL.poNumber.replace(/^ +| +$|( ) +/g,"$1");
+                        VIEW.poNumber.value = MODEL.poNumber;
+                    }
+
+                    if (
+                        MODEL.poNumber &&
+                        typeof(MODEL.poNumber) === 'string' &&
+                        MODEL.poNumber.length > 0
+                    ) {
+                        if (MODEL.poNumber !== MODEL.poNumberOld) {
+                            VIEW.showSpinner();
+                            VIEW.poNumberError.style.display = 'none';
+                            VIEW.poNumberError.innerText = '';
+                            VIEW.poNumber.classList.remove('general-payment__input-error');
+                            MODEL.isPONumberValid = true;
+                            MODEL.poNumberOld = MODEL.poNumber;
+                            MODEL.sentPONumber();
+                        }
+                    } else {
+                        VIEW.poNumberError.style.display = 'block';
+                        VIEW.poNumberError.innerText = 'Complete this field.';
+                        VIEW.poNumber.classList.add('general-payment__input-error');
+                        MODEL.isPONumberValid = false;
+
+                        MODEL.validatePlaceOrderButtonDisabled();
+                        VIEW.setPlaceOrderButtonDisabled();
+                    }
+                }
+            },
+
+            handleHasDarleyDollar: function (event) {
+                if (event.currentTarget) {
+                    MODEL.setHasDarleyDollar(event.currentTarget.checked);
+                }
+            },
+
+            handlerClickPlaceOrder: function(event) {
+                MODEL.clickPlaceOrder();
+            },
+
+            handlerHoverDarleyDollarHelp: function (event) {
+                VIEW.showDarleyDollarHelp();
+            },
+
+            handlerNotHoverDarleyDollarHelp: function (event) {
+                VIEW.hideDarleyDollarHelp();
+            },
+
+            handleChangeCardNameMethod: function (event) {
+                MODEL.creditCardName = event.target.value;
+                if (event.type === 'blur') {
+                    if (MODEL.creditCardName) {
+                        MODEL.creditCardName = MODEL.creditCardName.replace(/^ +| +$|( ) +/g,"$1");
+                        VIEW.cardMethodName.value = MODEL.creditCardName;
+                    }
+
+                    if (
+                        MODEL.creditCardName &&
+                        typeof(MODEL.creditCardName) === 'string' &&
+                        MODEL.creditCardName.length > 0
+                    ) {
+                        VIEW.cardMethodNameError.style.display = 'none';
+                        VIEW.cardMethodNameError.innerText = '';
+                        VIEW.cardMethodName.classList.remove('general-payment__input-error');
+                        MODEL.isCreditCardNameValid = true;
+                    } else {
+                        VIEW.cardMethodNameError.style.display = 'block';
+                        VIEW.cardMethodNameError.innerText = 'Complete this field.';
+                        VIEW.cardMethodName.classList.add('general-payment__input-error');
+                        MODEL.isCreditCardNameValid = false;
+                    }
+
+                    MODEL.validatePlaceOrderButtonDisabled();
+                    VIEW.setPlaceOrderButtonDisabled();
+                }
+
+            },
+
+            handleChangeCardNumberMethod: function (event) {
+                MODEL.creditCardNumber = event.target.value;
+
+                if (event.type === 'blur') {
+                    MODEL.creditCardNumber = MODEL.creditCardNumber ? MODEL.creditCardNumber.replace(/ /g, '') : MODEL.creditCardNumber;
+                    if (
+                        MODEL.creditCardNumber &&
+                        typeof(MODEL.creditCardNumber) === 'string' &&
+                        (MODEL.creditCardNumber.length === 16 || MODEL.creditCardNumber.length === 15 || MODEL.creditCardNumber.length === 14)
+                    ) {
+                        VIEW.cardMethodNumberError.style.display = 'none';
+                        VIEW.cardMethodNumberError.innerText = '';
+                        VIEW.cardMethodNumber.classList.remove('general-payment__input-error');
+                        MODEL.isCreditCardNumberValid = true;
+                    } else {
+                        VIEW.cardMethodNumberError.style.display = 'block';
+                        VIEW.cardMethodNumberError.innerText = 'Complete this field.';
+                        VIEW.cardMethodNumber.classList.add('general-payment__input-error');
+                        MODEL.isCreditCardNumberValid = false;
+                    }
+
+                    MODEL.validatePlaceOrderButtonDisabled();
+                    VIEW.setPlaceOrderButtonDisabled();
+                }
+
+            },
+
+            handleChangeCardExpirationDate: function(event) {
+                MODEL.creditCardExpirationDate = event.target.value;
+                if (event.type === 'blur') {
+                    MODEL.creditCardExpirationDate = MODEL.creditCardExpirationDate ? MODEL.creditCardExpirationDate.replace(/[^\d]/g, '') : MODEL.creditCardExpirationDate;
+                    if (
+                        MODEL.creditCardExpirationDate &&
+                        typeof(MODEL.creditCardExpirationDate) === 'string' &&
+                        MODEL.creditCardExpirationDate.length === 4
+                    ) {
+                        let currentExpirationDate = parseInt(MODEL.creditCardExpirationDate.slice(-2) + MODEL.creditCardExpirationDate.slice(0, 2));
+                        if (currentExpirationDate < MODEL.expirationDateMin) {
+                            VIEW.cardExpirationDateError.style.display = 'block';
+                            VIEW.cardExpirationDateError.innerText = 'Date is not valid.';
+                            VIEW.cardExpirationDate.classList.add('general-payment__input-error');
+                            MODEL.isCardExpirationDateValid = false;
+                        } else {
+                            VIEW.cardExpirationDateError.style.display = 'none';
+                            VIEW.cardExpirationDateError.innerText = '';
+                            VIEW.cardExpirationDate.classList.remove('general-payment__input-error');
+                            MODEL.isCardExpirationDateValid = true;
+                        }
+                    } else {
+                        VIEW.cardExpirationDateError.style.display = 'block';
+                        VIEW.cardExpirationDateError.innerText = 'Complete this field.';
+                        VIEW.cardExpirationDate.classList.add('general-payment__input-error');
+                        MODEL.isCardExpirationDateValid = false;
+                    }
+
+                    MODEL.validatePlaceOrderButtonDisabled();
+                    VIEW.setPlaceOrderButtonDisabled();
+                }
+            },
+
+            handleChangeCardSecurityCode: function (event) {
+                MODEL.creditCardCvv = event.target.value;
+
+                if (event.type === 'blur') {
+                    MODEL.creditCardCvv = MODEL.creditCardCvv ? MODEL.creditCardCvv.replace(/[^\d]/g, '') : MODEL.creditCardCvv;
+
+                    if (
+                        MODEL.creditCardCvv &&
+                        typeof(MODEL.creditCardCvv) === 'string' &&
+                        (MODEL.creditCardCvv.length === 4 || MODEL.creditCardCvv.length === 3)
+                    ) {
+                        VIEW.cardSecurityCodeError.style.display = 'none';
+                        VIEW.cardSecurityCodeError.innerText = '';
+                        VIEW.cardSecurityCode.classList.remove('general-payment__input-error');
+                        MODEL.isCardSecurityCodeValid = true;
+                    } else {
+                        VIEW.cardSecurityCodeError.style.display = 'block';
+                        VIEW.cardSecurityCodeError.innerText = 'Complete this field.';
+                        VIEW.cardSecurityCode.classList.add('general-payment__input-error');
+                        MODEL.isCardSecurityCodeValid = false;
+                    }
+
+                    MODEL.validatePlaceOrderButtonDisabled();
+                    VIEW.setPlaceOrderButtonDisabled();
+                }
+
+            },
+
+            handleClickCardViewChange: function () {
+                MODEL.creditCardMode = 'list';
+
+                var elements = '';
+                MODEL.existedCards.forEach( (card) => {
+                    elements +=
+                        '<span data-type="' + VIEW.cartIconId(card.cardType) + '" class="slds-radio b2b-payment-credit-card-icon">' +
+                            '<input data-name="payment-card-radio-input"  id="' + 'id_' + card.id + '" value="' + card.id + '" name="payment" type="radio" ' + (card.id === MODEL.selectedCard.id ? 'checked' : '') + ' />' +
+                            '<label for="' + 'id_' + card.id + '" class="slds-radio__label" title="Click to choose credit card">' +
+                                '<span class="slds-radio_faux"></span>' +
+                                '<span class="slds-form-element__label">' +
+                                    '<div class="b2b-payment-item__wrapper">' +
+                                        '<!-- ICON -->' +
+                                        '<div class="b2b-payment-item__icon">' +
+                                            '<div class="b2b-payment-icon__wrapper">' +
+                                                '<!-- AmericanExpress -->' +
+                                                '<svg id="b2b-cards-view-american-express-icon" class="credit-card-list-icon b2b-hide" width="750" height="471" viewBox="0 0 750 471" xmlns="http://www.w3.org/2000/svg"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><rect id="Rectangle-1" fill="#2557D6" x="0" y="0" width="750" height="471" rx="40"></rect><path d="M0.002688,221.18508 L36.026849,221.18508 L44.149579,201.67506 L62.334596,201.67506 L70.436042,221.18508 L141.31637,221.18508 L141.31637,206.26909 L147.64322,221.24866 L184.43894,221.24866 L190.76579,206.04654 L190.76579,221.18508 L366.91701,221.18508 L366.83451,189.15941 L370.2427,189.15941 C372.62924,189.24161 373.3263,189.46144 373.3263,193.38516 L373.3263,221.18508 L464.43232,221.18508 L464.43232,213.72973 C471.78082,217.6508 483.21064,221.18508 498.25086,221.18508 L536.57908,221.18508 L544.78163,201.67506 L562.96664,201.67506 L570.98828,221.18508 L644.84844,221.18508 L644.84844,202.65269 L656.0335,221.18508 L715.22061,221.18508 L715.22061,98.67789 L656.64543,98.67789 L656.64543,113.14614 L648.44288,98.67789 L588.33787,98.67789 L588.33787,113.14614 L580.80579,98.67789 L499.61839,98.67789 C486.02818,98.67789 474.08221,100.5669 464.43232,105.83121 L464.43232,98.67789 L408.40596,98.67789 L408.40596,105.83121 C402.26536,100.40529 393.89786,98.67789 384.59383,98.67789 L179.90796,98.67789 L166.17407,130.3194 L152.07037,98.67789 L87.59937,98.67789 L87.59937,113.14614 L80.516924,98.67789 L25.533518,98.67789 L-2.99999999e-06,156.92445 L-2.99999999e-06,221.18508 L0.002597,221.18508 L0.002688,221.18508 Z M227.39957,203.51436 L205.78472,203.51436 L205.70492,134.72064 L175.13228,203.51436 L156.62,203.51436 L125.96754,134.6597 L125.96754,203.51436 L83.084427,203.51436 L74.982981,183.92222 L31.083524,183.92222 L22.8996,203.51436 L4.7e-05,203.51436 L37.756241,115.67692 L69.08183,115.67692 L104.94103,198.84086 L104.94103,115.67692 L139.35289,115.67692 L166.94569,175.26406 L192.29297,115.67692 L227.39657,115.67692 L227.39657,203.51436 L227.39957,203.51436 Z M67.777214,165.69287 L53.346265,130.67606 L38.997794,165.69287 L67.777214,165.69287 Z M313.41947,203.51436 L242.98611,203.51436 L242.98611,115.67692 L313.41947,115.67692 L313.41947,133.96821 L264.07116,133.96821 L264.07116,149.8009 L312.23551,149.8009 L312.23551,167.80606 L264.07116,167.80606 L264.07116,185.34759 L313.41947,185.34759 L313.41947,203.51436 Z M412.67528,139.33321 C412.67528,153.33782 403.28877,160.57326 397.81863,162.74575 C402.43206,164.49434 406.37237,167.58351 408.24808,170.14281 C411.22525,174.51164 411.73875,178.41416 411.73875,186.25897 L411.73875,203.51436 L390.47278,203.51436 L390.39298,192.43732 C390.39298,187.1518 390.90115,179.55074 387.0646,175.32499 C383.98366,172.23581 379.28774,171.56552 371.69714,171.56552 L349.06363,171.56552 L349.06363,203.51436 L327.98125,203.51436 L327.98125,115.67692 L376.47552,115.67692 C387.25084,115.67692 395.18999,115.9604 402.00639,119.88413 C408.67644,123.80786 412.67529,129.53581 412.67529,139.33321 L412.67528,139.33321 Z M386.02277,152.37632 C383.1254,154.12756 379.69859,154.18584 375.59333,154.18584 L349.97998,154.18584 L349.97998,134.67583 L375.94186,134.67583 C379.61611,134.67583 383.44999,134.8401 385.94029,136.26016 C388.67536,137.53981 390.36749,140.26337 390.36749,144.02548 C390.36749,147.86443 388.75784,150.95361 386.02277,152.37632 Z M446.48908,203.51436 L424.97569,203.51436 L424.97569,115.67692 L446.48908,115.67692 L446.48908,203.51436 Z M696.22856,203.51436 L666.35032,203.51436 L626.38585,137.58727 L626.38585,203.51436 L583.44687,203.51436 L575.24166,183.92222 L531.44331,183.92222 L523.48287,203.51436 L498.81137,203.51436 C488.56284,203.51436 475.58722,201.25709 468.23872,193.79909 C460.82903,186.3411 456.97386,176.23903 456.97386,160.26593 C456.97386,147.23895 459.27791,135.33 468.33983,125.91941 C475.15621,118.90916 485.83044,115.67692 500.35982,115.67692 L520.77174,115.67692 L520.77174,134.49809 L500.78818,134.49809 C493.0938,134.49809 488.74909,135.63733 484.564,139.70147 C480.96957,143.4 478.50322,150.39171 478.50322,159.59829 C478.50322,169.00887 480.38158,175.79393 484.30061,180.22633 C487.5465,183.70232 493.445,184.75677 498.99495,184.75677 L508.46393,184.75677 L538.17987,115.67957 L569.77152,115.67957 L605.46843,198.76138 L605.46843,115.67957 L637.5709,115.67957 L674.6327,176.85368 L674.6327,115.67957 L696.22856,115.67957 L696.22856,203.51436 Z M568.07051,165.69287 L553.47993,130.67606 L538.96916,165.69287 L568.07051,165.69287 Z" id="Path" fill="#FFFFFF"></path><path d="M749.95644,343.76716 C744.83485,351.22516 734.85504,355.00582 721.34464,355.00582 L680.62723,355.00582 L680.62723,336.1661 L721.17969,336.1661 C725.20248,336.1661 728.01736,335.63887 729.71215,333.99096 C731.18079,332.63183 732.2051,330.65804 732.2051,328.26036 C732.2051,325.70107 731.18079,323.66899 729.62967,322.45028 C728.09984,321.10969 725.87294,320.50033 722.20135,320.50033 C702.40402,319.83005 677.70592,321.10969 677.70592,293.30714 C677.70592,280.56363 685.83131,267.14983 707.95664,267.14983 L749.95379,267.14983 L749.95644,249.66925 L710.93382,249.66925 C699.15812,249.66925 690.60438,252.47759 684.54626,256.84375 L684.54626,249.66925 L626.83044,249.66925 C617.60091,249.66925 606.76706,251.94771 601.64279,256.84375 L601.64279,249.66925 L498.57751,249.66925 L498.57751,256.84375 C490.37496,250.95154 476.53466,249.66925 470.14663,249.66925 L402.16366,249.66925 L402.16366,256.84375 C395.67452,250.58593 381.24357,249.66925 372.44772,249.66925 L296.3633,249.66925 L278.95252,268.43213 L262.64586,249.66925 L148.99149,249.66925 L148.99149,372.26121 L260.50676,372.26121 L278.447,353.20159 L295.34697,372.26121 L364.08554,372.32211 L364.08554,343.48364 L370.84339,343.48364 C379.96384,343.62405 390.72054,343.25845 400.21079,339.17311 L400.21079,372.25852 L456.90762,372.25852 L456.90762,340.30704 L459.64268,340.30704 C463.13336,340.30704 463.47657,340.45011 463.47657,343.92344 L463.47657,372.25587 L635.71144,372.25587 C646.64639,372.25587 658.07621,369.46873 664.40571,364.41107 L664.40571,372.25587 L719.03792,372.25587 C730.40656,372.25587 741.50913,370.66889 749.95644,366.60475 L749.95644,343.76712 L749.95644,343.76716 Z M408.45301,296.61266 C408.45301,321.01872 390.16689,326.05784 371.7371,326.05784 L345.42935,326.05784 L345.42935,355.52685 L304.44855,355.52685 L278.48667,326.44199 L251.5058,355.52685 L167.9904,355.52685 L167.9904,267.66822 L252.79086,267.66822 L278.73144,296.46694 L305.55002,267.66822 L372.92106,267.66822 C389.6534,267.66822 408.45301,272.28078 408.45301,296.61266 Z M240.82781,337.04655 L188.9892,337.04655 L188.9892,319.56596 L235.27785,319.56596 L235.27785,301.64028 L188.9892,301.64028 L188.9892,285.66718 L241.84947,285.66718 L264.91132,311.27077 L240.82781,337.04655 Z M324.3545,347.10668 L291.9833,311.3189 L324.3545,276.6677 L324.3545,347.10668 Z M372.2272,308.04117 L344.98027,308.04117 L344.98027,285.66718 L372.47197,285.66718 C380.08388,285.66718 385.36777,288.75636 385.36777,296.43956 C385.36777,304.03796 380.32865,308.04117 372.2272,308.04117 Z M514.97053,267.66815 L585.34004,267.66815 L585.34004,285.83764 L535.96778,285.83764 L535.96778,301.81074 L584.1348,301.81074 L584.1348,319.73642 L535.96778,319.73642 L535.96778,337.21701 L585.34004,337.29641 L585.34004,355.52678 L514.97053,355.52678 L514.97053,267.66815 Z M487.91724,314.6973 C492.61049,316.42205 496.44703,319.51387 498.24559,322.07317 C501.22276,326.36251 501.65378,330.36571 501.73891,338.10985 L501.73891,355.52685 L480.5714,355.52685 L480.5714,344.53458 C480.5714,339.24908 481.08223,331.42282 477.1632,327.33748 C474.08226,324.19002 469.38635,323.4376 461.69463,323.4376 L439.16223,323.4376 L439.16223,355.52685 L417.97609,355.52685 L417.97609,267.66822 L466.65393,267.66822 C477.32816,267.66822 485.10236,268.13716 492.02251,271.81449 C498.6766,275.8177 502.86168,281.30191 502.86168,291.3245 C502.85868,305.34765 493.46719,312.50362 487.91724,314.6973 Z M475.99899,303.59022 C473.17879,305.25668 469.69077,305.39975 465.58817,305.39975 L439.97483,305.39975 L439.97483,285.66718 L465.9367,285.66718 C469.69077,285.66718 473.4475,285.74658 475.99899,287.25416 C478.7314,288.67687 480.36499,291.39779 480.36499,295.15725 C480.36499,298.91672 478.7314,301.94496 475.99899,303.59022 Z M666.33539,309.1866 C670.44067,313.41766 672.64095,318.7588 672.64095,327.80112 C672.64095,346.70178 660.78278,355.5242 639.51948,355.5242 L598.45353,355.5242 L598.45353,336.68449 L639.35453,336.68449 C643.35337,336.68449 646.18954,336.15726 647.9668,334.50934 C649.41681,333.15021 650.45709,331.17643 650.45709,328.77875 C650.45709,326.21944 649.33167,324.18738 647.88433,322.96866 C646.27201,321.62807 644.04778,321.01872 640.37619,321.01872 C620.65868,320.34843 595.9659,321.62807 595.9659,293.82551 C595.9659,281.08201 604.00615,267.66822 626.11019,267.66822 L668.37872,267.66822 L668.37872,286.36752 L629.70196,286.36752 C625.86809,286.36752 623.37512,286.51059 621.25464,287.9545 C618.94527,289.37721 618.08856,291.48876 618.08856,294.2759 C618.08856,297.59028 620.04941,299.8449 622.702,300.81987 C624.92624,301.59084 627.31543,301.81603 630.9072,301.81603 L642.25722,302.12071 C653.703,302.39889 661.55967,304.37003 666.33539,309.1866 Z M750,285.66718 L711.57335,285.66718 C707.7368,285.66718 705.18797,285.81025 703.04088,287.25416 C700.81665,288.67687 699.95995,290.78843 699.95995,293.57558 C699.95995,296.88994 701.83831,299.14456 704.57071,300.11953 C706.79495,300.8905 709.18415,301.1157 712.6961,301.1157 L724.12327,301.42038 C735.65419,301.70387 743.35123,303.67765 748.04448,308.49157 C748.89852,309.16186 749.41202,309.91428 750,310.6667 L750,285.66718 Z" id="path13" fill="#FFFFFF"></path></g></g></svg>' +
+
+                                                '<!-- MasterCard -->' +
+                                                '<svg id="b2b-cards-view-master-card-icon" class="credit-card-list-icon b2b-hide" xmlns="http://www.w3.org/2000/svg" width="750" height="471" viewBox="0 0 750 471"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><rect id="Rectangle-1" fill="#000000" x="0" y="0" width="750" height="471" rx="40"></rect><g id="Group" transform="translate(133.000000, 48.000000)"><path d="M88.13,373.67 L88.13,348.82 C88.13,339.29 82.33,333.08 72.81,333.08 C67.81,333.08 62.46,334.74 58.73,340.08 C55.83,335.52 51.73,333.08 45.48,333.08 C40.7599149,332.876008 36.2525337,335.054575 33.48,338.88 L33.48,333.88 L25.61,333.88 L25.61,373.64 L33.48,373.64 L33.48,350.89 C33.48,343.89 37.62,340.54 43.42,340.54 C49.22,340.54 52.53,344.27 52.53,350.89 L52.53,373.67 L60.4,373.67 L60.4,350.89 C60.4,343.89 64.54,340.54 70.34,340.54 C76.14,340.54 79.45,344.27 79.45,350.89 L79.45,373.67 L88.13,373.67 Z M217.35,334.32 L202.85,334.32 L202.85,322.32 L195,322.32 L195,334.32 L186.72,334.32 L186.72,341.32 L195,341.32 L195,360 C195,369.11 198.31,374.5 208.25,374.5 C212.015784,374.421483 215.705651,373.426077 219,371.6 L216.51,364.6 C214.275685,365.996557 211.684475,366.715565 209.05,366.67 C204.91,366.67 202.84,364.18 202.84,360.04 L202.84,341 L217.34,341 L217.34,334.37 L217.35,334.32 Z M291.07,333.08 C286.709355,332.982846 282.618836,335.185726 280.3,338.88 L280.3,333.88 L272.43,333.88 L272.43,373.64 L280.3,373.64 L280.3,351.31 C280.3,344.68 283.61,340.54 289,340.54 C290.818809,340.613783 292.62352,340.892205 294.38,341.37 L296.87,333.91 C294.971013,333.43126 293.02704,333.153071 291.07,333.08 Z M179.66,337.22 C175.52,334.32 169.72,333.08 163.51,333.08 C153.57,333.08 147.36,337.64 147.36,345.51 C147.36,352.14 151.92,355.86 160.61,357.11 L164.75,357.52 C169.31,358.35 172.21,360.01 172.21,362.08 C172.21,364.98 168.9,367.08 162.68,367.08 C157.930627,367.177716 153.278889,365.724267 149.43,362.94 L145.29,369.15 C151.09,373.29 158.13,374.15 162.29,374.15 C173.89,374.15 180.1,368.77 180.1,361.31 C180.1,354.31 175.1,350.96 166.43,349.71 L162.29,349.3 C158.56,348.89 155.29,347.64 155.29,345.16 C155.29,342.26 158.6,340.16 163.16,340.16 C168.16,340.16 173.1,342.23 175.59,343.47 L179.66,337.22 Z M299.77,353.79 C299.77,365.79 307.64,374.5 320.48,374.5 C326.28,374.5 330.42,373.26 334.56,369.94 L330.42,363.73 C327.488758,366.10388 323.841703,367.41823 320.07,367.46 C313.07,367.46 307.64,362.08 307.64,354.21 C307.64,346.34 313,341 320.07,341 C323.841703,341.04177 327.488758,342.35612 330.42,344.73 L334.56,338.52 C330.42,335.21 326.28,333.96 320.48,333.96 C308.05,333.13 299.77,341.83 299.77,353.84 L299.77,353.79 Z M244.27,333.08 C232.67,333.08 224.8,341.36 224.8,353.79 C224.8,366.22 233.08,374.5 245.09,374.5 C250.932775,374.623408 256.638486,372.722682 261.24,369.12 L257.1,363.32 C253.772132,365.898743 249.708598,367.349004 245.5,367.46 C240.12,367.46 234.32,364.15 233.5,357.11 L262.91,357.11 L262.91,353.8 C262.91,341.37 255.45,333.09 244.27,333.09 L244.27,333.08 Z M243.86,340.54 C249.66,340.54 253.8,344.27 254.21,350.48 L232.68,350.48 C233.92,344.68 237.68,340.54 243.86,340.54 Z M136.59,353.79 L136.59,333.91 L128.72,333.91 L128.72,338.91 C125.82,335.18 121.72,333.11 115.88,333.11 C104.7,333.11 96.41,341.81 96.41,353.82 C96.41,365.83 104.69,374.53 115.88,374.53 C121.68,374.53 125.82,372.46 128.72,368.73 L128.72,373.73 L136.59,373.73 L136.59,353.79 Z M104.7,353.79 C104.7,346.33 109.26,340.54 117.13,340.54 C124.59,340.54 129.13,346.34 129.13,353.79 C129.13,361.66 124.13,367.04 117.13,367.04 C109.26,367.45 104.7,361.24 104.7,353.79 Z M410.78,333.08 C406.419355,332.982846 402.328836,335.185726 400.01,338.88 L400.01,333.88 L392.14,333.88 L392.14,373.64 L400,373.64 L400,351.31 C400,344.68 403.31,340.54 408.7,340.54 C410.518809,340.613783 412.32352,340.892205 414.08,341.37 L416.57,333.91 C414.671013,333.43126 412.72704,333.153071 410.77,333.08 L410.78,333.08 Z M380.13,353.79 L380.13,333.91 L372.26,333.91 L372.26,338.91 C369.36,335.18 365.26,333.11 359.42,333.11 C348.24,333.11 339.95,341.81 339.95,353.82 C339.95,365.83 348.23,374.53 359.42,374.53 C365.22,374.53 369.36,372.46 372.26,368.73 L372.26,373.73 L380.13,373.73 L380.13,353.79 Z M348.24,353.79 C348.24,346.33 352.8,340.54 360.67,340.54 C368.13,340.54 372.67,346.34 372.67,353.79 C372.67,361.66 367.67,367.04 360.67,367.04 C352.8,367.45 348.24,361.24 348.24,353.79 Z M460.07,353.79 L460.07,318.17 L452.2,318.17 L452.2,338.88 C449.3,335.15 445.2,333.08 439.36,333.08 C428.18,333.08 419.89,341.78 419.89,353.79 C419.89,365.8 428.17,374.5 439.36,374.5 C445.16,374.5 449.3,372.43 452.2,368.7 L452.2,373.7 L460.07,373.7 L460.07,353.79 Z M428.18,353.79 C428.18,346.33 432.74,340.54 440.61,340.54 C448.07,340.54 452.61,346.34 452.61,353.79 C452.61,361.66 447.61,367.04 440.61,367.04 C432.73,367.46 428.17,361.25 428.17,353.79 L428.18,353.79 Z" id="Shape" fill="#FFFFFF"></path><g><rect id="Rectangle-path" fill="#FF5F00" x="170.55" y="32.39" width="143.72" height="234.42"></rect><path d="M185.05,149.6 C185.05997,103.912554 205.96046,60.7376085 241.79,32.39 C180.662018,-15.6713968 92.8620037,-8.68523415 40.103462,48.4380037 C-12.6550796,105.561241 -12.6550796,193.638759 40.103462,250.761996 C92.8620037,307.885234 180.662018,314.871397 241.79,266.81 C205.96046,238.462391 185.05997,195.287446 185.05,149.6 Z" id="Shape" fill="#EB001B"></path> <path d="M483.26,149.6 C483.30134,206.646679 450.756789,258.706022 399.455617,283.656273 C348.154445,308.606523 287.109181,302.064451 242.26,266.81 C278.098424,238.46936 299.001593,195.290092 299.001593,149.6 C299.001593,103.909908 278.098424,60.7306402 242.26,32.39 C287.109181,-2.86445052 348.154445,-9.40652324 399.455617,15.5437274 C450.756789,40.493978 483.30134,92.5533211 483.26,149.6 Z" id="Shape" fill="#F79E1B"></path></g></g></g></g></svg>' +
+
+                                                '<!-- Visa -->' +
+                                                '<svg id="b2b-cards-view-visa-icon" class="credit-card-list-icon b2b-hide" xmlns="http://www.w3.org/2000/svg" width="750" height="471" viewBox="0 0 750 471"> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><rect id="Rectangle-1" fill="#0E4595" x="0" y="0" width="750" height="471" rx="40"></rect><polygon id="Shape" fill="#FFFFFF" points="278.1975 334.2275 311.5585 138.4655 364.9175 138.4655 331.5335 334.2275"></polygon><path d="M524.3075,142.6875 C513.7355,138.7215 497.1715,134.4655 476.4845,134.4655 C423.7605,134.4655 386.6205,161.0165 386.3045,199.0695 C386.0075,227.1985 412.8185,242.8905 433.0585,252.2545 C453.8275,261.8495 460.8105,267.9695 460.7115,276.5375 C460.5795,289.6595 444.1255,295.6545 428.7885,295.6545 C407.4315,295.6545 396.0855,292.6875 378.5625,285.3785 L371.6865,282.2665 L364.1975,326.0905 C376.6605,331.5545 399.7065,336.2895 423.6355,336.5345 C479.7245,336.5345 516.1365,310.2875 516.5505,269.6525 C516.7515,247.3835 502.5355,230.4355 471.7515,216.4645 C453.1005,207.4085 441.6785,201.3655 441.7995,192.1955 C441.7995,184.0585 451.4675,175.3575 472.3565,175.3575 C489.8055,175.0865 502.4445,178.8915 512.2925,182.8575 L517.0745,185.1165 L524.3075,142.6875" id="path13" fill="#FFFFFF"></path><path d="M661.6145,138.4655 L620.3835,138.4655 C607.6105,138.4655 598.0525,141.9515 592.4425,154.6995 L513.1975,334.1025 L569.2285,334.1025 C569.2285,334.1025 578.3905,309.9805 580.4625,304.6845 C586.5855,304.6845 641.0165,304.7685 648.7985,304.7685 C650.3945,311.6215 655.2905,334.1025 655.2905,334.1025 L704.8025,334.1025 L661.6145,138.4655 Z M596.1975,264.8725 C600.6105,253.5935 617.4565,210.1495 617.4565,210.1495 C617.1415,210.6705 621.8365,198.8155 624.5315,191.4655 L628.1385,208.3435 C628.1385,208.3435 638.3555,255.0725 640.4905,264.8715 L596.1975,264.8715 L596.1975,264.8725 Z" id="Path" fill="#FFFFFF"></path><path d="M232.9025,138.4655 L180.6625,271.9605 L175.0965,244.8315 C165.3715,213.5575 135.0715,179.6755 101.1975,162.7125 L148.9645,333.9155 L205.4195,333.8505 L289.4235,138.4655 L232.9025,138.4655" id="path16" fill="#FFFFFF"></path><path d="M131.9195,138.4655 L45.8785,138.4655 L45.1975,142.5385 C112.1365,158.7425 156.4295,197.9015 174.8155,244.9525 L156.1065,154.9925 C152.8765,142.5965 143.5085,138.8975 131.9195,138.4655" id="path18" fill="#F2AE14"></path></g></g></svg>' +
+
+                                                '<!-- Diners -->' +
+                                                `<svg id="b2b-cards-view-diners-icon" class="credit-card-list-icon b2b-hide" xmlns="http://www.w3.org/2000/svg" width="750" height="471" viewBox="0 0 750 471"> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="diners" fill-rule="nonzero"> <rect id="rectangle" fill="#0079BE" x="0" y="0" width="750" height="471" rx="40"></rect> <path d="M584.933911,237.947339 C584.933911,138.53154 501.952976,69.8140806 411.038924,69.8471464 L332.79674,69.8471464 C240.793699,69.8140806 165.066089,138.552041 165.066089,237.947339 C165.066089,328.877778 240.793699,403.587432 332.79674,403.150963 L411.038924,403.150963 C501.952976,403.586771 584.933911,328.857939 584.933911,237.947339 Z" id="Shape-path" fill="#FFFFFF"></path> <path d="M333.280302,83.9308394 C249.210378,83.9572921 181.085889,152.238282 181.066089,236.510581 C181.085889,320.768331 249.209719,389.042708 333.280302,389.069161 C417.370025,389.042708 485.508375,320.768331 485.520254,236.510581 C485.507715,152.238282 417.370025,83.9572921 333.280302,83.9308394 Z" id="Shape-path" fill="#0079BE"></path> <path d="M237.066089,236.09774 C237.145288,194.917524 262.812421,159.801587 299.006443,145.847134 L299.006443,326.327183 C262.812421,312.380667 237.144628,277.283907 237.066089,236.09774 Z M368.066089,326.372814 L368.066089,145.847134 C404.273312,159.767859 429.980043,194.903637 430.046043,236.103692 C429.980043,277.316312 404.273312,312.425636 368.066089,326.372814 Z" id="Path" fill="#FFFFFF"></path></g></g></svg>` +
+
+                                                '<!-- Discover -->' +
+                                                '<svg id="b2b-cards-view-discover-icon" class="credit-card-list-icon b2b-hide"  viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">' +
+                                                    '<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">' +
+                                                        '<g id="discover" fill-rule="nonzero">' +
+                                                            '<path fill="#38495C" d="M0 15c0,-8.28 6.72,-15 15,-15l290 0c8.28,0 15,6.72 15,15l0 180c0,8.29 -6.72,15 -15,15l-290 0c-8.28,0 -15,-6.71 -15,-15l0 -180z"></path>' +
+                                                            '<path fill="#FFFFFF" d="M250.26 103.28l-1.95 0 0 -10.46 2.06 0c4.17,0 6.44,1.75 6.44,5.12 0,3.47 -2.27,5.34 -6.55,5.34zm-180.1 10.05c-2.1,1.92 -4.84,2.75 -9.17,2.75l-1.8 0 0 -22.86 1.8 0c4.33,0 6.96,0.79 9.17,2.8 2.32,2.08 3.71,5.3 3.71,8.61 0,3.32 -1.39,6.63 -3.71,8.7zm-7.82 -25.96l-9.84 0 0 34.56 9.78 0c5.2,0 8.96,-1.23 12.26,-3.99 3.92,-3.26 6.24,-8.18 6.24,-13.26 0,-10.21 -7.58,-17.31 -18.44,-17.31zm21.52 34.56l6.7 0 0 -34.56 -6.7 0 0 34.56zm23.09 -21.3c-4.03,-1.49 -5.2,-2.48 -5.2,-4.35 0,-2.18 2.1,-3.83 4.98,-3.83 2.02,0 3.66,0.83 5.41,2.8l3.51 -4.62c-2.89,-2.54 -6.33,-3.83 -10.1,-3.83 -6.08,0 -10.71,4.24 -10.71,9.9 0,4.76 2.15,7.2 8.45,9.48 2.62,0.93 3.96,1.55 4.63,1.97 1.34,0.88 2.01,2.12 2.01,3.57 0,2.8 -2.21,4.88 -5.2,4.88 -3.2,0 -5.77,-1.61 -7.32,-4.61l-4.32 4.19c3.08,4.57 6.79,6.58 11.89,6.58 6.96,0 11.85,-4.66 11.85,-11.35 0,-5.49 -2.26,-7.97 -9.88,-10.78zm11.99 4.05c0,10.15 7.93,18.03 18.13,18.03 2.89,0 5.36,-0.57 8.4,-2.01l0 -7.94c-2.67,2.7 -5.05,3.79 -8.09,3.79 -6.74,0 -11.54,-4.92 -11.54,-11.92 0,-6.64 4.95,-11.88 11.23,-11.88 3.2,0 5.62,1.15 8.4,3.89l0 -7.93c-2.94,-1.5 -5.36,-2.12 -8.24,-2.12 -10.15,0 -18.29,8.04 -18.29,18.09zm79.66 5.91l-9.16 -23.22 -7.32 0 14.58 35.45 3.61 0 14.83 -35.45 -7.26 0 -9.28 23.22zm19.58 11.34l18.99 0 0 -5.85 -12.3 0 0 -9.33 11.85 0 0 -5.85 -11.85 0 0 -7.67 12.3 0 0 -5.86 -18.99 0 0 34.56zm45.53 -24.36c0,-6.47 -4.43,-10.2 -12.16,-10.2l-9.94 0 0 34.56 6.7 0 0 -13.88 0.87 0 9.27 13.88 8.24 0 -10.81 -14.56c5.05,-1.03 7.83,-4.5 7.83,-9.8z"></path>' +
+                                                            '<path fill="#E27539" d="M184.21 104.77c0,10.16 -8.18,18.39 -18.28,18.39 -10.09,0 -18.27,-8.23 -18.27,-18.39 0,-10.16 8.18,-18.39 18.27,-18.39 10.1,0 18.28,8.23 18.28,18.39z"></path>' +
+                                                        '</g>' +
+                                                    '</g>' +
+                                                '</svg>' +
+
+                                                '<!-- Default -->' +
+                                                '<svg id="b2b-cards-view-credit-card-icon" class="credit-card-list-icon b2b-hide" width="32" height="19" viewBox="0 0 32 19" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                                                    '<path fill-rule="evenodd" clip-rule="evenodd" d="M1.78169 5.64504e-06H30.2188C30.6911 0.000450272 31.1439 0.182535 31.4778 0.5058C31.8117 0.829288 31.9993 1.26773 31.9997 1.72505V4.10818L0.000917164 4.10796V1.72392C0.00137645 1.26682 0.18944 0.828405 0.523319 0.505351C0.857198 0.182085 1.31003 0.000221972 1.78213 0L1.78169 5.64504e-06ZM30.2188 18.9997H1.78169C1.30934 18.9992 0.856533 18.8176 0.522402 18.4943C0.188523 18.1711 0.00045852 17.7326 0 17.2753V5.85228H32V17.2747C31.9995 17.7321 31.8117 18.1705 31.4776 18.494C31.1435 18.8175 30.6907 18.9996 30.2183 19L30.2188 18.9997ZM11.5182 15.0378C11.5182 14.8064 11.4233 14.5843 11.2543 14.4206C11.0853 14.2568 10.8559 14.1649 10.6169 14.1649H3.68676C3.44473 14.1601 3.21074 14.2499 3.03784 14.4139C2.8647 14.5782 2.76733 14.8028 2.76733 15.0373C2.76733 15.2717 2.86469 15.4965 3.03784 15.6605C3.21075 15.8246 3.44474 15.9144 3.68676 15.9098H10.6163C10.8556 15.9098 11.085 15.8177 11.254 15.6539C11.4232 15.4898 11.5181 15.2677 11.5178 15.036L11.5182 15.0378ZM15.7153 10.4694C15.7155 10.2377 15.6207 10.0154 15.4517 9.85158C15.2827 9.68773 15.0533 9.59568 14.814 9.59568H3.68722H3.68745C3.36529 9.59568 3.06792 9.76198 2.90697 10.0321C2.74577 10.302 2.74577 10.6346 2.90697 10.9045C3.06794 11.1746 3.36531 11.341 3.68745 11.341H14.8136C15.0522 11.3407 15.2809 11.2489 15.4499 11.0857C15.6189 10.9227 15.7142 10.7015 15.7151 10.4705L15.7153 10.4694Z" fill="#AAAAAA"/>' +
+                                                '</svg>' +
+                                            '</div>' +
+                                        '</div>' +
+
+                                        '<!-- BODY -->' +
+                                        '<div class="b2b-payment-item__body">' +
+
+                                            '<!-- NAME -->' +
+                                            '<div class="b2b-payment-item__text">' +
+                                                '<div class="b2b-payment-item__name_list">' + card.name + '</div>' +
+                                                '<span class="b2b-payment-item__label_list">' + card.cardType + ' ending in ' + card.lastFour + '</span>' +
+                                            '</div>' +
+                                        '<div class="b2b-payment-item__change">' + card.expirationDate + '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</span>' +
+                        '</label>' +
+                    '</span>';
+                });
+                VIEW.creditCartListContainer.innerHTML = elements;
+
+                var cardElements = document.querySelectorAll("[data-name='payment-card-radio-input']");
+                if (cardElements) {
+                    cardElements.forEach((element) => {
+                        element.addEventListener("change", CONTROLLER.changeCreditCardMethod);
+                    });
+                }
+
+                VIEW.setCreditCardMode();
+
+                MODEL.validatePlaceOrderButtonDisabled();
+                VIEW.setPlaceOrderButtonDisabled();
+            },
+
+            handleClickAddNewCard: function () {
+                MODEL.creditCardMode = 'new';
+                VIEW.setCreditCardMode();
+
+                MODEL.validatePlaceOrderButtonDisabled();
+                VIEW.setPlaceOrderButtonDisabled();
+            },
+
+            changeCreditCardMethod: function (event) {
+                MODEL.selectedCardId = event.target.value;
+            },
+
+            handleUseThisCreditCard: function () {
+                MODEL.creditCardMode = 'view';
+                if (MODEL.selectedCardId) {
+                    MODEL.selectedCard = MODEL.existedCards.find( card => card.id === MODEL.selectedCardId );
+                }
+
+                VIEW.setCreditCardMode();
+
+                MODEL.dispatchEvent(SELECT_CREDIT_CARD, {
+                    creditCardId: MODEL.selectedCardId,
+                    creditCardName: MODEL.selectedCard.cardType + ' ending in ' + MODEL.selectedCard.lastFour
+                });
+
+                MODEL.validatePlaceOrderButtonDisabled();
+                VIEW.setPlaceOrderButtonDisabled();
+            },
+
+            handleCancelFromNewCard: function () {
+                CONTROLLER.handleClickCardViewChange();
+            },
+
+            initSelectedCard: function () {
+                MODEL.selectedCard = MODEL.existedCards[0];
+                for (var i = 0; i < MODEL.existedCards.length; i++) {
+                    if ((MODEL.selectedCardId == null && MODEL.existedCards[i].isDefault
+                        || (MODEL.selectedCardId !== null && MODEL.existedCards[i].id === MODEL.selectedCardId)
+                    )) {
+                        MODEL.selectedCard = MODEL.existedCards[i];
+                        break;
+                    }
+                }
+            },
+
+            MODULE: null,
+            PUBLIC_EXPONENT: null,
+            DIGITS: '0123456789abcdef',
+            HEX_BASE: 16,
+
+            encodeMessage: function(input) {
+                let pnDec = this.hexToDecimal(this.convertToHex(input));
+                let modDec = this.hexToDecimal(this.MODULE);
+                let expDec = this.hexToDecimal(this.PUBLIC_EXPONENT);
+
+                let result = this.modPow(pnDec, expDec, modDec);
+
+                let hexResult = this.decimalToHex(result);
+
+                if ((hexResult.length & 1) === 1) {
+                    hexResult = '0' + hexResult;
+                }
+
+                return hexResult;
+            },
+
+            convertToHex: function(input) {
+                let result = '';
+
+                for (let i = 0; i < input.length; i++) {
+                    let charCode = input[i].charCodeAt();
+                    result += charCode.toString(16);
+                }
+
+                return result;
+            },
+
+            decimalToHex: function(d) {
+                let hex = '';
+                while (d > 0) {
+                    let digit = this.modulus(d, BigInt(this.HEX_BASE));
+                    hex = this.DIGITS.substring(digit, digit + 1) + hex;
+                    d = this.div(d,16n);
+                }
+
+                return hex;
+            },
+
+            modulus: function(dividend, divisor) {
+                let d = this.div(dividend, divisor);
+                return Number(dividend - (d * divisor));
+            },
+
+            div: function(val, by) {
+                return (val - val % by) / by;
+            },
+
+            hexToDecimal: function(hex) {
+                let result = BigInt(0);
+                let length = hex.length;
+                let i = 0;
+                while(i < length) {
+                    let hexByte = this.DIGITS.indexOf(hex.substring(i, i + 1).toLowerCase());
+                    i++;
+                    let pow = length - i === 0 ? BigInt(1) : BigInt(this.HEX_BASE);
+
+                    for (let j = 1; j < length - i; j++) {
+                        pow *= BigInt(this.HEX_BASE);
+                    }
+
+                    result += BigInt(hexByte) * pow;
+                }
+
+                return result;
+            },
+
+            modPow: function(x, e, N) {
+                var r = 1n, base = x % N;
+                while (e > 0) {
+                    if (base == 0n) return 0n;
+                    if ((e & 1n) === 1n) r = (r * base) % N;
+                    e = e >> 1n;
+                    base = (base * base) % N;
+                }
+                return r;
+            }
+        };
+
+        // EVENTS
+        window.addEventListener('resize', CONTROLLER.resizeWindow);
+        window.addEventListener('message', CONTROLLER.windowMessage);
+        window.addEventListener('DOMContentLoaded', CONTROLLER.documentLoaded);
+        VIEW.tabs.forEach((element) => {
+            element.addEventListener('click', CONTROLLER.handleClickTab);
+        });
+
+        VIEW.amazonPayButton.addEventListener('click',CONTROLLER.handleAmazonMouse);
+
+        VIEW.poNumber.addEventListener('blur', CONTROLLER.handleChangePONumber);
+        VIEW.poNumber.addEventListener('input', CONTROLLER.handleChangePONumber);
+        VIEW.poNumber.addEventListener('change', CONTROLLER.handleChangePONumber);
+        VIEW.hasDarleyDollar.addEventListener('change', CONTROLLER.handleHasDarleyDollar);
+        VIEW.placeOrderButton.addEventListener('click', CONTROLLER.handlerClickPlaceOrder);
+        VIEW.darleyDollarIconButton.addEventListener('mouseenter', CONTROLLER.handlerHoverDarleyDollarHelp);
+        VIEW.darleyDollarIconButton.addEventListener('click', CONTROLLER.handlerHoverDarleyDollarHelp);
+        VIEW.darleyDollarIconButton.addEventListener('mouseleave', CONTROLLER.handlerNotHoverDarleyDollarHelp);
+
+        VIEW.cardMethodName.addEventListener('blur', CONTROLLER.handleChangeCardNameMethod);
+        VIEW.cardMethodName.addEventListener('input', CONTROLLER.handleChangeCardNameMethod);
+        VIEW.cardMethodName.addEventListener('change', CONTROLLER.handleChangeCardNameMethod);
+
+        VIEW.cardMethodNumber.addEventListener('blur', CONTROLLER.handleChangeCardNumberMethod);
+        VIEW.cardMethodNumber.addEventListener('input', CONTROLLER.handleChangeCardNumberMethod);
+        VIEW.cardMethodNumber.addEventListener('change', CONTROLLER.handleChangeCardNumberMethod);
+
+        VIEW.cardExpirationDate.addEventListener('blur', CONTROLLER.handleChangeCardExpirationDate);
+        VIEW.cardExpirationDate.addEventListener('input', CONTROLLER.handleChangeCardExpirationDate);
+        VIEW.cardExpirationDate.addEventListener('change', CONTROLLER.handleChangeCardExpirationDate);
+
+        VIEW.cardSecurityCode.addEventListener('blur', CONTROLLER.handleChangeCardSecurityCode);
+        VIEW.cardSecurityCode.addEventListener('input', CONTROLLER.handleChangeCardSecurityCode);
+        VIEW.cardSecurityCode.addEventListener('change', CONTROLLER.handleChangeCardSecurityCode);
+
+        VIEW.cardViewChange.addEventListener('click', CONTROLLER.handleClickCardViewChange);
+        VIEW.creditCardAddNew.addEventListener('click', CONTROLLER.handleClickAddNewCard);
+        VIEW.useThisCreditCard.addEventListener('click', CONTROLLER.handleUseThisCreditCard);
+        VIEW.cancelFromNewCard.addEventListener('click', CONTROLLER.handleCancelFromNewCard);
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* FRONT QUANTITY */
+
+.b2b-quantity__wrapper .slds-form-element__label lightning-helptext,
+.b2b-quantity__wrapper .slds-form-element__label lightning-helptext .slds-form-element__icon,
+.b2b-quantity__wrapper .slds-form-element__label lightning-helptext .slds-form-element__icon .slds-button {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.b2b-quantity__wrapper .slds-form-element__label lightning-helptext lightning-primitive-icon {
+    display: none;
+}
+
+.b2b-quantity__wrapper lightning-primitive-bubble .slds-popover__body {
+    white-space: pre-line;
+}

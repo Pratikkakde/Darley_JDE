@@ -1,0 +1,369 @@
+/* MY ACCOUNT. ADDRESSES */
+
+/* MY ACCOUNT. ADDRESSES. TABS */
+
+commerce_my_account-my-account-address-grid-container {
+    --slds-c-tabs-item-color-border-active: #ED1B2D;
+    margin-top: 1.25rem;
+}
+
+commerce_my_account-my-account-address-grid-container lightning-tab-bar .slds-tabs_default__nav .slds-tabs_default__link {
+    font-size: 1.125rem;
+    color: var(--dxp-g-root-contrast);
+}
+
+commerce_my_account-my-account-address-grid-container lightning-tab-bar .slds-tabs_default__nav .slds-tabs_default__link:hover,
+commerce_my_account-my-account-address-grid-container lightning-tab-bar .slds-tabs_default__nav .slds-tabs_default__link:active,
+commerce_my_account-my-account-address-grid-container lightning-tab-bar .slds-tabs_default__nav .slds-tabs_default__link:focus  {
+    text-decoration: none;
+}
+
+commerce_my_account-my-account-address-grid-container lightning-tab-bar .slds-tabs_default__nav .slds-tabs_default__item.slds-is-active:after {
+    background-color: (237, 27, 45, 1);
+}
+
+/* MY ACCOUNT. ADDRESSES. ADDRESS CARDS */
+
+commerce_my_account-my-account-address-grid-container .slds-tabs_default__content .address-container {
+    padding: 1.5rem 0 0;
+    gap: 2.25rem;
+}
+
+commerce_my_account-my-account-address-grid-container .slds-tabs_default__content {
+    padding-bottom: 0;
+}
+
+commerce_my_account-my-account-address-grid-container .slds-tabs_default__content .address-container .address-card-style-class {
+    padding: 23px;
+    border-radius: 0;
+    border-color: #E8E8E8 !important;
+    height: 100%;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card h3.name-decoration {
+    font-size: 18px;
+    line-height: 27px;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card .default-badge-style-class {
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: 500;
+    color: var(--dxp-g-brand-contrast);
+    border: 0;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card lightning-formatted-address {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 5px;
+    margin-top: 10px;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card lightning-formatted-address .slds-truncate {
+    white-space: pre-wrap;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card [slot="myAccountAddressFooter"] {
+    margin-top: 15px;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card .address-footer-style > button:nth-child(1) {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: none;
+    line-height: 1.2;
+    border-radius: 0;
+}
+
+.address-footer-style.commerce_my_account-myAccountAddressFooter_myAccountAddressFooter {
+    margin-top: 0 !important;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card .address-card-style-class .address-footer-style > button.address-footer-button-style:nth-child(2) {
+    display: none;
+}
+
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card .address-footer-style > button:active,
+commerce_my_account-my-account-address-grid-container commerce_my_account-my-account-address-card .address-footer-style > button:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* MY ACCOUNT. ADDRESSES. SHOW MORE BUTTON */
+
+commerce_my_account-my-account-address-grid-container .commerce_my_account-myAccountAddressGrid_myAccountAddressGrid.buttons > button {
+    margin-top: 1.5rem;
+    /* HIDE THE BUTTON */
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+
+    commerce_my_account-my-account-address-grid-container .commerce_my_account-myAccountAddressGrid_myAccountAddressGrid.buttons {
+        padding-left: 0;
+        padding-right: 0;
+        max-width: none;
+    }
+}
+
+/* MY ACCOUNT. ADDRESSES. DELETE ADDRESS MODAL */
+
+commerce_my_account-my-account-address-footer .slds-modal__content .modal-body-content {
+    padding: 0;
+}
+
+commerce_my_account-my-account-address-footer .slds-modal__footer {
+    background-color: white;
+}
+
+commerce_my_account-my-account-address-footer .slds-modal__footer .slds-button:nth-child(1) {
+    border-color: var(--dxp-g-brand);
+}
+
+/* MY ACCOUNT. ADDRESSES. NEW AND EDIT ADDRESS */
+
+commerce_my_account-my-account-input-address.commerce_my_account-myAccountInputAddress_myAccountInputAddress-host > div.commerce_my_account-myAccountInputAddress_myAccountInputAddress > h2.address-header {
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+commerce_my_account-my-account-input-address.commerce_my_account-myAccountInputAddress_myAccountInputAddress-host > .commerce_my_account-myAccountInputAddress_myAccountInputAddress > .address-header + .commerce_my_account-myAccountInputAddress_myAccountInputAddress {
+    width: 100%;
+}
+
+commerce_my_account-my-account-input-address.commerce_my_account-myAccountInputAddress_myAccountInputAddress-host > .commerce_my_account-myAccountInputAddress_myAccountInputAddress {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+commerce_my_account-my-account-input-address.commerce_my_account-myAccountInputAddress_myAccountInputAddress-host lightning-combobox .slds-dropdown {
+    max-height: 10.5rem;
+    overflow-y: auto;
+}
+
+commerce_my_account-my-account-input-address.commerce_my_account-myAccountInputAddress_myAccountInputAddress-host .slds-form-element__label {
+    color: var(--dxp-g-root-contrast);
+}
+
+commerce_my_account-my-account-input-address lightning-combobox .slds-icon_container .slds-icon {
+    fill: var(--background-gray-4);
+}
+
+commerce_my_account-my-account-input-address lightning-input-address[data-address-fields] {
+    margin-bottom: 0.375rem;
+}
+
+commerce_my_account-my-account-input-address lightning-input[data-default-address-checkbox] {
+    margin-bottom: 1.625rem;
+}
+
+commerce_my_account-my-account-input-address lightning-input[data-default-address-checkbox] .slds-checkbox .slds-checkbox__label .slds-form-element__label {
+    font-size: 0.875rem;
+}
+
+commerce_my_account-my-account-input-address commerce-action-buttons.commerce-actionButtons_actionButtons-host .commerce-actionButtons_actionButtons.action-buttons {
+    text-align: start;
+}
+
+/* B2B ADDRESS BOOK */
+
+c-b2b-address-book lightning-input-address .slds-form-element__row {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+c-b2b-address-book lightning-input-address .slds-form-element__row .slds-form-element + .slds-form-element {
+    padding-left: 1rem !important;
+}
+
+/* Hide default  */
+c-b2b-address-book lightning-input-address::before {
+    display: none;
+    content: '';
+}
+
+/* LOOKUP ADDRESS */
+c-b2b-address-book lightning-input-address .slds-form-element__row:nth-child(1) lightning-lookup-address .slds-form-element__label::before {
+    margin-right: 0.125rem;
+}
+
+/* COUNTRY */
+c-b2b-address-book lightning-input-address .slds-form-element__row:nth-child(3) lightning-combobox .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* STREET ADDRESS */
+c-b2b-address-book lightning-input-address .slds-form-element__row:nth-child(4) lightning-textarea .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* CITY */
+c-b2b-address-book lightning-input-address .slds-form-element__row:nth-child(5) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* STATE/PROVINCE */
+c-b2b-address-book lightning-input-address .slds-form-element__row:nth-child(5) lightning-combobox .slds-form-element__label::before {
+    margin-right: 0.125rem;
+}
+
+/* ZIP / POSTALCODE */
+c-b2b-address-book lightning-input-address .slds-form-element__row:nth-child(6) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+@media screen and (max-width: 768px) {
+    c-b2b-address-book lightning-input-address .slds-form-element__row{
+        display: flex;
+        flex-direction: column;
+    }
+
+    c-b2b-address-book lightning-input-address .slds-form-element__row .slds-form-element {
+        width:100%;
+    }
+
+    c-b2b-address-book lightning-input-address .slds-form-element__row .slds-form-element + .slds-form-element {
+        width:100%;
+        padding-left: 0 !important;
+        margin-top: 1rem !important;
+    }
+}
+
+/* B2B ADDRESS FORM*/
+
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row .slds-form-element + .slds-form-element {
+    padding-left: 1rem !important;
+}
+
+/* Hide default  */
+c-b2b-request-for-quote-addresses lightning-input-address::before {
+    display: none;
+    content: '';
+}
+
+/* LOOKUP ADDRESS */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(1) lightning-lookup-address .slds-form-element__label::before {
+    margin-right: 0.125rem;
+}
+
+/* COUNTRY */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(2) lightning-combobox .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* STREET ADDRESS */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(3) lightning-textarea .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* CITY */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(4) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* STATE/PROVINCE */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(4) lightning-combobox .slds-form-element__label::before {
+    margin-right: 0.125rem;
+}
+
+/* ZIP / POSTALCODE */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(5) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+@media screen and (max-width: 768px) {
+    c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row{
+        display: flex;
+        flex-direction: column;
+    }
+
+    c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row .slds-form-element {
+        width:100%;
+    }
+
+    c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row .slds-form-element + .slds-form-element {
+        width:100%;
+        padding-left: 0 !important;
+        margin-top: 1rem !important;
+    }
+}
+
+/* B2B REQUEST FOR QUOTES ADDRESSES */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+
+/* COUNTRY */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(3) lightning-combobox .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* STREET ADDRESS */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(4) lightning-textarea .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* CITY */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(5) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+/* ZIP / POSTALCODE */
+c-b2b-request-for-quote-addresses lightning-input-address .slds-form-element__row:nth-child(6) lightning-input .slds-form-element__label::before {
+    content: '*';
+    color: var(--dxp-g-destructive);
+    margin-right: 0.125rem;
+}
+
+commerce_my_account-my-account-add-address-button .slds-button {
+    min-width: 145px;
+    margin-bottom: 14px;
+    line-height: 38px;
+}
+
+/* C-B2B-ADDRESS-BOOK */
+
+c-b2b-address-book lightning-combobox label.slds-form-element__label,
+c-b2b-address-book lightning-input label.slds-form-element__label,
+c-b2b-address-book lightning-lookup-address label.slds-form-element__label,
+c-b2b-address-book lightning-textarea label.slds-form-element__label {
+    font-size: 12px;
+}
+
+c-b2b-address-book lightning-combobox button.slds-combobox__input,
+c-b2b-address-book lightning-input input.slds-input,
+c-b2b-address-book lightning-textarea textarea.slds-textarea {
+    border-radius: 0;
+    color: #231F20;
+}

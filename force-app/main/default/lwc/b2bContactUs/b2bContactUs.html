@@ -1,0 +1,251 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass} data-guest={isGuest}>
+
+        <!-- FORM -->
+        <div class="b2b-contact-us__form">
+
+            <!-- TITLE -->
+            <div class="b2b-contact-us__title">{getFormTitle}</div>
+
+            <!-- SUBTITLE -->
+            <div class="b2b-contact-us__subtitle">{getFormSubtitle}</div>
+
+            <div class="b2b-contact-us__form-wrapper">
+
+                <!-- SPINNER -->
+                <template if:true={isUpdateLoading}>
+                    <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                </template>
+
+                <!-- GUEST FIELDS -->
+                <template if:true={isGuest}>
+
+                    <!-- FIRST NAME -->
+                    <lightning-input
+                        type="text"
+                        name="firstName"
+                        label={labels.firstName}
+                        max-length={maxLength.firstName}
+                        value={form.firstName}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                    ></lightning-input>
+
+                    <!-- LAST NAME -->
+                    <lightning-input
+                        type="text"
+                        name="lastName"
+                        label={labels.lastName}
+                        max-length={maxLength.lastName}
+                        value={form.lastName}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                    ></lightning-input>
+
+                    <!-- EMAIL -->
+                    <lightning-input
+                        type="email"
+                        name="email"
+                        label={labels.email}
+                        max-length={maxLength.email}
+                        value={form.email}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                    ></lightning-input>
+
+                </template>
+
+                <!-- PHONE NUMBER -->
+                <lightning-input
+                    type="tel"
+                    name="phoneNumber"
+                    label={labels.phoneNumber}
+                    max-length={maxLength.phoneNumber}
+                    value={form.phoneNumber}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeFormElement}
+                ></lightning-input>
+
+                <!-- PREFERRED METHOD OF CONTACT -->
+                <lightning-combobox
+                    type="contactMethod"
+                    name="contactMethod"
+                    placeholder={labels.select}
+                    default-option={labels.select}
+                    label={labels.contactMethod}
+                    value={form.contactMethod}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeFormElement}
+                    options={contactMethodOptions}
+                ></lightning-combobox>
+
+                <!-- PREFERRED TIME OF CONTACT -->
+                <lightning-combobox
+                    type="contactTime"
+                    name="contactTime"
+                    placeholder={labels.select}
+                    default-option={labels.select}
+                    label={labels.contactTime}
+                    value={form.contactTime}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeFormElement}
+                    options={contactTimeOptions}
+                ></lightning-combobox>
+
+                <!-- COUNTRY STATE PICKLISTS -->
+                <c-b2b-country-state-picklists
+                    class="slds-size_1-of-1"
+                    countries-and-states-info={countriesAndStatesData}
+                    oncountrychange={handleCountryChanged}
+                    onstatechange={handleStateChanged}
+                    is-error-city-input={hasCountryErrorMessage}
+                ></c-b2b-country-state-picklists>
+
+                <!-- SUBJECT -->
+                <lightning-input
+                    type="text"
+                    name="subject"
+                    label={labels.subject}
+                    max-length={maxLength.subject}
+                    value={form.subject}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeFormElement}
+                ></lightning-input>
+
+                <!-- REASON FOR CONTACT -->
+                <lightning-combobox
+                    type="contactReason"
+                    name="contactReason"
+                    placeholder={labels.select}
+                    default-option={labels.select}
+                    label={labels.contactReason}
+                    value={form.contactReason}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeFormElement}
+                    options={contactReasonOptions}
+                ></lightning-combobox>
+
+                <template if:true={existingOrderOn}>
+                    <!-- ORDER NUMBER AND DATE -->
+                    <lightning-combobox
+                        type="existingOrder"
+                        name="existingOrder"
+                        label={labels.existingOrder}
+                        value={form.existingOrder}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                        options={existingOrderOptions}
+                    ></lightning-combobox>
+                </template>
+
+                <!-- DESCRIPTION -->
+                <lightning-textarea
+                    name="description"
+                    label={labels.description}
+                    max-length={maxLength.description}
+                    value={form.description}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeFormElement}
+                ></lightning-textarea>
+
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="b2b-contact-us__buttons">
+                <button
+                    class="slds-button slds-button_outline-brand"
+                    disabled={isUpdateLoading}
+                    onclick={handleClickCancelButton}
+                >{labels.buttonCancel}</button>
+    
+                <button
+                    class="slds-button slds-button_brand"
+                    disabled={isUpdateLoading}
+                    onclick={handleClickSubmitButton}
+                >{labels.buttonSubmit}</button>
+            </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <template if:true={getShowSidebar}>
+            <div class="b2b-contact-us__sidebar">
+
+                <!-- TITLE -->
+                <div class="b2b-contact-us__title">{getSidebarTitle}</div>
+
+                <!-- ADDRESS -->
+                <template if:true={showCompanyStreet}>
+                    <div class="b2b-contact-us__item">
+                        <span class="b2b-contact-us__item-icon">
+                            <svg width="10" height="15" viewBox="0 0 10 15" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 0C2.24305 0 0 2.24306 0 5.00001C0 5.82765 0.206923 6.64825 0.600292 7.3761L4.72657 14.8389C4.78151 14.9384 4.88618 15 5 15C5.11382 15 5.2185 14.9384 5.27343 14.8389L9.40123 7.37364C9.79308 6.64825 10 5.82762 10 4.99998C10 2.24306 7.75695 0 5 0ZM5 7.5C3.62153 7.5 2.50002 6.37849 2.50002 5.00001C2.50002 3.62153 3.62153 2.50002 5 2.50002C6.37847 2.50002 7.49999 3.62153 7.49999 5.00001C7.49999 6.37849 6.37847 7.5 5 7.5Z"></path>
+                            </svg>                                
+                        </span>
+                        <span class="b2b-contact-us__item-label b2b-contact-us__item-address">
+                            <template if:true={streetLine1}><span>{streetLine1}</span></template>
+                            <template if:true={streetLine2}><span>{streetLine2}</span></template>
+                        </span>
+                    </div>
+                </template>
+
+                <!-- TOLL FREE -->
+                <template if:true={showTollFreeNumber}>
+                    <div class="b2b-contact-us__item">
+                        <span class="b2b-contact-us__item-label">
+                            <span>{getTollFreeNumberLabel}</span>
+                            <a class=b2b-contact-us__link href={getTollFreeNumberLink} target="_blank">{tollFreeNumber}</a>
+                        </span>
+                    </div>
+                </template>
+
+                <!-- PHONE -->
+                <template if:true={showPhoneNumber}>
+                    <div class="b2b-contact-us__item">
+                        <span class="b2b-contact-us__item-label">
+                            <span>{getPhoneNumberLabel}</span>
+                            <span>{phoneNumber}</span>
+                        </span>
+                    </div>
+                </template>
+
+                <!-- FAX -->
+                <template if:true={showFaxNumber}>
+                    <div class="b2b-contact-us__item">
+                        <span class="b2b-contact-us__item-label">
+                            <span>{getFaxNumberLabel}</span>
+                            <span>{faxNumber}</span>
+                        </span>
+                    </div>
+                </template>
+
+                <!-- EMAIL -->
+                <template if:true={showEmail}>
+                    <div class="b2b-contact-us__item">
+                        <span class="b2b-contact-us__item-icon">
+                            <svg width="15" height="11" viewBox="0 0 15 11" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.19621 6.9712C7.36929 7.14428 7.6289 7.14428 7.80198 6.9712L14.3212 0.913508C14.4366 0.682739 14.4078 0.307739 13.9462 0.307739L1.05198 0.336585C0.705827 0.336585 0.417366 0.653893 0.676981 0.942355L7.19621 6.9712ZM14.4366 3.27889C14.4366 2.99043 14.0904 2.81735 13.8597 3.01928L8.7539 7.7212C8.40775 8.03851 7.97506 8.21159 7.51352 8.21159C7.05198 8.21159 6.61929 8.03851 6.27314 7.75005L1.19621 3.01928C0.965443 2.81735 0.619289 2.96159 0.619289 3.27889C0.590443 3.19235 0.590443 9.82697 0.590443 9.82697C0.590443 10.4616 1.10967 10.9808 1.74429 10.9808H13.2828C13.9174 10.9808 14.4366 10.4616 14.4366 9.82697V3.27889Z"></path>
+                            </svg>                 
+                        </span>
+                        <span class="b2b-contact-us__item-label">
+                            <a class="b2b-contact-us__link" href={getEmailLink} target="_blank">{email}</a>
+                        </span>
+                    </div>
+                </template>
+
+            </div>
+        </template>
+
+    </div>
+</template>

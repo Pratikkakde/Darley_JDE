@@ -1,0 +1,209 @@
+<apex:page controller="B2BQuotePrintController" renderAs="pdf">
+<apex:stylesheet value="{!URLFOR($Resource.b2bQuotePrint,'style.css')}"/>
+
+<div class="wrapper">
+
+    <!-- HEADER -->
+    <table class="table-grid table-header">
+        <tr>
+            <td class="td_w-45">
+                <img src="{!URLFOR($Resource.b2bQuotePrint,'DarleyLogo.png')}" class="logo"/>
+                <div class="company-info">
+                    <div class="company-info__Name">{!$Label.B2B_Quote_Print_Company_Name}</div>
+                    <div class="company-info__item">{!$Label.B2B_Quote_Print_Company_Address_Line_1}</div>
+                    <div class="company-info__item">{!$Label.B2B_Quote_Print_Company_Address_Line_2}</div>
+                    <div class="company-info__item">{!$Label.B2B_Quote_Print_Company_Phone}</div>
+                    <div class="company-info__item">{!$Label.B2B_Quote_Print_Company_Fax}</div>
+                    <div class="company-info__item">{!$Label.B2B_Quote_Print_Company_Email}</div>
+                </div>
+            </td>
+            <td class="td_w-10"></td>
+            <td class="td_w-45">
+                <div class="title">{!$Label.B2B_Quote_Print_Title}</div>
+                <table class="table-grid table-view">
+                    <tr>
+                        <th class="td_w-50">{!$Label.B2B_Quote_Number}</th>
+                        <th class="td_w-50">{!$Label.B2B_Quote_Status}</th>
+                    </tr>
+                    <tr>
+                        <td class="td_center">{!quoteNumber}</td>
+                        <td class="td_center">{!quoteStatus}</td>
+                    </tr>
+                </table>
+                <table class="table-grid table-view">
+                    <tr>
+                        <th class="td_w-50">{!$Label.B2B_Requested_Date}</th>
+                        <th class="td_w-50">{!$Label.B2B_Expiration_Date}</th>
+                    </tr>
+                    <tr>
+                        <td class="td_center">
+                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                <apex:param value="{!requestedDate}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="td_center">
+                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                <apex:param value="{!expirationDate}"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!--  TABLE SECCION 2  -->
+    <table class="table-grid table-container">
+        <td class="table-seccion td_w-45">
+            <div class="company-billing__tittle">{!$Label.B2B_Bill_To}:</div>
+            <div class="company-billing__info">
+                <apex:outputText value="{!IF(billingAddressStreet != null, billingAddressStreet, '—')}">
+                    <apex:param value="{!billingAddressStreet}"/>
+                </apex:outputText>
+            </div>
+            <div  class="company-billing__info">
+                <apex:outputText value="{!IF(billingAddressCity != null, billingAddressCity, '—')}">
+                    <apex:param value="{!billingAddressCity}"/>
+                </apex:outputText>&nbsp;
+                <apex:outputText value="{!IF(billingAddressState != null, billingAddressState, '—')}">
+                    <apex:param value="{!billingAddressState}"/>
+                </apex:outputText>
+            </div>
+            <div  class="company-billing__info">
+                <apex:outputText value="{!IF(billingAddressCountryCode != null, billingAddressCountryCode, '—')}">
+                    <apex:param value="{!billingAddressCountryCode}"/>
+                </apex:outputText>
+            </div>
+        </td>
+
+        <td class="td_w-10"></td>
+
+        <td class="table-seccion td_w-45">
+            <div class="company-billing__tittle">{!$Label.B2B_ship_To}:</div>
+            <div class="company-billing__info">
+                <apex:outputText value="{!IF(shippingAddressStreet != null, shippingAddressStreet, '—')}">
+                    <apex:param value="{!shippingAddressStreet}"/>
+                </apex:outputText>
+            </div>
+            <div  class="company-billing__info">
+                <apex:outputText value="{!IF(shippingAddressCity != null, shippingAddressCity, '—')}">
+                    <apex:param value="{!shippingAddressCity}"/>
+                </apex:outputText>&nbsp;
+                <apex:outputText value="{!IF(shippingAddressState != null, shippingAddressState, '—')}">
+                    <apex:param value="{!shippingAddressState}"/>
+                </apex:outputText>
+            </div>
+            <div  class="company-billing__info">
+                <apex:outputText value="{!IF(shippingAddressCountryCode != null, shippingAddressCountryCode, '—')}">
+                    <apex:param value="{!shippingAddressCountryCode}"/>
+                </apex:outputText>
+            </div>
+        </td>
+    </table>
+
+    <!-- TABLE PRODUCTS -->
+    <table class="table-grid table-view table-products">
+        <tr>
+            <th>{!$Label.B2B_Product_Name}</th>
+            <th>{!$Label.B2B_SKU}</th>
+            <th>{!$Label.B2B_Quantity}</th>
+            <th>{!$Label.B2B_Unit_Price}</th>
+            <th>{!$Label.B2B_Total}</th>
+        </tr>
+        <apex:repeat var="item" value="{!products}" rendered="{!showProducts}">
+            <tr>
+                <td>
+                    <apex:outputText value="{!IF(item.name != null, item.name, '—')}"/>
+                </td>
+                <td class="td_center">
+                    <apex:outputText value="{!IF(item.sku != null, item.sku, '—')}"/>
+                </td>
+                <td class="td_center">
+                    <apex:outputText value="{!IF(item.quantity != null, item.quantity, '—')}"/>
+                </td>
+                <td class="td_right">
+                    <apex:outputPanel rendered="{!IF(item.unitPrice != null, true, false)}">
+                        <apex:outputText value="{0,number,$#,##0.00}">
+                            <apex:param value="{!item.unitPrice}"/>
+                        </apex:outputText>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!IF(item.unitPrice != null, false, true)}">—</apex:outputPanel>
+                </td>
+                <td class="td_right">
+                    <apex:outputPanel rendered="{!IF(item.total != null, true, false)}">
+                        <apex:outputText value="{0,number,$#,##0.00}">
+                            <apex:param value="{!item.total}"/>
+                        </apex:outputText>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!IF(item.total != null, false, true)}">—</apex:outputPanel>
+                </td>
+            </tr>
+        </apex:repeat>
+    </table>
+
+    <!-- TABLE TOTAL -->
+    <table class="table-total">
+        <tr>
+            <td class="total">{!$Label.B2B_Quote_Subtotal}:</td>
+            <td class="total td_right">
+                <apex:outputPanel rendered="{!IF(quoteSubtotal != null, true, false)}">
+                    <apex:outputText value="{0,number,$#,##0.00}">
+                        <apex:param value="{!quoteSubtotal}"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(quoteSubtotal != null, false, true)}">—</apex:outputPanel>
+            </td>
+        </tr>
+    
+        <tr style="{!IF(promotions != null && promotions !=0,'', 'display:none;')}">
+            <td class="total">{!$Label.B2B_Quote_Promotions}:</td>
+            <td class="total td_right">
+                <apex:outputPanel rendered="{!IF(promotions != null && promotions !=0 , true, false)}">
+                    <apex:outputText value="{0,number,$#,##0.00}">
+                        <apex:param value="{!promotions}"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(promotions != null  && promotions !=0, false, true)}">—</apex:outputPanel>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="total">{!$Label.B2B_Estimated_tax}:</td>
+            <td class="total td_right">
+                <apex:outputPanel rendered="{!IF(estimatedTax != null, true, false)}">
+                    <apex:outputText value="{0,number,$#,##0.00}">
+                        <apex:param value="{!estimatedTax}"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(estimatedTax != null, false, true)}">—</apex:outputPanel>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="total">{!$Label.B2B_Estimated_Shipping}:</td>
+            <td class="total td_right">
+                <apex:outputPanel rendered="{!IF(estimatedShipping != null, true, false)}">
+                    <apex:outputText value="{0,number,$#,##0.00}">
+                        <apex:param value="{!estimatedShipping}"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(estimatedShipping != null, false, true)}">—</apex:outputPanel>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="total estimated-total">{!$Label.B2B_Quote_Total}:</td>
+            <td class="total td_right estimated-total">
+                <apex:outputPanel rendered="{!IF(estimatedQuoteTotal != null, true, false)}">
+                    <apex:outputText value="{0,number,$#,##0.00}">
+                        <apex:param value="{!estimatedQuoteTotal}"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(estimatedQuoteTotal != null, false, true)}">—</apex:outputPanel>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</apex:page>

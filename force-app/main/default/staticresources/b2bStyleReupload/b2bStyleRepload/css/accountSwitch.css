@@ -1,0 +1,44 @@
+/* ACCOUNT SWITCH */
+
+lightning-modal[class*="accountSwitcherModal"] .slds-modal__title {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+lightning-modal[class*="accountSwitcherModal"] .slds-modal__content {
+    padding-bottom: 30px;
+}
+
+commerce_my_account-account-switcher-list {
+    min-height: unset !important;
+    margin: 0 !important;
+}
+
+commerce_my_account-account-switcher-list ul li:last-child {
+    border-bottom: 0 !important;
+}
+
+commerce_my_account-account-switcher-list-record a.account-switcher-list-record {
+    padding: 8px;
+}
+
+commerce_my_account-account-switcher-list-record a.account-switcher-list-record > div > div:first-child .slds-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+commerce_my_account-account-switcher-list-record a.account-switcher-list-record .account-switcher-list-record__title {
+    font-size: 14px;
+    word-break: break-all;
+}
+
+commerce_my_account-account-switcher-list-record a.account-switcher-list-record .account-switcher-list-record__icon_check {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dxp-g-success);
+}

@@ -1,0 +1,200 @@
+:host {
+    display: block;
+}
+
+.b2b-request-for-quote-addresses__wrapper {
+    position: relative;
+}
+
+.b2b-request-for-quote-addresses__wrapper:not(:empty) {
+    min-height: 4rem;
+}
+
+/* VIEW */
+
+.b2b-request-for-quote-addresses__view-item + .b2b-request-for-quote-addresses__view-item {
+    margin-top: 20px;
+}
+
+.b2b-request-for-quote-addresses__view-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-column-gap: 1rem;
+    margin-bottom: 5px;
+}
+
+.b2b-request-for-quote-addresses__view-header .b2b-button_action {
+    line-height: 1.5;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #231F20;
+}
+
+.b2b-request-for-quote-addresses__view-header .b2b-button_action:hover,
+.b2b-request-for-quote-addresses__view-header .b2b-button_action:focus {
+    color: var(--dxp-g-brand-1);
+}
+
+.b2b-request-for-quote-addresses__view-address-name {
+    line-height: 1.5;
+    font-weight: 700;
+    color: #231F20;
+}
+
+.b2b-request-for-quote-addresses__view-address-string {
+    line-height: 1.5;
+    color: #231F20;
+}
+
+/* CHANGE */
+
+.b2b-request-for-quote-addresses__tab {
+    padding: 9px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #231F20;
+    border: 0;
+    background-color: transparent;
+    box-shadow: inset 0px -1px 0px #DDDBDA;
+}
+
+.b2b-request-for-quote-addresses__tab-active {
+    font-weight: 600;
+    box-shadow: inset 0px -2px 0px var(--dxp-g-brand-1);
+}
+
+.b2b-request-for-quote-addresses__change .slds-radio {
+    max-width: 500px;
+}
+
+.b2b-request-for-quote-addresses__change .slds-radio + .slds-radio {
+    margin-top: 15px;
+}
+
+.b2b-request-for-quote-addresses__change .slds-form-element {
+    margin-top: 22px;
+    margin-bottom: 0;
+}
+
+.b2b-request-for-quote-addresses__change .slds-radio__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.b2b-request-for-quote-addresses__change .slds-form-element__label {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.b2b-request-for-quote-addresses__address-item {
+    display: flex;
+    justify-content: space-between;
+    grid-column-gap: 65px;
+}
+
+@media screen and (max-width: 767.98px) {
+
+    .b2b-request-for-quote-addresses__address-item {
+        grid-column-gap: 1rem;
+    }
+
+}
+
+.b2b-request-for-quote-addresses__add-another-address,
+.b2b-request-for-quote-addresses__use-this-address {
+    margin-top: 1rem;
+}
+
+.b2b-request-for-quote-addresses__use-this-address .slds-button {
+    display: inline-block;
+    width: 100%;
+    max-width: 190px;
+    font-size: 14px;
+    line-height: 38px;
+    font-weight: 700;
+}
+
+/* FROM */
+
+.b2b-request-for-quote-addresses__form-title {
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 600;
+    color: #231F20;
+}
+
+.b2b-request-for-quote-addresses__form-fields {
+    padding: 20px 0 30px 0;
+}
+
+.b2b-request-for-quote-addresses__fields-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 15px * 2);
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.b2b-request-for-quote-addresses__fields-col {
+    width: 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (max-width: 1023.98px) {
+
+    .b2b-request-for-quote-addresses__fields-row {
+        width: calc(100% + 12px * 2);
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+    
+    .b2b-request-for-quote-addresses__fields-col {
+        width: 50%;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+}
+
+@media (max-width: 574.98px) {
+    .b2b-request-for-quote-addresses__fields-row {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .b2b-request-for-quote-addresses__fields-col {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.b2b-request-for-quote-addresses__form-buttons .slds-button {
+    font-size: 14px;
+    line-height: 38px;
+    font-weight: 700;
+}
+
+.b2b-request-for-quote-addresses__form-buttons .slds-button + .slds-button {
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-request-for-quote-addresses__form-buttons .slds-button {
+        display: block;
+        width: 100%;
+    }
+    
+    .b2b-request-for-quote-addresses__form-buttons .slds-button + .slds-button {
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+
+}

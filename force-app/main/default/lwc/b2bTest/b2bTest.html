@@ -1,0 +1,245 @@
+<template>
+
+    <!-- TESTREGION -->
+    <div data-f6-region class="slds-p-around_medium">
+        <slot name="testregion"></slot>
+    </div>
+
+    <!-- HEADING -->
+    <h1 class="dxp-text-heading-xlarge">Heading 1 (dxp-text-heading-xlarge)</h1>
+    <h2 class="dxp-text-heading-large">Heading 2 (dxp-text-heading-large)</h2>
+    <h3 class="dxp-text-heading-medium">Heading 3 (dxp-text-heading-medium)</h3>
+    <h4 class="dxp-text-heading-small">Heading 4 (dxp-text-heading-small)</h4>
+    <hr/>
+
+    <!-- TEXT -->
+    <p class="dxp-text-body">Paragraph 1 (dxp-text-body)</p>
+    <p class="dxp-text-body-small">Paragraph 2 (dxp-text-body-small)</p>
+    <hr/>
+
+    <!-- EXPERIENCE BUILDER -->
+    <div><strong>Experience Builder</strong></div>
+
+    <!-- BACKGROUND COLOR / TEXT COLOR -->
+    <div><strong>Background Color / Text Color (Root / Root Contrast)</strong></div>
+    <div style="color: var(--dxp-g-root-contrast); background-color: var(--dxp-g-root);">
+        <div>--dxp-g-root</div>
+        <div>--dxp-g-root-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-root-contrast-1); background-color: var(--dxp-g-root-1);">
+        <div>--dxp-g-root-1</div>
+        <div>--dxp-g-root-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-root-contrast-2); background-color: var(--dxp-g-root-2);">
+        <div>--dxp-g-root-2</div>
+        <div>--dxp-g-root-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-root-contrast-3); background-color: var(--dxp-g-root-3);">
+        <div>--dxp-g-root-3</div>
+        <div>--dxp-g-root-contrast-3</div>
+    </div>
+    <hr/>
+
+    <!-- BRAND COLOR / BRAND FOREGROUND COLOR -->
+    <div><strong>Brand Color / Brand Foreground Color (Brand / Brand Contrast)</strong></div>
+    <div style="color: var(--dxp-g-brand-contrast); background-color: var(--dxp-g-brand);">
+        <div>--dxp-g-brand</div>
+        <div>--dxp-g-brand-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-brand-contrast-1); background-color: var(--dxp-g-brand-1);">
+        <div>--dxp-g-brand-1</div>
+        <div>--dxp-g-brand-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-brand-contrast-2); background-color: var(--dxp-g-brand-2);">
+        <div>--dxp-g-brand-2</div>
+        <div>--dxp-g-brand-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-brand-contrast-3); background-color: var(--dxp-g-brand-3);">
+        <div>--dxp-g-brand-3</div>
+        <div>--dxp-g-brand-contrast-3</div>
+    </div>
+    <hr/>
+
+    <!-- ADDITIONAL COLORS -->
+    <div><strong>Additional Colors</strong></div>
+
+    <!-- SUCCESS COLOR -->
+    <div><strong>Success Color</strong></div>
+    <div style="color: var(--dxp-g-success-contrast); background-color: var(--dxp-g-success);">
+        <div>--dxp-g-success</div>
+        <div>--dxp-g-success-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-success-contrast-1); background-color: var(--dxp-g-success-1);">
+        <div>--dxp-g-success-1</div>
+        <div>--dxp-g-success-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-success-contrast-2); background-color: var(--dxp-g-success-2);">
+        <div>--dxp-g-success-2</div>
+        <div>--dxp-g-success-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-success-contrast-3); background-color: var(--dxp-g-success-3);">
+        <div>--dxp-g-success-3</div>
+        <div>--dxp-g-success-contrast-3</div>
+    </div>
+    <hr/>
+
+    <!-- DESTRUCTIVE COLOR -->
+    <div><strong>Destructive Color</strong></div>
+    <div style="color: var(--dxp-g-destructive-contrast); background-color: var(--dxp-g-destructive);">
+        <div>--dxp-g-destructive</div>
+        <div>--dxp-g-destructive-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-destructive-contrast-1); background-color: var(--dxp-g-destructive-1);">
+        <div>--dxp-g-destructive-1</div>
+        <div>--dxp-g-destructive-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-destructive-contrast-2); background-color: var(--dxp-g-destructive-2);">
+        <div>--dxp-g-destructive-2</div>
+        <div>--dxp-g-destructive-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-destructive-contrast-3); background-color: var(--dxp-g-destructive-3);">
+        <div>--dxp-g-destructive-3</div>
+        <div>--dxp-g-destructive-contrast-3</div>
+    </div>
+    <hr/>
+
+    <!-- WARNING COLOR -->
+    <div><strong>Warning Color</strong></div>
+    <div style="color: var(--dxp-g-warning-contrast); background-color: var(--dxp-g-warning);">
+        <div>--dxp-g-warning</div>
+        <div>--dxp-g-warning-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-warning-contrast-1); background-color: var(--dxp-g-warning-1);">
+        <div>--dxp-g-warning-1</div>
+        <div>--dxp-g-warning-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-warning-contrast-2); background-color: var(--dxp-g-warning-2);">
+        <div>--dxp-g-warning-2</div>
+        <div>--dxp-g-warning-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-warning-contrast-3); background-color: var(--dxp-g-warning-3);">
+        <div>--dxp-g-warning-3</div>
+        <div>--dxp-g-warning-contrast-3</div>
+    </div>
+    <hr/>
+
+    <!-- INFO COLOR -->
+    <div><strong>Info Color</strong></div>
+    <div style="color: var(--dxp-g-info-contrast); background-color: var(--dxp-g-info);">
+        <div>--dxp-g-info</div>
+        <div>--dxp-g-info-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-info-contrast-1); background-color: var(--dxp-g-info-1);">
+        <div>--dxp-g-info-1</div>
+        <div>--dxp-g-info-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-info-contrast-2); background-color: var(--dxp-g-info-2);">
+        <div>--dxp-g-info-2</div>
+        <div>--dxp-g-info-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-info-contrast-3); background-color: var(--dxp-g-info-3);">
+        <div>--dxp-g-info-3</div>
+        <div>--dxp-g-info-contrast-3</div>
+    </div>
+    <hr/>
+
+    <!-- NEUTRAL COLOR -->
+    <div><strong>Neutral Color</strong></div>
+    <div style="color: var(--dxp-g-neutral-contrast); background-color: var(--dxp-g-neutral);">
+        <div>--dxp-g-neutral</div>
+        <div>--dxp-g-neutral-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-neutral-contrast-1); background-color: var(--dxp-g-neutral-1);">
+        <div>--dxp-g-neutral-1</div>
+        <div>--dxp-g-neutral-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-neutral-contrast-2); background-color: var(--dxp-g-neutral-2);">
+        <div>--dxp-g-neutral-2</div>
+        <div>--dxp-g-neutral-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-neutral-contrast-3); background-color: var(--dxp-g-neutral-3);">
+        <div>--dxp-g-neutral-3</div>
+        <div>--dxp-g-neutral-contrast-3</div>
+    </div>
+    <hr/>
+
+    <!-- OFFLINE COLOR -->
+    <div><strong>Offline Color</strong></div>
+    <div style="color: var(--dxp-g-offline-contrast); background-color: var(--dxp-g-offline);">
+        <div>--dxp-g-offline</div>
+        <div>--dxp-g-offline-contrast</div>
+    </div>
+    <div style="color: var(--dxp-g-offline-contrast-1); background-color: var(--dxp-g-offline-1);">
+        <div>--dxp-g-offline-1</div>
+        <div>--dxp-g-offline-contrast-1</div>
+    </div>
+    <div style="color: var(--dxp-g-offline-contrast-2); background-color: var(--dxp-g-offline-2);">
+        <div>--dxp-g-offline-2</div>
+        <div>--dxp-g-offline-contrast-2</div>
+    </div>
+    <div style="color: var(--dxp-g-offline-contrast-3); background-color: var(--dxp-g-offline-3);">
+        <div>--dxp-g-offline-3</div>
+        <div>--dxp-g-offline-contrast-3</div>
+    </div>
+    <hr/>
+
+    <h1 class="dxp-text-heading-xlarge">B2B Alert</h1>
+
+    <c-b2b-alert
+        show=true
+        variant="base"
+        icon="user"
+        message="Message"
+        show-close-button=true
+        onclose={handleCloseAlert}
+    ></c-b2b-alert>
+
+    <c-b2b-alert
+        show=true
+        variant="success"
+        icon="success"
+        show-close-button=true
+        onclose={handleCloseAlert}
+    >
+        <span slot="content">
+            <div>Slot Content</div>
+            <div><a href="#">Log in</a></div>
+        </span>
+    </c-b2b-alert>
+
+    <c-b2b-alert
+        show=true
+        variant="warning"
+        icon="warning"
+        message="Message"
+        show-close-button=true
+        onclose={handleCloseAlert}
+    ></c-b2b-alert>
+
+    <c-b2b-alert
+        show=true
+        variant="error"
+        icon="error"
+        message="Message"
+        show-close-button=true
+    ></c-b2b-alert>
+
+    <c-b2b-alert
+        show=true
+        variant="offline"
+        icon="offline"
+        richtext='<a href="#">Log in</a>'
+        show-close-button=true
+        onclose={handleCloseAlert}
+    ></c-b2b-alert>
+
+    <c-b2b-alert
+        show=true
+        variant="info"
+        icon="info"
+        message="Message"
+        show-close-button=true
+        onclose={handleCloseAlert}
+    ></c-b2b-alert>
+
+</template>

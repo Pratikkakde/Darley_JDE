@@ -1,0 +1,49 @@
+:host {
+    --dxp-s-form-element-label-font-size: 12px;
+
+    position: relative;
+    display: block;
+}
+
+lightning-input {
+    margin-bottom: 0 !important;
+}
+
+.b2b-add-card-form__buttons {
+    margin-top: 1rem;
+}
+
+/* BUTTONS */
+.b2b-add-card-form__buttons {
+    text-align: right;
+}
+
+.b2b-add-card-form__buttons .slds-button + .slds-button {
+    margin-left: 0.75rem;
+}
+
+@media (max-width: 574.98px) {
+
+    .b2b-add-card-form__buttons {
+        display: flex;
+        flex-direction: column;
+        grid-row-gap: 0.75rem;
+    }
+
+    .b2b-add-card-form__buttons .slds-button {
+        width: 100%;
+    }
+
+    .b2b-add-card-form__buttons .slds-button:nth-child(1) {
+        order: 2;
+    }
+
+    .b2b-add-card-form__buttons .slds-button:nth-child(2) {
+        order: 1;
+    }
+
+    .b2b-add-card-form__buttons .slds-button + .slds-button {
+        margin-left: 0;
+    }
+
+}

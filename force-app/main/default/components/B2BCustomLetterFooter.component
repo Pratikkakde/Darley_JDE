@@ -1,0 +1,35 @@
+<apex:component access="global">
+    <div style="width: 100%; max-width: 800px; margin: 0 auto; padding: 32px 16px; background-color:#ffffff; box-sizing: border-box;">
+        <div style="width: 100%; max-width: 700px; margin: 0 auto; padding-top: 32px; border-top: 1px solid #E8E8E8;">
+            <table style="width: 100%; border-spacing: 0; border: 0;">
+                <tr>
+                    <td style="padding: 0; vertical-align: bottom; white-space: nowrap;">
+
+                        <!-- COPYRIGHT -->
+                        <span style="font-family: 'Century Gothic', 'Open Sans', 'Helvetica', 'Arial', 'sans-serif'; font-size: 15px; line-height: 26px; color: #000000;">&copy; {!$Setup.VisualForceEmailConfiguration__c.CopyrightFooter__c}</span>
+
+                    </td>
+                    <td style="padding: 0; vertical-align: bottom;">
+
+                        <!-- PHONE -->
+                        <div style="text-align: right; white-space: nowrap;">
+                            <img src="{!$Setup.VisualForceEmailConfiguration__c.URLPhoneIcon__c}" style="display: inline-block; width: 14px; margin-right: 8px;"></img>
+                            <a href="tel:{!$Setup.VisualForceEmailConfiguration__c.FooterPhone__c}" style="display: inline-block; text-decoration: none;" target="_blank">
+                                <span style="font-family: 'Century Gothic', 'Open Sans', 'Helvetica', 'Arial', 'sans-serif'; font-size: 15px; line-height: 26px; color: #000000;">{!$Setup.VisualForceEmailConfiguration__c.FooterPhone__c}</span>
+                            </a>
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div style="text-align: right; white-space: nowrap;">
+                            <img src="{!$Setup.VisualForceEmailConfiguration__c.URLEmailIcon__c}" style="display: inline-block; width: 14px; margin-right: 8px;"></img>
+                            <a href="mailto:{!$Setup.VisualForceEmailConfiguration__c.FooterEmail__c}" style="display: inline-block; text-decoration: none;" target="_blank">
+                                <span style="font-family: 'Century Gothic', 'Open Sans', 'Helvetica', 'Arial', 'sans-serif'; font-size: 15px; line-height: 26px; color: #000000;">{!$Setup.VisualForceEmailConfiguration__c.FooterEmail__c}</span>
+                            </a>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</apex:component>

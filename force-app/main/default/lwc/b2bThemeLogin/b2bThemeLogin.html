@@ -1,0 +1,23 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div data-theme="theme-login" data-path={getPathName} class="b2b-theme__wrapper">
+
+        <!-- HEADER -->
+        <div data-f6-region class="b2b-theme__header">
+            <slot name="themeHeader"></slot>
+        </div>
+
+        <!-- BODY -->
+        <main class="b2b-theme__body">
+            <div data-f6-region class="b2b-theme__container">
+                <slot></slot>
+            </div>
+        </main>
+    
+        <!-- FOOTER -->
+        <div data-f6-region class="b2b-theme__footer">
+            <slot name="themeFooter"></slot>
+        </div>
+
+    </div>
+</template>

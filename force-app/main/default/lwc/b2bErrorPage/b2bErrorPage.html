@@ -1,0 +1,42 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+        <div class="b2b-error-page__container">
+
+            <!-- IMAGE -->
+            <template if:true={showImage}>
+                <div class="b2b-error-page__image-wrapper">
+                    <img src={getImage} class="b2b-error-page__image">
+                </div>
+            </template>
+
+            <!-- CONTENT -->
+            <div class="b2b-error-page__content">
+
+                <!-- TITLE -->
+                <template if:true={getShowTitle}>
+                    <h1 class="b2b-error-page__title">{getTitle}</h1>
+                </template>
+    
+                <!-- SUBTITLE -->
+                <template if:true={getShowSubtitle}>
+                    <h3 class="b2b-error-page__subtitle">{getSubtitle}</h3>
+                </template>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <template if:true={getShowDescription}>
+                <p class="b2b-error-page__description">{getDescription}</p>
+            </template>
+
+            <!-- BUTTON -->
+            <template if:true={getShowButton}>
+                <div class="b2b-error-page__button">
+                    <a href={getButtonLink} class="b2b-button slds-button slds-button_brand">{getButtonLabel}</a>
+                </div>
+            </template>
+
+        </div>
+    </div>
+</template>

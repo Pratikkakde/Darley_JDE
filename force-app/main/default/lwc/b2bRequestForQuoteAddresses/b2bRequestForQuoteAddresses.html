@@ -1,0 +1,252 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class="b2b-request-for-quote-addresses__wrapper">
+
+        <!-- LOADING SPINNER -->
+        <template if:true={isUpdateLoading}>
+            <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+        </template>
+
+        <!-- VIEW -->
+        <template if:true={showView}>
+            <div class="b2b-request-for-quote-addresses__view">
+
+                <!-- SHIPPING -->
+                <div class="b2b-request-for-quote-addresses__view-item">
+                    <div class="b2b-request-for-quote-addresses__view-header">
+                        <a
+                            href="#"
+                            class="b2b-button_action"
+                            disabled={isUpdateLoading}
+                            onclick={handleClickViewShippingAddress}
+                        >{labels.shippingAddress}</a>
+                        <a
+                            href="#"
+                            class="b2b-button_action"
+                            disabled={isUpdateLoading}
+                            onclick={handleClickViewChange}
+                        >{labels.change}</a>
+                    </div>
+                    <div class="b2b-request-for-quote-addresses__view-body">
+
+                        <!-- ADDRESS NAME -->
+                        <template if:true={getShippingAddressName}>
+                            <div class="b2b-request-for-quote-addresses__view-address-name">{getShippingAddressName}</div>
+                        </template>
+
+                        <!-- ADDRESS STRING -->
+                        <template if:true={getShippingAddressString}>
+                            <div class="b2b-request-for-quote-addresses__view-address-string">{getShippingAddressString}</div>
+                        </template>
+
+                    </div>
+                </div>
+
+                <!-- BILLING -->
+                <div class="b2b-request-for-quote-addresses__view-item">
+                    <div class="b2b-request-for-quote-addresses__view-header">
+                        <a
+                            href="#"
+                            class="b2b-button_action"
+                            disabled={isUpdateLoading}
+                            onclick={handleClickViewBillingAddress}
+                        >{labels.billingAddress}</a>
+                    </div>
+                    <div class="b2b-request-for-quote-addresses__view-body">
+
+                        <!-- SAME ADDRESS -->
+                        <template if:true={showSameAddress}>
+                            <div class="b2b-request-for-quote-addresses__view-address-string">{labels.sameAsShippingAddress}</div>
+                        </template>
+
+                        <template if:false={showSameAddress}>
+
+                            <!-- ADDRESS NAME -->
+                            <template if:true={getBillingAddressName}>
+                                <div class="b2b-request-for-quote-addresses__view-address-name">{getBillingAddressName}</div>
+                            </template>
+
+                            <!-- ADDRESS STRING -->
+                            <template if:true={getBillingAddressString}>
+                                <div class="b2b-request-for-quote-addresses__view-address-string">{getBillingAddressString}</div>
+                            </template>
+
+                        </template>
+                    </div>
+                </div>
+
+            </div>
+        </template>
+
+        <!-- CHANGE -->
+        <template if:true={showChange}>
+            <div class="b2b-request-for-quote-addresses__change">
+
+                <!-- TABS -->
+                <template if:true={getTabOptions.length}>
+                    <div class="b2b-request-for-quote-addresses__tabs">
+                        <template for:each={getTabOptions} for:item="item">
+                            <button
+                                key={item.value}
+                                data-value={item.value}
+                                class={item.class}
+                                onclick={handleClickTab}
+                            >{item.label}</button>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- LIST -->
+                <fieldset class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <template for:each={getAddressOptions} for:item="item">
+                            <span key={item.id} class="slds-radio">
+                                <input
+                                    id={item.id}
+                                    name="address"
+                                    type="radio"
+                                    value={item.id}
+                                    checked={item.checked}
+                                    onchange={handleChangeAddress}
+                                />
+                                <label
+                                    for={item.id}
+                                    class="slds-radio__label"
+                                    title={labels.clickToChooseAddress}
+                                >
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-form-element__label">
+                                        <div class="b2b-request-for-quote-addresses__address-item">
+                                            <div class="b2b-request-for-quote-addresses__address-content">
+
+                                                <!-- NAME -->
+                                                <template if:true={item.name}>
+                                                    <div class="b2b-request-for-quote-addresses__view-address-name">{item.name}</div>
+                                                </template>
+
+                                                <!-- ADDRESS -->
+                                                <template if:true={item.address}>
+                                                    <div class="b2b-request-for-quote-addresses__view-address-string">{item.address}</div>
+                                                </template>
+
+                                            </div>
+
+                                            <!-- EDIT BUTTON -->
+                                            <lightning-button-icon
+                                                data-id={item.id}
+                                                icon-name="utility:edit"
+                                                title={labels.clickToEditAddress}
+                                                variant="bare"
+                                                size="large"
+                                                onclick={handleClickEditAddress}
+                                            ></lightning-button-icon>
+
+                                        </div>
+                                    </span>
+                                </label>
+                            </span>
+                        </template>
+                    </div>
+                </fieldset>
+
+                <!-- ADD ANOTHER ADDRESS -->
+                <div class="b2b-request-for-quote-addresses__add-another-address">
+                    <lightning-button
+                        variant="base"
+                        label={getAddAnotherAddressLabel}
+                        icon-name="utility:add"
+                        onclick={handleClickAddAnotherAddress}
+                    ></lightning-button>
+                </div>
+
+                <!-- USE THIS ADDRESS -->
+                <div class="b2b-request-for-quote-addresses__use-this-address">
+                    <button
+                        class="slds-button slds-button_brand"
+                        onclick={handleClickUseThisAddress}
+                    >{labels.useThisAddress}</button>
+                </div>
+
+            </div>
+        </template>
+
+        <!-- FORM -->
+        <template if:true={showForm}>
+            <div class="b2b-request-for-quote-addresses__form">
+                <!-- TITLE -->
+                <div class="b2b-request-for-quote-addresses__form-title">{getFormTitle}</div>
+
+                <!-- FIELDS -->
+                <div class="b2b-request-for-quote-addresses__form-fields">
+                    
+                    <!-- NAME -->
+                    <lightning-input
+                        type="text"
+                        data-name="name"
+                        name="name"
+                        label={labels.name}
+                        max-length={maxLength.name}
+                        value={form.name}
+                        disabled={isFormDisabled}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleNameChange}
+                    ></lightning-input>
+
+                    <!-- GOOGLE -->
+                    <lightning-input-address
+                        variant="label-hidden"
+                        address-label ="Address Info"
+                        address-lookup-label="Address" 
+                        address-lookup-placeholder ="Search on google"
+                        street-label="Street Address"
+                        city-label="City"
+                        country-label="Country"
+                        province-label="State/Province"
+                        postal-code-label="ZIP/PostalCode"
+                        street={form.streetAddress}
+                        city={form.city}
+                        province={form.provinceCode}
+                        country={form.countryCode}
+                        postal-code={form.postalCode}
+                        country-options={getCountryOptions}
+                        province-options={getProvinceOptions}
+                        show-address-lookup
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeAddressForm}
+                    ></lightning-input-address>
+                   
+                    <!-- IS DEFAULT -->
+                    <lightning-input
+                        type="checkbox"
+                        name="isDefault"
+                        data-name="isDefault"
+                        label={labels.isDefault}
+                        checked={isDefault}
+                        disabled={isFormDisabled}
+                        onchange={handleChangeIsDefault}
+                    ></lightning-input>
+
+                </div>
+                 <!-- BUTTONS -->
+                <div class="b2b-request-for-quote-addresses__form-buttons">
+                    <template if:true={showUpsertCancelButton}>
+                        <button
+                            class="slds-button slds-button_outline-brand"
+                            onclick={handleClickUpsertCancel}
+                        >{labels.cancel}</button>
+                    </template>
+                    <button
+                        class="slds-button slds-button_brand"
+                        disabled={isUpsertButtonDisabled}
+                        onclick={handleClickUpsertAddress}
+                        >{getUpsertYourAddressLabel}
+                    </button>
+                </div>
+            </div>
+
+        </template>
+
+    </div>
+
+</template>

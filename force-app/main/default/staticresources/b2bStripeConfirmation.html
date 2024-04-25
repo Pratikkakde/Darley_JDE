@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <script src="https://js.stripe.com/v3/"></script>
+
+        <style>
+            :root {
+                --b2b-colorText: rgb(51, 51, 51);
+                --b2b-colorAction: #112146;
+                --b2b-colorRealRed: rgb(183, 32, 34);
+                --b2b-colorWhite: rgb(255, 255, 255);
+                --b2b-colorError: rgb(226, 75, 50);
+                --b2b-colorLink: rgb(50, 151, 240);
+                --b2b-colorDisabled: rgb(201, 201, 201);
+                --b2b-borderRadius: 0.25rem;
+                --b2b-placeholder: rgb(166, 162, 162);
+                --b2b-border: rgb(232, 232, 232);
+            }
+
+            html,
+            body {
+                display: block;
+                width: 100%;
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+                font-family: 'Cabin', sans-serif;
+                background-color: transparent;
+            }
+
+            .stripe-credit-card-form__wrapper,
+            .stripe-credit-card-form__form {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                background-color: transparent;
+            }
+
+            .stripe-credit-card-form__form span {
+                display: block;
+                padding: 4px 8px;
+                font-size: 16px;
+                text-transform: uppercase;
+                color: #ffffff;
+                background-color: rgb(0, 0, 0, 0.5);
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="stripe-credit-card-form__wrapper">
+            <div id="payment_form" class="stripe-credit-card-form__form">
+                <span>PAYMENT PROCESSING...</span>
+            </div>
+        </div>
+
+        <script>
+            const FRAME_LOADED = 'DOMContentLoadedForPaymentConfirmation';
+            const SEND_PUBLIC_KEY = 'handlePubKey';
+            const CONFIRM_PAYMENT = 'confirmPayment';
+            var PUBLIC_KEY = null;
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                window.parent.postMessage({
+                    methodType: FRAME_LOADED,
+                    isIframeLoaded: true,
+                }, window.location.origin);
+
+                window.addEventListener('message', async (event) => {
+                    let data = event.data;
+                    if (typeof(event.data) === 'string' && event.data.length > 0) {
+                        data = JSON.parse(event.data);
+                    }
+
+                    if (
+                        event.origin === data.originUrl &&
+                        data.methodType === SEND_PUBLIC_KEY &&
+                        data.publicKey
+                    ) {
+                        storePublicKey(data.publicKey);
+                    } else if (
+                        event.origin === data.originUrl &&
+                        data.methodType === CONFIRM_PAYMENT &&
+                        data.clientSecret
+                    ) {
+                        confirmPayment(data.clientSecret);
+                    }
+                });
+            });
+
+            function storePublicKey(publicKey) {
+                PUBLIC_KEY = publicKey || null;
+            }
+
+            function confirmPayment(clientSecret) {
+                if (!PUBLIC_KEY || !clientSecret) {
+                    window.parent.postMessage({
+                        isError: true,
+                        errorMessage: 'Public key or Client Secret is not defined',
+                        methodType: CONFIRM_PAYMENT
+                    }, window.location.origin);
+                };
+
+                const stripe = Stripe(PUBLIC_KEY);
+                stripe.confirmCardPayment(clientSecret)
+                    .then((result) => {
+                        if (result.error) {
+                            window.parent.postMessage({
+                                isError: true,
+                                errorMessage: result.error.message,
+                                methodType: CONFIRM_PAYMENT
+                            }, window.location.origin);
+
+                        } else if (result.paymentIntent.status === 'succeeded') {
+                            window.parent.postMessage({
+                                isError: false,
+                                errorMessage: null,
+                                methodType: CONFIRM_PAYMENT,
+                                id: result.paymentIntent.id
+                            }, window.location.origin);
+                        }
+                    });
+            }
+        </script>
+    </body>
+</html>

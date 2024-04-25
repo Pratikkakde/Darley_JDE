@@ -1,0 +1,216 @@
+:host {
+    display: block;
+}
+
+/* WRAPPER */
+.b2b-contact-us__wrapper {
+    display: flex;
+    grid-column-gap: var(--b2b-theme-contentHorizontalPaddings, 2.5rem);
+}
+
+.b2b-contact-us__form {
+    width: 100%;
+}
+
+.b2b-contact-us__form-wrapper {
+    position: relative;
+}
+
+.b2b-contact-us__sidebar {
+    min-width: 321px;
+}
+
+@media (max-width: 1349.98px) {
+    .b2b-contact-us__wrapper[data-guest="false"] {
+        flex-wrap: wrap;
+        grid-row-gap: 3.125rem;
+    }
+
+    .b2b-contact-us__wrapper[data-guest="false"] .b2b-contact-us__form,
+    .b2b-contact-us__wrapper[data-guest="false"] .b2b-contact-us__sidebar {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 1023.98px) {
+    .b2b-contact-us__wrapper[data-guest="true"] {
+        flex-wrap: wrap;
+        grid-row-gap: 3.125rem;
+    }
+
+    .b2b-contact-us__wrapper[data-guest="true"] .b2b-contact-us__form,
+    .b2b-contact-us__wrapper[data-guest="true"] .b2b-contact-us__sidebar {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* TITLES */
+.b2b-contact-us__title {
+    font-size: 36px;
+    line-height: 1.4;
+    font-weight: 300;
+    color: var(--b2b-colorText);
+}
+
+.b2b-contact-us__subtitle {
+    margin-bottom: 36px;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 400;
+    color: #4F4C4D;
+}
+
+.b2b-contact-us__sidebar .b2b-contact-us__title {
+    margin-bottom: 3.75rem;
+}
+
+@media (max-width: 1349.98px) {
+    .b2b-contact-us__wrapper[data-guest="false"] .b2b-contact-us__sidebar .b2b-contact-us__title {
+        margin-bottom: 1.8125rem;
+    }
+}
+
+@media (max-width: 1023.98px) {
+    .b2b-contact-us__sidebar .b2b-contact-us__title {
+        margin-bottom: 1.8125rem;
+    }
+}
+
+/* FORM */
+.b2b-contact-us__form-wrapper lightning-input + lightning-input,
+.b2b-contact-us__form-wrapper lightning-input + lightning-textarea {
+    margin-top: 0.6875rem;
+}
+
+/* ITEMS */
+.b2b-contact-us__item {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 1.5rem;
+}
+
+.b2b-contact-us__item-icon {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    display: block;
+    width: 0.9375rem;
+    height: 0.9375rem;
+}
+
+.b2b-contact-us__item-icon svg {
+    display: block;
+    fill: rgb(109, 110, 113);
+}
+
+.b2b-contact-us__item-label {
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.8;
+}
+
+.b2b-contact-us__item-label span + span,
+.b2b-contact-us__item-label span + a {
+    margin-left: 0.5rem;
+}
+
+.b2b-contact-us__item-label span + a {
+    font-weight: 600 !important;
+}
+
+.b2b-contact-us__item-label a {
+    color: var(--b2b-colorText);
+    transition: color 0.1s;
+}
+
+.b2b-contact-us__item-label a:hover {
+    text-decoration: none;
+    color: var(--b2b-colorActionDarker);
+}
+
+.b2b-contact-us__link {
+    font-weight: 600 !important;
+    text-decoration: underline !important;
+}
+
+.b2b-contact-us__item-address {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.b2b-contact-us__item-address span + span {
+    margin-left: 0;
+}
+
+/* GOOGLE MAP */
+.b2b-contact-us__map {
+    margin-top: 4.125rem;
+}
+
+@media (max-width: 1349.98px) {
+    .b2b-contact-us__wrapper[data-guest="false"] .b2b-contact-us__map {
+        margin-top: 1.8125rem;
+    }
+}
+
+@media (max-width: 1023.98px) {
+    .b2b-contact-us__map {
+        margin-top: 1.8125rem;
+    }
+}
+
+.b2b-contact-us__map iframe {
+    width: 100%;
+    height: 22.5625rem;
+    border: 0;
+}
+
+.b2b-contact-us__wrapper[data-guest="false"] .b2b-contact-us__map iframe {
+    height: 21rem;
+}
+
+/* BUTTONS */
+.b2b-contact-us__buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 30px;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-contact-us__buttons {
+        margin-top: 20px;
+    }
+}
+
+.b2b-contact-us__buttons .slds-button {
+    width: 100%;
+    max-width: 130px;
+    line-height: 2.6875rem;
+}
+
+.b2b-contact-us__buttons .slds-button + .slds-button {
+    margin-left: 30px;
+}
+
+@media (max-width: 574.98px) {
+
+    .b2b-contact-us__buttons {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .b2b-contact-us__buttons .slds-button + .slds-button {
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+
+    .b2b-contact-us__buttons .slds-button {
+        max-width: 100%;
+        line-height: 30px;
+    }
+
+}

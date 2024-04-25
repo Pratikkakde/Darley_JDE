@@ -1,0 +1,257 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+
+    <!-- FATAL ERROR -->
+    <template if:true={isFatalError}>
+        <div class="b2b-checkout__fatal-error">
+            <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">{isFatalMessage}</div>
+        </div>
+    </template>
+
+    <template if:false={isFatalError}>
+        <div class={wrapperClass}>
+
+            <!-- BODY -->
+            <div class="b2b-checkout__body">
+                <div class="b2b-checkout__card">
+
+                    <!-- TITLE -->
+                    <div class="b2b-checkout__title">{labels.checkout}</div>
+
+                    <!-- LOADING SPINNER -->
+                    <template if:true={isLoading}>
+                        <div class="slds-is-relative slds-p-around_large">
+                            <lightning-spinner
+                                    alternative-text="Loading"
+                                    size="medium"
+                                    variant="brand"
+                            ></lightning-spinner>
+                        </div>
+                    </template>
+                    <template if:false={isLoading}>
+                        <div class="slds-is-relative">
+
+                            <!-- UPDATNG SPINNER -->
+                            <template if:true={isUpdateLoading}>
+                                <template if:false={showStripeModal}>
+                                    <lightning-spinner
+                                            alternative-text="Loading"
+                                            size="medium"
+                                            variant="brand"
+                                    ></lightning-spinner>
+                                </template>
+                            </template>
+
+                            <!-- ADDRESSES -->
+                            <c-b2b-checkout-addresses
+                                    is-cart-secondary={isCartSecondary}
+                                    is-update-loading={isAddressUpdating}
+                                    country-options={countryOptions}
+                                    state-options={stateOptions}
+                                    shipping-selected={shippingSelected}
+                                    shipping-addresses={shippingAddresses}
+                                    billing-selected={billingSelected}
+                                    billing-addresses={billingAddresses}
+                                    same-addresses={sameAddresses}
+                                    onupsert={handleUpsertAddress}
+                                    onuse={handleUseAddress}
+                                    onvalid={handleValidAddress}
+                            ></c-b2b-checkout-addresses>
+
+                            <!-- METHOD -->
+                            <c-b2b-checkout-info
+                                    is-update-loading={isInfoUpdating}
+                                    special-instructions={specialInstructions}
+                                    onblurspecialinstructions={handleBlurSpecialInstructions}
+                            ></c-b2b-checkout-info>
+
+                            <!-- PAYMENT -->
+                            <div class="b2b-hide" data-show={hasPaymentSection}>
+                                <c-b2b-checkout-payment
+                                        expiration-date-min={expirationDateMin}
+                                        is-update-loading={isPaymentUpdating}
+                                        payment-selected={paymentSelected}
+                                        payment-list={paymentList}
+                                        payment-types={paymentTypes}
+                                        is-invoice-my-company={isInvoiceMyCompany}
+                                        is-credit-terms={isAccountCreditTerms}
+                                        po-number={poNumber}
+                                        has-darley-dollar={hasDarleyDollar}
+                                        record-id={recordId}
+                                        has-invoice-payment={hasInvoicePayment}
+                                        payment-method={paymentMethod}
+                                        darley-dollar-amount={darleyDollarAmount}
+                                        is-disabled-place-order={isPlaceOrderButtonDisabled}
+                                        total={getTotal}
+                                        public-key={publicKey}
+                                        public-exponent={publicExponent}
+                                        onuse={handleUsePayment}
+                                        onupsert={handleUpsertPayment}
+                                        onvalid={handleValidPayment}
+                                        onchangeinvoice={handleChangeInvoice}
+                                        onchangeponumber={handleChangePoNumber}
+                                        onchangepaymentmethod={handleUpdatePaymentMethod}
+                                        onchangehasdarleydollar={handleChangeHasDarleyDollar}
+                                        onclickplaceorder={handleClickPlaceOrderButton}
+                                ></c-b2b-checkout-payment>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- ORDER SUMMARY -->
+            <div class="b2b-checkout__total">
+
+                <!-- SUMMARY -->
+                <div class="b2b-checkout__card b2b-checkout__card_summary">
+
+                    <div class="b2b-checkout__title">{labels.orderSummary}</div>
+                    <div class="b2b-checkout__total-items">
+
+                        <!-- ITEMS -->
+                        <div class="b2b-checkout__total-item">
+                            <div class="b2b-checkout__total-label">{labels.items}:</div>
+                            <div class="b2b-checkout__total-value">
+                                <lightning-formatted-number
+                                        value={items}
+                                        format-style="currency"
+                                        currency-code={getCurrencyIsoCode}
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+
+                        <!-- SALES TAX -->
+                        <div class="b2b-checkout__total-item">
+                            <div class="b2b-checkout__total-label">{labels.salesTax}:</div>
+                            <div class="b2b-checkout__total-value">
+                                <lightning-formatted-number
+                                        value={salesTax}
+                                        format-style="currency"
+                                        currency-code={getCurrencyIsoCode}
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+
+                        <!-- PROMTION -->
+                        <div class="b2b-checkout__total-item" if:true={promotion}>
+                            <div class="b2b-checkout__total-label">{labels.promotions}:</div>
+                            <div class="b2b-checkout__total-value">
+                                <lightning-formatted-number
+                                        value={promotion}
+                                        format-style="currency"
+                                        currency-code={getCurrencyIsoCode}
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+
+                        <!-- DELIVERY -->
+                        <div class="b2b-checkout__total-item" if:true={totalChargeAmount}>
+                            <div class="b2b-checkout__total-label">{labels.estimatedShipping}:</div>
+                            <div class="b2b-checkout__total-value">
+                                <lightning-formatted-number
+                                        value={totalChargeAmount}
+                                        format-style="currency"
+                                        currency-code={getCurrencyIsoCode}
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+
+                        <!-- DARLEY DOLLAR -->
+                        <div if:true={hasDarleyDollar} class="b2b-checkout__total-item">
+                            <div class="b2b-checkout__total-label b2b-checkout__darley-dollar-label">Darley Dollars:</div>
+                            <div class="b2b-checkout__total-value b2b-checkout__darley-dollar-value">
+                                <span>-</span>
+                                <svg class="b2b-darley-dollar-logo slds-m-right_xx-small" width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.8028 4.09398H3.6514V8.90602C3.6514 9.33455 3.29872 9.68144 2.8645 9.68144H1.6813V12.375H11.5299C12.6164 12.375 13.5 11.5143 13.5 10.4513V2.54871C13.5 1.48575 12.6164 0.625 11.5299 0.625H2.4701C1.38171 0.625 0.5 1.48575 0.5 2.54871V6.21432H2.4701V4.09398C2.4701 3.66731 2.81899 3.32412 3.257 3.32412H9.1673C9.60152 3.32412 9.9542 3.66546 9.9542 4.09398V8.90602C9.9542 9.33455 9.60152 9.68144 9.1673 9.68144H7.5916C7.15738 9.68144 6.8047 9.33269 6.8047 8.90602V4.09398H6.8028Z" fill="#236192"/>
+                                </svg>
+                                <lightning-formatted-number
+                                        value={darleyDollarAmount}
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- TOTAL -->
+                    <div class="b2b-checkout__total-summary">
+                        <div class="b2b-checkout__total-item">
+                            <div class="b2b-checkout__total-label">{labels.orderTotal}:</div>
+                            <div class="b2b-checkout__total-value">
+                                <lightning-formatted-number
+                                        value={getTotal}
+                                        format-style="currency"
+                                        currency-code={getCurrencyIsoCode}
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAX EXEMPT -->
+                    <template if:true={showTaxExempt}>
+                        <div class="b2b-checkout__total-summary-message">
+                            {labels.areYou} <a href="" onclick={handleClickTaxExempt}>{labels.taxExempt}</a>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- ORDER REVIEW -->
+                <div class="b2b-checkout__review">
+                    <div class="b2b-checkout__card">
+                        <div if:true={showReviewSpinner} class="">
+                            <lightning-spinner
+                                    alternative-text="Loading"
+                                    size="medium"
+                                    variant="brand"
+                            ></lightning-spinner>
+                        </div>
+                        <c-b2b-checkout-review
+                                record-id={recordId}
+                                products={products}
+                                is-cart-secondary={isCartSecondary}
+                                show-subscription={showSubscription}
+                                onsubscriptionvalidity={handleSubscriptionValidity}
+                                is-loading={isLoading}
+                        ></c-b2b-checkout-review>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MODAL -->
+        <!-- The following iframe dom element cause an error in the Experience Builder -->
+        <template if:false={isBuilder}>
+            <section class="b2b-checkout__modal slds-modal slds-fade-in-open" data-show={showStripeModal}>
+                <div class="slds-modal__container">
+                    <div class="slds-modal__content">
+                        <iframe
+                            data-id="b2b_stripe_payment_confirmation"
+                            src={stripePaymentConfirmationLink}
+                            allowtransparency="true"
+                            class="b2b-checkout__stripe-iframe"
+                        ></iframe>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- MODAL -->
+        <c-b2b-modal
+            is-loading={isModalLoading}
+            onclose={handleCloseModal}
+            onsubmit={handleSumbitModal}
+        >
+            <span slot="content">
+                <c-b2b-tax-exempt
+                    customer-tax-information={customerTaxInformation}
+                    onsavecustomer={handleSaveCustomer}
+                    onclosetaxexemptmodal={handleCloseExemptModal}
+                ></c-b2b-tax-exempt>
+            </span>
+        </c-b2b-modal>
+
+    </template>
+</template>

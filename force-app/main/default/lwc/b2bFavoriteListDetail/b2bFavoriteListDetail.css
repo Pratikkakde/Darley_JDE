@@ -1,0 +1,156 @@
+:host {
+    position: relative;
+    display: block;
+    margin-bottom: 0;
+}
+
+/* HEADER */
+
+.b2b-favorite-list-detail__header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-column-gap: 2.375rem;
+    align-items: center;
+    margin-bottom: 1.875rem;
+}
+
+.b2b-favorite-list-detail__name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.b2b-favorite-list-detail__actions {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-column-gap: 1.3125rem;
+}
+
+.b2b-favorite-list-detail__actions .b2b-button_action {
+    font-weight: 600;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 1299.98px) and (min-width: 1100px), (max-width: 899.98px) and (min-width: 575px) {
+
+    .b2b-favorite-list-detail__header {
+        grid-template-columns: 1fr auto;
+        grid-column-gap: 2rem;
+        grid-row-gap: 1rem;
+    }
+
+    .b2b-favorite-list-detail__name {
+        grid-column: 1/3;
+        grid-row: 1/2;
+    }
+
+}
+
+@media screen and (max-width: 1099.98px) and (min-width: 1024px) {
+
+    .b2b-favorite-list-detail__header {
+        grid-template-columns: auto 1fr;
+        grid-row-gap: 1rem;
+    }
+
+    .b2b-favorite-list-detail__name {
+        grid-column: 1/3;
+        grid-row: 1/2;
+    }
+
+    .b2b-favorite-list-detail__actions {
+        grid-column: 1/3;
+        grid-row: 2/3;
+    }
+
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-favorite-list-detail__header {
+        grid-template-columns: 100%;
+        grid-row-gap: 1rem;
+    }
+
+}
+
+/* BODY */
+
+.b2b-favorite-list-detail__body {
+    min-height: 5rem;
+}
+
+/* EMPTY MESSAGE */
+
+.b2b-favorite-list-detail__empty-message {
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.b2b-favorite-list-detail__empty-message p + p {
+    margin-top: 2rem;
+}
+
+/* FOOTER */
+
+.b2b-favorite-list-detail__footer {
+    position: sticky;
+    bottom: 0;
+    padding: 1rem 0;
+    margin-bottom: -1rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 1;
+}
+
+.b2b-favorite-list-detail__pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.b2b-favorite-list-detail__pagination + .b2b-favorite-list-detail__add-all {
+    margin-top: 1.875rem;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-favorite-list-detail__pagination {
+        justify-content: center;
+    }
+
+}
+
+.b2b-favorite-list-detail__add-all {
+    text-align: right;
+}
+
+.b2b-favorite-list-detail__add-all .slds-button {
+    line-height: 38px;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-favorite-list-detail__add-all .slds-button {
+        width: 100%;
+    }
+
+}
+
+/* UNAVAILABLE PRODUCTS */
+
+.b2b-favorite-list-detail__unavailable-products p + p {
+    margin: 0.75rem 0 0.5rem;
+    font-weight: 700;
+}
+
+.b2b-favorite-list-detail__unavailable-products ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+}
+
+.b2b-favorite-list-detail__unavailable-products ol li {
+    padding-left: 0.5rem;
+}
+
+.b2b-favorite-list-detail__unavailable-products ol li + li {
+    margin-top: 0.125rem;
+}

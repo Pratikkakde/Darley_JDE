@@ -1,0 +1,154 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class={wrapperClass}>
+
+            <!-- TITLE -->
+            <div class="b2b-quick-order__title">{labels.title}</div>
+
+            <!-- LIST SUBTITLE -->
+            <template if:true={showListSubtitle}>
+                <div class="b2b-quick-order__list-subtitle">
+                    <div class="b2b-quick-order__item">
+                        <div class="b2b-quick-order__item-product">
+                            <div class="b2b-quick-order__subtitle">{labels.columnProductLabel}</div>
+                        </div>
+                        <div class="b2b-quick-order__item-quantity">
+                            <div class="b2b-quick-order__subtitle">{labels.columnQuantityLabel}</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- LIST -->
+            <template if:true={list.length}>
+                <div class="b2b-quick-order__list">
+
+                    <!-- UPDATE SPINNER -->
+                    <template if:true={isUpdateLoading}>
+                        <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                    </template>
+
+                    <!-- FORM -->
+                    <template for:each={list} for:item="item">
+                        <div key={item.index} class="b2b-quick-order__item">
+
+                            <!-- PRODUCT -->
+                            <div class="b2b-quick-order__item-product">
+                                <c-b2b-quick-order-search-product
+                                    item-id={item.itemId}
+                                    is-update-loading={item.isUpdateLoading}
+                                    search={item.search}
+                                    options={item.options}
+                                    product-id={item.productId}
+                                    product-name={item.name}
+                                    product-sku={item.sku}
+                                    disabled={isFormDisabled}
+                                    onchange={handleChangeSearchProduct}
+                                    onselect={handleSelectSearchProduct}
+                                ></c-b2b-quick-order-search-product>
+                            </div>
+
+                            <!-- QUANTITY -->
+                            <div class="b2b-quick-order__item-quantity">
+                                <c-b2b-quantity
+                                    data-itemid={item.itemId}
+                                    editable={quantityEditable}
+                                    disabled={isFormDisabled}
+                                    increment={item.increment}
+                                    min-quantity={item.minQuantity}
+                                    max-quantity={item.maxQuantity}
+                                    value={item.quantity}
+                                    onchange={handleQuantityChange}
+                                ></c-b2b-quantity>
+                            </div>
+
+                            <!-- QUANTITY RULE -->
+                            <div class="b2b-quick-order__item-quantity-rule">
+                                <template if:true={item.helptext}>
+                                    <lightning-helptext content={item.helptext}></lightning-helptext>
+                                </template>
+                            </div>
+
+                            <!-- REMOVE LINE -->
+                            <div class="b2b-quick-order__item-remove-line">
+                                <template if:true={item.productId}>
+                                    <lightning-button-icon
+                                        data-itemid={item.itemId}
+                                        icon-name="utility:clear"
+                                        size="medium"
+                                        variant="bare"
+                                        onclick={handleClickRemove}
+                                    ></lightning-button-icon>
+                                </template>
+                            </div>
+
+                        </div>
+                    </template>
+
+                </div>
+            </template>
+
+            <!-- BUTTONS -->
+            <div class="b2b-quick-order__buttons">
+
+                <!-- ADD LINE -->
+                <lightning-button
+                    variant="base"
+                    label={labels.addLineButtonLabel}
+                    icon-name="utility:add"
+                    disabled={isAddLineDisabled}
+                    onclick={handleClickAddLine}
+                ></lightning-button>
+
+                <!-- ADD TO CART -->
+                <lightning-button
+                    variant="brand"
+                    label={labels.addToCartButtonLabel}
+                    disabled={isAddToCartDisabled}
+                    onclick={handleClickAddToCart}
+                ></lightning-button>
+
+            </div>
+
+            <!-- MODAL -->
+            <template if:true={showModal}>
+                <section class="b2b-quick-order__modal-wrapper slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+
+                        <!-- HEADER -->
+                        <header class="slds-modal__header">
+                            <button
+                                class="slds-button slds-button_icon slds-modal__close"
+                                title={labels.close}
+                                onclick={handleClickModalClose}
+                            >
+                                <lightning-icon
+                                    icon-name="utility:close"
+                                    alternative-text={labels.close}
+                                    variant="inverse"
+                                ></lightning-icon>
+                            </button>
+                            <div class="b2b-quick-order__modal-title">{modalTitleLabel}</div>
+                        </header>
+
+                        <!-- FOOTER -->
+                        <div class="slds-modal__footer">
+                            <button
+                                class="slds-button slds-button_outline-brand"
+                                onclick={handleClickModalViewCart}
+                            >{labels.successModalViewCart}</button>
+                            <button
+                                class="slds-button slds-button_brand"
+                                onclick={handleClickModalClose}
+                            >{labels.successModalContinueShopping}</button>
+                        </div>
+
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+
+        </div>
+    </template>
+</template>

@@ -1,0 +1,11 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass} data-component-id={componentId}>
+        <div data-f6-region class="b2b-wrapper-sidebar__sidebar">
+            <slot name="sidebar"></slot>
+        </div>
+        <div data-f6-region class="b2b-wrapper-sidebar__content">
+            <slot name="content"></slot>
+        </div>
+    </div>
+</template>

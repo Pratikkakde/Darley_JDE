@@ -1,0 +1,9 @@
+<template>
+    <template if:true={isRequestForQuoteAvailable}>
+        <a
+                target="_self"
+                class="slds-button slds-button_outline-brand"
+                onclick={handleClickButton}
+        >{labels.requestForQuote}</a>
+    </template>
+</template>

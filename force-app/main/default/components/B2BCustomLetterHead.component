@@ -1,0 +1,10 @@
+<apex:component access="global">
+    <div style="width: 100%; max-width: 800px; margin: 0 auto; padding: 32px 16px; background-color:#ffffff; box-sizing: border-box;">
+        <div style="width: 100%; max-width: 700px; margin: 0 auto; padding-bottom: 32px; border-bottom: 1px solid #E8E8E8;">
+
+            <!-- LOGO -->
+            <img src="{!$Setup.VisualForceEmailConfiguration__c.URLCompanyLogo__c}" style="display: block; width: 100%; max-width: 220px;"/>
+
+        </div>
+    </div>
+</apex:component>

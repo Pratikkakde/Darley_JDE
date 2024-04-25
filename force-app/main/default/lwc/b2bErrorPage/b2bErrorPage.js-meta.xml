@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Error Page</masterLabel>
+    <description>B2B Error Page</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <property name="showBackgroundImage" type="Boolean" label="Show 'Background' Image" default="false"></property>
+            <property name="backgroundImage" label="'Background' Image" type="ContentReference" filter="cms_image"></property>
+            <property name="backgroundColor" type="Color" label="'Background' Color" default="rgba(0, 0, 0, 0.7)"></property>
+
+            <!-- CONTAINER -->
+            <property name="containerMaxWidth" type="Integer" label="'Container' Max-Width (px)" min="100" max="1170" default="1100"></property>
+            <property name="containerColor" type="Color" label="'Container' Color"></property>
+            <property name="containerHorizontalPosition" type="String" label="'Container' Horizontal Position" datasource="Left,Center,Right" default="Center"></property>
+            <property name="containerVerticalPosition" type="String" label="'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Middle"></property>
+            <property name="containerBorderRadius" type="Integer" label="'Container' Border Radius (px)" min="0" max="50"></property>
+
+            <!-- IMAGE -->
+            <property name="showImage" type="Boolean" label="Show 'Image'" default="false"></property>
+            <property name="image" label="Image" type="ContentReference" filter="cms_image"></property>
+            <property name="imageMaxWidth" type="Integer" label="'Image' Max-Width (px)" min="50" max="1000"></property>
+            <property name="imageAlign" type="String" label="'Image' Align" datasource="Left,Center,Right" default="Center"></property>
+
+            <!-- TITLE -->
+            <property name="showTitle" type="Boolean" label="Show 'Title'" default="true"></property>
+            <property name="title" type="String" label="Title" default=""></property>
+            <property name="titleColor" type="Color" label="'Title' Color" default="rgb(255, 255, 255)"></property>
+            <property name="titleAlign" type="String" label="'Title' Align" datasource="Left,Center,Right" default="Center"></property>
+
+            <!-- SUTITLE -->
+            <property name="showSubtitle" type="Boolean" label="Show 'Subtitle'" default="true"></property>
+            <property name="subtitle" type="String" label="Subtitle" default=""></property>
+            <property name="subtitleColor" type="Color" label="'Subtitle' Color" default="rgb(255, 255, 255)"></property>
+            <property name="subtitleAlign" type="String" label="'Subtitle' Align" datasource="Left,Center,Right" default="Center"></property>
+
+            <!-- DESCRIPTION -->
+            <property name="showDescription" type="Boolean" label="Show 'Description'" default="false"></property>
+            <property name="description" type="String" label="Description" default=""></property>
+            <property name="descriptionColor" type="Color" label="'Description' Color" default="rgb(255, 255, 255)"></property>
+            <property name="descriptionAlign" type="String" label="'Description' Align" datasource="Left,Center,Right" default="Center"></property>
+
+            <!-- BUTTON -->
+            <property name="showButton" type="Boolean" label="Show 'Button'" default="true"></property>
+            <property name="buttonLabel" type="String" label="'Button' Label" default=" Back Home"></property>
+            <property name="buttonNavigateTo" type="String" label="'Button' Navigate to" default="/" description="Store URL"></property>
+            <property name="buttonAlign" type="String" label="'Button' Align" datasource="Left,Center,Right" default="Center"></property>
+            <property name="buttonTextColor" type="Color" label="'Button' Text Color"></property>
+            <property name="buttonBackgroundColor" type="Color" label="'Button' Background Color"  default="rgba(35, 31, 32, 1)"></property>
+            <property name="buttonTextColorHover" type="Color" label="'Button' Text Color (hover)"></property>
+            <property name="buttonBackgroundColorHover" type="Color" label="'Button' Background Color (hover)" default="rgba(35, 31, 32, 1)"></property>
+            <property name="buttonBorderRadius" type="Integer" label="'Button' Border Radius (px)" min="0" max="50" default="0"></property>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

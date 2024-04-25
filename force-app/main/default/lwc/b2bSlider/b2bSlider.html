@@ -1,0 +1,70 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+        <template if:true={items.length}>
+
+            <!-- PRODUCTS LIST -->
+            <div class="b2b-slider__list-wrapper">
+
+                <!-- PREVIOUS BUTTON -->
+                <template if:true={getShowArrows}>
+                    <div class="b2b-slider__prev">
+                        <button
+                            class="b2b-slider__arrow"
+                            title={getPrevTitle}
+                            disabled={isPrevDisabled}
+                            onclick={handleClickPrev}
+                        >
+                            <svg viewBox="0 0 52 52" class="b2b-slider__arrow-svg">
+                                <path d="M34.2 47.7L13.4 27.2c-.6-.6-.6-1.6 0-2.2L34.2 4.5c.6-.6 1.6-.6 2.2 0l2.2 2.2c.6.6.6 1.6 0 2.2L22.1 25c-.6.6-.6 1.6 0 2.2l16.3 16.1c.6.6.6 1.6 0 2.2l-2.2 2.2c-.5.5-1.4.5-2 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </template>
+
+                <!-- LIST -->
+                <div class="b2b-slider__list-container">
+                    <div class="b2b-slider__list">
+                        <div class="b2b-slider__container">
+                            <!-- <div class="b2b-slider__item"> -->
+                            <slot></slot>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEXT BUTTON -->
+                <template if:true={getShowArrows}>
+                    <div class="b2b-slider__next">
+                        <button
+                            class="b2b-slider__arrow"
+                            title={getNextTitle}
+                            disabled={isNextDisabled}
+                            onclick={handleClickNext}
+                        >
+                            <svg viewBox="0 0 52 52" class="b2b-slider__arrow-svg">
+                                <path d="M17.9 4.4l20.7 20.5c.6.6.6 1.6 0 2.2L17.9 47.6c-.6.6-1.6.6-2.2 0l-2.2-2.2c-.6-.6-.6-1.6 0-2.2l16.3-16.1c.6-.6.6-1.6 0-2.2L13.6 8.8c-.6-.6-.6-1.6 0-2.2l2.2-2.2c.6-.5 1.5-.5 2.1 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </template>
+
+            </div>
+
+            <!-- PRODUCTS SLICK -->
+            <template if:true={getShowSlicks}>
+                <div class="b2b-slider__slicks">
+                    <template for:each={getSlickOptions} for:item="item">
+                        <button
+                            key={item.index}
+                            data-index={item.index}
+                            title={item.title}
+                            class={item.class}
+                            onclick={handleClickSlick}
+                        ></button>
+                    </template>
+                </div>
+            </template>
+
+        </template>
+    </div>
+</template>

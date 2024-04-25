@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Company Logo</masterLabel>
+    <description>B2B Company Logo</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="showLogo" type="Boolean" label="Show Logo" default="true"></property>
+            <property name="logoImage" type="ContentReference" label="Logo Image"  filter="cms_image"></property>
+            <property name="alternativeText" type="String" label="Alternative Text" default=""></property>
+            <property name="useAsLink" type="Boolean" label="Use as link" default="true"></property>
+            <property name="navigateTo" type="String" label="Navigate to" default="/"></property>
+            <property name="logoMaxWidth" type="String" label="Logo Max-Width" default="250px"></property>
+            <property name="logoMaxHeight" type="String" label="Logo Max-Height" default="150px"></property>
+            <property name="logoAlign" type="String" label="Logo Align" datasource="Left,Center,Right" default="Center"></property>
+            <property name="logoMarginBottom" type="String" label="Logo Margin-Bottom" default="2rem"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

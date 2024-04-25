@@ -1,0 +1,53 @@
+:host {
+    display: block;
+}
+
+.b2b-select__wrapper {
+    margin-bottom: 0 !important;
+}
+
+.b2b-select__label {
+    margin-bottom: 2px;
+}
+
+.b2b-select__label label {
+    display: inline;
+    margin-bottom: 0;
+    padding-top: 0;
+}
+
+select[value=""] {
+    color: var(--b2b-colorDisabledDark);
+}
+
+select {
+    font-size: 12px;
+    color: var(--b2b-colorText);
+    cursor: pointer;
+}
+
+select[disabled] {
+    cursor: not-allowed;
+    color: var(--b2b-colorDisabledDark);
+    border-color: var(--b2b-colorDisabled);
+    background-color: var(--b2b-colorDisabledLight);
+}
+
+option {
+    letter-spacing: 0;
+    color: var(--b2b-colorText);
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+option[disabled] {
+    color: var(--b2b-colorDisabledDark);
+    background-color: var(--b2b-colorDisabledLight);
+}
+
+.b2b-select__label__option {
+    display: flex;
+    flex-direction: column;
+}

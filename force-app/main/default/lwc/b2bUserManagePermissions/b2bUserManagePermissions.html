@@ -1,0 +1,61 @@
+<template>
+    <template if:true={show}>
+        <section class="b2b-user-manage-permissions__wrapper slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <button
+                        class="slds-button slds-button_icon slds-modal__close"
+                        title={labels.close}
+                        disabled={isUpdateLoading}
+                        onclick={handleClickModalClose}
+                    >
+                        <lightning-icon
+                            icon-name="utility:close"
+                            alternative-text={labels.close}
+                            variant="inverse"
+                        ></lightning-icon>
+                    </button>
+                    <h2 class="b2b-user-manage-permissions__modal-title">{labels.title}</h2>
+                </header>
+
+                <!-- CONTENT -->
+                <div class="slds-modal__content">
+
+                    <!-- UPDATE LOADING -->
+                    <template if:true={isUpdateLoading}>
+                        <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                    </template>
+
+                    <p class="b2b-user-manage-permissions__subtitle">{labels.subtitle}</p>
+                    <lightning-dual-listbox
+                        variant="label-hidden"
+                        source-label={labels.available}
+                        selected-label={labels.selected}
+                        options={options}
+                        value={value}
+                        onchange={handleChangeListbox}
+                    ></lightning-dual-listbox>
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="slds-modal__footer">
+                    <button
+                        class="slds-button slds-button_outline-brand"
+                        disabled={isUpdateLoading}
+                        onclick={handleClickModalClose}
+                    >{labels.modalClose}</button>
+                    <button
+                        class="slds-button slds-button_brand"
+                        disabled={isUpdateLoading}
+                        onclick={handleClickModalSubmit}
+                    >{labels.modalSubmit}</button>
+                </div>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

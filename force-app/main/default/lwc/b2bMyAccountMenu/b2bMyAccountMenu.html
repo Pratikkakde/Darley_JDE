@@ -1,0 +1,27 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+
+        <!-- TITLE -->
+        <div class="b2b-my-account-menu__title">{getMenuTitle}</div>
+
+        <!-- LIST -->
+        <template if:true={menuOptions.length}>
+            <div class="b2b-my-account-menu__list">
+                <template for:each={menuOptions} for:item="item" for:index="index">
+                    <a
+                        key={item.index}
+                        data-pageapiname={item.pageApiName}
+                        href={item.value}
+                        class={item.itemClass}
+                        onclick={handleClickMenuItem}
+                    >
+                        <lightning-icon icon-name={item.icon} size="small"></lightning-icon>
+                        <span class="b2b-my-account-menu__label">{item.label}</span>
+                    </a>
+                </template>
+            </div>
+        </template>
+
+    </div>
+</template>

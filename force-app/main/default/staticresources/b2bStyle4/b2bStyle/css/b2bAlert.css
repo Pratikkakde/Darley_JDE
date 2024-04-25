@@ -1,0 +1,207 @@
+/* B2B ALERT */
+
+c-b2b-alert {
+    --b2b-alert-base-icon-color: var(--dxp-g-neutral-contrast);
+    --b2b-alert-base-icon-color-hover: var(--dxp-g-neutral-3);
+    --b2b-alert-base-text-color: var(--dxp-g-neutral-contrast);
+    --b2b-alert-base-background-color: var(--dxp-g-neutral);
+    --b2b-alert-base-button-shadow-color: var(--dxp-g-neutral-3);
+
+    --b2b-alert-success-icon-color: var(--dxp-g-success-contrast);
+    --b2b-alert-success-icon-color-hover: var(--dxp-g-neutral-3);
+    --b2b-alert-success-text-color: var(--dxp-g-success-contrast);
+    --b2b-alert-success-background-color: var(--dxp-g-success);
+    --b2b-alert-success-button-shadow-color: var(--dxp-g-neutral-3);
+
+    --b2b-alert-warning-icon-color: var(--dxp-g-warning-contrast);
+    --b2b-alert-warning-icon-color-hover: var(--dxp-g-neutral-3);
+    --b2b-alert-warning-text-color: var(--dxp-g-warning-contrast);
+    --b2b-alert-warning-background-color: var(--dxp-g-warning);
+    --b2b-alert-warning-button-shadow-color: var(--dxp-g-neutral-3);
+
+    --b2b-alert-error-icon-color: var(--dxp-g-destructive-contrast);
+    --b2b-alert-error-icon-color-hover: var(--dxp-g-root-2);
+    --b2b-alert-error-text-color: var(--dxp-g-destructive-contrast);
+    --b2b-alert-error-background-color: var(--dxp-g-destructive);
+    --b2b-alert-error-button-shadow-color: var(--dxp-g-root);
+
+    --b2b-alert-offline-icon-color: var(--dxp-g-offline-contrast);
+    --b2b-alert-offline-icon-color-hover: var(--dxp-g-root-2);
+    --b2b-alert-offline-text-color: var(--dxp-g-offline-contrast);
+    --b2b-alert-offline-background-color: var(--dxp-g-offline);
+    --b2b-alert-offline-button-shadow-color: var(--dxp-g-root);
+
+    --b2b-alert-info-icon-color: var(--dxp-g-info-contrast);
+    --b2b-alert-info-icon-color-hover: var(--dxp-g-root-2);
+    --b2b-alert-info-text-color: var(--dxp-g-info-contrast);
+    --b2b-alert-info-background-color: var(--dxp-g-info);
+    --b2b-alert-info-button-shadow-color: var(--dxp-g-root);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-icon span,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-icon lightning-primitive-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-icon .slds-icon {
+    display: block;
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert .b2b-alert__content a {
+    display: inline;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    transition: opacity 0.1s;
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert .b2b-alert__content a:hover,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert .b2b-alert__content a:focus,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert .b2b-alert__content a:active {
+    opacity: 0.7;
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-button-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-button-icon .slds-button,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-button-icon lightning-primitive-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert lightning-button-icon .slds-button__icon {
+    display: block;
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert .slds-button_icon {
+    border: 0;
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-notify_alert .slds-button_icon .slds-button__icon {
+    transition: fill 0.1s;
+}
+
+/* BASE */
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_base {
+    color: var(--b2b-alert-base-text-color);
+    background-color: var(--b2b-alert-base-background-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_base .slds-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_base .slds-button_icon .slds-button__icon {
+    fill: var(--b2b-alert-base-icon-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_base .slds-button_icon:focus {
+    box-shadow: 0 0 3px var(--b2b-alert-base-button-shadow-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_base .slds-button_icon:hover .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_base .slds-button_icon:focus .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_base .slds-button_icon:active .slds-button__icon {
+    fill: var(--b2b-alert-base-icon-color-hover);
+}
+
+/* SUCCESS */
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_success {
+    color: var(--b2b-alert-success-text-color);
+    background-color: var(--b2b-alert-success-background-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_success .slds-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_success .slds-button_icon .slds-button__icon {
+    fill: var(--b2b-alert-success-icon-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_success .slds-button_icon:focus {
+    box-shadow: 0 0 3px var(--b2b-alert-success-button-shadow-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_success .slds-button_icon:hover .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_success .slds-button_icon:focus .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_success .slds-button_icon:active .slds-button__icon {
+    fill: var(--b2b-alert-success-icon-color-hover);
+}
+
+/* WARNING */
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_warning {
+    color: var(--b2b-alert-warning-text-color);
+    background-color: var(--b2b-alert-warning-background-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_warning .slds-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_warning .slds-button_icon .slds-button__icon {
+    fill: var(--b2b-alert-warning-icon-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_warning .slds-button_icon:focus {
+    box-shadow: 0 0 3px var(--b2b-alert-warning-button-shadow-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_warning .slds-button_icon:hover .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_warning .slds-button_icon:focus .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_warning .slds-button_icon:active .slds-button__icon {
+    fill: var(--b2b-alert-warning-icon-color-hover);
+}
+
+/* ERROR */
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_error {
+    color: var(--b2b-alert-error-text-color);
+    background-color: var(--b2b-alert-error-background-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_error .slds-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_error .slds-button_icon .slds-button__icon {
+    fill: var(--b2b-alert-error-icon-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_error .slds-button_icon:focus {
+    box-shadow: 0 0 3px var(--b2b-alert-error-button-shadow-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_error .slds-button_icon:hover .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_error .slds-button_icon:focus .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_error .slds-button_icon:active .slds-button__icon {
+    fill: var(--b2b-alert-error-icon-color-hover);
+}
+
+/* OFFLNE */
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_offline {
+    color: var(--b2b-alert-offline-text-color);
+    background-color: var(--b2b-alert-offline-background-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_offline .slds-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_offline .slds-button_icon .slds-button__icon {
+    fill: var(--b2b-alert-offline-icon-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_offline .slds-button_icon:focus {
+    box-shadow: 0 0 3px var(--b2b-alert-offline-button-shadow-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_offline .slds-button_icon:hover .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_offline .slds-button_icon:focus .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_offline .slds-button_icon:active .slds-button__icon {
+    fill: var(--b2b-alert-offline-icon-color-hover);
+}
+
+/* INFO */
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_info {
+    color: var(--b2b-alert-info-text-color);
+    background-color: var(--b2b-alert-info-background-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_info .slds-icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_info .slds-button_icon .slds-button__icon {
+    fill: var(--b2b-alert-info-icon-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_info .slds-button_icon:focus {
+    box-shadow: 0 0 3px var(--b2b-alert-info-button-shadow-color);
+}
+
+c-b2b-alert .b2b-alert__wrapper.slds-alert_info .slds-button_icon:hover .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_info .slds-button_icon:focus .slds-button__icon,
+c-b2b-alert .b2b-alert__wrapper.slds-alert_info .slds-button_icon:active .slds-button__icon {
+    fill: var(--b2b-alert-info-icon-color-hover);
+}

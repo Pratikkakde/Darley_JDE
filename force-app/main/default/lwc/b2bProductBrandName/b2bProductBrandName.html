@@ -1,0 +1,13 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class="b2b-product-brand-name__wrapper">
+            <template if:true={showAsLink}>
+                <a href={brandLink} class="b2b-product-brand-name__link">{brandLabel}</a>
+            </template>
+            <template if:false={showAsLink}>
+                <span class="b2b-product-brand-name__label">{brandLabel}</span>
+            </template>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,133 @@
+@import './libs/style.css';
+
+:host {
+    --b2b-credit-card-form-grid-column-gap: 1rem;
+    --b2b-credit-card-form-grid-row-gap: 1rem;
+
+    position: relative;
+    display: block;
+}
+
+lightning-input,
+.slds-form-element {
+    margin-bottom: 0 !important;
+}
+
+/* BODY */
+
+.b2b-credit-card-form__body {
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-row-gap: 2rem;
+}
+
+.b2b-credit-card-form__body[data-show-image="true"] {
+    grid-template-columns: 1fr 315px;
+}
+
+.b2b-credit-card-form__body[data-show-image="false"] {
+    grid-template-columns: 100%;
+}
+
+@media (max-width: 767.98px) {
+
+    .b2b-credit-card-form__body[data-show-image="true"] {
+        grid-template-columns: 100%;
+    }
+
+}
+
+/* CARD CONTAINER */
+
+.b2b-credit-card-form__body[data-show-image="false"] .jp-card-container {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+@media (max-width: 767.98px) {
+
+    .b2b-credit-card-form__body[data-show-image="true"] .jp-card-container {
+        margin-right: auto;
+        margin-left: 0;
+    }
+
+}
+
+@media (max-width: 479.98px) {
+
+    .b2b-credit-card-form__body .jp-card-container {
+        transform: scale(0.84) !important;
+        transform-origin: left top !important;
+    }
+
+}
+
+/* FORM */
+
+.b2b-credit-card-form__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    grid-row-gap: var(--b2b-credit-card-form-grid-row-gap);
+}
+
+.b2b-credit-card-form__card-name {
+    width: 100%;
+}
+
+.b2b-credit-card-form__card-holder-name {
+    width: 100%;
+}
+
+.b2b-credit-card-form__card-number {
+    width: calc(100% - 110px - 100px - var(--b2b-credit-card-form-grid-column-gap) * 2 / 3);
+}
+
+.b2b-credit-card-form__card-number-has-icon .slds-form-element__control {
+    position: relative;
+}
+
+.b2b-credit-card-form__card-number-has-icon c-b2b-payment-icon {
+    --b2b-payment-icon-width: 28px;
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+}
+
+.b2b-credit-card-form__card-number-has-icon input.slds-input {
+    padding-left: 43px;
+}
+
+.b2b-credit-card-form__card-expiration {
+    width: calc(110px - var(--b2b-credit-card-form-grid-column-gap) * 2 / 3);
+}
+
+.b2b-credit-card-form__card-cvv {
+    width: calc(100px - var(--b2b-credit-card-form-grid-column-gap) * 2 / 3);
+}
+
+.b2b-credit-card-form__card-default {
+    width: 100%;
+}
+
+@media (max-width: 574.98px) {
+
+    .b2b-credit-card-form__card-name,
+    .b2b-credit-card-form__card-holder-name,
+    .b2b-credit-card-form__card-number,
+    .b2b-credit-card-form__card-expiration,
+    .b2b-credit-card-form__card-cvv,
+    .b2b-credit-card-form__card-default {
+        width: 100%;
+    }
+
+}
+
+/* IMAGE */
+
+.b2b-credit-card-form__image[data-show-image="false"] {
+    display: none;
+}

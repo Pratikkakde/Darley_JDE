@@ -1,0 +1,222 @@
+.slds-form-element__label{
+    font-size:12px !important;
+}
+
+.b2b-quotes-title {
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #231F20;
+}
+
+.b2b-quotes-header-section {
+    justify-content: space-between;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    align-items: center;
+}
+
+.b2b-quote-detail__quote > div {
+    width: 100%;
+}
+
+.b2b-quote-status {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6D6E71;
+}
+
+.b2b-quote-status__value {
+    font-size: 12px;
+    padding-left: 0.2rem;
+    color: #231F20;
+}
+
+.b2b-quote-detail__title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #231F20;
+}
+
+.b2b-shipping__container,
+.b2b-billing__container {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+    padding-top: 1rem;
+    color: rgba(109, 110, 113, 1);
+}
+
+.b2b-shipping__container .b2b-quote-detail__value,
+.b2b-billing__container .b2b-quote-detail__value {
+    color: rgba(109, 110, 113, 1) !important;
+}
+
+.b2b-quote-detail__subtitle {
+    font-weight: 600;
+    font-size: 14px;
+    color:  rgba(109, 110, 113, 1);
+}
+
+.b2b-quote-detail__value {
+    font-weight: 400;
+    font-size: 14px;
+    color: #6D6E71;
+}
+
+.b2b-quote-detail__value lightning-formatted-date-time {
+    color: #231F20 !important;
+}
+
+.table-container {
+    margin-top: 1rem;
+}
+
+.b2b-quote-total {
+    font-weight: 700;
+    font-size: 14px;
+    color: #231F20;
+}
+
+.b2b-quote__button{
+    float: right;
+}
+
+.b2b_Place_order__button{
+    text-transform: capitalize;
+}
+
+.b2b-changeRequest__container{
+   padding-bottom: 3rem;
+}
+
+.b2b-button {
+    margin-left: 0.5rem;
+}
+
+.b2b-quote__total_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 291px;
+    margin-left: auto;
+    margin-top: 12px;
+} 
+
+.b2b-quote__total_items {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.b2b-quote__total_items.b2b-quote-total {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-quotes-header-section {
+        flex-direction: column;
+        padding-bottom: 1rem;
+    }
+
+    .b2b-quotes-title {
+        margin-bottom: 0.75rem;
+    }
+
+    .b2b-quote-button{
+        margin: 0 !important;
+    }
+
+    .b2b-quote-detail__quote > div,
+    .b2b-quotes-header-section > div {
+        width: 100%;
+    }
+
+    .b2b-quote-detail__quote {
+        flex-direction: column;
+        margin: 1rem 0;
+    }
+
+    .b2b-shipping__container,
+    .b2b-billing__container {
+        display: block;
+    }
+
+    .b2b-quote-detail__quote > div {
+        margin-bottom: 0.75rem;
+    }
+
+    .table-container {
+        margin-top: 1rem;
+    }
+
+    .b2b-quote-total {
+        justify-content: space-between;
+    }
+
+    .b2b-changeRequest__container{
+        padding-bottom: 2rem;
+    }
+
+    .b2b-quote__total_container{
+        padding-right: 1rem !important;
+    }
+}
+
+@media (min-width: 768.98px) and (max-width: 1023.98px){
+    .b2b-quote__total_container{
+        padding-right: 2rem !important;
+    }
+
+    .b2b-quote-detail__quote {
+        flex-direction: row;
+        margin: 1rem 0;
+    }
+
+    .b2b-shipping__container,
+    .b2b-billing__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+@media (min-width: 1023.98px) and (max-width: 1270.98px) {
+    .b2b-quote__total_container{
+        padding-right: 1rem !important;
+    }
+
+    .b2b-quote-detail__quote {
+        margin: 1rem 0;
+        flex-direction: column;
+    }
+
+    .b2b-shipping__container,
+    .b2b-billing__container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+}
+
+@media (min-width: 1270.98px) and (max-width: 1460.98px) {
+    .b2b-quote__total_container{
+        padding-right: 2.5rem !important;
+    }
+
+    .b2b-quote-detail__quote {
+        margin: 1rem 0;
+    }
+
+    .b2b-shipping__container,
+    .b2b-billing__container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+}

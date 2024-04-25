@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Favorite List</masterLabel>
+    <description>B2B Favorite List</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="itemsOnPage" type="Integer" label="Items on page" required="true" min="5" max="50" default="10"></property>
+            <property name="showOriginalPrice" type="Boolean" label="Show original price" default="false" description="The base price from the store’s original price book. If the original price is higher than the actual price, it’s crossed out."></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

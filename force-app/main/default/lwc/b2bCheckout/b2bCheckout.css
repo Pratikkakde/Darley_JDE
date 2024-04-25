@@ -1,0 +1,319 @@
+:host {
+    --b2b-theme-contentHorizontalPaddings: 15px;
+
+    display: block;
+    margin-top: var(--dxp-c-component-wrapper-spacer-size, var(--dxp-s-component-wrapper-spacer-size));
+    margin-bottom: var(--dxp-c-component-wrapper-spacer-size, var(--dxp-s-component-wrapper-spacer-size));
+}
+
+@media(max-width: 767.98px) {
+
+    :host  {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+}
+
+/* WRAPPER */
+
+.b2b-checkout__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 395px;
+    grid-gap: 45px;
+    max-width: var(--b2b-checkout-contentMaxWidth, 100%);
+    margin: 0 auto;
+}
+
+@media(max-width: 991.98px) {
+
+    .b2b-checkout__wrapper {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(2, auto);
+        grid-gap: 1rem;
+    }
+
+    .b2b-checkout__body {
+        order: 2;
+    }
+
+    .b2b-checkout__total {
+        order: 1;
+    }
+
+}
+
+/* CARD */
+
+.b2b-checkout__card {
+    position: relative;
+    min-height: 300px;
+    background-color: var(--b2b-colorWhite);
+    box-shadow: var(--b2b-shadowCard);
+}
+
+.b2b-checkout__review > .b2b-checkout__card {
+    min-height: 200px;
+    padding: 50px;
+}
+
+/* TITLE */
+.b2b-checkout__title {
+    padding: 50px 50px 25px 50px;
+    margin-bottom: 40px;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #231F20;
+}
+
+@media(max-width: 574.98px) {
+
+    .b2b-checkout__title {
+        padding: 30px 24px 0 24px;
+        font-size: 22px !important;
+    }
+
+    .b2b-checkout__total .b2b-checkout__card {
+        padding: 30px 24px !important;
+    }
+
+}
+
+.b2b-checkout__total .b2b-checkout__title {
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+@media(max-width: 991.98px) {
+
+    .b2b-checkout__title {
+        margin-bottom: 1.75rem;
+        font-size: 26px;
+    }
+
+    .b2b-checkout__total {
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+        -webkit-box-orient:vertical;
+        -webkit-box-direction:reverse;
+        -ms-flex-direction:column-reverse;
+        flex-direction:column-reverse;
+    }
+}
+
+@media(max-width: 767.98px) {
+    .b2b-checkout__title {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* BUTTON */
+.b2b-checkout__body-total .b2b-button {
+    min-width: 250px;
+    font-size: 18px;
+    line-height: 52px;
+}
+
+@media(max-width: 767.98px) {
+    .b2b-checkout__body-total .b2b-button {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+.b2b-checkout__body-total .b2b-button:disabled {
+    color: var(--b2b-colorWhite);
+    border-color: var(--b2b-colorBorder);
+    background-color: var(--b2b-colorBorder);
+}
+
+/* ORDER SUMMARY */
+.b2b-checkout__card_summary > .b2b-checkout__title {
+    padding: 0;
+}
+
+@media(max-width: 574.98px) {
+
+    .b2b-checkout__card_summary > .b2b-checkout__title {
+        font-size: 22px;
+    }
+
+}
+
+.b2b-checkout__card.b2b-checkout__card_summary {
+    padding: 50px;
+}
+
+@media(max-width: 991.98px) {
+    .b2b-checkout__card.b2b-checkout__card_summary {
+        margin-top: 1rem;
+    }
+}
+
+.b2b-checkout__total-items {
+    border-top: 1px solid var(--b2b-colorBorder);
+    padding: 18px 0;
+    border-bottom: 1px solid var(--b2b-colorBorder);
+}
+
+.b2b-checkout__total-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.b2b-checkout__total-item + .b2b-checkout__total-item {
+    margin-top: 15px;
+}
+
+.b2b-checkout__total-label,
+.b2b-checkout__total-value {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.b2b-checkout__total-value {
+    font-weight: 700;
+}
+
+.b2b-checkout__total-summary {
+    margin-top: 24px;
+}
+
+.b2b-checkout__total-summary .b2b-checkout__total-label,
+.b2b-checkout__total-summary .b2b-checkout__total-value {
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+/* BODY TOTAL */
+.b2b-checkout__body-total {
+    margin-top: 25px;
+}
+
+@media(max-width: 767.98px) {
+    .b2b-checkout__body-total {
+        margin-top: 1rem;
+    }
+}
+
+/* MODAL */
+.b2b-checkout__modal {
+    display: none;
+    z-index: 9499;
+}
+
+.b2b-checkout__modal + .slds-backdrop {
+    display: none;
+    z-index: 9498;
+}
+
+.b2b-checkout__modal[data-show="true"],
+.b2b-checkout__modal[data-show="true"] + .slds-backdrop {
+    display: block;
+}
+
+.b2b-checkout__modal .slds-modal__container {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    padding: 0;
+    height: 100%;
+    border-radius: 0;
+}
+
+.b2b-checkout__modal .slds-modal__header {
+    padding: 0;
+    border: 0;
+}
+
+.b2b-checkout__modal .slds-modal__header .slds-modal__close:active,
+.b2b-checkout__modal .slds-modal__header .slds-modal__close:focus {
+    box-shadow: unset;
+}
+
+.b2b-checkout__modal .slds-modal__content {
+    padding: 0;
+    height: 100%;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+@media (max-width: 1199.98px) {
+    .b2b-checkout__modal .slds-modal__content {
+        padding: 30px;
+    }
+}
+
+/* IFRAME */
+.b2b-checkout__stripe-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* FATAL ERROR */
+.b2b-checkout__fatal-error {
+    max-width: var(--b2b-checkout-contentMaxWidth, 100%);
+    margin: 0 auto;
+}
+
+.b2b-checkout__fatal-error .slds-notify.slds-notify_alert.slds-alert_error {
+    font-size: 16px;
+}
+
+.b2b-checkout__total-summary-message {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.b2b-checkout__total-summary-message a {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.b2b-checkout__darley-dollar-label {
+    font-weight: 600;
+    color: #236192;
+}
+
+.b2b-darley-dollar-logo {
+    display: inline-block;
+    position: relative;
+    width: 14px;
+    height: 16px;
+    top: -1.5px;
+}
+
+.b2b-checkout__darley-dollar-value {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: #236192;
+}
+
+.b2b-checkout__review {
+    margin-top: 45px;
+}
+
+@media(max-width: 991.98px) {
+    .b2b-checkout__review {
+        margin-top: 0;
+    }
+}
+
+.b2b-hide[data-show="true"] {
+    display: block !important;
+}
+
+.b2b-hide[data-show="false"] {
+    display: none !important;
+}

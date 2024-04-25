@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Contact Us</masterLabel>
+    <description>B2B Contact Us</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="formTitle" type="String" label="'Form' Title" default=""></property>
+            <property name="formSubtitle" type="String" label="'Form' Subtitle" default=""></property>
+            <property name="showSidebar" type="Boolean" label="Show Sidebar" default="true"></property>
+            <property name="sidebarTitle" type="String" label="'Sidebar' Title" default=""></property>
+            <property name="streetLine1" type="String" label="Street Line 1" default="325 Spring Lake Dr"></property>
+            <property name="streetLine2" type="String" label="Street Line 2" default="Itasca, IL 60143"></property>
+            <property name="tollFreeLabel" type="String" label="'Toll Free' Label" default=""></property>
+            <property name="tollFreeNumber" type="String" label="'Toll Free' Number" default="1-800-323-0244"></property>
+            <property name="phoneLabel" type="String" label="'Phone' Label" default=""></property>
+            <property name="phoneNumber" type="String" label="'Phone' Number" default="1.630.735.3500"></property>
+            <property name="faxLabel" type="String" label="'Fax' Label" default=""></property>
+            <property name="faxNumber" type="String" label="'Fax' Number" default="630.735.3560"></property>
+            <property name="emailLabel" type="String" label="'Email' Label" default=""></property>
+            <property name="email" type="String" label="Email" default="edarleycustomerservice@darley.com"></property>
+            <property name="googleMapUrl" type="String" label="'Google Map' URL" default="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1485.3240162837108!2d-87.63960363725485!3d41.87891852561569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2cbf6ac71899%3A0x3667f9dd6a4ff6d6!2sForte%20Group%20%7C%20software%20development!5e0!3m2!1sen!2sby!4v1666948552312!5m2!1sen!2sby"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

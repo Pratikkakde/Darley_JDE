@@ -1,0 +1,35 @@
+<template>
+    <template if:true={showComponent}>
+        <div class="b2b-featured-products__wrapper">
+
+            <!-- TTILE -->
+            <template if:true={labels.title}>
+                <div class="dxp-text-heading-xlarge">{labels.title}</div>
+            </template>
+
+            <!-- SLIDER -->
+            <div class="b2b-featured-products__slider">
+                <c-b2b-slider
+                    list={products}
+                    show-arrows={showArrows}
+                    show-slicks={showSlicks}
+                    grid-column-gap="60"
+                    xl-grid-column-gap="60"
+                    lg-grid-column-gap="30"
+                    md-grid-column-gap="30"
+                >
+                    <template for:each={products} for:item="item" for:index="index">
+                        <div key={item.index} class="b2b-slider__item">
+                            <c-b2b-product-card
+                                product={item}
+                                onaction={handleClickAction}
+                                featured-product="true"
+                            ></c-b2b-product-card>
+                        </div>
+                    </template>
+                </c-b2b-slider>
+            </div>
+
+        </div>
+    </template>
+</template>

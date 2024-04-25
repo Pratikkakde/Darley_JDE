@@ -1,0 +1,100 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+
+        <div class={wrapperClass} data-guest={isGuest}>
+         
+            <!-- TITLE -->
+            <template if:false={editMode}>
+             <div class="b2b-address-form__title">{getFormTitle}</div>
+            </template>
+
+            <!-- EDITMODE -->
+            <template if:true={editMode}>
+                <div class="b2b-address-form__title">{getEditFormTitle}</div>
+            </template>
+    
+            <!-- SPINNER -->
+            <template if:true={isUpdateLoading}>
+                <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+            </template>
+            
+             <div class="b2b-address-book-wrapper">
+                 <!-- ADDRESS TYPE -->
+                 <lightning-combobox
+                    type="addressType"
+                    name="addressType"
+                    placeholder={labels.select}
+                    default-option={labels.select}
+                    label={labels.addressType}
+                    value={form.addressType}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeAddressType}
+                    options={addressTypeOptions}
+                ></lightning-combobox>
+    
+                <!-- NAME -->
+                <lightning-input
+                    name="Name"
+                    data-name="Name"
+                    type="text"
+                    label={labels.Name}
+                    max-length={maxLength.Name}
+                    value={form.name}
+                    required
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleNameChange}
+                    class="slds-m-vertical_medium b2b-addresForm__name"
+                ></lightning-input>
+
+                <!-- GOOGLE -->
+                <lightning-input-address
+                    variant="label-hidden"
+                    address-label="Address Info"
+                    address-lookup-label="Address" 
+                    address-lookup-placeholder="Search on google"
+                    street-label="Street Address"
+                    city-label="City"
+                    country-label="Country"
+                    province-label="State/Province"
+                    postal-code-label="ZIP/PostalCode"
+                    street={form.streetAddress}
+                    city={form.city}
+                    province={form.provinceCode}
+                    country={form.countryCode}
+                    postal-code={form.postalCode}
+                    country-options={getCountryOptions}
+                    province-options={getProvinceOptions}
+                    show-address-lookup
+                    message-when-value-missing={labels.requiredField}
+                    onchange={handleChangeAddress}
+                ></lightning-input-address>
+    
+                <!-- SAVE AS DEFAULT -->
+                <div>
+                    <lightning-checkbox-group
+                        data-name="saveAsDefaultAddress"
+                        variant="label-hidden"
+                        options={saveAsDefaultAddressOptions}
+                        value={saveAsDefaultAddress}
+                        onchange={handleChangeSaveAsDefaultAddress}
+                    ></lightning-checkbox-group>
+                </div>
+    
+                <!-- BUTTONS -->
+                <div class="b2b-address-book__footer">
+                    <button
+                        class="slds-button slds-button_outline-brand"
+                        disabled={isUpdateLoading}
+                        onclick={handleClickCancelButton}
+                    >{labels.cancel}</button>
+        
+                    <button
+                        class="slds-button slds-button_brand"
+                        disabled={isUpdateLoading}
+                        onclick={handleClickSubmitButton}
+                    >{labels.saveButton}</button>
+                </div> 
+             </div>
+        </div>
+</template>

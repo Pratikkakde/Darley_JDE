@@ -1,0 +1,30 @@
+<template>
+
+    <!-- LOADING SPINNER -->
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+    </template>
+
+    <!-- CART FROM -->
+    <c-b2b-form-credit-card
+        show-card-name
+        is-card-name-required
+        show-card-default
+        show-card-icon
+    ></c-b2b-form-credit-card>
+
+    <!-- BUTTONS -->
+    <div class="b2b-add-card-form__buttons">
+        <button
+            class="b2b-button slds-button slds-button_outline-brand"
+            disabled={isLoading}
+            onclick={handleClickClose}
+        >{labels.cancel}</button>
+        <button
+            class="b2b-button slds-button slds-button_brand"
+            disabled={isLoading}
+            onclick={handleClickSave}
+        >{labels.save}</button>
+    </div>
+
+</template>

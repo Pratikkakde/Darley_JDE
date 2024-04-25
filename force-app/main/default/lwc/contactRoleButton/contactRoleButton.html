@@ -1,0 +1,153 @@
+<template>
+
+
+<div class="slds-p-around_small">
+    
+    <p class="slds-text-heading_medium slds-text-align_center ">Create Contact Role </p>
+<!-- <lightning-card title="Create ContactRole" >-->
+
+<div>
+    <lightning-input type="text" value={searchValue} label="Select Contact" onchange={handelEvent}
+        placeholder="search contact..."></lightning-input>
+    </div>
+    <template if:true={showbutton}>
+        <lightning-button variant="brand" class="slds-float_right slds-p-around_small"  title="Create Contact" label="Create Contact" onclick={HandlecreateContact}></lightning-button>
+    </template>
+    <div>
+        <template if:true={loaded1}>
+            <lightning-spinner alternative-text="Loading" size="Meduim"></lightning-spinner>
+    </template>
+        <template if:true={contacts}>
+            
+
+                <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+                    <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                        <div class="slds-truncate" title="Name"></div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Name">Title</div>
+                            </th>
+                        <th class="" scope="col">
+                        <div class="slds-truncate" title="Name" style="padding-left: 80px;">Email</div>
+                        </th>
+                        <th class="" scope="col">
+                        <div class="slds-truncate" title="CAC Status">Phone</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <template for:each={contacts} for:item="con">
+                        <tr key={con.Id}>
+                        <td>
+                            <lightning-input type="radio" label= {con.Name}  value={con.Id}  name="input1"  onchange={SelectContact} class="my-radio-group"></lightning-input>                           </td>
+                        
+                            <td>
+                                <div class="slds-truncate .slds-float_left ProdData" >{con.Title}</div>
+                                </td>
+                        <td>
+                        <div class="slds-truncate .slds-float_left ProdData" style="padding-left: 80px;">{con.Email}</div>
+                        </td>
+            
+                            
+                        <td>
+                        <div class="slds-truncate .slds-float_left ProdData" >{con.Phone}</div>
+                        </td>
+            
+                        </tr>
+                        
+                    </template>
+                    
+                </tbody>
+                </table>
+
+            
+            
+        
+        
+        </template>
+    </div>
+
+    <template if:true={showFields}>
+        <div class="">
+            
+        <lightning-record-edit-form object-api-name="OpportunityContactRole"  onsuccess={handleSuccess} >
+            
+            <lightning-input-field field-name="ContactId" value={selectedContactID}>  </lightning-input-field>
+            <div class="slds-grid  slds-col slds-size_1-of-1 ">
+        <lightning-input-field field-name="OpportunityId" value={recordId} > </lightning-input-field>
+        <lightning-input-field field-name="Role"  > </lightning-input-field>
+
+    </div>
+                
+
+        <lightning-input-field class="checkbox"  field-name="IsPrimary"  > </lightning-input-field>
+            
+            <lightning-button class="slds-float_right slds-p-bottom_small" variant="Brand" type="submit" label="SAVE" onclick={handleSuccess}> </lightning-button>
+        
+        </lightning-record-edit-form>
+        <template if:true={loaded}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        
+        </div>
+            </template>
+    
+
+
+</div>
+
+
+<template if:true={isModalOpen}>
+    <!-- Modal/Popup Box LWC starts here -->
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Contact</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                
+                
+                <lightning-record-edit-form object-api-name=Contact onsuccess={HandlecreateContact} record-type-id={contactRecordTypeId}  >
+                    
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            
+                            <lightning-input-field field-name="FirstName"  onchange={handleFirstNameChange} ></lightning-input-field>
+                            <lightning-input-field field-name="Phone" onchange={handlePhoneChange}  ></lightning-input-field>
+                            <lightning-input-field field-name="AccountId" value={accountId} ></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <!-- More lightning-input-field components here -->
+                            <lightning-input-field field-name="LastName" onchange={handleLastNameChange}  ></lightning-input-field>
+                            <lightning-input-field field-name="Email"  onchange={handleEmailChange} ></lightning-input-field>
+                            <lightning-input-field field-name="Title"  onchange={handleTitleChange} ></lightning-input-field>
+
+                        </div>
+                        
+                        
+                    </div>
+                    <lightning-button  variant="brand" label="SAVE" class="slds-float_right slds-p-bottom_small " style="width: 100px;" onclick={CreateContact}  ></lightning-button>
+                    <lightning-button variant="brand" label="CANCEL" onclick={closeModal} class="slds-float_right slds-p-bottom_small "  style="padding-right: 5px;width: 100px;"></lightning-button>
+                    
+                </lightning-record-edit-form>
+            </div>
+            
+        </div>
+    </section>
+</template>
+
+
+
+
+</template>

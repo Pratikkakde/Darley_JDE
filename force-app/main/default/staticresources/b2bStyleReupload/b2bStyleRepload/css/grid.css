@@ -1,0 +1,20 @@
+/* GRID */
+
+.b2b-container {
+    margin: 0 auto;
+    padding: 0 var(--b2b-theme-contentHorizontalPaddings, 0);
+    max-width: calc(var(--b2b-theme-containerMaxWidth, 100%) + var(--b2b-theme-contentHorizontalPaddings, 0) * 2);
+}
+
+.b2b-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + var(--b2b-theme-contentHorizontalPaddings, 0) * 2);
+    margin-left: calc(var(--b2b-theme-contentHorizontalPaddings, 0) * -1);
+    margin-right: calc(var(--b2b-theme-contentHorizontalPaddings, 0) * -1);
+}
+
+.b2b-col {
+    width: 100%;
+    padding: 0 var(--b2b-theme-contentHorizontalPaddings, 0);
+}

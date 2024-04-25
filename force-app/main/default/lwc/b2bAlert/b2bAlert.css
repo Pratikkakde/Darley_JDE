@@ -1,0 +1,15 @@
+:host {
+    display: block;
+    margin-bottom: 0;
+}
+
+:host:empty {
+    display: none;
+}
+
+.b2b-alert__wrapper {
+    display: flex;
+    grid-column-gap: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}

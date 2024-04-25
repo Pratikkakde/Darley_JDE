@@ -1,0 +1,52 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+        <div class="b2b-order-confirmation__container">
+
+            <!-- IMAGE -->
+            <template if:true={getContentImage}>
+                <img src={getContentImage} class="b2b-order-confirmation__image">
+            </template>
+
+            <!-- TITLE -->
+            <div class="b2b-order-confirmation__title">{getTile}</div>
+
+            <!-- ORDER NUMBER -->
+            <template if:true={orderNumber}>
+                <div class="b2b-order-confirmation__number">{getOrderNumberLabel} {orderNumber}</div>
+            </template>
+
+<!-- To use subscription functionality uncomment this part  -->
+            <!-- SUBSCRIPTION NUMBER -->
+<!--            <template if:true={subscriptionId}>-->
+<!--                <div class="b2b-order-confirmation__number">-->
+<!--                    {subscriptionNumberLabel}-->
+<!--                    <a-->
+<!--                        href={getSubscriptionLink}-->
+<!--                    > {subscriptionNumber}</a>-->
+<!--                </div>-->
+<!--            </template>-->
+<!-- -----------------------------------------------------  -->
+
+            <!-- BUTTONS -->
+            <div class="b2b-order-confirmation__buttons">
+
+                <!-- CONTINUE SHOPPING -->
+                <a
+                    href={getButtonContinueLink}
+                    class="slds-button slds-button_brand"
+                >{getButtonContinueLabel}</a>
+
+                <!-- ORDER DETAILS -->
+                <template if:true={showButtonOrder}>
+                    <a
+                        href={getButtonOrderLink}
+                        class="slds-button slds-button_outline-brand"
+                    >{getButtonOrderLabel}</a>
+                </template>
+
+            </div>
+
+        </div>
+    </div>
+</template>

@@ -1,0 +1,141 @@
+<template>
+    <div class="b2b-profile__wrapper">
+
+        <!-- FATAL ERROR -->
+        <template if:true={showFatalError}>
+            <c-b2b-alert
+                show={showFatalError}
+                variant="error"
+                message={fatalErrorMessage}
+            ></c-b2b-alert>
+        </template>
+        <template if:false={showFatalError}>
+
+            <!-- LOADING SPINNER -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+            </template>
+
+            <!-- HEADER -->
+            <div class="b2b-profile__header">
+                <div class="b2b-profile__header-content">
+
+                    <!-- NAME -->
+                    <template if:true={user.name}>
+                        <div class="b2b-profile__name dxp-text-heading-small">{user.name}</div>
+                    </template>
+
+                    <!-- TITLE -->
+                    <template if:true={user.title}>
+                        <div class="b2b-profile__title dxp-text-body-small">{user.title}</div>
+                    </template>
+
+                </div>
+                <div class="b2b-profile__header-action">
+
+                    <!-- EDIT BUTTON -->
+                    <button
+                        class="slds-button slds-button_brand"
+                        disabled={isLoading}
+                        onclick={handleClickEdit}
+                    >{labels.edit}</button>
+
+                </div>
+            </div>
+
+            <!-- BODY -->
+            <div class="b2b-profile__body">
+
+                <!-- NAME -->
+                <div class="b2b-profile__field">
+                    <div class="b2b-profile__field-label dxp-text-body-small">{labels.name}</div>
+                    <div class="b2b-profile__field-value dxp-text-body">
+                        <template if:true={user.name}>{user.name}</template>
+                    </div>
+                </div>
+                
+                <!-- EMAIL -->
+                <div class="b2b-profile__field">
+                    <div class="b2b-profile__field-label dxp-text-body-small">{labels.email}</div>
+                    <div class="b2b-profile__field-value dxp-text-body">
+                        <template if:true={user.email}>{user.email}</template>
+                    </div>
+                </div>
+
+                <!-- PHONE -->
+                <div class="b2b-profile__field">
+                    <div class="b2b-profile__field-label dxp-text-body-small">{labels.phone}</div>
+                    <div class="b2b-profile__field-value dxp-text-body">
+                        <template if:true={user.phone}>{user.phone}</template>
+                    </div>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="b2b-profile__field">
+                    <div class="b2b-profile__field-label dxp-text-body-small">{labels.password}</div>
+                    <div class="b2b-profile__field-value dxp-text-body">
+                        <span>**********</span>
+                        <a
+                            href="#"
+                            class="b2b-button_action"
+                            disabled={isLoading}
+                            onclick={handleClickResetPassword}
+                        >{labels.resetPassword}</a>
+                    </div>
+                </div>
+
+                <!-- YOUR BALANCE DARLEY DOLLARS-->
+                <template if:true={user.showDarleyDollars}>
+                    <div class="b2b-profile__field">
+                        <div class="b2b-profile__field-label dxp-text-body-small">{labels.yourBalanceDarleyDollars}</div>
+                        <div class="b2b-profile__field-value dxp-text-body">
+                            <div class="b2b-profile__darley-dollars"> 
+                                <svg class="b2b-profile__darley-dollars_icon" viewBox="0 0 12 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.81797 5.77898H2.90898V10.2209C2.90898 10.6164 2.58343 10.9366 2.18261 10.9366H1.09043V13.423H10.1814C11.1844 13.423 12 12.6285 12 11.6473V4.35257C12 3.37138 11.1844 2.57684 10.1814 2.57684H1.81855C0.813886 2.57684 0 3.37138 0 4.35257V7.73622H1.81855V5.77898C1.81855 5.38513 2.14061 5.06834 2.54492 5.06834H8.00058C8.4014 5.06834 8.72695 5.38342 8.72695 5.77898V10.2209C8.72695 10.6164 8.4014 10.9366 8.00058 10.9366H6.54609C6.14527 10.9366 5.81972 10.6147 5.81972 10.2209V5.77898H5.81797Z"></path>
+                                    <rect x="3" y="0.730774" width="2.76923" height="2.53846"></rect>
+                                    <rect x="3" y="12.7308" width="2.76923" height="2.53846"></rect>
+                                    <rect x="6.69238" y="0.730774" width="2.76923" height="2.53846"></rect>
+                                    <rect x="6.69238" y="12.7308" width="2.76923" height="2.53846"></rect>
+                                </svg>                                    
+                                <lightning-formatted-number
+                                    value={user.totalDarleyDollars}
+                                    maximum-fraction-digits="2"
+                                    minimum-fraction-digits="2"
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+        </template>
+
+    </div>
+
+    <!-- B2B USER UPSERT -->
+    <c-b2b-user-upsert
+        onclose={handleCloseUserUpsert}
+        onshowemailmodal={handleShowEmailModal}
+    ></c-b2b-user-upsert>
+
+    <!-- MODAL -->
+    <template if:true={showEmailModal}>
+        <section class="b2b-email-change__modal slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <button
+                    class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    onclick={handleClickModalCancel}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <path d="M31 25.4l13-13.1c.6-.6.6-1.5 0-2.1l-2-2.1c-.6-.6-1.5-.6-2.1 0L26.8 21.2c-.4.4-1 .4-1.4 0L12.3 8c-.6-.6-1.5-.6-2.1 0l-2.1 2.1c-.6.6-.6 1.5 0 2.1l13.1 13.1c.4.4.4 1 0 1.4L8 39.9c-.6.6-.6 1.5 0 2.1l2.1 2.1c.6.6 1.5.6 2.1 0L25.3 31c.4-.4 1-.4 1.4 0l13.1 13.1c.6.6 1.5.6 2.1 0L44 42c.6-.6.6-1.5 0-2.1L31 26.8c-.4-.4-.4-1 0-1.4z"></path>
+                    </svg>
+                </button>
+                <div class="slds-modal__header">
+                    <h2 class="title">{labels.emailChange}</h2>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+</template>

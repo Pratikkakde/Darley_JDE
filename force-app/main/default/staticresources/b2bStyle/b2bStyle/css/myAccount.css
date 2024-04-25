@@ -1,0 +1,46 @@
+/* LAYOUT. MY ACCOUNT */
+
+.b2b-layout__wrapper[data-layout="my-account"] {
+    min-height: 60vh;
+    background-color: var(--b2b-theme-layoutMyAccountSidebarBackgroundColor);
+}
+
+.b2b-layout__wrapper[data-layout="my-account"] .b2b-layout__sidebar,
+.b2b-layout__wrapper[data-layout="my-account"] .b2b-layout__content {
+    padding: 2.5rem;
+    border-radius: 0;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.06);
+    background-color: var(--dxp-g-root);
+}
+
+@media screen and (max-width: 1023.98px) {
+
+    .b2b-layout__wrapper[data-layout="my-account"] .b2b-layout__sidebar,
+    .b2b-layout__wrapper[data-layout="my-account"] .b2b-layout__content {
+        padding: 1.5rem;
+    }
+
+}
+
+@media screen and (max-width: 767.98px) {
+
+    .b2b-layout__wrapper[data-layout="my-account"] {
+        background-color: var(--dxp-g-root);
+    }
+
+    .b2b-layout__wrapper[data-layout="my-account"] .b2b-layout__sidebar,
+    .b2b-layout__wrapper[data-layout="my-account"] .b2b-layout__content {
+        padding: 0;
+        border-radius: 0;
+        box-shadow: unset;
+    }
+
+}
+
+.b2b-layout__wrapper[data-layout="my-account"] c-b2b-order-list {
+    margin-bottom: 0 !important;
+}
+
+.b2b-layout__wrapper[data-layout="my-account"] .b2b-layout__content community_layout-section {
+    padding: 0 !important;
+}

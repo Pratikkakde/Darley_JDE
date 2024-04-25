@@ -1,0 +1,15 @@
+:host {
+    display: block;
+}
+
+.b2b-layout__wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+}
+
+.b2b-layout__header,
+.b2b-layout__content,
+.b2b-layout__footer {
+    width: 100%;
+}

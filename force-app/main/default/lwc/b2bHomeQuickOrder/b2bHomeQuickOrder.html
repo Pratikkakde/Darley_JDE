@@ -1,0 +1,45 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class={wrapperClass}>
+
+            <!-- TITLE -->
+            <div class="b2b-home-quick-order__title">{labels.title}</div>
+
+            <!-- TABS -->
+            <template if:true={tabOptions.length}>
+                <div class="b2b-home-quick-order__tabs">
+                    <template for:each={tabOptions} for:item="item" for:index="index">
+                        <button
+                            key={item.value}
+                            data-value={item.value}
+                            disabled={item.selected}
+                            class="b2b-home-quick-order__tab-item"
+                            onclick={handleClickTab}
+                        >{item.label}</button>
+                    </template>
+                </div>
+            </template>
+
+            <div class="b2b-home-quick-order__row">
+
+                <!-- QUICK ORDER -->
+                <div class="b2b-home-quick-order__col" data-show={showManualInput}>
+                    <c-b2b-quick-order
+                        number-of-lines={numberOfLines}
+                        max-number-of-lines={maxNumberOfLines}
+                    ></c-b2b-quick-order>
+                </div>
+
+                <!-- QUICK ORDER UPLOADER -->
+                <div class="b2b-home-quick-order__col" data-show={showUploadFile}>
+                    <c-b2b-quick-order-uploader
+                        template-document-id={templateDocumentId}
+                    ></c-b2b-quick-order-uploader>
+                </div>
+
+            </div>
+
+        </div>
+    </template>
+</template>

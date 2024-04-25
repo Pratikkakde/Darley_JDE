@@ -1,0 +1,90 @@
+/* B2B USER CARD */
+
+c-b2b-user-card lightning-button-menu > .slds-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+}
+
+c-b2b-user-card lightning-button-menu > .slds-button[disabled] {
+    cursor: not-allowed;
+}
+
+c-b2b-user-card lightning-button-menu > .slds-button .slds-button__icon {
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: var(--dxp-g-root-contrast);
+}
+
+c-b2b-user-card lightning-button-menu > .slds-button lightning-primitive-icon {
+    display: block;
+}
+
+c-b2b-user-card lightning-button-menu > .slds-button lightning-primitive-icon + lightning-primitive-icon {
+    display: none;
+}
+
+c-b2b-user-card lightning-button-menu .slds-dropdown {
+    padding: 0;
+    margin-bottom: 0;
+    border: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+}
+
+c-b2b-user-card lightning-button-menu .slds-dropdown .slds-dropdown__item a {
+    transition: color 0.1s, background-color 0.1s;
+}
+
+c-b2b-user-card lightning-button-menu .slds-dropdown .slds-dropdown__item a:hover,
+c-b2b-user-card lightning-button-menu .slds-dropdown .slds-dropdown__item a:focus {
+    color: var(--dxp-g-brand-contrast);
+    background-color: var(--dxp-g-brand);
+}
+
+c-b2b-user-card lightning-button-menu .slds-dropdown .slds-dropdown__item a:active {
+    color: var(--dxp-g-brand-contrast-1);
+    background-color: var(--dxp-g-brand-1);
+}
+
+/* B2B USER MANAGE PERMISSIONS */
+
+c-b2b-user-manage-permissions lightning-dual-listbox .slds-dueling-list__column:last-child {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+c-b2b-user-manage-permissions lightning-dual-listbox .slds-dueling-list__options {
+    height: 10.3rem;
+}
+
+c-b2b-user-manage-permissions lightning-dual-listbox .slds-form-element__label {
+    margin-bottom: 4px;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1;
+}
+
+c-b2b-user-manage-permissions lightning-dual-listbox lightning-button-icon svg.slds-button__icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+c-b2b-user-manage-permissions lightning-dual-listbox .slds-dueling-list__options [aria-selected="true"] {
+    color: var(--dxp-g-brand-contrast);
+    background-color: var(--dxp-g-brand);
+}
+
+c-b2b-user-manage-permissions lightning-dual-listbox .slds-dueling-list__options [aria-selected="true"]:hover,
+c-b2b-user-manage-permissions lightning-dual-listbox .slds-dueling-list__options [aria-selected="true"]:focus {
+    color: var(--dxp-g-brand-contrast-1);
+    background-color: var(--dxp-g-brand-1);
+}

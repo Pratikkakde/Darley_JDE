@@ -1,0 +1,32 @@
+<template>
+
+    <div lwc:dom="manual" class="custom-css-container"></div>
+
+    <div class="slds-grid slds-grid_vertical-align-center">
+        <label class="slds-m-right_x-small slds-form-element__label">{label}</label>
+
+        <span class="b2b-qty-container">
+            <button
+                    class="slds-p-horizontal_xx-small slds-p-vertical_x-small button-minus"
+                    disabled={isMinusButtonDisabled}
+                    onclick={decreaseValue}
+            >
+                <lightning-icon size="x-small" icon-name="utility:dash"></lightning-icon>
+            </button>
+            <input
+                    type=number
+                    min={LIMIT_MIN}
+                    max={LIMIT_MAX}
+                    value={value}
+                    onchange={changeValue}
+            />
+            <button
+                    class="slds-p-horizontal_xx-small slds-p-vertical_x-small button-add"
+                    disabled={isAddButtonDisabled}
+                    onclick={increaseValue}
+            >
+                <lightning-icon size="x-small" icon-name="utility:add"></lightning-icon>
+            </button>
+        </span>
+    </div>
+</template>

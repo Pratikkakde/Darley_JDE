@@ -1,0 +1,53 @@
+<template>
+    <div class={wrapperClass}>
+        <div class="b2b-guest-cart-total__body">
+
+            <!-- TITLE -->
+            <div class="b2b-guest-cart-total__title">{labels.title}</div>
+
+            <!-- FIELDS -->
+            <template if:true={getFields.length}>
+                <div class="b2b-guest-cart-total__fields">
+                    <template for:each={getFields} for:item="item" for:index="index">
+                        <div key={item.index} class={item.class}>
+                            <div class="b2b-guest-cart-total__item-label">{item.label}</div>
+                            <div class="b2b-guest-cart-total__item-value">
+                                <lightning-formatted-number
+                                    value={item.value}
+                                    format-style="currency"
+                                    currency-code={currencyIsoCode}
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- TOTAL -->
+            <div class="b2b-guest-cart-total__total b2b-guest-cart-total__item">
+                <div class="b2b-guest-cart-total__item-label">{labels.totalLabel}</div>
+                <div class="b2b-guest-cart-total__item-value">
+                    <lightning-formatted-number
+                        value={total}
+                        format-style="currency"
+                        currency-code={currencyIsoCode}
+                    ></lightning-formatted-number>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="b2b-guest-cart-total__footer">
+            <button
+                class="slds-button slds-button_brand"
+                onclick={handleClickProceedToCheckout}
+            >{labels.buttonLabel}</button>
+
+            <button
+                class="slds-button slds-button_outline-brand"
+                onclick={handleClickProceedToCheckout}
+            >{labels.requestForQuote}</button>
+        </div>
+
+    </div>
+</template>

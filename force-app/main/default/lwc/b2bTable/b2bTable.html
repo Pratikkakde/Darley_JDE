@@ -1,0 +1,359 @@
+<template>
+    <div lwc:dom="manual" class="custom-css-container"></div>
+    <div class="table-component">
+
+        <!-- DESKTOP -->
+        <div class="list-table">
+            <table class="custom-table slds-table slds-table_bordered slds-table_col-bordered">
+                <!-- TABLE HEAD -->
+                <thead>
+                <tr>
+                    <template for:each={tableHeaders} for:item="item">
+                        <th key={item.key} scope="col" class="list-th-action" data-field={item.field}>
+                            <div class={item.orderClass}>
+                                <span>
+                                    {item.label}
+                                </span>
+
+                                <template if:true={item.isSort}>
+                                    <lightning-icon
+                                            icon-name={item.iconName}
+                                            size="xx-small"
+                                            class="slds-m-left_xx-small"
+                                    ></lightning-icon>
+
+                                    <div
+                                            class="list__th-clickable"
+                                            data-field={item.field}
+                                            onclick={handleHeaderSortClick}
+                                    ></div>
+                                </template>
+                            </div>
+                        </th>
+                    </template>
+                </tr>
+                </thead>
+
+                <!-- TABLE BODY -->
+                <tbody>
+                <template if:true={tableViewData.length}>
+                    <template for:each={tableViewData} for:item="item">
+                        <tr key={item.key}>
+                            <template for:each={item.data} for:item="rowItem">
+                                <template if:true={rowItem.isString}>
+                                    <td key={rowItem.key} data-type="string" >
+                                        <span>
+                                            {rowItem.label}
+                                        </span>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isNumber}>
+                                    <td key={rowItem.key} data-type="number" >
+                                        <span>
+                                            {rowItem.label}
+                                        </span>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isLink}>
+                                    <td key={rowItem.key} data-type="link">
+                                        <span class="link-cell" data-url={rowItem.url} onclick={handleLinkClick}>
+                                            {rowItem.label}
+                                        </span>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isDate}>
+                                    <td key={rowItem.key} data-type="date">
+                                        <lightning-formatted-date-time
+                                                value={rowItem.label}
+                                                year="numeric"
+                                                month="2-digit"
+                                                day="2-digit"
+                                        ></lightning-formatted-date-time>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isDateUTC}>
+                                    <td key={rowItem.key} data-type="date">
+                                        <lightning-formatted-date-time
+                                                if:true={rowItem.label}
+                                                value={rowItem.label}
+                                                year="numeric"
+                                                month="2-digit"
+                                                day="2-digit"
+                                                time-zone="UTC"
+                                        ></lightning-formatted-date-time>
+                                       
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isCurrency}>
+                                    <td key={rowItem.key} data-type="currency">
+                                        <lightning-formatted-number
+                                                value={rowItem.label}
+                                                format-style="currency"
+                                                currency-code={rowItem.currencyCode}
+                                                currency-display-as="symbol"
+                                                minimum-fraction-digits="2"
+                                        ></lightning-formatted-number>
+
+                                        <div
+                                                if:true={rowItem.hasAdditionalLabel}
+                                                class="currency-desktop-additional-label"
+                                                style={rowItem.additionalLabelTextColor}
+                                        >{rowItem.additionalLabelText}</div>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isBoolean}>
+                                    <td key={rowItem.key} data-type="boolean" >
+                                        <lightning-input 
+                                            type="checkbox"
+                                            variant="label-hidden"
+                                            data-id={rowItem.id} 
+                                            disabled={rowItem.disabled}
+                                            value={rowItem.label}
+                                            onchange={handleCheckboxClick}
+                                        ></lightning-input>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isPicklist}>
+                                    <td key={rowItem.key} data-type="string">
+                                        <lightning-combobox
+                                            variant="label-hidden"
+                                            required
+                                            disabled={rowItem.disabled}
+                                            placeholder={rowItem.placeholder}
+                                            data-id={rowItem.id} 
+                                            value={rowItem.label}
+                                            options={rowItem.options}
+                                            onchange={handlePicklistChange}
+                                        ></lightning-combobox>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isQuantitySelector}>
+                                    <td key={rowItem.key} data-type="quantitySelector" >
+                                        <c-b2b-quantity
+                                            disabled={rowItem.disabled}
+                                            editable={rowItem.editable}
+                                            required={rowItem.required}
+                                            increment={rowItem.increment}
+                                            min-quantity={rowItem.min}
+                                            max-quantity={rowItem.max}
+                                            value={rowItem.value}
+                                            data-id={rowItem.id} 
+                                            onchange={handlePicklistQuantity}
+                                        ></c-b2b-quantity>
+                                    </td>
+                                </template>
+
+                                <template if:true={rowItem.isButton}>
+                                    <td key={rowItem.key} data-type="button">
+                                        <button data-id={rowItem.id} data-action={rowItem.action} onclick={handleButtonClick}>{rowItem.label}</button>
+                                    </td>
+                                </template>
+                            </template>
+                        </tr>
+                    </template>
+                </template>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MOBILE -->
+        <div class="mobile-view-list">
+            <template for:each={tableViewMobileData} for:item="item">
+                <div key={item.id} class="mobile-view-list-item">
+                    <div class="mobile-view-list-item-header">
+                        <div class="arrow-section">
+                            <button data-id={item.id} data-show={item.showDetails} onclick={handleArrowButtonClick}>
+                                <lightning-icon
+                                        icon-name="utility:chevronright"
+                                        size="xx-small"
+                                ></lightning-icon>
+                            </button>
+                        </div>
+
+                        <div class="header-values">
+                            <template for:each={item.itemHeader} for:item="headerItem">
+                                <div key={headerItem.key} class="header-value">
+                                    <template if:true={headerItem.isString}>
+                                        <span data-type="string">
+                                            {headerItem.label}
+                                        </span>
+                                    </template>
+
+                                    <template if:true={headerItem.isNumber}>
+                                        <span data-type="number">
+                                            {headerItem.label}
+                                        </span>
+                                    </template>
+
+                                    <template if:true={headerItem.isLink}>
+                                        <span data-type="link" class="link-cell" data-url={headerItem.url} onclick={handleLinkClick}>
+                                            {headerItem.label}
+                                        </span>
+                                    </template>
+
+                                    <template if:true={headerItem.isCurrency}>
+                                        <div if:true={headerItem.hasAdditionalLabel} class="currency-mobile-header-additional-label">
+                                            {headerItem.additionalLabel}
+                                        </div>
+
+                                        <lightning-formatted-number
+                                                value={headerItem.value}
+                                                format-style="currency"
+                                                currency-code={headerItem.currencyCode}
+                                                currency-display-as="symbol"
+                                                minimum-fraction-digits="2"
+                                        ></lightning-formatted-number>
+                                    </template>
+                                    <template if:true={headerItem.isBoolean}>
+                                        <span data-type="boolean">
+                                            <lightning-input 
+                                                type="toggle" 
+                                                variant="label-hidden"
+                                                message-toggle-active ="" 
+                                                message-toggle-inactive=""
+                                                disabled={headerItem.disabled}
+                                                data-id={headerItem.id}
+                                                value={headerItem.label}
+                                                label={headerItem.label}
+                                                onchange={handleCheckboxClick}
+                                            ></lightning-input>
+                                        </span>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <template if:true={item.showDetails}>
+                        <div class="mobile-view-list-item-body-container">
+                            <template for:each={item.itemBody} for:item="bodyItem">
+                                <div key={bodyItem.key} class="mobile-view-list-item-body">
+                                    <div class="mobile-view-list-item-body-row">
+                                        <template if:false={bodyItem.isHideLabel}>
+                                            <div class="mobile-view-list-item-body-item">
+                                                {bodyItem.label}
+                                            </div>
+                                        </template>
+
+                                        <div class="mobile-view-list-item-body-item">
+                                            <template if:true={bodyItem.isString}>
+                                                {bodyItem.value}
+                                            </template>
+
+                                            <template if:true={bodyItem.isNumber}>
+                                                {bodyItem.value}
+                                            </template>
+
+                                            <template if:true={bodyItem.isDate}>
+                                                <lightning-formatted-date-time
+                                                    value={bodyItem.value}
+                                                    year="numeric"
+                                                    month="2-digit"
+                                                    day="2-digit"
+                                                ></lightning-formatted-date-time>
+                                            </template>
+
+                                            <template if:true={bodyItem.isDateUTC}>
+                                                <lightning-formatted-date-time
+                                                        if:true={bodyItem.value}
+                                                        value={bodyItem.value}
+                                                        year="numeric"
+                                                        month="2-digit"
+                                                        day="2-digit"
+                                                        time-zone="UTC"
+                                                ></lightning-formatted-date-time>
+                                                <div if:false={bodyItem.value}>{emptyField}</div>
+                                            </template>
+
+                                            <template if:true={bodyItem.isCurrency}>
+                                                <lightning-formatted-number
+                                                        value={bodyItem.value}
+                                                        format-style="currency"
+                                                        currency-code={bodyItem.currencyCode}
+                                                        currency-display-as="symbol"
+                                                        minimum-fraction-digits="2"
+                                                ></lightning-formatted-number>
+
+                                                <div
+                                                        if:true={bodyItem.hasAdditionalLabel}
+                                                        class="currency-mobile-body-additional-label"
+                                                        style={bodyItem.additionalLabelTextColor}
+                                                >{bodyItem.additionalLabelText}</div>
+                                            </template>
+
+                                            <template if:true={bodyItem.isButton}>
+                                                <button
+                                                        data-id={bodyItem.id}
+                                                        data-action={bodyItem.action}
+                                                        onclick={handleButtonClick}
+                                                >{bodyItem.buttonName}</button>
+                                            </template>
+
+                                            <template if:true={bodyItem.isPicklist}>
+                                                <lightning-combobox
+                                                    variant="label-hidden"
+                                                    required
+                                                    disabled={bodyItem.disabled}
+                                                    label={bodyItem.label}
+                                                    data-id={bodyItem.id} 
+                                                    value={bodyItem.label}
+                                                    options={bodyItem.options}
+                                                    onchange={handlePicklistChange}
+                                                ></lightning-combobox>
+                                            </template>
+
+                                            <template if:true={bodyItem.isQuantitySelector}>
+                                                <c-b2b-quantity
+                                                    data-type="quantitySelector"
+                                                    disabled={bodyItem.disabled}
+                                                    editable={bodyItem.editable}
+                                                    required={bodyItem.required}
+                                                    increment={bodyItem.increment}
+                                                    min-quantity={bodyItem.min}
+                                                    max-quantity={bodyItem.max}
+                                                    value={bodyItem.value}
+                                                    data-id={bodyItem.id} 
+                                                    onchange={handlePicklistQuantity}
+                                                ></c-b2b-quantity>
+                                            </template>
+
+                                            <template if:true={bodyItem.isLink}>
+                                                <span class="link-cell" data-url={bodyItem.url} onclick={handleLinkClick}>
+                                                    {bodyItem.value}
+                                                </span>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+
+        <!-- SPINNER -->
+        <template if:true={isLoading}>
+            <lightning-spinner
+                alternative-text="Loading"
+                size="medium"
+            ></lightning-spinner>
+        </template>
+
+        <!-- NO RECORDS MESSAGE -->
+        <template if:false={isLoading}>
+            <template if:false={tableData.length}>
+                <div class="no-records-message">{noItemsLabel}</div>
+            </template>
+        </template>
+
+    </div>
+</template>

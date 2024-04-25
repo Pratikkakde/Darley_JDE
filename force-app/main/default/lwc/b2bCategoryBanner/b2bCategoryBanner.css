@@ -1,0 +1,10 @@
+:host {
+    display: block;
+}
+
+.b2b-category-banner__image {
+    display: block;
+    width: 100%;
+    height: var(--b2b-category-banner-height, 250px);
+    object-fit: cover;
+}

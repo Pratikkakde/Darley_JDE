@@ -1,0 +1,42 @@
+/* LAYOUT */
+
+community_layout-column[slot="columns"].col-large-size_12-of-12.col-size_12-of-12.community_layout-column_column-host {
+    display: block;
+}
+
+.b2c_lite_commerce-commerceLayout_commerceLayout {
+    position: relative;
+}
+
+.commerce_builder-cartContents_cartContents.cart-spinner.slds-spinner_container {
+    background-color: transparent !important;
+}
+
+/* TOOLTIP */
+
+lightning-primitive-bubble .slds-popover .slds-popover__body {
+    white-space: pre-line;
+}
+
+/* SPINNER */
+
+lightning-spinner.slds-spinner_container {
+    z-index: 1;
+}
+
+/* FORM. LIGHTNING COMBOBOX */
+
+lightning-combobox .slds-input_faux.slds-is-disabled {
+    color: var(--dxp-c-input-text-color-disabled);
+}
+
+lightning-combobox .slds-listbox.slds-dropdown {
+    z-index: 990;
+}
+
+/* OUTLINE FOR REGIONS */
+
+[data-f6-region]:focus-within {
+    outline: 0 !important;
+    outline-offset: 0 !important;
+}

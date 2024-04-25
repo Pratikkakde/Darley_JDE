@@ -1,0 +1,30 @@
+:host {
+    display: block;
+}
+
+.b2b-horizontal-banner__wrapper {
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+}
+
+.b2b-horizontal-banner__container {
+    width: 100%;
+    padding: var(--b2b-theme-contentHorizontalPaddings);
+}
+
+.b2b-horizontal-banner__title {
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+@media (max-width: 767.98px) {
+    .b2b-horizontal-banner__container {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}

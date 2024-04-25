@@ -1,0 +1,66 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+
+    <!-- CONTENT -->
+    <div class="b2b-checkout-payment-container">
+        <!-- PAYMENT IFRAME -->
+        <iframe
+                src={getB2bStaticPayment}
+                class="b2b-checkout-payment__iframe"
+        ></iframe>
+
+        <!-- AMAZON PAY BUTTON -->
+        <div class="amazon-pay-button-container">
+            <div lwc:dom="manual" class="amazon-pay-button"></div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <template if:true={isShowModal}>
+        <section class="b2b-modal__wrapper slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+
+                <!-- CLOSE BUTTON -->
+                <button
+                        class="slds-button slds-button_icon slds-modal__close"
+                        title="Close"
+                        onclick={clickModalClose}
+                >
+                    <lightning-icon
+                            icon-name="utility:close"
+                            alternative-text={labels.close}
+                            variant="inverse"
+                    ></lightning-icon>
+                </button>
+
+                <!-- CONTENT -->
+                <div class="slds-modal__content slds-modal__content_headless">
+                    <div class="slds-m-vertical_large">Do you want to save this credit card?</div>
+                    <div class="slds-m-vertical_large">
+                        <lightning-input
+                                type="checkbox"
+                                name="isDefault"
+                                data-name="isDefault"
+                                label="Make Default Card"
+                                checked={isDefault}
+                                onchange={handleChangeIsDefault}
+                        ></lightning-input>
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <div name="footer" class="slds-modal__footer b2b-modal__footer_right">
+                    <button
+                            class="slds-button slds-button_outline-brand"
+                            onclick={clickModalNo}
+                    >No</button>
+                    <button
+                            class="slds-button slds-button_brand"
+                            onclick={clickModalYes}
+                    >Yes</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

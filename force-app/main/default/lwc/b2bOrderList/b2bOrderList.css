@@ -1,0 +1,250 @@
+:host {
+    display: block;
+}
+
+.order-summary-wrapper {
+    position: relative;
+}
+
+.order-summary-title {
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #231F20;
+}
+
+.order-summary-filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    position: relative;
+}
+
+.search-container {
+    width: 25%;
+}
+
+.sort-and-clear-section {
+    width: 75%;
+}
+
+.sort {
+    display: none;
+}
+
+.sort-and-clear-section {
+    align-items: baseline;
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 1rem;
+}
+
+.sort-mobile-section {
+    display: none;
+}
+
+.filter-input {
+    margin-left: 0.5rem;
+    margin-right: -0.5rem;
+    width: 100%;
+}
+
+.sort-field-select {
+    margin-top: 0.5rem;
+}
+
+.sort-order-select {
+    margin-top: 1rem;
+}
+
+.table-container {
+    margin-top: 33px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+}
+
+.b2b-button_action {
+    white-space: nowrap;
+}
+
+.list-date-from,
+.list-date-to,
+.sort-and-clear {
+    padding-left: 1rem;
+}
+
+.list-date-from,
+.list-date-to {
+    min-width: 12rem;
+}
+
+.status-field-select {
+    min-width: 8rem;
+}
+.filter-date-and-clear-section{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+
+@media only screen and (max-width: 1365px) and (min-width: 1023.98px) {
+    .order-summary-filter-section {
+        flex-wrap: wrap;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+    
+    .sort-and-clear-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 1rem;
+        padding-left: 0;
+        width: 100%;
+    }
+    .status-field-select {
+        width: 100%;
+    }
+
+    .list-date-from,
+    .list-date-to {
+        min-width: 12rem;
+    }
+    .filter-date-and-clear-section{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+
+    .order-summary-filter-section {
+        flex-wrap: wrap;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+        
+    .sort-and-clear-section {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        margin-top: 1rem;
+        padding-left: 0;
+        width: 100%;
+    }
+    .filter-date-and-clear-section{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        
+    }
+
+}
+
+@media only screen and (max-width: 795px) {
+
+    .filter-date-and-clear-section{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    } 
+
+    .order-summary-wrapper {
+        padding: 0;
+    }
+
+    .order-summary-filter-section {
+        flex-direction: column;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .sort-and-clear {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 1rem;
+        padding-left: 0;
+    }
+
+    .sort {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: bold;
+        line-height: 1rem;
+    }
+
+    .sort-and-clear-section {
+        flex-direction: column;
+        margin-top: 0;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .sort-button {
+        border: 1px solid #E8E8E8;
+        color: #2E363A;
+        margin: 1rem 0.5rem 0;
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .sort-button[disabled] {
+        background-color:transparent;
+        border-color:transparent;
+        color:#dddbda;
+        cursor:default;
+    }
+
+    .sort-button-click {
+        border: 1px solid #ED1B2D;
+    }
+
+    .status-field-select {
+        display: none;
+    }
+
+    .list-date-from,
+    .list-date-to {
+        margin-top: 1rem;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .sort-mobile-section {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -0.5rem;
+        width: 100%;
+    }
+
+    .pagination {
+        margin-top: 1.25rem;
+    }
+
+}
+
+.sort-and-clear .slds-button.b2b-button_action {
+    color: #231F20;
+}
+
+.sort-and-clear .slds-button.b2b-button_action:hover,
+.sort-and-clear .slds-button.b2b-button_action:focus {
+    color: rgb(237, 27, 45);
+}

@@ -1,0 +1,64 @@
+lightning-button.savebtn{
+    --sds-c-button-shadow-focus: 0 1 3px black;
+    --sds-c-button-brand-color-background : #6D67E4;
+    --sds-c-button-text-color: #f4f7f9;
+ }
+ .bgcolor{
+    
+    
+    color:black;
+    
+    
+}
+.tblColPad{
+  
+    color : #434243;
+    
+}
+.percent {
+    /* justify-content:end; */
+    display:flex;
+    text-align-last: right;
+    /* font-size: medium;
+    font-weight: bold; */
+    /* position:absolute; */
+}
+.percent div{
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 1px;
+    font-weight: bold;
+}
+.headingCss{
+   width:200%;
+    display:flex;
+    
+}
+ .hdcss{
+    width:300px;
+    font-weight: bold;
+    padding-right: 5px;
+   
+}
+ /* .iconCss{
+    display: flex;
+ } */
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1500px)
+{
+ 
+ .tblColPad{
+    table-layout: fixed;
+   
+ }  
+}
+/* .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .card-container lightning-card {
+    margin: 0;
+  } */

@@ -1,0 +1,45 @@
+.b2b-layout__wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    padding-right: var(--b2b-theme-contentHorizontalPaddings, 0);
+    padding-left: var(--b2b-theme-contentHorizontalPaddings, 0);
+}
+
+.b2b-layout__header,
+.b2b-layout__row,
+.b2b-layout__footer {
+    width: 100%;
+    margin: 0 auto;
+    max-width: var(--b2b-theme-containerMaxWidth, 100%);
+}
+
+.b2b-layout__row {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    grid-column-gap: var(--b2b-theme-contentHorizontalPaddings, 0);
+    padding-top: var(--b2b-theme-contentVerticalPaddings, 0);
+    padding-bottom: var(--b2b-theme-contentVerticalPaddings, 0);
+}
+
+.b2b-layout__sidebar {
+    width: var(--b2b-theme-layoutMyAccountSidebarWidth, 300px);
+    min-width: var(--b2b-theme-layoutMyAccountSidebarWidth, 300px);
+}
+
+.b2b-layout__content {
+    width: calc(100% - var(--b2b-theme-layoutMyAccountSidebarWidth, 300px) - var(--b2b-theme-contentHorizontalPaddings, 0));
+    max-width: calc(100% - var(--b2b-theme-layoutMyAccountSidebarWidth, 300px) - var(--b2b-theme-contentHorizontalPaddings, 0));
+}
+
+@media (max-width: 1023.98px) {
+    .b2b-layout__sidebar {
+        display: none;
+    }
+
+    .b2b-layout__content {
+        width: 100%;
+        max-width: 100%;
+    }
+}

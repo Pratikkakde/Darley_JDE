@@ -1,0 +1,50 @@
+<template>
+    <template if:true={show}>
+        <section class={modalClass}>
+            <div class="slds-modal__container">
+
+                <!-- CLOSE BUTTON -->
+                <button
+                    class="slds-button slds-button_icon slds-modal__close"
+                    title={labels.close}
+                    disabled={isLoading}
+                    onclick={handleClickHeaderClose}
+                >
+                    <lightning-icon
+                        icon-name="utility:close"
+                        alternative-text={labels.close}
+                        variant="inverse"
+                    ></lightning-icon>
+                </button>
+
+                <!-- HEADER -->
+                <template if:false={hideHeader}>
+                    <slot name="header" class="slds-modal__header">
+                        <h2 class="b2b-modal__title">{title}</h2>
+                    </slot>
+                </template>
+
+                <!-- CONTENT -->
+                <slot name="content" class={contentClass}></slot>
+
+                <!-- FOOTER -->
+                <template if:false={hideFooter}>
+                    <slot name="footer" class={footerClass}>
+                        <button
+                            class="slds-button slds-button_outline-brand"
+                            disabled={isLoading}
+                            onclick={handleClickModalClose}
+                        >{closeLabel}</button>
+                        <button
+                            class="slds-button slds-button_brand"
+                            disabled={isSubmitDisabled}
+                            onclick={handleClickModalSubmit}
+                        >{submitLabel}</button>
+                    </slot>
+                </template>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

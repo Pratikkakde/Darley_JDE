@@ -1,0 +1,219 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div if:true={hasAccess} class={wrapperClass}>
+
+        <!-- LOADING SPINNER -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+        </template>
+
+        <!-- ORDER INFORMATION -->
+        <div class="b2b-order-detail__order b2b-grid__row">
+            <div class="b2b-grid__col">
+
+                <!-- ORDER DATE -->
+                <div class="b2b-order-detail__subtitle">{labels.orderDate}</div>
+                <div class="b2b-order-detail__value">
+                    <lightning-formatted-date-time
+                        year="numeric"
+                        month="numeric"
+                        day="numeric"
+                        value={order.orderDate}
+                    ></lightning-formatted-date-time>
+                </div>
+
+            </div>
+            <div class="b2b-grid__col">
+
+                <!-- ORDER STATUS -->
+                <div>
+                    <div class="b2b-order-detail__subtitle">{labels.orderStatus}</div>
+                    <div class="spinLoader">
+                        <template if:false={ordStatLoading}>
+                            <!-- <div class="b2b-order-detail__value">{order.status}</div> -->
+                            <div class="b2b-order-detail__value">{OrdStat}</div>
+                        </template>
+                        <template if:true={ordStatLoading}>
+                            <lightning-spinner alternative-text= "Loading" size="small"></lightning-spinner>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDER DETAIL -->
+        <div class="b2b-order-detail__detail b2b-grid__row">
+            <div class="b2b-grid__col">
+
+                <!-- SHIPPING INFORMATION -->
+                <div class="b2b-order-detail__subtitle">{labels.shippingInformation}</div>
+
+                <!-- SHIPPING ADDRESS -->
+                <div class="b2b-order-detail__item">
+                    <div class="b2b-order-detail__label">
+                        {labels.shippingAddress}:
+                    </div>
+                    <div class="b2b-order-detail__value">{shipping.address}</div>
+                </div>
+
+                <!-- TRACKING NUMBER -->
+                <div class="b2b-order-detail__subtitle">{labels.trackingNumber}</div>
+                <div if:true={isTrackingNumbersEmpty}>{labels.emptyTrackingNumbersMessage}</div>
+                <template for:each={tracking} for:item="item" for:index="index">
+                    <div key={item.index} class="slds-m-right_small b2b-word-break">
+                        <a href={item} target="_blank" class="b2b-pointer">{item}</a>
+                    </div>
+                </template>
+            </div>
+            <div class="b2b-grid__col">
+
+                <!-- BILLING INFORMATION -->
+                <div class="b2b-order-detail__subtitle">{labels.billingInformation}</div>
+                <div class="b2b-order-detail__item">
+                    <div class="b2b-order-detail__label">{labels.billingAddress}:</div>
+                    <div class="b2b-order-detail__value">{billing.address}</div>
+                </div>
+
+                <!-- PAYMENT METHOD -->
+                <div class="b2b-order-detail__subtitle">{labels.paymentMethod}</div>
+
+                <template if:true={isCreditCard}>
+                    <div class="b2b-order-detail__item">
+                        <div class="b2b-order-detail__label">{labels.creditCard}:</div>
+                        <div class="b2b-order-detail__value b2b-order-detail-credit-card__name">{payment.creditCard}</div>
+                    </div>
+                </template>
+
+                <template if:true={isInvoice}>
+                    <div class="b2b-order-detail__item">
+                        <div class="b2b-order-detail__label">{labels.invoice}</div>
+                    </div>
+                </template>
+
+                <template if:true={isAmazonPay}>
+                    <div class="b2b-order-detail__item">
+                        <div class="b2b-order-detail__label">{labels.amazonPay}</div>
+                    </div>
+                </template>
+
+                <div class="b2b-order-detail__item slds-m-top_x-small">
+                    <div class="b2b-order-detail__label">{labels.poNumber}:</div>
+                    <div class="b2b-order-detail__value">
+                        <template if:true={isPONumberAvailable}>{payment.poNumber}</template>
+                        <template if:false={isPONumberAvailable}>N/A</template>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PRODUCTS -->
+        <div class="table-container">
+            <div class="b2b-order-detail__label slds-m-bottom_small">{labels.orderedProducts}</div>
+
+            <c-b2b-table
+                table-headers={tableOrdersHeaders}
+                table-data={list}
+                table-view-data={list}
+                table-view-mobile-data={listMobile}
+                onexpand={handleClickOrderTitle}
+            ></c-b2b-table>
+        </div>
+
+        <!-- TOTALS -->
+        <div class="b2b-order-detail__totals b2b-grid__row">
+            <div class="b2b-grid__col"></div>
+            <div class="b2b-grid__col"></div>
+
+            <div class="b2b-grid__col">
+                <!-- SUBTOTALS -->
+                <div class="b2b-order-detail__total-item">
+                    <div class="b2b-order-detail__total-label">{labels.subtotal}:</div>
+                    <div class="b2b-order-detail__total-value">
+                        <lightning-formatted-number
+                            value={totals.subtotal}
+                            currency-code={getCurrencyIsoCode}
+                            format-style="currency"
+                        ></lightning-formatted-number>
+                    </div>
+                </div>
+
+                <!-- DARLEY DOLLARS -->
+                <template if:true={hasDarleyDollars}>
+                    <div class="b2b-order-detail__darley-dollar-item">
+                        <div class="b2b-order-detail__total-label">{labels.darleyDollars}:</div>
+                        <div class="b2b-order-detail__total-value">
+                            <span>-</span>
+                            <svg class="b2b-darley-dollar-logo slds-m-right_xx-small" width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.8028 4.09398H3.6514V8.90602C3.6514 9.33455 3.29872 9.68144 2.8645 9.68144H1.6813V12.375H11.5299C12.6164 12.375 13.5 11.5143 13.5 10.4513V2.54871C13.5 1.48575 12.6164 0.625 11.5299 0.625H2.4701C1.38171 0.625 0.5 1.48575 0.5 2.54871V6.21432H2.4701V4.09398C2.4701 3.66731 2.81899 3.32412 3.257 3.32412H9.1673C9.60152 3.32412 9.9542 3.66546 9.9542 4.09398V8.90602C9.9542 9.33455 9.60152 9.68144 9.1673 9.68144H7.5916C7.15738 9.68144 6.8047 9.33269 6.8047 8.90602V4.09398H6.8028Z" fill="#236192"/>
+                            </svg>
+                            <lightning-formatted-number
+                                value={totals.darleyDollars}
+                                currency-code={getCurrencyIsoCode}
+                                format-style="currency"
+                            ></lightning-formatted-number>
+                        </div>
+                    </div>
+                </template>
+               
+                <!-- ESTIMATED TAX -->    
+                <div class="b2b-order-detail__total-item">
+                    <div class="b2b-order-detail__total-label">{labels.tax}:</div>
+                    <div class="b2b-order-detail__total-value">
+                        <lightning-formatted-number
+                            value={totals.tax}
+                            currency-code={getCurrencyIsoCode}
+                            format-style="currency"
+                        ></lightning-formatted-number>
+                    </div>
+                </div>
+                
+                <!-- ESTIMATED SHIPPING -->
+                <div class="b2b-order-detail__total-item">
+                    <div class="b2b-order-detail__total-label">{labels.estimatedShipping}:</div>
+                    <div class="b2b-order-detail__total-value">
+                        <lightning-formatted-number
+                            value={totals.estimatedShipping}
+                            currency-code={getCurrencyIsoCode}
+                            format-style="currency"
+                        ></lightning-formatted-number>
+                    </div>
+                </div>
+                
+                <!-- PROMOTIONS -->
+                <template if:true={hasPromotions}>
+                    <div class="b2b-order-detail__total-item">
+                        <div class="b2b-order-detail__total-label">{labels.promotions}:</div>
+                        <div class="b2b-order-detail__total-value">
+                            <lightning-formatted-number
+                                value={totals.promotions}
+                                currency-code={getCurrencyIsoCode}
+                                format-style="currency"
+                            ></lightning-formatted-number>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- TOTAL -->
+                <div class="b2b-order-detail__total-item b2b-order-detail__total-huge">
+                    <div class="b2b-order-detail__total-label">{labels.orderTotal}:</div>
+                    <div class="b2b-order-detail__total-value">
+                        <lightning-formatted-number
+                            value={totals.total}
+                            currency-code={getCurrencyIsoCode}
+                            format-style="currency"
+                            minimum-fraction-digits="2"
+                        ></lightning-formatted-number>
+                    </div>
+                </div>
+
+                <!-- TOTAL MESSAGE -->
+                <div class="b2b-order-detail__value slds-m-top_large">{labels.totalMessage}</div>
+            </div>
+        </div>
+    </div>
+
+    <template if:false={hasAccess}>
+        <div class="slds-text-align_center slds-m-around_large b2b-error-message">{labels.youDoNotHaveAccess}</div>
+    </template>
+</template>

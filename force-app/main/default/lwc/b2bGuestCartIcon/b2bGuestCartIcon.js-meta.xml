@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Guest Cart Icon</masterLabel>
+    <description>B2B Guest Cart Icon</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="effectiveAccountId" type="String" label="Effective Account Id" default="000000000000000"></property>
+            <property
+                name="quantityType"
+                type="String"
+                label="Show a cart icon in the page header with a count of all items or products in a cart."
+                datasource="Total Items in Cart,Total Products in Cart"
+                default="Total Items in Cart"
+            ></property>
+            <property name="buttonWidth" label="'Button' Width (px)" type="Integer" min="12" max="48" required="true" default="32"></property>
+            <property name="iconColor" label="'Icon' Color" type="Color" default="#2574a9"></property>
+            <property name="iconColorHover" label="'Icon' Color Hover" type="Color" default="#135f90"></property>
+            <property name="quantityColor" label="'Quantity' Color" type="Color" default="#FFFFFF"></property>
+            <property name="quantityBackgroundColor" label="'Quantity' Background Color" type="Color" default="#EA001E"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

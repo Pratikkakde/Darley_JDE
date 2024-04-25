@@ -1,0 +1,10 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <a href={getBannerLink} class={wrapperClass}>
+        <div class="b2b-horizontal-banner__container">
+            <template if:true={getShowTitle}>
+                <h1 class="b2b-horizontal-banner__title">{title}</h1>
+            </template>
+        </div>
+    </a>
+</template>

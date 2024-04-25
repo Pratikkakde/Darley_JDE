@@ -1,0 +1,16 @@
+:host {
+    display: block;
+}
+
+.b2b-payment-icon__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--b2b-payment-icon-width, 35px);
+    overflow: hidden;
+}
+
+.b2b-payment-icon__wrapper svg {
+    display: block;
+    width: 100%;
+}

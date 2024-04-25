@@ -1,0 +1,57 @@
+<template>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+
+            <div class="slds-modal__container modal-container " style={modalWidth}>
+                <div if:true={isCloseVisible}>
+                    <lightning-button-icon
+                            icon-name = "utility:close"
+                            size      = "large"
+                            variant   = "bare-inverse"
+                            class     = "slds-float_right slds-m-bottom_x-small"
+                            onclick   = {closeModal}
+                    ></lightning-button-icon>
+                </div>
+                <!-- HEADER -->
+                <template if:true={isHeaderVisible}>
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate headerStyle">
+                            {modalHeading}
+                        </h2>
+                    </header>
+                </template>
+
+                <template if:false={isHeaderVisible}>
+                    <div>
+                        <lightning-button-icon
+                                icon-name = "utility:close"
+                                size      = "large"
+                                variant   = "bare-inverse"
+                                class     = "slds-float_right slds-m-bottom_x-small"
+                                onclick   = {closeModal}
+                        ></lightning-button-icon>
+                    </div>
+                </template>
+
+                <!-- BODY -->
+                <div class="slds-modal__content">
+                    <slot></slot>
+                </div>
+
+                <!-- FOOTER -->
+                <template if:true={isFooterVisible}>
+                    <footer class="slds-modal__footer">
+                        <lightning-button
+                                variant = "neutral"
+                                label   = {closeLabel}
+                                title   = {closeLabel}
+                                onclick = {closeModal}
+                                class   = "slds-m-left_x-small"
+                        ></lightning-button>
+                    </footer>
+                </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

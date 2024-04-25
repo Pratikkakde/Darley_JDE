@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Home Slider</masterLabel>
+    <description>B2B Home Slider</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <!-- SLIDER SETTINGS -->
+            <property name="sliderHeight" type="String" label="Slider Height" default="550px"></property>
+
+            <!-- SLIDE ARROW -->
+            <property name="showArrowButtons" type="Boolean" label="Show 'Arrow' buttons" default="true"></property>
+            <property name="arrowColor" type="Color" label="'Arrow' Color" default="rgb(255, 255, 255)"></property>
+            <property name="arrowColorHover" type="Color" label="'Arrow' Color (hover)" default="rgba(255, 255, 255, 0.75)"></property>
+
+            <!-- SLIDE SLICKS -->
+            <property name="showSliksButtons" type="Boolean" label="Show 'Slicks' buttons" default="true"></property>
+            <property name="slickColor" type="Color" label="'Slick' Color" default="rgb(255, 255, 255)"></property>
+            <property name="slickColorHover" type="Color" label="'Slick' Color (hover)" default="rgb(255, 255, 255)"></property>
+            <property name="slickColorActive" type="Color" label="'Slick' Color (active)" default="rgb(255, 255, 255)"></property>
+
+            <!-- SLIDE 1 -->
+            <property name="slide1ShowSlide" type="Boolean" label="Slide 1: Show 'Slide'" default="true"></property>
+            <property name="slide1ShowBackgroundImage" type="Boolean" label="Slide 1: Show 'Background' Image" default="true"></property>
+            <property name="slide1BackgroundImage" label="Slide 1: 'Background' Image" type="ContentReference" filter="cms_image"></property>
+            <property name="slide1BackgroundColor" type="Color" label="Slide 1: 'Background' Color"></property>
+            <!-- SLIDE 1: CONTAINER -->
+            <property name="slide1ContainerMaxWidth" type="String" label="Slide 1: 'Container' Max-Width" default="810px"></property>
+            <property name="slide1ContainerColor" type="Color" label="Slide 1: 'Container' Color"></property>
+            <property name="slide1ContainerHorizontalPosition" type="String" label="Slide 1: 'Container' Horizontal Position" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide1ContainerVerticalPosition" type="String" label="Slide 1: 'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Top"></property>
+            <!-- SLIDE 1: TTILE -->
+            <property name="slide1ShowTitle" type="Boolean" label="Slide 1: Show 'Title'" default="true"></property>
+            <property name="slide1Title" type="String" label="Slide 1: Title"></property>
+            <property name="slide1TitleColor" type="Color" label="Slide 1: 'Title' Color"></property>
+            <property name="slide1TitleAlign" type="String" label="Slide 1: 'Title' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 1: SUTITLE -->
+            <property name="slide1ShowSubtitle" type="Boolean" label="Slide 1: Show 'Subtitle'" default="true"></property>
+            <property name="slide1Subtitle" type="String" label="Slide 1: Subtitle"></property>
+            <property name="slide1SubtitleColor" type="Color" label="Slide 1: 'Subtitle' Color"></property>
+            <property name="slide1SubtitleAlign" type="String" label="Slide 1: 'Subtitle' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 1: BUTTON -->
+            <property name="slide1ShowButton" type="Boolean" label="Slide 1: Show 'Button'" default="false"></property>
+            <property name="slide1ButtonLabel" type="String" label="Slide 1: 'Button' Label" default=""></property>
+            <property name="slide1ButtonNavigateTo" type="String" label="Slide 1: 'Button' Navigate to" default=""></property>
+            <property name="slide1ButtonAlign" type="String" label="Slide 1: 'Button' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide1ButtonTextColor" type="Color" label="Slide 1: 'Button' Text Color"></property>
+            <property name="slide1ButtonBackgroundColor" type="Color" label="Slide 1: 'Button' Background Color"></property>
+            <property name="slide1ButtonTextColorHover" type="Color" label="Slide 1: 'Button' Text Color (hover)"></property>
+            <property name="slide1ButtonBackgroundColorHover" type="Color" label="Slide 1: 'Button' Background Color (hover)"></property>
+
+            <!-- SLIDE 2 -->
+            <property name="slide2ShowSlide" type="Boolean" label="Slide 2: Show 'Slide'" default="true"></property>
+            <property name="slide2ShowBackgroundImage" type="Boolean" label="Slide 2: Show 'Background' Image" default="true"></property>
+            <property name="slide2BackgroundImage" label="Slide 2: 'Background' Image" type="ContentReference" filter="cms_image"></property>
+            <property name="slide2BackgroundColor" type="Color" label="Slide 2: 'Background' Color"></property>
+            <!-- SLIDE 2: CONTAINER -->
+            <property name="slide2ContainerMaxWidth" type="String" label="Slide 2: 'Container' Max-Width" default="810px"></property>
+            <property name="slide2ContainerColor" type="Color" label="Slide 2: 'Container' Color"></property>
+            <property name="slide2ContainerHorizontalPosition" type="String" label="Slide 2: 'Container' Horizontal Position" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide2ContainerVerticalPosition" type="String" label="Slide 2: 'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Top"></property>
+            <!-- SLIDE 2: TTILE -->
+            <property name="slide2ShowTitle" type="Boolean" label="Slide 2: Show 'Title'" default="true"></property>
+            <property name="slide2Title" type="String" label="Slide 2: Title"></property>
+            <property name="slide2TitleColor" type="Color" label="Slide 2: 'Title' Color"></property>
+            <property name="slide2TitleAlign" type="String" label="Slide 2: 'Title' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 2: SUTITLE -->
+            <property name="slide2ShowSubtitle" type="Boolean" label="Slide 2: Show 'Subtitle'" default="true"></property>
+            <property name="slide2Subtitle" type="String" label="Slide 2: Subtitle"></property>
+            <property name="slide2SubtitleColor" type="Color" label="Slide 2: 'Subtitle' Color"></property>
+            <property name="slide2SubtitleAlign" type="String" label="Slide 2: 'Subtitle' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 2: BUTTON -->
+            <property name="slide2ShowButton" type="Boolean" label="Slide 2: Show 'Button'" default="false"></property>
+            <property name="slide2ButtonLabel" type="String" label="Slide 2: 'Button' Label" default=""></property>
+            <property name="slide2ButtonNavigateTo" type="String" label="Slide 2: 'Button' Navigate to" default=""></property>
+            <property name="slide2ButtonAlign" type="String" label="Slide 2: 'Button' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide2ButtonTextColor" type="Color" label="Slide 2: 'Button' Text Color"></property>
+            <property name="slide2ButtonBackgroundColor" type="Color" label="Slide 2: 'Button' Background Color"></property>
+            <property name="slide2ButtonTextColorHover" type="Color" label="Slide 2: 'Button' Text Color (hover)"></property>
+            <property name="slide2ButtonBackgroundColorHover" type="Color" label="Slide 2: 'Button' Background Color (hover)"></property>
+
+            <!-- SLIDE 3 -->
+            <property name="slide3ShowSlide" type="Boolean" label="Slide 3: Show 'Slide'" default="true"></property>
+            <property name="slide3ShowBackgroundImage" type="Boolean" label="Slide 3: Show 'Background' Image" default="true"></property>
+            <property name="slide3BackgroundImage" label="Slide 3: 'Background' Image" type="ContentReference" filter="cms_image"></property>
+            <property name="slide3BackgroundColor" type="Color" label="Slide 3: 'Background' Color"></property>
+            <!-- SLIDE 3: CONTAINER -->
+            <property name="slide3ContainerMaxWidth" type="String" label="Slide 3: 'Container' Max-Width" default="810px"></property>
+            <property name="slide3ContainerColor" type="Color" label="Slide 3: 'Container' Color"></property>
+            <property name="slide3ContainerHorizontalPosition" type="String" label="Slide 3: 'Container' Horizontal Position" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide3ContainerVerticalPosition" type="String" label="Slide 3: 'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Top"></property>
+            <!-- SLIDE 3: TTILE -->
+            <property name="slide3ShowTitle" type="Boolean" label="Slide 3: Show 'Title'" default="true"></property>
+            <property name="slide3Title" type="String" label="Slide 3: Title"></property>
+            <property name="slide3TitleColor" type="Color" label="Slide 3: 'Title' Color"></property>
+            <property name="slide3TitleAlign" type="String" label="Slide 3: 'Title' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 3: SUTITLE -->
+            <property name="slide3ShowSubtitle" type="Boolean" label="Slide 3: Show 'Subtitle'" default="true"></property>
+            <property name="slide3Subtitle" type="String" label="Slide 3: Subtitle"></property>
+            <property name="slide3SubtitleColor" type="Color" label="Slide 3: 'Subtitle' Color"></property>
+            <property name="slide3SubtitleAlign" type="String" label="Slide 3: 'Subtitle' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 3: BUTTON -->
+            <property name="slide3ShowButton" type="Boolean" label="Slide 3: Show 'Button'" default="false"></property>
+            <property name="slide3ButtonLabel" type="String" label="Slide 3: 'Button' Label" default=""></property>
+            <property name="slide3ButtonNavigateTo" type="String" label="Slide 3: 'Button' Navigate to" default=""></property>
+            <property name="slide3ButtonAlign" type="String" label="Slide 3: 'Button' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide3ButtonTextColor" type="Color" label="Slide 3: 'Button' Text Color"></property>
+            <property name="slide3ButtonBackgroundColor" type="Color" label="Slide 3: 'Button' Background Color"></property>
+            <property name="slide3ButtonTextColorHover" type="Color" label="Slide 3: 'Button' Text Color (hover)"></property>
+            <property name="slide3ButtonBackgroundColorHover" type="Color" label="Slide 3: 'Button' Background Color (hover)"></property>
+
+            <!-- SLIDE 4 -->
+            <property name="slide4ShowSlide" type="Boolean" label="Slide 4: Show 'Slide'" default="true"></property>
+            <property name="slide4ShowBackgroundImage" type="Boolean" label="Slide 4: Show 'Background' Image" default="true"></property>
+            <property name="slide4BackgroundImage" label="Slide 4: 'Background' Image" type="ContentReference" filter="cms_image"></property>
+            <property name="slide4BackgroundColor" type="Color" label="Slide 4: 'Background' Color"></property>
+            <!-- SLIDE 4: CONTAINER -->
+            <property name="slide4ContainerMaxWidth" type="String" label="Slide 4: 'Container' Max-Width" default="810px"></property>
+            <property name="slide4ContainerColor" type="Color" label="Slide 4: 'Container' Color"></property>
+            <property name="slide4ContainerHorizontalPosition" type="String" label="Slide 4: 'Container' Horizontal Position" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide4ContainerVerticalPosition" type="String" label="Slide 4: 'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Top"></property>
+            <!-- SLIDE 4: TTILE -->
+            <property name="slide4ShowTitle" type="Boolean" label="Slide 4: Show 'Title'" default="true"></property>
+            <property name="slide4Title" type="String" label="Slide 4: Title"></property>
+            <property name="slide4TitleColor" type="Color" label="Slide 4: 'Title' Color"></property>
+            <property name="slide4TitleAlign" type="String" label="Slide 4: 'Title' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 4: SUTITLE -->
+            <property name="slide4ShowSubtitle" type="Boolean" label="Slide 4: Show 'Subtitle'" default="true"></property>
+            <property name="slide4Subtitle" type="String" label="Slide 4: Subtitle"></property>
+            <property name="slide4SubtitleColor" type="Color" label="Slide 4: 'Subtitle' Color"></property>
+            <property name="slide4SubtitleAlign" type="String" label="Slide 4: 'Subtitle' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 4: BUTTON -->
+            <property name="slide4ShowButton" type="Boolean" label="Slide 4: Show 'Button'" default="false"></property>
+            <property name="slide4ButtonLabel" type="String" label="Slide 4: 'Button' Label" default=""></property>
+            <property name="slide4ButtonNavigateTo" type="String" label="Slide 4: 'Button' Navigate to" default=""></property>
+            <property name="slide4ButtonAlign" type="String" label="Slide 4: 'Button' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide4ButtonTextColor" type="Color" label="Slide 4: 'Button' Text Color"></property>
+            <property name="slide4ButtonBackgroundColor" type="Color" label="Slide 4: 'Button' Background Color"></property>
+            <property name="slide4ButtonTextColorHover" type="Color" label="Slide 4: 'Button' Text Color (hover)"></property>
+            <property name="slide4ButtonBackgroundColorHover" type="Color" label="Slide 4: 'Button' Background Color (hover)"></property>
+
+            <!-- SLIDE 5 -->
+            <property name="slide5ShowSlide" type="Boolean" label="Slide 5: Show 'Slide'" default="true"></property>
+            <property name="slide5ShowBackgroundImage" type="Boolean" label="Slide 5: Show 'Background' Image" default="true"></property>
+            <property name="slide5BackgroundImage" label="Slide 5: 'Background' Image" type="ContentReference" filter="cms_image"></property>
+            <property name="slide5BackgroundColor" type="Color" label="Slide 5: 'Background' Color"></property>
+            <!-- SLIDE 5: CONTAINER -->
+            <property name="slide5ContainerMaxWidth" type="String" label="Slide 5: 'Container' Max-Width" default="810px"></property>
+            <property name="slide5ContainerColor" type="Color" label="Slide 5: 'Container' Color"></property>
+            <property name="slide5ContainerHorizontalPosition" type="String" label="Slide 5: 'Container' Horizontal Position" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide5ContainerVerticalPosition" type="String" label="Slide 5: 'Container' Vertical Position" datasource="Top,Middle,Bottom,Stretch" default="Top"></property>
+            <!-- SLIDE 5: TTILE -->
+            <property name="slide5ShowTitle" type="Boolean" label="Slide 5: Show 'Title'" default="true"></property>
+            <property name="slide5Title" type="String" label="Slide 5: Title"></property>
+            <property name="slide5TitleColor" type="Color" label="Slide 5: 'Title' Color"></property>
+            <property name="slide5TitleAlign" type="String" label="Slide 5: 'Title' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 5: SUTITLE -->
+            <property name="slide5ShowSubtitle" type="Boolean" label="Slide 5: Show 'Subtitle'" default="true"></property>
+            <property name="slide5Subtitle" type="String" label="Slide 5: Subtitle"></property>
+            <property name="slide5SubtitleColor" type="Color" label="Slide 5: 'Subtitle' Color"></property>
+            <property name="slide5SubtitleAlign" type="String" label="Slide 5: 'Subtitle' Align" datasource="Left,Center,Right" default="Left"></property>
+            <!-- SLIDE 5: BUTTON -->
+            <property name="slide5ShowButton" type="Boolean" label="Slide 5: Show 'Button'" default="false"></property>
+            <property name="slide5ButtonLabel" type="String" label="Slide 5: 'Button' Label" default=""></property>
+            <property name="slide5ButtonNavigateTo" type="String" label="Slide 5: 'Button' Navigate to" default=""></property>
+            <property name="slide5ButtonAlign" type="String" label="Slide 5: 'Button' Align" datasource="Left,Center,Right" default="Left"></property>
+            <property name="slide5ButtonTextColor" type="Color" label="Slide 5: 'Button' Text Color"></property>
+            <property name="slide5ButtonBackgroundColor" type="Color" label="Slide 5: 'Button' Background Color"></property>
+            <property name="slide5ButtonTextColorHover" type="Color" label="Slide 5: 'Button' Text Color (hover)"></property>
+            <property name="slide5ButtonBackgroundColorHover" type="Color" label="Slide 5: 'Button' Background Color (hover)"></property>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

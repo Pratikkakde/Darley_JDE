@@ -1,0 +1,50 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class="b2b-category-information__wrapper">
+
+            <div class="b2b-category-information__row">
+                <div class="b2b-category-information__content" data-is-image-exists={isImageExists}>
+
+                    <!-- NAME -->
+                    <div class="b2b-category-information__title">{name}</div>
+
+                    <!-- DESCRIPTION -->
+                    <template if:true={description}>
+                        <div class="b2b-category-information__description" data-is-additional-description-exists={isAdditionalDescriptionExists}>
+                            <lightning-formatted-rich-text
+                                value={description}
+                            ></lightning-formatted-rich-text>
+                        </div>
+                    </template>
+
+                    <!-- ADDITIONAL DESCRIPTION -->
+                    <template if:true={additionalDescription}>
+                        <div class="b2b-category-information__additional-description">
+                            <lightning-formatted-rich-text
+                                value={additionalDescription}
+                            ></lightning-formatted-rich-text>
+                        </div>
+                    </template>
+
+                    <!-- BUTTON -->
+                    <template if:true={link}>
+                        <div class="b2b-category-information__button">
+                            <a href={link} target="_blank" class={getButtonClass}>{getButtonLabel}</a>
+                        </div>
+                    </template>
+
+                </div>
+
+                <!-- IMAGE -->
+                <template if:true={image}>
+                    <div class="b2b-category-information__image">
+                        <img src={image} alt={name}>
+                    </div>
+                </template>
+
+            </div>
+
+        </div>
+    </template>
+</template>

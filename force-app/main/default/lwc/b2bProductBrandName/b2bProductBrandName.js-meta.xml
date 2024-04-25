@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Product Brand Name</masterLabel>
+    <description>B2B Product Brand Name</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}"></property>
+            <property name="useAsLink" type="Boolean" label="Use Brand Label as link" default="true"></property>
+            <property name="labelFontSize" type="String" label="'Label' font size (CSS)" default="14px"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

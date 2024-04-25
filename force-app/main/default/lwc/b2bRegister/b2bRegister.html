@@ -1,0 +1,192 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+
+        <!-- SPINNER -->
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+        </template>
+
+        <!-- TITLE SECTION -->
+        <template if:false={isRegistrationProcess}>
+            <div class="b2b-message">{labels.subtitle}</div>
+        </template>
+    
+        <template if:true={register}>
+            <div class="slds-m-top_large b2b-register-container">
+                <template if:false={isRegistrationProcess}>
+
+                    <!-- REGISTER NEW USER UNDER EXISTING ACCOUNT -->
+                    <!-- FIRST NAME -->
+                    <lightning-input
+                        name="firstName"
+                        type="text"
+                        label={labels.firstName}
+                        max-length={maxLength.firstName}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        class="slds-m-vertical_medium"
+                    ></lightning-input>
+
+                    <!-- LAST NAME -->
+                    <lightning-input
+                        name="lastName"
+                        type="text"
+                        label={labels.lastName}
+                        max-length={maxLength.lastName}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        class="slds-m-vertical_medium"
+                    ></lightning-input>
+
+                    <!-- EMAIL -->
+                    <lightning-input
+                        name="email"
+                        type="email"
+                        label={labels.email}
+                        max-length={maxLength.email}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        class="slds-m-vertical_medium"
+                        onblur={handleBlurEmail}
+                    ></lightning-input>
+
+                    <!-- REGISTRATION TYPE -->
+                    <c-b2b-select
+                        data-name="registrationType"
+                        label={labels.registrationType}
+                        value={registrationType}
+                        options={registrationTypeOptions}
+                        required="true"
+                        placeholder={labels.select}
+                        default-option={labels.select}
+                        onchange={handleChangeRegistrationType}
+                    ></c-b2b-select>
+
+                    <!-- ACCOUNT NAME -->
+                    <template lwc:if={registrationTypeBusinessOrFederalGovernment}>
+                        <lightning-input
+                            name="companyName"
+                            type="text"
+                            label={labels.accountName}
+                            max-length={maxLength.accountName}
+                            required
+                            message-when-value-missing={labels.requiredField}
+                            class="slds-m-vertical_medium"
+                        ></lightning-input>
+                    </template>
+
+                    <!-- ACCOUNT NUMBER -->
+                    <div data-show={registerNewUserUnderExistingAccount}>
+                        <lightning-input
+                            name="companyNumber"
+                            type="text"
+                            label={labels.accountNumber}
+                            max-length={maxLength.accountNumber}
+                            required
+                            message-when-value-missing={labels.requiredField}
+                            class="slds-m-vertical_medium"
+                        ></lightning-input>
+                    </div>
+
+                    <!-- PHONE NUMBER -->
+                    <div data-hide={registerNewUserUnderExistingAccount}>
+                        <lightning-input
+                            name="companyPhoneNumber"
+                            type="tel"
+                            label={labels.phoneNumber}
+                            max-length={maxLength.phoneNumber}
+                            required
+                            message-when-value-missing={labels.requiredField}
+                            class="slds-m-vertical_medium"
+                            onkeypress={handleKeypressPhoneNumber}
+                            onchange={handleChangePhoneNumber}
+                        ></lightning-input>
+                    </div>
+
+                    <!-- ADDRESS SECTION -->
+                    <div data-hide={registerNewUserUnderExistingAccount}>
+                        <div class="slds-text-title_bold">{labels.addressTitle}</div>
+
+                        <!-- STREET -->
+                        <lightning-textarea
+                            name="streetAddress"
+                            label={labels.street}
+                            max-length={maxLength.street}
+                            required
+                            message-when-value-missing={labels.requiredField}
+                            class="slds-m-top_medium"
+                        ></lightning-textarea>
+
+                        <!-- COUNTRY STATE PICKLISTS -->
+                        <!-- TODO: Remove this component -->
+                        <c-b2b-country-state-picklists
+                            class="slds-size_1-of-1"
+                            countries-and-states-info={countriesAndStatesData}
+                            oncountrychange={handleCountryChanged}
+                            onstatechange={handleStateChanged}
+                            is-error-city-input={hasCountryErrorMessage}
+                        ></c-b2b-country-state-picklists>
+
+                        <div class="slds-grid b2b-mobile-column-direction">
+
+                            <!-- CITY -->
+                            <lightning-input
+                                name="city"
+                                type="text"
+                                label={labels.city}
+                                max-length={maxLength.city}
+                                required
+                                message-when-value-missing={labels.requiredField}
+                                class="slds-p-right_small slds-m-top_medium slds-size_3-of-5 b2b-mobile-full-width"
+                            ></lightning-input>
+
+                            <!-- POSTAL CODE -->
+                            <lightning-input
+                                name="postalCode"
+                                type="text"
+                                label={labels.postalCode}
+                                max-length={maxLength.postalCode}
+                                required
+                                message-when-value-missing={labels.requiredField}
+                                class="slds-m-top_medium slds-size_2-of-5 b2b-mobile-full-width"
+                            ></lightning-input>
+
+                        </div>
+                    </div>
+
+                    <!-- ERROR SECTION -->
+                    <div class="slds-has-error slds-text-align_center slds-m-vertical_large">
+                        <div if:true={errorMessage} class="slds-form-element__help">{errorMessage}</div>
+                    </div>
+
+                    <!-- BUTTON SECTION-->
+                    <div class="slds-m-vertical_large slds-align_absolute-center">
+                        <button
+                            class="b2b-button slds-button slds-button_brand slds-m-vertical_medium b2b-lightning-button"
+                            variant="brand"
+                            onclick={handleClickSignUp}
+                        >{labels.signUp}</button>
+                    </div>
+                    <div class="slds-grid slds-grid_align-center slds-align_absolute-center">
+                        <a href={getLoginUrl} class="b2b-register-link">{labels.alreadyHaveAccount}</a>
+                    </div>
+                </template>
+
+                <!-- SUCCESS SECTION -->
+                <template if:true={isRegistrationProcess}>
+<!--                    <div lwc:dom="manual" class="custom-css-thank-you-background"></div>-->
+                    <div class="b2b-register-title slds-text-align_center slds-m-bottom_medium">{labels.thankYouTitle}</div>
+                    <div class="slds-text-align_center">{labels.thankYouMessage}  <a class="b2b-register-link" href={getContactUsUrl}>{labels.contactUs}</a></div>
+                    <div class="slds-grid slds-grid_align-center slds-align_absolute-center">
+                        <div class="b2b-home-page__button">
+                            <a href={getHomeUrl} class="b2b-home-page-link b2b-button slds-button slds-button_brand">{labels.successButtonLabel}</a>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+        </template>
+
+    </div>
+</template>

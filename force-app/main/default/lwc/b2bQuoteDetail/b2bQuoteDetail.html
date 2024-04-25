@@ -1,0 +1,220 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapper}>
+        <div class="b2b-quotes-header-section slds-grid">
+            <div class="b2b-quotes-title">{quoteNumberHeader}</div>
+            <!-- TOP BUTTONS -->
+            <div class="slds-grid slds-grid_align-end">
+                <div if:true={hasPlaceOrderButton}>
+                    <!--PLACE ORDER-->
+                    <button
+                            class="b2b-button slds-button slds-button_brand b2b_Place_order__button"
+                            onclick={handlerConvertIntoOrder}
+                    >{LABELS.PLACE_ORDER}
+                    </button>
+                </div>
+                    <!--PRINT-->
+                    <button
+                        class="b2b-button slds-button slds-button_outline-brand"
+                        onclick={handleClickPrintButton}
+                    >{LABELS.PRINT}
+                    </button>
+            </div> 
+        </div>
+
+        <!-- STATUS -->
+        <div class="slds-grid  slds-grid slds-m-bottom_large">
+            <div class="b2b-quote-status">{LABELS.STATUS}:</div>
+            <div class="b2b-quote-status__value">{quote.status}</div>
+        </div>
+
+        <!-- QUOTE INFORMATION -->
+        <div if:true={quote} class="b2b-quote-detail__quote slds-grid slds-m-top_small slds-m-bottom_large">
+
+            <div class="slds-grid slds-grid_vertical">
+                <!-- REQUESTED DATE -->
+                <div class="b2b-quote-detail__title slds-p-bottom_x-small" style="font-weight: 600;">{LABELS.REQUESTED_DATE}</div>
+                <div class="b2b-quote-detail__value">
+                    <lightning-formatted-date-time
+                            year="numeric"
+                            month="numeric"
+                            day="numeric"
+                            value={quote.requestedDate}
+                            time-zone="UTC"
+                    ></lightning-formatted-date-time>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-grid_vertical">
+                <!-- EXPIRATION DATE -->
+                <div class="b2b-quote-detail__title slds-p-bottom_x-small" style="font-weight: 600;">{LABELS.EXPIRATION_DATE}</div>
+                <div class="b2b-quote-detail__value">
+                    <lightning-formatted-date-time
+                            year="numeric"
+                            month="numeric"
+                            day="numeric"
+                            value={quote.expirationDate}
+                    ></lightning-formatted-date-time>
+                </div>
+            </div>
+        </div>
+
+
+        <div if:true={quote} class="b2b-quote-detail__quote slds-grid slds-grid slds-p-vertical_small slds-m-bottom_large">
+            
+            <div class="slds-grid slds-grid_vertical">
+                <!-- SHIPPING ADDRESS -->
+                <div class="b2b-quote-detail__title">{LABELS.SHIPPING_INFO}</div>
+                <div class="b2b-shipping__container">
+                    <div class="b2b-quote-detail__subtitle">{LABELS.SHIPPING_ADDRESS}:</div>
+                    <div class="b2b-quote-detail__value">
+                        <lightning-formatted-address
+                            street={quote.shippingAddressStreet}
+                            city={quote.shippingAddressCity}
+                            country={quote.shippingAddressCountryCode}
+                            province={quote.shippingAddressState}
+                            postal-code={quote.shippingAddressPostalCode}
+                            disabled="true"
+                        >
+                        </lightning-formatted-address>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BILLING ADDRESS -->
+            <div class="slds-grid slds-grid_vertical">
+                <div class="b2b-quote-detail__title">{LABELS.BILLING_INFO}</div>
+                <div class="b2b-billing__container">
+                    <div class="b2b-quote-detail__subtitle">{LABELS.BILLING_ADDRESS}:</div>
+                    <div class="b2b-quote-detail__value">
+                        <lightning-formatted-address
+                            street={quote.billingAddressStreet}
+                            city={quote.billingAddressCity}
+                            country={quote.billingAddressState}
+                            province={quote.billingAddressPostalCode}
+                            postal-code={quote.billingAddressCountryCode}
+                            disabled="true"
+                        >
+                        </lightning-formatted-address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="b2b-changeRequest__container">
+            <!-- CHANGE REQUEST -->
+            <lightning-textarea
+                    name="Change Request"
+                    label={LABELS.CHANGE_REQUEST}
+                    max-length="131000"
+                    placeholder={changeRequestPlaceHolder}
+                    message-when-value-missing="Please enter the description"
+                    onchange={handleButtonTextAreaChange}
+                    >
+            </lightning-textarea>
+
+            <!-- SUBMIT BUTTON -->
+            <lightning-button 
+                    variant="brand" 
+                    label={buttonLabel} 
+                    title="Primary action" 
+                    class="slds-m-left_x-small b2b-quote__button" 
+                    onclick={submitForm} 
+                    disabled={buttonDisabled}>
+            </lightning-button>
+        </div>
+
+        <!-- QUOTE ITEMS TABLE-->
+        <div class="table-container">
+            <div class="b2b-quote-detail__subtitle slds-p-bottom_medium" style="font-weight: 600;">{LABELS.QUOTE_ITEMS}</div>
+            <c-b2b-table
+                    table-headers={tableItemHeaders}
+                    table-data={list}
+                    table-view-data={list}
+                    table-view-mobile-data={listMobile}
+                    is-loading={isLoading}
+                    onexpand={handleClickItemTitle}
+            ></c-b2b-table>
+        </div>
+
+        <!-- QUOTE TOTAL SECTION-->
+        <div class="b2b-quote__total_container">
+            
+            <!--QUOTE SUBTOTAL-->
+            <div class="b2b-quote__total_items">
+                <div class="slds-m-right_large">{LABELS.QUOTE_SUBTOTAL}:</div>
+                <div if:true={quote}>
+                    <lightning-formatted-number
+                            value={quote.quoteSubtotal}
+                            format-style="currency"
+                            currency-code={CURRENCY_CODE}
+                            currency-display-as="symbol"
+                            minimum-fraction-digits="2"
+                    ></lightning-formatted-number>
+                </div>
+            </div>
+            
+            <!--PROMOTIONS-->
+            <template if:true={showPromotions}>
+                <div class="b2b-quote__total_items">
+                    <div class="slds-m-right_large">{LABELS.QUOTE_PROMOTIONS}:</div>
+                    <div if:true={quote}>
+                        <lightning-formatted-number
+                                value={quote.promotions}
+                                format-style="currency"
+                                currency-code={CURRENCY_CODE}
+                                currency-display-as="symbol"
+                                minimum-fraction-digits="2"
+                        ></lightning-formatted-number>
+                    </div>
+                </div>
+            </template>
+            
+            <!--ESTIMATED TAX-->
+            <div class="b2b-quote__total_items">
+                <div class="slds-m-right_large">{LABELS.ESTIMATED_TAX}:</div>
+                <div if:true={quote}>
+                    <lightning-formatted-number
+                            value={quote.estimatedTax}
+                            format-style="currency"
+                            currency-code={CURRENCY_CODE}
+                            currency-display-as="symbol"
+                            minimum-fraction-digits="2"
+                    ></lightning-formatted-number>
+                </div>
+            </div>
+    
+            <!--ESTIMATED SHIPPING-->
+            <div class="b2b-quote__total_items">
+                <div class="slds-m-right_large">{LABELS.ESTIMATED_SHIPPING}:</div>
+                <div if:true={quote}>
+                    <lightning-formatted-number
+                            value={quote.estimatedShipping}
+                            format-style="currency"
+                            currency-code={CURRENCY_CODE}
+                            currency-display-as="symbol"
+                            minimum-fraction-digits="2"
+                    ></lightning-formatted-number>
+                </div>
+            </div>
+
+            <!--QUOTE TOTAL-->
+            <div class="b2b-quote__total_items b2b-quote-total">
+                <div class="slds-m-right_large">{LABELS.QUOTE_TOTAL}:</div>
+                <div if:true={quote}>
+                    <lightning-formatted-number
+                            value={quote.estimatedQuoteTotal}
+                            format-style="currency"
+                            currency-code={CURRENCY_CODE}
+                            currency-display-as="symbol"
+                            minimum-fraction-digits="2"
+                    ></lightning-formatted-number>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADING SPINNER -->
+    <div if:true={isLoading} class="slds-spinner_container"></div>
+
+</template>

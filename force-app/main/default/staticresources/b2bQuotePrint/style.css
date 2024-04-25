@@ -1,0 +1,140 @@
+* {
+    font-family: 'Arial', 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
+    color: #000000;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 21cm;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.table-grid {
+    margin-bottom: 16px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-grid td {
+    vertical-align: top;
+}
+
+.td_w-50 {
+    width: 50%;
+}
+
+.td_w-45 {
+    width: 45%;
+}
+
+.td_w-10 {
+    width: 10%;
+}
+
+.td_center {
+    text-align: center;
+}
+
+.td_right {
+    text-align: right;
+}
+
+.logo {
+    display: block;
+    width: 101px;
+    margin-bottom: 20px;
+}
+
+.company-info__item {
+    font-size: 12px;
+    line-height: 1.2;
+    color: #2E363A;
+}
+
+.company-info__Name{
+    font-weight: bold;
+    font-size: 14px !important;
+    padding-bottom: 10px !important;
+}
+
+.company-info__item + .company-info__item {
+    margin-top: 2px;
+}
+
+.title {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.table-view th,
+.table-view td {
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.3;
+    border: 1px solid #DDDBDA;
+}
+
+.table-view th {
+    text-align: center;
+    font-weight: 700;
+    background-color: #F3F3F3;
+}
+
+.table-info {
+    margin-bottom: 30px;
+}
+
+.table-products {
+    margin-bottom: 20px;
+}
+
+.table-total {
+    margin-left: auto;
+    width: 30%;
+}
+
+.table-total td {
+    padding: 3px 12px;
+    font-size: 12px;
+    line-height: 14px;
+    white-space: nowrap;
+}
+
+.table-total td.total {
+    font-weight: 500;
+}
+
+.table-total td.estimated-total{
+    padding-top: 20px;
+    font-weight: 700;
+}
+
+.table-seccion{
+	border-collapse: collapse;
+    font-size: 12px;
+    line-height: 1.3;
+    border: 1px solid #DDDBDA;
+    padding-bottom: 10px;
+}
+
+.company-billing__tittle{
+    border-bottom: 1px solid #DDDBDA;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px !important;
+    width: 100%;
+    padding: 6px 0;
+}
+
+.company-billing__info{
+    padding-left: 10px;
+}
+
+.table-container{
+    margin-bottom: 50px;
+}

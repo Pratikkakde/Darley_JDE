@@ -1,0 +1,154 @@
+<template>
+    <div class="b2b-credit-card-form__body" data-show-image={showCardImage}>
+
+        <!-- FORM -->
+        <div class="b2b-credit-card-form__form">
+            
+            <!-- CART NAME -->
+            <template if:true={showCardName}>
+                <div class="b2b-credit-card-form__card-name">
+                    <lightning-input
+                        type="text"
+                        data-name="cardName"
+                        name="cardName"
+                        label={labels.cardName}
+                        placeholder={labels.cardNamePlaceholder}
+                        disabled={disabled}
+                        value={cardName}
+                        required={isCardNameRequired}
+                        onblur={handleChangeCardName}
+                        onchange={handleChangeCardName}
+                    ></lightning-input>
+                </div>
+            </template>
+
+            <!-- CARD HOLDER NAME -->
+            <template if:true={showCardHolderName}>
+                <div class={getCardHolderNameClass}>
+                    <label class="slds-form-element__label" for="card_holder_name">
+                        <template if:true={isCardHolderNameRequired}>
+                            <abbr class="slds-required" title="required">*</abbr>
+                        </template>
+                        <span>{labels.cardHolderName}</span>
+                    </label>
+                    <input
+                        id="card_holder_name"
+                        placeholder={labels.cardHolderNamePlaceholder}
+                        type="text"
+                        name="name"
+                        class="slds-input"
+                        value={cardHolderName}
+                        disabled={disabled}
+                        oninput={handleInputCardHolderName}
+                        onblur={handleInputCardHolderName}
+                        onchange={handleInputCardHolderName}
+                    />
+                    <template if:true={isCardHolderNameError}>
+                        <div class="slds-form-element__help">{labels.cardHolderNameNotValid}</div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- CARD NUMBER -->
+            <div class={getCardNumberClass}>
+                <label class="slds-form-element__label" for="card_number">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    <span>{labels.cardNumber}</span>
+                </label>
+                <div class="slds-form-element__control">
+
+                    <!-- CARD ICON -->
+                    <template if:true={showCardIcon}>
+                        <c-b2b-payment-icon
+                            icon-name={getCardIconType}
+                        ></c-b2b-payment-icon>
+                    </template>
+
+                    <input
+                        id="card_number"
+                        placeholder={labels.cardNumberPlaceholder}
+                        type="tel"
+                        name="number"
+                        class="slds-input"
+                        value={cardNumber}
+                        disabled={disabled}
+                        oninput={handleInputCardNumber}
+                        onblur={handleInputCardNumber}
+                        onchange={handleInputCardNumber}
+                    />
+                </div>
+                <template if:true={isCardNumberError}>
+                    <div class="slds-form-element__help">{labels.cardNumberNotValid}</div>
+                </template>
+            </div>
+
+            <!-- CARD EXPIRATION -->
+            <div class={getCardExpirationClass}>
+                <label class="slds-form-element__label" for="card_expiration">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    <span>{labels.cardExpiration}</span>
+                </label>
+                <input
+                    id="card_expiration"
+                    placeholder={labels.cardExpirationPlaceholder}
+                    type="tel"
+                    name="expiry"
+                    class="slds-input"
+                    value={cardExpiration}
+                    disabled={disabled}
+                    oninput={handleInputCardExpiration}
+                    onblur={handleInputCardExpiration}
+                    onchange={handleInputCardExpiration}
+                />
+                <template if:true={isCardExpirationError}>
+                    <div class="slds-form-element__help">{labels.cardExpirationNotValid}</div>
+                </template>
+            </div>
+
+            <!-- CVV / CVC -->
+            <div class={getCardCvvClass}>
+                <label class="slds-form-element__label" for="card_cvv">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    <span>{labels.cardCvv}</span>
+                </label>
+                <input
+                    id="card_cvv"
+                    placeholder={labels.cardCvvPlaceholder}
+                    type="tel"
+                    name="cvc"
+                    class="slds-input"
+                    value={cardCvv}
+                    disabled={disabled}
+                    oninput={handleInputCardCvv}
+                    onblur={handleInputCardCvv}
+                    onchange={handleInputCardCvv}
+                />
+                <template if:true={isCardCvvError}>
+                    <div class="slds-form-element__help">{labels.cardCvvNotValid}</div>
+                </template>
+            </div>
+
+            <!-- IS DEFAULT -->
+            <template if:true={showCardDefault}>
+                <div class="b2b-credit-card-form__card-default">
+                    <lightning-input
+                        type="checkbox"
+                        name="isDefault"
+                        label={labels.cardDefault}
+                        onblur={handleChangeCardDefault}
+                        onchange={handleChangeCardDefault}
+                    ></lightning-input>
+                </div>
+            </template>
+
+        </div>
+
+        <!-- CARD IMAGE -->
+        <div
+            data-show-image={showCardImage}
+            lwc:dom="manual"
+            class="b2b-credit-card-form__image"
+        ></div>
+
+    </div>
+</template>

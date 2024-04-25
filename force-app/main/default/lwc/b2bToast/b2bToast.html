@@ -1,0 +1,51 @@
+<template>
+    <div class="b2b-toast__wrapper">
+        <div class="slds-notify_container">
+            <template for:each={list} for:item="item">
+                <div key={item.id} class={item.class} role="status">
+                    <span class="slds-assistive-text">{item.assistiveText}</span>
+
+                    <!-- ICON -->
+                    <span class={item.iconClass}>
+                        <lightning-icon
+                            size="small"
+                            icon-name={item.iconName}
+                            alternative-text={item.assistiveText}
+                        ></lightning-icon>
+                    </span>
+
+                    <!-- CONTENT -->
+                    <div class="slds-notify__content">
+                        <template if:true={item.richtext}>
+                            <lightning-formatted-rich-text
+                                value={item.richtext}
+                            ></lightning-formatted-rich-text>
+                        </template>
+                        <template if:false={item.richtext}>
+                            <h2 class="slds-text-heading_small">{item.title}</h2>
+                            <template if:true={item.message}>
+                                <p>{item.message}</p>
+                            </template>
+                        </template>
+                    </div>
+
+                    <!-- CLOSE BUTTON -->
+                    <template if:true={item.showCloseButton}>
+                        <div class="slds-notify__close">
+                            <lightning-button-icon
+                                data-id={item.id}
+                                icon-name="utility:close"
+                                size="large"
+                                variant="bare-inverse"
+                                title={labels.closeButtonTitle}
+                                alternative-text={labels.closeButtonTitle}
+                                onclick={handleClickButtonClose}
+                            ></lightning-button-icon>
+                        </div>
+                    </template>
+
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

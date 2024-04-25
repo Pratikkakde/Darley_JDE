@@ -1,0 +1,42 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class="b2b-category-list__wrapper">
+
+            <!-- ALL PRODUCTS -->
+            <button
+                key={item.index}
+                class="b2b-category-list__item"
+                onclick={handleClickShowProducts}
+            >
+                <span>{labels.allProducts}</span>
+            </button>
+
+            <!-- LIST -->
+            <template for:each={list} for:item="item" for:index="index">
+                <a
+                    key={item.index}
+                    href={item.link}
+                    class="b2b-category-list__item"
+                >
+                    <template if:true={item.image}>
+                        <img src={item.image} alt={item.name}>
+                    </template>
+                    <template if:false={item.image}>
+                        <div class="b2b-category-list__image-default-wrapper">
+                            <svg
+                                viewBox="0 0 150 143"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="b2b-category-list__image-default"
+                            >
+                                <path d="M37.1027 59.5577H143.31C147.005 59.5577 150 62.553 150 66.2479V135.659C150 139.354 147.005 142.349 143.31 142.349H37.1027C33.4078 142.349 30.4124 139.354 30.4124 135.659V66.2479C30.4124 62.553 33.4078 59.5577 37.1027 59.5577ZM46.3017 127.296H135.783V103.058L124.856 78.792L99.9469 88.3917L80.6025 107.95L60.0355 82.1553L46.3017 114.492V127.296ZM69.0875 46.1773H24.5585C20.8636 46.1773 17.8683 49.1726 17.8683 52.8675V93.2844L0.40529 45.3052C-0.858441 41.8331 0.931774 37.994 4.40385 36.7303L104.206 0.40529C107.678 -0.858441 111.517 0.931774 112.781 4.40385L127.985 46.1773H112.118L110.51 41.7599L91.9423 22.6947L71.819 40.2347L69.0875 46.1773Z"></path>
+                            </svg>
+                        </div>
+                    </template>
+                    <span>{item.name}</span>
+                </a>
+            </template>
+
+        </div>
+    </template>
+</template>

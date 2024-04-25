@@ -1,0 +1,56 @@
+<template>
+   
+    <!-- <lightning-card  title="Attachment Files" icon-name="" class="slds-text-heading_small"> -->
+        <lightning-card  icon-name="standard:file">
+            <h1 slot="title" style="font-size: 25px;">Attachment Files</h1>
+           
+           
+       
+        <!-- <h1 style="font-size:22px ;">Attachment Files</h1> -->
+        <div>
+        <template if:true={loaded}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+        aria-labelledby="element-with-table-label other-element-with-table-label">
+       
+        <thead>
+            <tr>
+                <th  scope="col" style="padding-left:10px;">
+                    <div class="slds-truncate " title=" Name" style="font-size:medium;">File Name</div>
+                </th>
+                <th  scope="col">
+                    <div class="slds-truncate" title=" Stage" style="font-size:medium; text-align:left ;">File Type</div>
+                </th>
+                <th>
+                    <div> </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template if:true={data}>
+                <template for:each={data} for:item="data">
+                    <tr key={data.id} class="slds-hint-parent">
+                        <td data-label="Settlement Name" style="padding-left:10px; width:45%" class="slds-truncate slds-wrap addwidth ">
+                            <div class="slds-truncate " title="Settlement Name" >{data.Title}
+                             </div> 
+                        </td>
+                        <td data-label="Settlement Stage" >
+                            <div class="slds-truncate" title="Settlement Stage"  style="text-align:left">{data.FileType}
+                            </div>
+                        </td>
+                        <td data-label="Settlement Stage"  >
+                            
+                            <lightning-button variant="destructive" style="float:right" label="Delete File" title={data.Id} value={data.Id} onclick={handleDelete}></lightning-button>
+
+                           
+                        </td>
+                    </tr>
+                </template>
+            </template>
+        </tbody>
+    </table>
+
+</div>  
+    </lightning-card>
+</template>

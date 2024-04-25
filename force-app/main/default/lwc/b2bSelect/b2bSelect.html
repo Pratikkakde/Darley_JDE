@@ -1,0 +1,49 @@
+<template>
+    <div class={wrapperClass}>
+
+        <!-- LABEL -->
+        <template if:true={label}>
+            <label for={componentId} class="b2b-select__label slds-form-element__label">
+                <template if:true={required}>
+                    <abbr class="slds-required" title="required">*</abbr>
+                </template>
+                {label}
+            </label>
+        </template>
+
+        <div class="slds-form-element__control b2b-select__label__option">
+
+            <!-- SELECT -->
+            <select
+                id={componentId}
+                name={name}
+                autocomplete={autocomplete}
+                class="b2b-select__select slds-input"
+                value={value}
+                required={required}
+                disabled={disabled}
+                placeholder={getPlaceholder}
+                onchange={handleChange}
+                onfocus={handleFocus}
+                onblur={handleBlur}
+            >
+                <option value={defaultValue} disabled={getDefaultDisabled} selected>{getDefaultOptionLabel}</option>
+
+                <template for:each={options} for:item="item" for:index="index">
+                    <option
+                        key={item.index}
+                        value={item.value}
+                        disabled={item.disabled}
+                    >{item.label}</option>
+                </template>
+            </select>
+
+            <!-- ERROR -->
+            <template if:true={showError}>
+                <div class="b2b-select__error slds-form-element__help">{getErrorMessage}</div>
+            </template>
+
+        </div>
+
+    </div>
+</template>

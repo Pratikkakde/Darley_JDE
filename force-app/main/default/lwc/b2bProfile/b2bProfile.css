@@ -1,0 +1,142 @@
+:host {
+    display: block;
+    margin-bottom: 0;
+}
+
+.b2b-profile__wrapper {
+    position: relative;
+    min-height: 3rem;
+}
+
+/* HEADER */
+
+.b2b-profile__header {
+    display: flex;
+    justify-content: space-between;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    margin-bottom: 1.4375rem;
+}
+
+@media screen and (max-width: 767.98px) {
+
+    .b2b-profile__header {
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+}
+
+/* NAME */
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-profile__name {
+        text-align: center;
+    }
+
+}
+
+/* TITLE */
+
+.b2b-profile__title {
+    font-weight: 700;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-profile__title {
+        text-align: center;
+    }
+
+}
+
+/* ACTION BUTTON */
+
+.b2b-profile__header-action .slds-button {
+    min-width: 85px;
+    line-height: 38px;
+}
+
+.b2b-profile__header-action .slds-button[disabled] {
+    cursor: not-allowed;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-profile__header-action .slds-button {
+        width: 100%;
+    }
+
+}
+
+/* BODY */
+
+.b2b-profile__body {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 1rem;
+}
+
+/* FIELD */
+
+.b2b-profile__field {
+    width: 100%;
+    border-bottom: 1px solid #DDDBDA;
+}
+
+.b2b-profile__field-label {
+    margin-bottom: 3px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #4F4C4D;
+    opacity: 0.5;
+}
+
+.b2b-profile__field-value {
+    min-height: 1.3125rem;
+    line-height: 1.5;
+}
+
+.b2b-profile__field-value span + .b2b-button_action {
+    margin-left: 11px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.b2b-profile__field-value span + .b2b-button_action[disabled="true"] {
+    color: var(--dxp-g-neutral-1);
+    cursor: not-allowed;
+}
+
+.b2b-profile__darley-dollars {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    grid-column-gap: 4px;
+}
+
+.b2b-profile__darley-dollars_icon {
+    display: block;
+    width: 12px;
+    height: 16px;
+    fill: #236192;
+}
+
+.b2b-profile__darley-dollars lightning-formatted-number {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #236192;
+}
+
+/* MODAL */
+
+.b2b-email-change__modal .slds-modal__close svg {
+    fill: var(--b2b-colorWhite);
+}
+
+.title {
+    text-transform: none; 
+    font-weight: normal !important;
+}

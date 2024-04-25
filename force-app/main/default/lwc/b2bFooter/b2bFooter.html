@@ -1,0 +1,114 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapperClass}>
+
+        <div class="slds-grid slds-wrap slds-gutters slds-grid_align-center b2b-footer__menu-container">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_3-of-12 slds-order_1 slds-medium-order_1 slds-large-order_1">
+
+                <!-- LOGOS -->
+                <div class="b2b-footer__logos">
+                    <a href={getLogoLink} title={labels.logoTitle}>
+                        <img src={getLogo} alt={labels.companyName}/>
+                    </a>
+                </div>
+                
+                <!-- COMPANY INFO -->
+                <div  class="b2b-footer__text">
+                    <h4 class="slds-p-bottom_x-small slds-p-top_large">{labels.shortAboutUsTittle}</h4>
+                    <p class="b2b-footer__text_text">{labels.shortAboutUsText}</p>
+                </div>
+                
+                <!-- SOCIAL -->
+                <template if:true={socialOptions.length}>
+                    <div class="b2b-social__wrapper">
+                        <template for:each={socialOptions} for:item="item" for:index="index">
+                            <div key={item.index} class="b2b-social__item">
+                                <a href={item.value} target="_blank" title={item.title} class={item.class}>
+                                    <c-b2b-icon icon-name={item.icon}></c-b2b-icon>
+                                </a>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+
+        <!-- MENU COLUMN 1 -->
+             <div class="b2b-small__menu b2b__menu1 slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_2-of-12 slds-order_2 slds-medium-order_2 slds-large-order_2">
+                <template if:true={menuColumn1.length}>
+                    <div class="b2b-footer__label">{menuTitle1}</div>
+                    <hr/>
+                    <div class="b2b-footer__menu">
+                        <template for:each={menuColumn1} for:item="item" for:index="index">
+                            <div key={item.index} class="b2b-footer__menu-item">
+                                <a target={item.target} href={item.value}>{item.label}</a>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+
+            <div class="b2b-small__menu b2b-menu3 slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_2-of-12 slds-order_3 slds-medium-order_3 slds-large-order_3">
+
+                <!-- MENU COLUMN 2 -->
+                <template if:true={menuColumn2.length}>
+                    <div class="b2b-footer__label">{menuTitle2}</div>
+                    <hr/>
+                    <div class="b2b-footer__menu">
+                        <template for:each={menuColumn2} for:item="item" for:index="index">
+                            <div key={item.index} class="b2b-footer__menu-item">
+                                <a href={item.value}>{item.label}</a>
+                            </div>
+                        </template>
+                        <div class="b2b-footer__menu-item">
+                            <a href="tel:18003230244">1-800-323-0244</a>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+            <!-- MENU COLUMN 3 -->
+            <div class="b2b__menu2 b2b-small__menu slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_2-of-12 slds-order_4 slds-medium-order_4 slds-large-order_4">
+                <div class="b2b-footer__menuContainer">
+                    <div class="b2b-footer__label">{getMenuTitle3}</div>
+                    <hr/>
+                    <div>
+                        <p class="b2b-menu__text slds-p-bottom_x-small">Join our newsletter to stay up to date on the latest happenings.</p>
+                    </div>
+
+                    <div class="slds-form-element">
+                        <div>
+                            <iframe src=https://go.darley.com/l/970063/2023-02-27/49h76 
+                                width="100%" 
+                                height="200" 
+                                type="text/html" 
+                                frameborder="0">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="b2b-footer__copyright-Container ">
+            <div class="b2b-footer__copyright">
+                <div class="b2b-row b2b-footer__copyright-row">
+                    <template if:true={getCopyrightLabel}>
+                        <div class="b2b-footer__copyright_text">
+                            {getCopyrightLabel}
+                        </div>
+                    </template>
+                </div>
+                <!-- MENU COLUM 4 -->
+                <div  class=" b2b-row b2b-footer__copyright-menu">
+                    <template for:each={menuColumn4} for:item="item" for:index="index">
+                        <div key={item.index}>
+                            <a class="b2b-footer__menu4" target={item.target} href={item.value}>{item.label}</a>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+     </div>
+</template>

@@ -1,0 +1,74 @@
+:host {
+    display: inline-block;
+}
+
+.b2b-popover__wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.b2b-popover__button-trigger {
+    padding: 3px 6px;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--b2b-colorText);
+    border-radius: 4px;
+    border: 1px solid var(--b2b-colorBorder);
+    background-color: var(--b2b-colorWhite);
+}
+
+.slds-popover {
+    position: absolute;
+    width: var(--b2b-popover-width);
+    top: var(--b2b-popover-positionTop);
+    left: var(--b2b-popover-positionLeft);
+    right: var(--b2b-popover-positionRight);
+    transform: var(--b2b-popover-positionTransform);
+}
+
+.slds-nubbin_top-left::before,
+.slds-nubbin_top-left::after,
+.slds-nubbin_bottom-left::before,
+.slds-nubbin_bottom-left::after {
+    left: var(--b2b-popover-shiftNubbin, 1.5rem);
+}
+
+.slds-nubbin_top-right::before,
+.slds-nubbin_top-right::after,
+.slds-nubbin_bottom-right::before,
+.slds-nubbin_bottom-right::after {
+    right: var(--b2b-popover-shiftNubbin, 1.5rem);
+}
+
+[data-showheader="true"] lightning-button-icon {
+    transform: translate(-6px, 6px);
+}
+
+.slds-popover__header {
+    border-bottom: 1px solid var(--b2b-colorBorder);
+}
+
+.b2b-popover__title {
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--b2b-colorText);
+}
+
+.slds-popover__body:empty {
+    display: none;
+}
+
+.slds-popover__body {
+    display: block;
+}
+
+.slds-popover__footer {
+    display: block;
+    background-color: #f3f3f3;
+}
+
+.slds-popover__footer:empty {
+    display: none;
+}

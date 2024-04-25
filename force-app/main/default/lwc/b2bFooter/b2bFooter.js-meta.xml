@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Footer</masterLabel>
+    <description>B2B Footer</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <!-- SYSTEM -->
+            <property name="menuColumn1Label" type="String" label="Menu 'Column 1' Label" default="About US"></property>
+            <property name="menuColumn1ApiName" type="String" label="Menu 'Column 1' API Name" default="About Us"></property>
+            <property name="menuColumn2Label" type="String" label="Menu 'Column 2' Label" default="Help"></property>
+            <property name="menuColumn2ApiName" type="String" label="Menu 'Column 2' API Name" default="Help"></property>
+            <property name="menuColumn3Label" type="String" label="Menu 'Column 3' Label" default="Stay Informed"></property>
+            <property name="menuColumn4Label" type="String" label="Menu 'Column 4' Label" default="Privacy Policy"></property>
+            <property name="menuColumn4ApiName" type="String" label="Menu 'Column 4' API Name" default="Privacy Policy"></property>
+            <property name="menuColumnLabel" type="String" label="Menu 'Column 5' Label" default=""></property>
+
+            <!-- COMPANY -->
+            <property name="companyStreetLine1" type="String" label="'Company' Street Line 1" default=""></property>
+            <property name="companyStreetLine2" type="String" label="'Company' Street Line 2" default=""></property>
+            <property name="companyEmail" type="String" label="'Company' Email" default=""></property>
+            <property name="companyPhone" type="String" label="'Company' Phone" default=""></property>
+            <property name="companyFax" type="String" label="'Company' Fax" default=""></property>
+
+            <!-- SOCIAL -->
+            <property name="socialLabel1" type="String" label="Social Item 1" datasource="Facebook,Twitter,Linkedin,Instagram,Youtube,Yelp" default="Facebook"></property>
+            <property name="socialValue1" type="String" label="Social Link 1" default=" https://www.facebook.com/wsdarley/"></property>
+            <property name="socialLabel2" type="String" label="Social Item 2" datasource="Facebook,Twitter,Linkedin,Instagram,Youtube,Yelp" default="Twitter"></property>
+            <property name="socialValue2" type="String" label="Social Link 2" default="https://twitter.com/wsdarley"></property>
+            <property name="socialLabel3" type="String" label="Social Item 3" datasource="Facebook,Twitter,Linkedin,Instagram,Youtube,Yelp" default="Linkedin"></property>
+            <property name="socialValue3" type="String" label="Social Link 3" default="https://www.linkedin.com/company/darleycompany"></property>
+            <property name="socialLabel4" type="String" label="Social Item 4" datasource="Facebook,Twitter,Linkedin,Instagram,Youtube,Yelp" default="Instagram"></property>
+            <property name="socialValue4" type="String" label="Social Link 4" default="https://www.instagram.com/wsdarley/"></property>
+            <property name="socialLabel5" type="String" label="Social Item 5" datasource="Facebook,Twitter,Linkedin,Instagram,Youtube,Yelp" default="Youtube"></property>
+            <property name="socialValue5" type="String" label="Social Link 5" default="https://www.youtube.com/user/darleyvideo"></property>
+            <property name="socialLabel6" type="String" label="Social Item 6" datasource="Facebook,Twitter,Linkedin,Instagram,Youtube,Yelp" default=""></property>
+            <property name="socialValue6" type="String" label="Social Link 6" default=""></property>
+
+            <!-- COPYRIGHT -->
+            <property name="copyrightLabel" type="String" label="'Copyright' Company" default="© {0} Darley. All rights reserved"></property>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

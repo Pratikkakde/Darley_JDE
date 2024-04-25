@@ -1,0 +1,69 @@
+<template>
+    <div class={wrapperClass}>
+
+        <!-- HEADER -->
+        <div class="b2b-payment-card__header">
+
+            <!-- CARD TYPE -->
+            <span class="b2b-payment-card__type">{name}</span>
+
+            <!-- IS DEFAULT ICON -->
+            <template if:true={isDefault}>
+                <svg viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.2635 22.4351C17.2108 22.4351 22.0917 17.5439 22.0917 11.5967C22.0917 5.65967 17.2006 0.768555 11.2635 0.768555C5.31628 0.768555 0.435425 5.65967 0.435425 11.5967C0.435425 17.5439 5.32654 22.4351 11.2635 22.4351ZM10.1356 16.7441C9.67419 16.7441 9.31531 16.5391 8.98718 16.1392L6.57751 13.2681C6.34167 12.981 6.24939 12.7246 6.24939 12.4272C6.24939 11.7915 6.76208 11.2891 7.38757 11.2891C7.75671 11.2891 8.04382 11.4326 8.32068 11.7607L10.1049 13.9653L14.1039 7.60791C14.3705 7.17725 14.7089 6.96191 15.1088 6.96191C15.724 6.96191 16.288 7.41309 16.288 8.04883C16.288 8.30518 16.1854 8.58203 16.0009 8.84863L11.243 16.1289C10.9764 16.5186 10.5765 16.7441 10.1356 16.7441Z"></path>
+                </svg>
+            </template>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="b2b-payment-card__body">
+            <!-- CARD DATE -->
+            <template if:true={cardNickName}>
+                <div class="b2b-payment-card__name">{cardNickName}</div>
+            </template>
+
+
+            <!-- CARD NUMBER -->
+            <template if:true={cardNumber}>
+                <div class="b2b-payment-card__number">{cardNumber}</div>
+            </template>
+
+            <!-- CARD DATE -->
+            <template if:true={cardDate}>
+                <div class="b2b-payment-card__date">{cardDate}</div>
+            </template>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="b2b-payment-card__footer">
+            <div class="b2b-payment-card__actions">
+
+                <!-- DELETE -->
+                <button
+                    class="b2b-payment-card__action"
+                    title={labels.clickToDeleteCart}
+                    onclick={handleClickDelete}
+                >{labels.delete}</button>
+
+                <template if:false={isDefault}>
+                    <span class="b2b-payment-card__action-separator"></span>
+
+                    <!-- SET AS DEFAULT -->
+                    <button
+                        class="b2b-payment-card__action"
+                        title={labels.clickToSetAsDefault}
+                        onclick={handleClickSetAsDefault}
+                    >{labels.setAsDefault}</button>
+
+                </template>
+            </div>
+
+            <!-- ICON -->
+            <c-b2b-payment-icon icon-name={type}></c-b2b-payment-icon>
+
+        </div>
+
+    </div>
+</template>

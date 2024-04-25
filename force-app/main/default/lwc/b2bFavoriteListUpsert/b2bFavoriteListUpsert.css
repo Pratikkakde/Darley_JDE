@@ -1,0 +1,24 @@
+:host {
+    --dxp-s-form-element-label-font-size: 12px;
+    display: block;
+}
+
+.b2b-favorite-list-upsert__subtitle {
+    margin-bottom: 11px;
+}
+
+lightning-input:last-child {
+    margin-bottom: 0;
+}
+
+.slds-modal__content {
+    position: relative;
+}
+
+.slds-button[disabled] {
+    cursor: not-allowed;
+}
+
+.slds-modal__content {
+    padding-bottom: 4px;
+}

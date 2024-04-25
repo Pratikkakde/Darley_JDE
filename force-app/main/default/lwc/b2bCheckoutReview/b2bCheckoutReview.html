@@ -1,0 +1,92 @@
+<template>
+    <div class="b2b-checkout__section">
+
+        <!-- TITLE -->
+        <div class="b2b-checkout__section-title">
+            <div class="b2b-checkout__section-title-wrapper">
+                <div class="b2b-checkout__section-title-label">{getTitleLabel}</div>
+            </div>
+        </div>
+
+        <!-- ACTION -->
+        <div class="b2b-checkout__section-action" if:false={isCartSecondary}>
+            <a
+                href={getCartLink}
+                class="b2b-checkout__section-action-item"
+                title={labels.editCartTitle}
+            >{labels.editCart}</a>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="b2b-checkout__section-content">
+        <template for:each={getProductsOptions} for:item="item" for:index="index">
+            <div key={item.index} class="b2b-checkout-review__item">
+
+                <!-- IMAGE -->
+                <a
+                    href={item.link}
+                    title={item.title}
+                    class="b2b-checkout-review__item-image"
+                >
+                    <img src={item.image} alt={item.name}>
+                </a>
+
+                <!-- CONTAINER -->
+                <div class="b2b-checkout-review__item-container">
+                    <div class="b2b-checkout-review__item-content">
+
+                        <!-- NAME -->
+                        <div class="b2b-checkout-review__item-name">
+                            <a href={item.link} title={item.title}>{item.name}</a>
+                        </div>
+
+                        <!-- SKU -->
+                        <template if:true={item.sku}>
+                            <div class="b2b-checkout-review__item-sku">{labels.sku} {item.sku}</div>
+                        </template>
+
+                        <!-- PRODUCT ATTRIBUTES -->
+                        <template if:true={item.productVariant}>
+                            <template for:each={item.productVariant} for:item="attribute" for:index="index">
+                                <div key={attribute.index} class="b2b-checkout-review__item-variant">{attribute.label}: {attribute.value}</div>
+                            </template>
+                        </template>
+
+                        <!-- QUANTITY -->
+                        <template if:true={item.quantity}>
+                            <div class="b2b-checkout-review__item-quantity">{labels.quantity}: {item.quantity}</div>
+                        </template>
+
+                        <!-- PRICE'S -->
+                        <div class="b2b-checkout-review__item-price">
+
+                            <!-- PRICE -->
+                            <template if:true={item.price}>
+                                <div class="b2b-checkout-review__item-your-price">
+                                    <lightning-formatted-number
+                                        value={item.price}
+                                        format-style="currency"
+                                        currency-code={item.currencyIsoCode}
+                                    ></lightning-formatted-number>
+                                </div>
+                            </template>
+
+                            <!-- ORIGINAL PRICE -->
+                            <template if:true={item.originalPrice}>
+                                <div class="b2b-checkout-review__item-original-price">
+                                    <lightning-formatted-number
+                                        value={item.originalPrice}
+                                        format-style="currency"
+                                        currency-code={item.currencyIsoCode}
+                                    ></lightning-formatted-number>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+</template>

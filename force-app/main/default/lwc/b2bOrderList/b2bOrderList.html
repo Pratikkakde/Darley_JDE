@@ -1,0 +1,140 @@
+<template>
+
+    <div lwc:dom="manual" class="custom-css-container"></div>
+
+    <div class="order-summary-wrapper">
+        <div class="order-summary-title">{labels.ORDERS}</div>
+
+        <div class="order-summary-main-section">
+            <div if:true={isSubAccountVisible} class="order-summary-sub-account">
+                <div>
+                    <lightning-combobox
+                        value={subAccount}
+                        options={subAccountOptions}
+                        placeholder={labels.STATUS_PLACEHOLDER}
+                        class="sub-account-field-select"
+                        onchange={handleFieldSubAccountChange}
+                        disabled={isDisabledFilter}
+                    ></lightning-combobox>
+                </div>
+            </div>
+
+            <div class="order-summary-filter-section">
+                <div class="field-container search-container">
+                    <lightning-input
+                        type="search"
+                        variant="label-hidden"
+                        placeholder={labels.SEARCH_PLACEHOLDER}
+                        class="search"
+                        value={search}
+                        onchange={handleChangeSearch}
+                    ></lightning-input>
+                </div>
+
+                <div class="sort-and-clear-section">
+                    <lightning-combobox
+                        value={status}
+                        options={statusOptions}
+                        placeholder={labels.STATUS_PLACEHOLDER}
+                        class="status-field-select"
+                        onchange={handleFieldStatusChange}
+                        disabled={isDisabledFilter}
+                    ></lightning-combobox>
+
+                    <div class="filter-date-and-clear-section"> 
+                        <!-- DATE FROM -->
+                        <lightning-input
+                            type="date"
+                            date-style="short"
+                            label={labels.DATE_FROM}
+                            placeholder={labels.DATE_FROM}
+                            class="list-date-from"
+                            max={dateTo}
+                            value={dateFrom}
+                            onchange={handleChangeDateFrom}
+                            disabled={isDisabledFilter}
+                        ></lightning-input>
+
+                        <!-- DATE TO -->
+                        <lightning-input
+                            type="date"
+                            date-style="short"
+                            label={labels.DATE_TO}
+                            placeholder={labels.DATE_TO}
+                            class="list-date-to"
+                            min={dateFrom}
+                            value={dateTo}
+                            onchange={handleChangeDateTo}
+                            disabled={isDisabledFilter}
+                        ></lightning-input>
+
+                        <div class="sort-and-clear">
+                            <div class="sort">{labels.SORT}</div>
+                            <button
+                                class="slds-button b2b-button_action"
+                                disabled={isDisabledFilter}
+                                onclick={handleClearAll}
+                            >{labels.CLEAR_ALL}</button>
+                        </div>
+                    </div>
+                    
+                    <div class="sort-mobile-section">
+                        <lightning-combobox
+                            variant="label-hidden"
+                            label=""
+                            value={lastSortField}
+                            options={sortFieldOptions}
+                            class="sort-field-select filter-input"
+                            onchange={handleSortFieldChange}
+                            disabled={isDisabledFilter}
+                        ></lightning-combobox>
+
+                        <lightning-combobox
+                            variant="label-hidden"
+                            label=""
+                            value={lastSortOrder}
+                            options={sortOrderOptions}
+                            class="sort-order-select filter-input"
+                            onchange={handleSortOrderChange}
+                            disabled={isDisabledFilter}
+                        ></lightning-combobox>
+
+                        <template for:each={statusOptions} for:item="item" for:index="index">
+                            <button
+                                key={item.id}
+                                value={item.value}
+                                class={item.cssClasses}
+                                onclick={handleFieldStatusChange}
+                                disabled={isDisabledFilter}
+                            >{item.label}</button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <div if:true={isFullSpinnerRunning} class="slds-spinner_container"></div>
+        </div>
+
+        <div class="table-container">
+            <c-b2b-table
+                table-headers={tableOrdersHeaders}
+                table-data={list}
+                table-view-data={listView}
+                table-view-mobile-data={listMobileView}
+                is-loading={isLoading}
+                onsorted={handleSortClick}
+                onexpand={handleClickOrderTitle}
+            ></c-b2b-table>
+        </div>
+
+        <!-- PAGINATION -->
+        <c-b2b-pagination
+            current-page={currentPage}
+            max-page={maxPage}
+            disabled={isPaginationDisabled}
+            class="pagination"
+            onchange={handleChangePage}
+        ></c-b2b-pagination>
+
+    </div>
+</template>

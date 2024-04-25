@@ -1,0 +1,140 @@
+<template>
+    <template if:true={showComponent}>
+        <div class="b2b-user-card__wrapper">
+            <div class="b2b-user-card__body">
+
+                <!-- PHOTO -->
+                <div class="b2b-user-card__photo">
+                    <template if:true={getPhoto}>
+                        <img class="b2b-user-card__photo-image" src={getPhoto} alt={getName}>
+                    </template>
+                    <template if:false={getPhoto}>
+                        <svg class="b2b-user-card__photo-default" width="29" height="29" viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M28.5 24.4167V25.7C28.5 27.2167 27.2167 28.5 25.7 28.5H3.3C1.78333 28.5 0.5 27.2167 0.5 25.7V24.4167C0.5 21.0333 4.46667 18.9333 8.2 17.3L8.55 17.125C8.84167 17.0083 9.13333 17.0083 9.425 17.1833C10.9417 18.175 12.6333 18.7 14.4417 18.7C16.25 18.7 18 18.1167 19.4583 17.1833C19.75 17.0083 20.0417 17.0083 20.3333 17.125L20.6833 17.3C24.5333 18.9333 28.5 20.975 28.5 24.4167ZM14.5 0.5C18.35 0.5 21.4417 3.94167 21.4417 8.2C21.4417 12.4583 18.35 15.9 14.5 15.9C10.65 15.9 7.55833 12.4583 7.55833 8.2C7.55833 3.94167 10.65 0.5 14.5 0.5Z"></path>
+                        </svg>                            
+                    </template>
+                </div>
+
+                <!-- CONTENT -->
+                <div class="b2b-user-card__content">
+
+                    <!-- CONTENT HEADER -->
+                    <div class="b2b-user-card__content-header">
+
+                        <!-- PERSON -->
+                        <div class="b2b-user-card__person">
+
+                            <!-- NAME -->
+                            <template if:true={getName}>
+                                <div class="b2b-user-card__name">{getName}</div>
+                            </template>
+        
+                            <!-- TTILE -->
+                            <template if:true={getTitle}>
+                                <div class="b2b-user-card__title">{getTitle}</div>
+                            </template>
+
+                        </div>
+
+                        <!-- ACTIVE STATUS -->
+                        <template if:true={showIsActive}>
+                            <div class="b2b-user-card__active" title={isActiveTitle}>
+                                <template if:true={isActive}>
+                                    <svg class="b2b-user-card__active-icon b2b-user-card__active-success" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 16C12.3939 16 16 12.3881 16 7.99621C16 3.61193 12.3864 0 8 0C3.60606 0 0 3.61193 0 7.99621C0 12.3881 3.61364 16 8 16ZM7.16667 11.7974C6.82576 11.7974 6.56061 11.646 6.31818 11.3507L4.53788 9.23048C4.36364 9.01846 4.29545 8.82915 4.29545 8.60956C4.29545 8.14009 4.67424 7.76905 5.13636 7.76905C5.40909 7.76905 5.62121 7.87506 5.82576 8.11737L7.14394 9.74539L10.0985 5.05064C10.2955 4.73261 10.5455 4.57359 10.8409 4.57359C11.2955 4.57359 11.7121 4.90677 11.7121 5.37624C11.7121 5.56555 11.6364 5.77 11.5 5.96687L7.98485 11.3431C7.78788 11.6309 7.49242 11.7974 7.16667 11.7974Z"></path>
+                                    </svg>
+                                </template>
+                                <template if:false={isActive}>
+                                    <svg class="b2b-user-card__active-icon b2b-user-card__active-error" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.32031 16.8984C9.42025 16.8984 10.4531 16.6892 11.4189 16.2707C12.3847 15.8575 13.2351 15.2834 13.9702 14.5483C14.7053 13.8133 15.2794 12.9628 15.6925 11.997C16.1111 11.0312 16.3203 9.99837 16.3203 8.89844C16.3203 7.80387 16.1111 6.77369 15.6925 5.80789C15.2794 4.8421 14.7026 3.99166 13.9622 3.25659C13.2271 2.52151 12.3767 1.94472 11.4109 1.5262C10.4451 1.10769 9.4122 0.898438 8.31226 0.898438C7.22306 0.898438 6.19556 1.10769 5.22977 1.5262C4.26397 1.94472 3.41086 2.52151 2.67041 3.25659C1.93534 3.99166 1.35854 4.8421 0.940031 5.80789C0.526885 6.77369 0.320312 7.80387 0.320312 8.89844C0.320312 9.99837 0.529568 11.0312 0.948079 11.997C1.36659 12.9628 1.94338 13.8133 2.67846 14.5483C3.41354 15.2834 4.26397 15.8575 5.22977 16.2707C6.19556 16.6892 7.22575 16.8984 8.32031 16.8984ZM5.90583 12.158C5.67511 12.158 5.47658 12.0775 5.31025 11.9165C5.14929 11.7502 5.0688 11.549 5.0688 11.3129C5.0688 11.0929 5.15197 10.8998 5.3183 10.7334L7.13721 8.90649L5.3183 7.08757C5.15197 6.92661 5.0688 6.73345 5.0688 6.5081C5.0688 6.27201 5.14929 6.07349 5.31025 5.91252C5.47658 5.75156 5.67511 5.67107 5.90583 5.67107C6.14191 5.67107 6.34312 5.75424 6.50945 5.92057L8.32836 7.72339L10.1553 5.91252C10.3163 5.74619 10.5175 5.66303 10.7589 5.66303C10.995 5.66303 11.1936 5.74351 11.3545 5.90447C11.5155 6.06544 11.596 6.26396 11.596 6.50005C11.596 6.7254 11.5128 6.92124 11.3465 7.08757L9.51951 8.90649L11.3384 10.7334C11.5048 10.889 11.5879 11.0822 11.5879 11.3129C11.5879 11.549 11.5074 11.7502 11.3465 11.9165C11.1855 12.0775 10.987 12.158 10.7509 12.158C10.5041 12.158 10.2975 12.0775 10.1312 11.9165L8.32836 10.1057L6.52554 11.9165C6.35921 12.0775 6.15264 12.158 5.90583 12.158Z"></path>
+                                    </svg>
+                                </template>
+                            </div>
+                        </template>
+
+                    </div>
+
+                    <!-- CONTACTS -->
+                    <div class="b2b-user-card__contacts">
+
+                        <!-- EMAIL -->
+                        <template if:true={showEmail}>
+                            <div class="b2b-user-card__contact">
+                                <a href={getEmailLink} target="_blank" class="b2b-user-card__contact-link">
+                                    <div class="b2b-user-card__contact-icon">
+                                        <svg class="b2b-user-card__contact-svg" width="10" height="9" viewBox="0 0 10 9" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.77595 5.4574C4.90083 5.58228 5.08815 5.58228 5.21303 5.4574L9.91677 1.08666C10 0.920159 9.97921 0.64959 9.6462 0.64959L0.342777 0.670403C0.0930204 0.670403 -0.11511 0.899346 0.0722074 1.10748L4.77595 5.4574ZM10 2.79333C10 2.5852 9.75027 2.46032 9.58376 2.60602L5.89985 5.99854C5.6501 6.22748 5.3379 6.35236 5.00489 6.35236C4.67189 6.35236 4.35969 6.22748 4.10993 6.01935L0.446839 2.60602C0.280335 2.46032 0.0305787 2.56439 0.0305787 2.79333C0.00976565 2.73089 0.00976565 7.51789 0.00976565 7.51789C0.00976565 7.97578 0.3844 8.35041 0.842287 8.35041H9.1675C9.62539 8.35041 10 7.97578 10 7.51789V2.79333Z"></path>
+                                        </svg>                                            
+                                    </div>
+                                    <div class="b2b-user-card__contact-label">{user.email}</div>
+                                </a>
+                            </div>
+                        </template>
+
+                        <!-- PHONE -->
+                        <template if:true={showPhone}>
+                            <div class="b2b-user-card__contact">
+                                <a href={getPhoneLink} target="_blank" class="b2b-user-card__contact-link">
+                                    <div class="b2b-user-card__contact-icon">
+                                        <svg class="b2b-user-card__contact-svg" width="10" height="11" viewBox="0 0 10 11" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.69363 7.9662L8.42743 6.9491C8.13683 6.72077 7.72169 6.70001 7.43109 6.92834L6.35171 7.71712C6.22717 7.8209 6.04035 7.80015 5.91581 7.6756L4.29675 6.2226L2.84374 4.60353C2.7192 4.47899 2.7192 4.31293 2.80223 4.16763L3.591 3.08826C3.81933 2.79765 3.79857 2.38251 3.57024 2.09191L2.55314 0.825718C2.24178 0.452088 1.68134 0.410573 1.32846 0.763446L0.249087 1.84282C0.0830289 2.00888 0 2.23721 0 2.46554C0.103786 4.58278 1.05862 6.59623 2.47011 8.00772C3.8816 9.41921 5.89505 10.374 8.01229 10.4778C8.24062 10.4986 8.46895 10.3948 8.63501 10.2287L9.71438 9.14937C10.1088 8.83801 10.088 8.25681 9.69363 7.9662ZM5.7705 5.08095H8.96711C9.17469 5.08095 9.23696 4.85262 9.0709 4.68656L8.05379 3.6487L9.92195 1.75979C10.0257 1.656 10.0257 1.46919 9.92195 1.3654L9.15393 0.597386C9.05014 0.4936 8.88408 0.4936 8.75954 0.597386L6.87063 2.48629L5.81201 1.46919C5.66671 1.28237 5.43838 1.34465 5.43838 1.55222V4.72807C5.43838 4.87338 5.6252 5.08095 5.7705 5.08095Z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="b2b-user-card__contact-label">{user.phone}</div>
+                                </a>
+                            </div>
+                        </template>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="b2b-user-card__footer">
+                <div class="b2b-user-card__actions">
+
+                    <!-- EDIT ACTION -->
+                    <template if:true={showEditAction}>
+                        <div class="b2b-user-card__action dxp-text-body-small">
+                            <a href="#" onclick={handleClickEdit} disabled={disabled}>{labels.edit}</a>
+                        </div>
+                    </template>
+
+                    <!-- ACTIVATE ACTION -->
+                    <template if:true={showActivateAction}>
+                        <div class="b2b-user-card__action dxp-text-body-small">
+                            <a href="#" onclick={handleClickActivate} disabled={disabled}>{activateActionLabel}</a>
+                        </div>
+                    </template>
+
+                </div>
+                <div class="b2b-user-card__action-menu">
+
+                    <!-- DROPDOWN MENU -->
+                    <lightning-button-menu
+                        icon-name="utility:threedots_vertical"
+                        variant="bare"
+                        menu-alignment="right"
+                        alternative-text="Show menu"
+                        disabled={disabled}
+                        onselect={handleSelectMenuItem}
+                    >
+                        <template if:true={showResetPasswordMenuItem}>
+                            <lightning-menu-item
+                                value={resetPassword}
+                                label={labels.resetPassword}
+                                disabled={disabled}
+                            ></lightning-menu-item>
+                        </template>
+                        <lightning-menu-item
+                            value={managePermissions}
+                            label={labels.managePermissions}
+                            disabled={disabled}
+                        ></lightning-menu-item>
+                    </lightning-button-menu>
+
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

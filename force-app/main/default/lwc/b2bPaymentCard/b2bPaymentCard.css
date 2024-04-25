@@ -1,0 +1,106 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.b2b-payment-card__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    padding: 1.5rem;
+    border: 1px solid var(--b2b-colorBorder);
+    border-radius: 0;
+    transition: border-color 0.1s;
+}
+
+.b2b-payment-card__wrapper:hover {
+    border-color: var(--b2b-colorAction);
+}
+
+/* HEADER */
+.b2b-payment-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 9px;
+}
+
+.b2b-payment-card__type {
+    font-size: 18px;
+    line-height: 26px;
+    color: #231F20;
+}
+
+.b2b-payment-card__header svg {
+    display: block;
+    width: 23px;
+    min-width: 23px;
+    height: 23px;
+    margin-left: 0.5rem;
+    fill: #40AE49;
+}
+
+/* BODY */
+.b2b-payment-card__body {
+    height: 100%;
+}
+
+.b2b-payment-card__name,
+.b2b-payment-card__number,
+.b2b-payment-card__date {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #231F20;
+}
+
+.b2b-payment-card__name {
+    font-weight: 700;
+}
+
+.b2b-payment-card__number,
+.b2b-payment-card__date {
+    color: #231F20;
+}
+
+/* FOOTER */
+.b2b-payment-card__footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.b2b-payment-card__actions span,
+.b2b-payment-card__actions button {
+    display: inline-block;
+}
+
+.b2b-payment-card__action-separator {
+    width: 1px;
+    height: 14px;
+    margin: 0 0.5rem;
+    background-color: var(--b2b-colorText);
+    transform: translateY(3px);
+}
+
+.b2b-payment-card__action {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration-line: underline;
+    border: 0;
+    color: var(--b2b-colorText);
+    background-color: var(--b2b-colorWhite);
+    transition: color 0.1s;
+}
+
+.b2b-payment-card__action:hover,
+.b2b-payment-card__action:active {
+    color: var(--b2b-colorAction);
+}

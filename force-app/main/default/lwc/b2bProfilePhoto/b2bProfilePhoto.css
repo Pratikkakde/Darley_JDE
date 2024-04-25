@@ -1,0 +1,210 @@
+:host {
+    --b2b-profile-photo-width: 6.4375rem;
+    display: block;
+    margin: 0 auto 0 auto;
+}
+
+/* PHOTO */
+
+.b2b-profile-photo__photo {
+    position: relative;
+    width: var(--b2b-profile-photo-width);
+    min-width: var(--b2b-profile-photo-width);
+    height: var(--b2b-profile-photo-width);
+    margin: 0 auto;
+}
+
+.b2b-profile-photo__image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dxp-g-neutral-1);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.b2b-profile-photo__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.b2b-profile-photo__image-default {
+    width: 3.75rem;
+    height: 3.75rem;
+    fill: var(--dxp-g-neutral-contrast-3);
+}
+
+/* UPDATE BUTTON */
+
+.b2b-profile-photo__update-button {
+    position: absolute;
+    right: 0.3125rem;
+    bottom: 0.3125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--dxp-g-brand-contrast);
+    overflow: hidden;
+    transition: background-color 0.1s;
+}
+
+.b2b-profile-photo__update-button-icon {
+    display: block;
+    width: 0.75rem;
+    min-width: 0.75rem;
+    fill: var(--dxp-g-brand);
+    transform: translate(0.8px, 0.3px);
+    transition: fill 0.1s;
+}
+
+.b2b-profile-photo__update-button:hover,
+.b2b-profile-photo__update-button:focus {
+    background-color: var(--dxp-g-brand-1);
+}
+
+.b2b-profile-photo__update-button:hover .b2b-profile-photo__update-button-icon,
+.b2b-profile-photo__update-button:focus .b2b-profile-photo__update-button-icon {
+    fill: var(--dxp-g-brand-contrast);
+}
+
+.b2b-profile-photo__update-button[disabled] {
+    cursor: not-allowed;
+}
+
+.b2b-profile-photo__update-button[disabled],
+.b2b-profile-photo__update-button[disabled]:hover,
+.b2b-profile-photo__update-button[disabled]:focus {
+    background-color: var(--dxp-g-brand-contrast);
+}
+
+.b2b-profile-photo__update-button[disabled] .b2b-profile-photo__update-button-icon,
+.b2b-profile-photo__update-button[disabled]:hover .b2b-profile-photo__update-button-icon,
+.b2b-profile-photo__update-button[disabled]:focus .b2b-profile-photo__update-button-icon {
+    fill: var(--dxp-g-neutral-1);
+}
+
+/* MODAL */
+
+.b2b-profile-photo__modal .slds-modal__content {
+    position: relative;
+    min-height: 142px;
+}
+
+.b2b-profile-photo__modal-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    grid-column-gap: 49px;
+    grid-row-gap: 32px;
+    margin-top: 13px;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-profile-photo__modal-row {
+        flex-direction: column;
+    }
+
+}
+
+.b2b-profile-photo__modal-col-photo {
+    width: var(--b2b-profile-photo-width);
+    min-width: var(--b2b-profile-photo-width);
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-profile-photo__modal-col-photo {
+        width: 100%;
+        min-width: 100%;
+    }
+
+}
+
+.dxp-text-body-small {
+    line-height: 15px !important;
+}
+
+.b2b-profile-photo__modal-col-content {
+    width: 100%;
+}
+
+.b2b-profile-photo__image-remove {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.b2b-profile-photo__image-remove .b2b-button_action {
+    font-size: 0.75rem;
+    line-height: 1;
+    text-decoration: underline;
+    color: var(--dxp-g-destructive);
+    transition: color 0.1s;
+}
+
+.b2b-profile-photo__image-remove .b2b-button_action:hover,
+.b2b-profile-photo__image-remove .b2b-button_action:focus {
+    color: var(--dxp-g-destructive-1);
+}
+
+.b2b-profile-photo__modal lightning-input {
+    margin-bottom: 0;
+}
+
+.b2b-profile-photo__modal lightning-input + .dxp-text-body-small {
+    max-width: 15.625rem;
+    min-height: 30px;
+    margin-top: 43px;
+    line-height: 15px;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-profile-photo__modal lightning-input + .dxp-text-body-small {
+        margin-top: 16px;
+    }
+
+}
+
+/* MODAL FOOTER */
+
+.b2b-profile-photo__wrapper .slds-modal__footer {
+    display: flex;
+    justify-content: space-between;
+    grid-column-gap: 93px;
+    padding-top: 45px;
+}
+
+.b2b-profile-photo__wrapper .slds-modal__footer .slds-button {
+    width: 100%;
+    max-width: calc(50% - 93px / 2);
+    line-height: 38px;
+}
+
+.b2b-profile-photo__wrapper .slds-modal__footer .slds-button + .slds-button {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+}
+
+@media (max-width: 574.98px) {
+
+    .b2b-profile-photo__wrapper .slds-modal__footer {
+        flex-direction: column;
+        grid-row-gap: 1rem;
+    }
+
+    .b2b-profile-photo__wrapper .slds-modal__footer .slds-button {
+        max-width: 100%;
+    }
+
+}

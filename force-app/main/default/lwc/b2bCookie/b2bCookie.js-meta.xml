@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Cookie</masterLabel>
+    <description>B2B Cookie</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="cookieExpireDays" type="Integer" label="Cookie expire days" default="5" min="1" max="30" required="true"></property>
+            <property name="cookieDelayedDays" type="Integer" label="Cookie delayed days" default="1" min="1" max="30" required="true"></property>
+            <property name="submitLabel" type="String" label="'Submit' Button label" default=""></property>
+            <property name="privacyPolicyLink" type="String" label="'Privacy Policy' Button link" default="privacy-policy" required="true"></property>
+            <property name="privacyPolicyLabel" type="String" label="'Privacy Policy' Button label" default="{0} Privacy Policy" required="true"></property>
+            <property name="companyName" type="String" label="Company Name" default="Darley" description="This value replaces the string {0} in the 'Privacy Policy Button label' field"></property>
+            <property name="containerMaxWidth" type="String" label="Container Max-Width" default="586px"></property>
+            <property name="horizontalAlignment" type="String" label="Horizontal Alignment" datasource="Left,Center,Right" default="Center"></property>
+            <property name="verticalAlignment" type="String" label="Vertical Alignment" datasource="Top,Middle,Bottom" default="Bottom"></property>
+            <property name="buttonAlignment" type="String" label="Button Alignment" datasource="Left,Center,Right" default="Center"></property>
+            <property name="textColor" type="Color" label="Text Color" default="rgb(255, 255, 255)"></property>
+            <property name="backgroundColor" type="Color" label="Background Color" default="rgba(35, 31, 32, 0.85)"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

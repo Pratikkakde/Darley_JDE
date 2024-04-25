@@ -1,0 +1,80 @@
+<template>
+    <template if:true={showComponent}>
+        <div class="b2b-pagination__wrapper">
+
+            <!-- PREVIOUS -->
+            <button
+                class="b2b-pagination__button"
+                disabled={getPreviousButtonDisabled}
+                title={getPreviousButtonTitle}
+                onclick={handleClickToPrevious}
+            >
+                <svg class="b2b-pagination__icon" viewBox="0 0 7 13" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.89961 10.7498L2.64961 6.4998L6.89961 2.2498L6.04961 0.549805L0.0996094 6.4998L6.04961 12.4498L6.89961 10.7498Z"></path>
+                </svg>
+            </button>
+
+            <!-- FIRST -->
+            <button
+                data-number="1"
+                data-active={getFirstButtonActive}
+                title={getFirstButtonTitle}
+                disabled={disabled}
+                class="b2b-pagination__button"
+                onclick={handleClickToButton}
+            >1</button>
+
+            <!-- PREVIOUS SEPARATOR -->
+            <template if:true={showPreviousSeparator}>
+                <button
+                    class="b2b-pagination__button b2b-pagination__separator"
+                    disabled={disabled}
+                >{labels.separator}</button>
+            </template>
+
+            <!-- RANGE -->
+            <template for:each={getRangeOptions} for:item="item" for:index="index">
+                <button
+                    key={item.index}
+                    data-number={item.number}
+                    data-active={item.active}
+                    title={item.title}
+                    disabled={item.disabled}
+                    class="b2b-pagination__button"
+                    onclick={handleClickToButton}
+                >{item.number}</button>
+            </template>
+
+            <!-- NEXT SEPARATOR -->
+            <template if:true={showNextSeparator}>
+                <button
+                    class="b2b-pagination__button b2b-pagination__separator"
+                    disabled={disabled}
+                >{labels.separator}</button>
+            </template>
+
+            <!-- LAST -->
+            <button
+                data-number={getMaxPage}
+                data-active={getLastButtonActive}
+                title={getLastButtonTitle}
+                disabled={disabled}
+                class="b2b-pagination__button"
+                onclick={handleClickToButton}
+            >{getMaxPage}</button>
+
+            <!-- NEXT -->
+            <button
+                class="b2b-pagination__button"
+                disabled={getNextButtonDisabled}
+                title={getNextButtonTitle}
+                onclick={handleClickToNext}
+            >
+                <svg class="b2b-pagination__icon" viewBox="0 0 7 13" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.100391 10.7498L4.35039 6.4998L0.100391 2.2498L0.950391 0.549805L6.90039 6.4998L0.950391 12.4498L0.100391 10.7498Z"></path>
+                </svg>
+            </button>
+
+        </div>
+    </template>
+</template>

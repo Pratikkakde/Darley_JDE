@@ -1,0 +1,43 @@
+.field-label {
+    color: var(--lwc-colorTextLabel, #696969);
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+}
+
+.field-label span {
+    color: #ff0000;
+}
+
+.success-msg {
+    color: #000;
+}
+
+.error-msg {
+    color: #ff0000;
+}
+
+.header-text {
+    color: #000;
+    font-size: 1.125rem;
+}
+
+.error-margin {
+    margin-bottom: 2.5625rem;
+}
+
+@media screen and (max-width: 375px) {
+    .error-margin {
+        margin-bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .b2b-mobile-full-width {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .b2b-mobile-column-direction {
+        flex-direction: column;
+    }
+}

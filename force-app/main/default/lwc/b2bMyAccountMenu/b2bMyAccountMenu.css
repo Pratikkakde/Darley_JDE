@@ -1,0 +1,68 @@
+:host {
+    --dxp-s-link-text-decoration: none;
+    --dxp-s-link-text-decoration-hover: none;
+    --dxp-s-link-text-decoration-focus: none;
+    --dxp-s-link-text-decoration-active: none;
+    --dxp-c-link-text-color-hover: var(--dxp-g-brand);
+    --dxp-c-link-text-color-focus: var(--dxp-g-brand-1);
+    --dxp-c-link-text-color-active: var(--dxp-g-brand-1);
+
+    display: block;
+}
+
+/* TITLE */
+.b2b-my-account-menu__title {
+    font-size: 1.75rem;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+/* MENU */
+.b2b-my-account-menu__list {
+    margin-top: 1.25rem;
+}
+
+/* MENU ITEM */
+.b2b-my-account-menu__item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    color: var(--dxp-g-root-contrast) !important;
+}
+
+.b2b-my-account-menu__item-active {
+    color: rgba(237, 27, 45, 1) !important;
+}
+
+.b2b-my-account-menu__item:hover {
+    color: var(--dxp-g-brand) !important;
+}
+
+.b2b-my-account-menu__item:focus,
+.b2b-my-account-menu__item:active {
+    color: var(--dxp-g-brand-1) !important;
+}
+
+.b2b-my-account-menu__item-active .b2b-my-account-menu__label,
+.b2b-my-account-menu__item:hover .b2b-my-account-menu__label,
+.b2b-my-account-menu__item:focus .b2b-my-account-menu__label,
+.b2b-my-account-menu__item:active .b2b-my-account-menu__label {
+    font-weight: 700;
+}
+
+lightning-icon + .b2b-my-account-menu__label {
+    margin-left: 1.5rem;
+}
+
+.b2b-my-account-menu__label {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.44;
+}
+
+.b2b-my-account-menu__item-active .b2b-my-account-menu__label {
+    font-weight: 700;
+}

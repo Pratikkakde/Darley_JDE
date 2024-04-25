@@ -1,0 +1,312 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+
+        <!-- FORM -->
+        <div class={wrapperClass}>
+            <div class="b2b-quick-order-uploader__header">{labels.title}</div>
+            <div class="b2b-quick-order-uploader__body">
+
+                <!-- FORM INPUT -->
+                <div class="b2b-quick-order-uploader__form">
+
+                    <!-- UPDATE SPINNER -->
+                    <template if:true={isUpdateLoading}>
+                        <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                    </template>
+
+                    <!-- UPLOAD FILE -->
+                    <lightning-input
+                        type="file"
+                        variant="label-hidden"
+                        accept=".csv"
+                        onchange={handleChangeUpload}
+                    ></lightning-input>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="b2b-quick-order-uploader__content">
+                    <div class="b2b-quick-order-uploader__template">
+                        <div class="b2b-quick-order-uploader__template-label">{labels.templateLabel}</div>
+                        <template if:true={templateLink}>
+                            <div class="b2b-quick-order-uploader__template-link">
+                                <a href="#" onclick={handleClickTemplateLink}>{labels.templateLink}</a>
+                            </div>
+                        </template>
+                    </div>
+                    <template if:true={showError}>
+                        <div class="b2b-quick-order-uploader__error">
+                            <div class="b2b-quick-order-uploader__error-title">{labels.errorTitle}</div>
+                            <div class="b2b-quick-order-uploader__error-message">{getErrorMessage}</div>
+                        </div>
+                    </template>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODAL -->
+        <template if:true={showModal}>
+            <section class="b2b-quick-order-uploader__modal-wrapper slds-modal slds-modal_medium slds-fade-in-open">
+                <div class="slds-modal__container">
+
+                    <!-- HEADER -->
+                    <header class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close"
+                            title={labels.close}
+                            onclick={handleClickModalClose}
+                        >
+                            <lightning-icon
+                                icon-name="utility:close"
+                                alternative-text={labels.close}
+                                variant="inverse"
+                            ></lightning-icon>
+                        </button>
+                        <h2>{labels.modalTitle}</h2>
+
+                        <!-- PANEL -->
+                        <div class="b2b-quick-order-uploader__panel">
+
+                            <!-- PAGE SIZE -->
+                            <div class="b2b-quick-order-uploader__page-size">
+                                <span>{labels.pageSizePrefix}</span>
+                                <c-b2b-select
+                                    value={pageSize}
+                                    options={pageSizeOptions}
+                                    required={pageSizeRequired}
+                                    disabled={getPageSizeDisabled}
+                                    onchange={handleChangePageSize}
+                                ></c-b2b-select>
+                                <span>{labels.pageSizeSufix}</span>
+                            </div>
+
+                            <!-- SHOW ISSUE -->
+                            <div class="b2b-quick-order-uploader__show-issue">
+                                <lightning-input
+                                    type="toggle"
+                                    name="show_issue"
+                                    label={getShowIssueLabel}
+                                    disabled={getShowIssueDisabled}
+                                    checked={showIssue}
+                                    onchange={handleChangeShowIssue}
+                                ></lightning-input>
+                            </div>
+
+                        </div>
+                    </header>
+
+                    <!-- CONTENT -->
+                    <div class="slds-modal__content">
+
+                        <!-- UPDATE SPINNER -->
+                        <template if:true={isAddingLoading}>
+                            <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                        </template>
+
+                        <!-- TABLE -->
+                        <template if:true={list.length}>
+                            <div class="b2b-quick-order-uploader__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="b2b-quick-order-uploader__th-icon"></th>
+                                            <th>{labels.thSku}</th>
+                                            <th>{labels.thProductName}</th>
+                                            <th class="b2b-quick-order-uploader__th-requested-qty">{labels.thRequestedQty}</th>
+                                            <th class="b2b-quick-order-uploader__th-recommended-qty">{labels.thRecommendedQty}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={displayedList} for:item="item" for:index="index">
+                                            <tr key={item.index} data-status={item.status}>
+
+                                                <!-- ICON -->
+                                                <td class="b2b-quick-order-uploader__td-icon">
+                                                    <!-- SUСCESS -->
+                                                    <template if:true={item.isSuccess}>
+                                                        <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.5 12.7461C9.76953 12.7461 12.4766 10.0332 12.4766 6.76953C12.4766 3.5 9.76367 0.792969 6.49414 0.792969C3.23047 0.792969 0.523438 3.5 0.523438 6.76953C0.523438 10.0332 3.23633 12.7461 6.5 12.7461ZM5.84375 9.63477C5.64453 9.63477 5.48047 9.55273 5.32812 9.34766L3.85742 7.54297C3.76953 7.42578 3.7168 7.29688 3.7168 7.16211C3.7168 6.89844 3.92188 6.68164 4.18555 6.68164C4.35547 6.68164 4.48438 6.73438 4.63086 6.92773L5.82031 8.46289L8.32227 4.44336C8.43359 4.26758 8.58594 4.17383 8.73828 4.17383C8.99609 4.17383 9.23633 4.34961 9.23633 4.625C9.23633 4.75391 9.16016 4.88867 9.08984 5.01172L6.33594 9.34766C6.21289 9.54102 6.04297 9.63477 5.84375 9.63477Z" fill="#479A14"></path>
+                                                        </svg>
+                                                    </template>
+                                                    <!-- WARNING -->
+                                                    <template if:true={item.isWarning}>
+                                                        <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.5 12.7461C9.76953 12.7461 12.4766 10.0332 12.4766 6.76953C12.4766 3.5 9.76367 0.792969 6.49414 0.792969C3.23047 0.792969 0.523438 3.5 0.523438 6.76953C0.523438 10.0332 3.23633 12.7461 6.5 12.7461ZM6.5 7.85938C6.19531 7.85938 6.02539 7.68945 6.01953 7.37891L5.94336 4.18555C5.9375 3.875 6.16602 3.65234 6.49414 3.65234C6.81641 3.65234 7.05664 3.88086 7.05078 4.19141L6.96875 7.37891C6.96289 7.69531 6.79297 7.85938 6.5 7.85938ZM6.5 9.82227C6.14844 9.82227 5.84375 9.54102 5.84375 9.19531C5.84375 8.84961 6.14258 8.5625 6.5 8.5625C6.85742 8.5625 7.15625 8.84375 7.15625 9.19531C7.15625 9.54688 6.85156 9.82227 6.5 9.82227Z" fill="#ED9F2D"></path>
+                                                        </svg>
+                                                    </template>
+                                                    <!-- ERROR -->
+                                                    <template if:true={item.isError}>
+                                                        <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.5 12.7461C9.76953 12.7461 12.4766 10.0332 12.4766 6.76953C12.4766 3.5 9.76367 0.792969 6.49414 0.792969C3.23047 0.792969 0.523438 3.5 0.523438 6.76953C0.523438 10.0332 3.23633 12.7461 6.5 12.7461ZM4.53125 9.23047C4.26172 9.23047 4.05078 9.01367 4.05078 8.74414C4.05078 8.61523 4.09766 8.49219 4.19141 8.4043L5.81445 6.77539L4.19141 5.15234C4.09766 5.05859 4.05078 4.94141 4.05078 4.8125C4.05078 4.53711 4.26172 4.33203 4.53125 4.33203C4.66602 4.33203 4.77148 4.37891 4.86523 4.4668L6.5 6.0957L8.14648 4.46094C8.24609 4.36133 8.35156 4.32031 8.48047 4.32031C8.75 4.32031 8.9668 4.53125 8.9668 4.80078C8.9668 4.93555 8.92578 5.04102 8.82031 5.14648L7.19141 6.77539L8.81445 8.39844C8.91406 8.48633 8.96094 8.60938 8.96094 8.74414C8.96094 9.01367 8.74414 9.23047 8.46875 9.23047C8.33398 9.23047 8.21094 9.18359 8.12305 9.08984L6.5 7.46094L4.88281 9.08984C4.78906 9.18359 4.66602 9.23047 4.53125 9.23047Z" fill="#D8232A"></path>
+                                                        </svg>
+                                                    </template>
+                                                </td>
+
+                                                <!-- SKU -->
+                                                <td class="b2b-quick-order-uploader__td-sku">
+                                                    <span>{item.sku}</span>
+                                                </td>
+
+                                                <!-- NAME -->
+                                                <td class="b2b-quick-order-uploader__td-name">
+                                                    <template if:true={item.message}>
+                                                        {item.message}
+                                                    </template>
+                                                    <template if:false={item.message}>
+                                                        <a href={item.link} target="_blank">{item.name}</a>
+                                                    </template>
+                                                </td>
+
+                                                <!-- REQUESTED QTY -->
+                                                <td class="b2b-quick-order-uploader__td-requested-qty">{item.requestedQty}</td>
+
+                                                <!-- RECOMMENDED QTY -->
+                                                <td class="b2b-quick-order-uploader__td-recommended-qty">
+                                                    <span>{item.recommendedQty}</span>
+                                                    <template if:true={item.tooltip}>
+                                                        <lightning-helptext content={item.tooltip}></lightning-helptext>
+                                                    </template>
+                                                </td>
+
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </template>
+                        <template if:false={list.length}>
+                            <div class="b2b-quick-order-uploader__table-empty">{labels.noRecordsToDisplay}</div>
+                        </template>
+
+                        <!-- MOBILE LIST -->
+                        <template if:true={list.length}>
+                            <div class="b2b-quick-order-uploader__mobile-list">
+                                <template for:each={displayedList} for:item="item" for:index="index">
+                                    <c-b2b-accordion
+                                        key={item.index}
+                                        component-id={item.componentId}
+                                        show={item.expanded}
+                                        onexpand={handleExpandMobileItem}
+                                    >
+                                        <div slot="header" class="b2b-quick-order-uploader__mobile-list_header">
+                                            <div class="b2b-quick-order-uploader__mobile-list_header-icon">
+                                                <!-- SUСCESS -->
+                                                <template if:true={item.isSuccess}>
+                                                    <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.5 12.7461C9.76953 12.7461 12.4766 10.0332 12.4766 6.76953C12.4766 3.5 9.76367 0.792969 6.49414 0.792969C3.23047 0.792969 0.523438 3.5 0.523438 6.76953C0.523438 10.0332 3.23633 12.7461 6.5 12.7461ZM5.84375 9.63477C5.64453 9.63477 5.48047 9.55273 5.32812 9.34766L3.85742 7.54297C3.76953 7.42578 3.7168 7.29688 3.7168 7.16211C3.7168 6.89844 3.92188 6.68164 4.18555 6.68164C4.35547 6.68164 4.48438 6.73438 4.63086 6.92773L5.82031 8.46289L8.32227 4.44336C8.43359 4.26758 8.58594 4.17383 8.73828 4.17383C8.99609 4.17383 9.23633 4.34961 9.23633 4.625C9.23633 4.75391 9.16016 4.88867 9.08984 5.01172L6.33594 9.34766C6.21289 9.54102 6.04297 9.63477 5.84375 9.63477Z" fill="#479A14"></path>
+                                                    </svg>
+                                                </template>
+                                                <!-- WARNING -->
+                                                <template if:true={item.isWarning}>
+                                                    <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.5 12.7461C9.76953 12.7461 12.4766 10.0332 12.4766 6.76953C12.4766 3.5 9.76367 0.792969 6.49414 0.792969C3.23047 0.792969 0.523438 3.5 0.523438 6.76953C0.523438 10.0332 3.23633 12.7461 6.5 12.7461ZM6.5 7.85938C6.19531 7.85938 6.02539 7.68945 6.01953 7.37891L5.94336 4.18555C5.9375 3.875 6.16602 3.65234 6.49414 3.65234C6.81641 3.65234 7.05664 3.88086 7.05078 4.19141L6.96875 7.37891C6.96289 7.69531 6.79297 7.85938 6.5 7.85938ZM6.5 9.82227C6.14844 9.82227 5.84375 9.54102 5.84375 9.19531C5.84375 8.84961 6.14258 8.5625 6.5 8.5625C6.85742 8.5625 7.15625 8.84375 7.15625 9.19531C7.15625 9.54688 6.85156 9.82227 6.5 9.82227Z" fill="#ED9F2D"></path>
+                                                    </svg>
+                                                </template>
+                                                <!-- ERROR -->
+                                                <template if:true={item.isError}>
+                                                    <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.5 12.7461C9.76953 12.7461 12.4766 10.0332 12.4766 6.76953C12.4766 3.5 9.76367 0.792969 6.49414 0.792969C3.23047 0.792969 0.523438 3.5 0.523438 6.76953C0.523438 10.0332 3.23633 12.7461 6.5 12.7461ZM4.53125 9.23047C4.26172 9.23047 4.05078 9.01367 4.05078 8.74414C4.05078 8.61523 4.09766 8.49219 4.19141 8.4043L5.81445 6.77539L4.19141 5.15234C4.09766 5.05859 4.05078 4.94141 4.05078 4.8125C4.05078 4.53711 4.26172 4.33203 4.53125 4.33203C4.66602 4.33203 4.77148 4.37891 4.86523 4.4668L6.5 6.0957L8.14648 4.46094C8.24609 4.36133 8.35156 4.32031 8.48047 4.32031C8.75 4.32031 8.9668 4.53125 8.9668 4.80078C8.9668 4.93555 8.92578 5.04102 8.82031 5.14648L7.19141 6.77539L8.81445 8.39844C8.91406 8.48633 8.96094 8.60938 8.96094 8.74414C8.96094 9.01367 8.74414 9.23047 8.46875 9.23047C8.33398 9.23047 8.21094 9.18359 8.12305 9.08984L6.5 7.46094L4.88281 9.08984C4.78906 9.18359 4.66602 9.23047 4.53125 9.23047Z" fill="#D8232A"></path>
+                                                    </svg>
+                                                </template>
+                                            </div>
+                                            <div class="b2b-quick-order-uploader__mobile-list_header-label">
+                                                <template if:true={item.message}>{item.message}</template>
+                                                <template if:false={item.message}>{item.name}</template>
+                                            </div>
+                                            <div class="b2b-quick-order-uploader__mobile-list_header-sku">{item.sku}</div>
+                                        </div>
+                                        <div slot="content" class="b2b-quick-order-uploader__mobile-list_content">
+                                            <div class="b2b-quick-order-uploader__mobile-list_content-sku">
+                                                <span class="b2b-quick-order-uploader__mobile-list_content-sku-lebel">{labels.thSku}: </span>
+                                                <span class="b2b-quick-order-uploader__mobile-list_content-sku-value">{item.sku}</span>
+                                            </div>
+                                            <div class="b2b-quick-order-uploader__mobile-list_content-item">
+                                                <span class="b2b-quick-order-uploader__mobile-list_content-item-label">{labels.thRequestedQty}</span>
+                                                <span class="b2b-quick-order-uploader__mobile-list_content-item-value">{item.requestedQty}</span>
+                                            </div>
+                                            <div class="b2b-quick-order-uploader__mobile-list_content-item">
+                                                <span class="b2b-quick-order-uploader__mobile-list_content-item-label">{labels.thRecommendedQty}</span>
+                                                <span class="b2b-quick-order-uploader__mobile-list_content-item-value">{item.recommendedQty}</span>
+                                            </div>
+                                        </div>
+                                    </c-b2b-accordion>
+                                </template>
+                            </div>
+                        </template>
+
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="slds-modal__footer">
+
+                        <!-- SHOWING LABEL -->
+                        <div class="b2b-quick-order-uploader__showing-label">{getShowingLabel}</div>
+
+                        <!-- PAGINATION -->
+                        <div class="b2b-quick-order-uploader__pagination">
+                            <c-b2b-pagination
+                                current-page={currentPage}
+                                max-page={getMaxPage}
+                                disabled={isAddingLoading}
+                                onchange={handleChangePagination}
+                            ></c-b2b-pagination>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <div class="b2b-quick-order-uploader__submit-button">
+                            <button
+                                class="slds-button slds-button_brand"
+                                disabled={isModalSubmitDisabled}
+                                onclick={handleClickModalSubmit}
+                            >{labels.modalSubmit}</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- SUCCESS MODAL -->
+        <template if:true={showSuccessModal}>
+            <section class="b2b-quick-order__success-modal-wrapper slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+
+                    <!-- HEADER -->
+                    <header class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close"
+                            title={labels.close}
+                            onclick={handleClickSuccessModalClose}
+                        >
+                            <lightning-icon
+                                icon-name="utility:close"
+                                alternative-text={labels.close}
+                                variant="inverse"
+                            ></lightning-icon>
+                        </button>
+                        <h2 class="b2b-quick-order__modal-title">{labels.modalSuccessTitle}</h2>
+                    </header>
+
+                    <!-- FOOTER -->
+                    <div class="slds-modal__footer">
+                        <button
+                            class="slds-button slds-button_outline-brand"
+                            onclick={handleClickModalViewCart}
+                        >{labels.modalSuccessViewCart}</button>
+                        <button
+                            class="slds-button slds-button_brand"
+                            onclick={handleClickSuccessModalClose}
+                        >{labels.modalSuccessContinueShopping}</button>
+                    </div>
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </template>
+</template>

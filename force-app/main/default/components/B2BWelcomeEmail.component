@@ -1,0 +1,22 @@
+<apex:component access="global">
+    <apex:attribute name="userName" type="String" description="User Name"/>
+
+    <div style="width: 100%; max-width: 1000px; margin: 0 auto; padding: 50px 8px; background-image: url({!$Setup.VisualForceEmailConfiguration__c.URLBackground__c}); box-sizing: border-box;">
+        <c:B2BCustomLetterHead ></c:B2BCustomLetterHead>
+        <div style="width: 100%; max-width: 800px; margin: 0 auto; padding: 0 16px; background-color:#ffffff; box-sizing: border-box;">
+            <div style="width: 100%; max-width: 700px; margin: 0 auto;">
+
+                <!-- CONTENT -->
+                <div style="font-family: 'Century Gothic', 'Open Sans', 'Helvetica', 'Arial', 'sans-serif'; font-size: 15px; line-height: 26px; color: #000000;">
+                    <div style="margin: 0 0; margin-bottom: 20px; font-weight: 700;">Hello {!userName},</div>
+                    <div>Welcome, and thank you for registering online with Darley!</div>
+                    <div>Please, follow this <a href="{!$Network.NetworkUrlForUserEmails}" style="color: #3297F0; text-decoration: none;" target="_blank">link</a> to set your password and begin shopping.</div>
+                    <div style="margin-top: 30px;">Thank you,</div>
+                    <div>Darley Team</div>
+                </div>
+
+            </div>
+        </div>
+        <c:B2BCustomLetterFooter ></c:B2BCustomLetterFooter>
+    </div>
+</apex:component>

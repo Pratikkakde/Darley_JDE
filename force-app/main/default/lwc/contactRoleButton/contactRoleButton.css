@@ -1,0 +1,13 @@
+.my-radio-group {
+    --sds-c-button-line-height: 2.875rem;
+}
+
+.checkbox{
+    --sds-c-textarea-sizing-min-height: 200px; 
+}
+.slds-modal__container {
+    max-width: 100rem !important;
+    width: 100% !important;
+    /* max-height: 50rem !important;
+    height: 50% !important; */
+}

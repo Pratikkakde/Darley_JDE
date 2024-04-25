@@ -1,0 +1,107 @@
+:host {
+    display: block;
+    margin-bottom: 0;
+}
+
+.b2b-category-information__wrapper {
+    padding-bottom: 50px;
+}
+
+@media screen and (max-width: 1023.98px) {
+
+    .b2b-category-information__wrapper {
+        padding-bottom: 30px;
+    }
+
+}
+
+.b2b-category-information__row {
+    display: flex;
+    grid-column-gap: 50px;
+    grid-row-gap: 30px;
+}
+
+@media screen and (max-width: 1023.98px) {
+
+    .b2b-category-information__row {
+        flex-wrap: wrap;
+    }
+
+}
+
+.b2b-category-information__content,
+.b2b-category-information__image {
+    width: calc(50% - 25px);
+}
+
+.b2b-category-information__content[data-is-image-exists="false"] {
+    width: 100%;
+}
+
+@media screen and (max-width: 1023.98px) {
+
+    .b2b-category-information__content,
+    .b2b-category-information__image {
+        width: 100%;
+    }
+
+}
+
+.b2b-category-information__title {
+    font-size: 42px;
+    line-height: 1;
+    font-weight: 500;
+    text-align: var(--b2b-category-information-title-align, left);
+    color: var(--b2b-category-information-title-color, var(--b2b-color-text, #231F20));
+}
+
+.b2b-category-information__description,
+.b2b-category-information__additional-description,
+.b2b-category-information__button {
+    margin-top: 20px;
+}
+
+.b2b-category-information__description,
+.b2b-category-information__additional-description {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.b2b-category-information__description {
+    text-align: var(--b2b-category-information-description-align, left);
+    color: var(--b2b-category-information-description-color, var(--b2b-color-text, #231F20));
+}
+
+.b2b-category-information__additional-description {
+    text-align: var(--b2b-category-information-additional-description-align, left);
+    color: var(--b2b-category-information-additional-description-color, var(--b2b-color-text, #231F20));
+}
+
+.b2b-category-information__description[data-is-additional-description-exists="true"] {
+    font-weight: 700;
+}
+
+.b2b-category-information__button {
+    text-align: var(--b2b-category-information-button-align, left);
+}
+
+.b2b-category-information__button .slds-button {
+    min-width: 134px;
+    line-height: 38px;
+    text-align: center;
+}
+
+@media screen and (max-width: 574.98px) {
+
+    .b2b-category-information__button .slds-button {
+        width: 100%;
+    }
+
+}
+
+.b2b-category-information__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

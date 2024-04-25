@@ -1,0 +1,147 @@
+<template>
+    <div class="b2b-favorite-list-detail__wrapper">
+
+        <!-- FATAL ERROR -->
+        <c-b2b-alert
+            show={isFatalError}
+            variant="error"
+            message={fatalErrorMessage}
+        ></c-b2b-alert>
+        <template if:false={isFatalError}>
+
+            <!-- LOADING SPINNER -->
+            <template if:true={showSpinner}>
+                <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+            </template>
+
+            <!-- HEADER -->
+            <div class="b2b-favorite-list-detail__header">
+                <div class="b2b-favorite-list-detail__name slds-truncate">{listName}</div>
+                <div class="b2b-favorite-list-detail__actions">
+
+                    <!-- RENAME -->
+                    <a
+                        href="#"
+                        class="b2b-button_action"
+                        disabled={isActionsDisabled}
+                        onclick={handleClickRename}
+                    >{labels.rename}</a>
+
+                    <!-- DELETE -->
+                    <a
+                        href="#"
+                        class="b2b-button_action"
+                        disabled={isActionsDisabled}
+                        onclick={handleClickDelete}
+                    >{labels.delete}</a>
+
+                    <!-- CLEAR LIST -->
+                    <a
+                        href="#"
+                        class="b2b-button_action"
+                        disabled={isClearDisabled}
+                        onclick={handleClickClear}
+                    >{labels.clearList}</a>
+
+                </div>
+
+                <!-- SORT -->
+                <div class="b2b-favorite-list-detail__sort">
+                    <lightning-combobox
+                        label={labels.sortLabel}
+                        variant="label-inline"
+                        value={sort}
+                        options={sortOptions}
+                        disabled={isSortOptionsDisabled}
+                        onchange={handleChangeSort}
+                    ></lightning-combobox>
+                </div>
+
+            </div>
+
+            <!-- BODY -->
+            <div class="b2b-favorite-list-detail__body">
+
+                <!-- EMPTY MESSAGE -->
+                <template if:true={showEmptyMessage}>
+                    <div class="b2b-favorite-list-detail__empty-message">
+                        <p>{labels.emptyMessageTitle}</p>
+                        <p>{labels.emptyMessageText}</p>
+                    </div>
+                </template>
+
+                <!-- LIST -->
+                <template if:true={list.length}>
+                    <template for:each={getList} for:item="item">
+                        <c-b2b-favorite-list-item
+                            key={item.id}
+                            is-update-loading={isUpdateLoading}
+                            item={item}
+                            show-original-price={showOriginalPrice}
+                            onavailable={handleAvailable}
+                            onupdateloading={handleUpdateLoading}
+                            onmodalloading={handleModalLoading}
+                            onremove={handleClickRemove}
+                        ></c-b2b-favorite-list-item>
+                    </template>
+                </template>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="b2b-favorite-list-detail__footer">
+
+                <!-- PAGINATION -->
+                <template if:true={showPagination}>
+                    <div class="b2b-favorite-list-detail__pagination">
+                        <c-b2b-pagination
+                            current-page={currentPage}
+                            max-page={maxPage}
+                            disabled={isPaginationDisabled}
+                            onchange={handleChangePagination}
+                        ></c-b2b-pagination>
+                    </div>
+                </template>
+
+                <!-- ADD ALL BUTTON -->
+                <div class="b2b-favorite-list-detail__add-all">
+                    <button
+                        class="slds-button slds-button_brand"
+                        disabled={isAddAllButtonDisabled}
+                        onclick={handleClickAddAllButton}
+                    >{getAddAllButtonLabel}</button>
+                </div>
+
+            </div>
+
+        </template>
+
+    </div>
+
+    <!-- FAVORITE LIST UPSERT -->
+    <c-b2b-favorite-list-upsert
+        effective-account-id={effectiveAccountId}
+        onclose={handleCloseFavoriteListUpsert}
+    ></c-b2b-favorite-list-upsert>
+
+    <!-- MODAL -->
+    <c-b2b-modal
+        is-loading={isModalLoading}
+        onclose={handleCloseModal}
+        onsubmit={handleSubmitModal}
+    >
+        <!-- UNAVAILABLE PRODUCTS -->
+        <template if:true={unavailableProducts.length}>
+            <div slot="content" class="b2b-favorite-list-detail__unavailable-products">
+                <p>{labels.addAllUnavailableProductsInfo}</p>
+                <p>{labels.addAllUnavailableProductsLabel}</p>
+                <ol>
+                    <template for:each={unavailableProducts} for:item="item" for:index="index">
+                        <li key={item.index}>{item}</li>
+                    </template>
+                </ol>
+            </div>
+        </template>
+    </c-b2b-modal>
+
+</template>

@@ -1,0 +1,10 @@
+:host {
+    display: block;
+}
+
+/* CONTENT */
+
+.slds-modal__content:not(:empty) {
+    min-height: 3rem;
+    padding-bottom: 4px;
+}

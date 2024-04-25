@@ -1,0 +1,43 @@
+/* TITLES */
+.b2b-address-form__title {
+    margin-bottom: 20px;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--b2b-colorText);
+}
+
+.slds-form-element{
+    margin-bottom: 0;
+}
+
+/* FOOTER */
+
+.b2b-address-book__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    grid-column-gap: 20px;
+    grid-row-gap: 1rem;
+    margin-top: 30px;
+}
+
+.b2b-address-book__footer .slds-button {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    min-width: 140px;
+    line-height: 38px;
+}
+
+@media (max-width: 574.978px) {
+    
+    .b2b-address-book__footer {
+        flex-direction: column;
+    }
+
+    .b2b-address-book__footer .slds-button {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,26 @@
+<apex:component access="global">
+    <apex:attribute name="userName" type="String" description="User Name"/>
+    <apex:attribute name="orderNumber" type="String" description="Order Number"/>
+    <apex:attribute name="orderedDate" type="Date" description="Ordered Date"/>
+
+    <div style="width: 100%; max-width: 1000px; margin: 0 auto; padding: 50px 8px; background-image: url({!$Setup.VisualForceEmailConfiguration__c.URLBackground__c}); box-sizing: border-box;">
+        <c:B2BCustomLetterHead ></c:B2BCustomLetterHead>
+        <div style="width: 100%; max-width: 800px; margin: 0 auto; padding: 0 16px; background-color:#ffffff; box-sizing: border-box;">
+            <div style="width: 100%; max-width: 700px; margin: 0 auto;">
+
+                <!-- CONTENT -->
+                <div style="font-family: 'Century Gothic','Open Sans','Helvetica','Arial','sans-serif'; font-size: 15px; line-height: 26px; color: #333333;">
+                    <div style="margin-bottom: 16px;font-weight: BOLD;text-transform: capitalize;">Hello {!userName},</div>
+                    <div style="margin: 16px 0;">Feel free to track your Order <b>#{!orderNumber}</b> (<apex:outputText value="{0,date,MMMM d','  yyyy}"> <apex:param value="{!orderedDate}"/></apex:outputText>) any time.</div>
+                    <div style="margin: 16px 0;">Tracking Information:</div>
+                    <div style="margin: 16px 0, font-weight: BOLD;text-decoration: underline;">{#TrackingLinks}</div>
+                    <div style="margin: 16px 0;">Click the {#LinkToOrderSummary} to view your order.</div>
+                    <div style="margin-top: 16px;">Thank you,</div>
+                    <div>Darley Team</div>
+                </div>
+
+            </div>
+        </div>
+        <c:B2BCustomLetterFooter ></c:B2BCustomLetterFooter>
+    </div>
+</apex:component>

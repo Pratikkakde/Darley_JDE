@@ -1,0 +1,227 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-31-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+  <div style=" overflow:auto;  padding-left:3%">
+    <p style = " font-size:large; font-weight:bolder;text-align:center">Price Component</p>
+    <br>
+  <lightning-card variant="Narrow"   title="PUMP MODEL NAME : ">
+    <Strong style="padding-left :20px;font-size: large; color: #434243">{pumpname}</Strong> 
+  </lightning-card>
+  
+  
+  </div>
+  <br>
+  <div style="height:450px; overflow:auto;  padding-left:3%">
+      <!-- <div class="slds-p-top_small" > -->
+      <template for:each={arrayvaluedataforprice} for:item="selectionRule" >
+        <lightning-card class="slds-p-top_small bgcolor slds-m-around_small " variant="Narrow" key={selectionRule.bundleid}  title={selectionRule.Bundleattribute}>
+          <table class=" slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped tblColPad"  cellpadding="5" cellspacing="5"  style="border-collapse:collapse;">
+            <thead>
+            <tr class = "slds-line-height_reset">
+                
+                <th class =""  scope="col"  style = " font-weight : bold; width:40%"> 
+                  <div class ="slds-truncate" title="Product Name" >  Product Name 
+                  </div>
+                </th>
+                <th  class =""  scope="col"  style = " font-weight : bold; width:20%"> 
+                  <div class ="slds-truncate" title="Product Code" >  Product Code
+                  </div>
+                  </th>
+                <th class =""  scope="col"  style = " font-weight : bold; width:15%"> 
+                  <div class ="slds-truncate" title="Product Price" > Product Price
+                  </div>
+                </th>
+                <th  class =""  scope="col"  style = " font-weight : bold; width:8%"> 
+                  <div class ="slds-truncate" title="Quantity" >  Quantity
+                  </div>
+                  </th>
+                  <th class =""  scope="col"  style = " font-weight : bold; width:7%"> 
+                  <div class ="slds-truncate" title="Discount" >  Discount
+                  </div>
+                </th>
+                <th class =""  scope="col"  style = " font-weight : bold; width:10%"> 
+                  <div class ="slds-truncate" title="Final Price" >  Final Price
+                  </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          
+          
+            
+            <tr class ="slds-hint-parent"  >
+              
+            <td data-label="Product Name" scope ="row">
+              <div class = "slds-truncate" style="word-break: break-all">
+                
+                  <label for={selectionRule.bundleid}> {selectionRule.productName}</label>
+                </div>
+              </td>
+              <td data-label ="Product Code" scope ="row" >
+                <div class = "slds-truncate">
+                {selectionRule.productcode}
+                </div>
+              </td>
+              <td data-label ="Product Price" scope ="row">
+                <div class = "slds-truncate">
+                ${selectionRule.price}
+              </div>
+              </td>
+  
+              <td data-label="Quantity" scope ="row">
+                <div class="slds-truncate percent">               
+                    <lightning-input label="Input" name={selectionRule.bundleid} type="Number" value="1" variant="label-hidden" onchange={QuantityChange}  required></lightning-input>
+                    </div>
+              </td>
+  
+              <td data-label="Discount" scope ="row">
+                <div class ="slds-truncate  percent">
+                  <lightning-input label="Input" type="number" name={selectionRule.bundleid} value="0" onchange={discountChange} variant="label-hidden" ></lightning-input><div>%</div>
+                  </div>   
+              </td>
+  
+              <td data-label="Final Price" scope ="row">
+                <div class = "slds-truncate">
+                  
+                  ${selectionRule.finalprice}
+                </div>
+              </td>
+          </tr>
+          
+          
+      </tbody>
+          </table>
+        </lightning-card>
+    
+    </template>
+  
+    
+    
+    <!-- </div>  -->
+    
+    </div>
+    <br>
+
+      <div style=" overflow:auto;  padding-left:3%">
+      <lightning-card>
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-m-left_medium slds-text-title_bold">
+          <lightning-card>
+            Total price : ${totalPrice}
+          </lightning-card>
+          </div>
+          <div class="slds-col slds-m-horizontal_large slds-text-title_bold">
+            <lightning-input label="Discount on total (in %)" type="Number" value="0" onchange={totaldiscountChange} ></lightning-input>
+          </div>
+          <div class="slds-col slds-m-right_medium slds-text-title_bold">
+            <lightning-input label="Final price" type="Number"  value={afterFinalDiscount} onchange={finalPriceChange}></lightning-input>
+          </div>
+        </div>
+      </lightning-card>
+    </div>
+
+    <br>
+    <div class="slds-float_right ">
+      <lightning-button variant="brand" label="Save" title="Primary action" class="slds-modal__setMargin savebtn" onclick={nextButton}></lightning-button>
+    </div>
+    <!-- ................................................modal..................................................... -->
+    <template if:true={showModal}>
+      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small" >
+        <div class="slds-modal__container">
+          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+            </svg>
+            <span class="slds-assistive-text">Cancel and close</span>
+          </button>
+          <div class="slds-modal__header">
+            
+            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Search Opportunity</h1>
+          <lightning-layout>
+            <lightning-layout-item size="6"  padding="around-small">
+          <div class="slds-form-element" >
+            <!--lOOKUP 1(cLIENT LOOKUP) STARTS HERE-->
+            <!-- <label class="slds-form-element__label" for="combobox-id-2" style="background-color: white;" >
+              <b>
+                {lookupLabel}
+              </b>
+            </label> -->
+            <div class="slds-form-element__control">
+              <div class="slds-combobox_container">
+                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                  <template if:true={oppName}>
+                    
+                  <div data-key="pilldiv" class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right headingCss" role="none">
+                    <h2 class ="hdcss">Opportunity Name</h2>
+                    <span class="slds-icon_container slds-icon-standard-account slds-combobox__input-entity-icon" title="object">
+                      
+                      <div class="slds-icon slds-icon_small" aria-hidden="true">
+                      <lightning-icon icon-name="standard:opportunity"  size="small"></lightning-icon>
+                      </div>
+                      <span class="slds-assistive-text">Record</span>
+                    </span>
+                    <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value " id="combobox-id-5" aria-controls="listbox-id-5" role="textbox" placeholder="Select an Option" readonly value={oppName} />
+                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right " onclick={removeRecordOnLookup}
+                    title="Remove selected option">
+                      <span class="slds-button__icon" aria-hidden="true" >
+                      <lightning-icon icon-name="utility:close"
+                        size="xx-Small" class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default cssIcon" aria-hidden="true"></lightning-icon>
+                      </span>
+                      <span class="slds-assistive-text ">Remove selected record</span>
+                    </button>
+                    </div>
+                  </template>
+                  <template if:false={oppName}>
+                  <div data-key="searchdiv" class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right headingCss" role="none" >
+                    <h2 class ="hdcss">Opportunity Name</h2>
+                    <br>
+                    <br>
+                    <input type="text" name = "performer" onfocusout={onLeave} value={searchKey} onkeyup={handleSearch} onchange={handleSearch} class="slds-input slds-combobox__input slds-has-focus " id="combobox-id-2" aria-autocomplete="list" aria-controls="listbox-id-2" role="textbox" placeholder="Search..." />
+                    <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                      <lightning-icon icon-name="utility:search" size="xx-Small" class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default cssIcon" aria-hidden="true"></lightning-icon>
+                    </span>
+                  </div>
+                  <template if:true={oppList}>
+                  <div id="listbox-id-2-venu" data-key="dropdownresult"  role="listbox" style="height:auto">
+                    <ul class="slds-listbox " role="presentation" >
+                      <template for:each={oppList} for:item="opp">
+                        <li id={opp.Id} key={opp.Id} onclick={handleSelectPerformer} role="presentation" class="slds-listbox__item">
+                        <div data-key={opp.Id} data-name={opp.Name} class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option" style="padding-left:40px; padding-top:10px">
+                          
+                          
+                              <lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon>
+                            
+                          
+                         
+                            <span data-key={opp.Id} data-name={opp.Name}  style="padding-left:10px">{opp.Name} </span>
+                          
+                        </div>
+                      </li>
+                      </template>
+                    </ul>
+                  </div>
+                  </template>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </lightning-layout-item>
+      </lightning-layout>
+          <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeModal} title="Cancel" >Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={submitDetails}  title="Ok"> Ok</button>
+          </div>
+        </div>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+        
+  </template>

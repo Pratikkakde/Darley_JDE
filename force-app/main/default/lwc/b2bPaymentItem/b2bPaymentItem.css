@@ -1,0 +1,35 @@
+:host {
+    display: inline-block;
+    width: 100%;
+}
+
+.b2b-payment-item__wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.b2b-payment-item__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.b2b-payment-item__icon {
+    margin-right: 12px;
+}
+
+.b2b-payment-item__text {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.b2b-payment-item__name {
+    font-weight: 700;
+}
+
+.b2b-payment-item__date {
+    margin-left: 6px;
+    font-size: 14px;
+    line-height: 16px;
+}

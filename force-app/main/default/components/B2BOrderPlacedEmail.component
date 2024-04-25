@@ -1,0 +1,20 @@
+<apex:component access="global">
+    <apex:attribute name="userName" type="String" description="User Name"/>
+    <apex:attribute name="orderSummaryId" type="String" description="Order Summary Id"/>
+
+    <div style="width: 100%; max-width: 1000px; margin: 0 auto; padding: 50px 8px; background-image: url({!$Setup.VisualForceEmailConfiguration__c.URLBackground__c}); box-sizing: border-box;">
+        <c:B2BCustomLetterHead ></c:B2BCustomLetterHead>
+        <div style="width: 100%; max-width: 800px; margin: 0 auto; padding: 0 16px; background-color:#ffffff; box-sizing: border-box;">
+            <div style="width: 100%; max-width: 700px; margin: 0 auto;">
+                <div style="font-family: 'Century Gothic','Open Sans','Helvetica','Arial','sans-serif'; font-size: 15px; line-height: 26px; color: #333333;">
+                    <div style="margin-bottom: 16px;font-weight: BOLD;">Hello {!userName},</div>
+                    <div style="margin: 16px 0;">Thank you for placing your order with Darley.</div>
+                    <div style="margin: 16px 0;">Please, follow the <a href="{!$Setup.B2BSettings__c.CommunityURL__c}/OrderSummary/{!orderSummaryId}" style="color: #3297F0; text-decoration: none;" target="_blank">link</a> to review your order details.</div>
+                    <div style="margin-top: 16px;">Thank you,</div>
+                    <div>Darley Team</div>
+                </div>
+            </div>
+        </div>
+        <c:B2BCustomLetterFooter ></c:B2BCustomLetterFooter>
+    </div>
+</apex:component>

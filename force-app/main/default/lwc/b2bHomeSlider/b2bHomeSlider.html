@@ -1,0 +1,88 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <template if:true={showComponent}>
+        <div class={wrapperClass}>
+
+            <!-- SLIDER CONTAINER -->
+            <div class="b2b-home-slider__container">
+                <template for:each={list} for:item="item" for:index="index">
+                    <div key={item.index} class={item.class}>
+                        <div class="b2b-home-slider__content">
+                            <div class="b2b-home-slider__blackout"></div>
+
+                            <!-- TITLE -->
+                            <template if:true={item.title}>
+                                <div class="b2b-home-slider__title">{item.title}</div>
+                            </template>
+
+                            <!-- SUBTITLE -->
+                            <template if:true={item.subtitle}>
+                                <div class="b2b-home-slider__subtitle">{item.subtitle}</div>
+                            </template>
+
+                            <!-- BUTTON -->
+                            <template if:true={item.link}>
+                                <template if:true={item.label}>
+                                    <div class="b2b-home-slider__button-wrapper">
+                                        <a
+                                            href={item.link}
+                                            class="b2b-home-slider__button b2b-button slds-button slds-button_brand"
+                                        >
+                                            <span>{item.label}</span>
+                                            <svg viewBox="0 0 13 10" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.9164 3.46602L6.27246 7.96588L7.85573 9.50002L12.4997 5.00016L10.9164 3.46602Z"></path>
+                                                <path d="M12.4994 4.99986L7.85547 0.5L6.2722 2.03414L10.9162 6.534L12.4994 4.99986Z"></path>
+                                                <path d="M9.7968 3.91528H0.5V6.08488H9.7968V3.91528Z"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </template>
+                            </template>
+
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- SLICKS -->
+            <template if:true={showSliсkButtons}>
+                <div class="b2b-home-slider__slick-list">
+                    <template for:each={slickOptions} for:item="item" for:index="index">
+                        <button
+                            key={item.index}
+                            data-index={item.index}
+                            title={item.title}
+                            class={item.class}
+                            onclick={handleClickSlickButton}
+                        ></button>
+                    </template>
+                </div>
+            </template>
+
+            <!-- NAVIGATE BUTTONS -->
+            <template if:true={showNavigateButtons}>
+                <button
+                    class="b2b-home-slider__button-prev"
+                    title={labels.buttonPrevTitle}
+                    onclick={handleClickButtonPrev}
+                >
+                    <span></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42" class="b2b-home-slider__button-prev-svg">
+                        <path d="M21.1211 41.543C32.4492 41.543 41.7461 32.2266 41.7461 20.8984C41.7461 9.58984 32.4297 0.273438 21.1211 0.273438C9.79297 0.273438 0.496094 9.58984 0.496094 20.8984C0.496094 32.2266 9.8125 41.543 21.1211 41.543ZM10.418 20.8984C10.418 20.1562 10.6914 19.5508 11.2773 19.0039L18.2891 12.2852C18.7578 11.8359 19.207 11.6602 19.832 11.6602C20.9844 11.6602 21.7852 12.5 21.7852 13.6719C21.7852 14.2578 21.5117 14.8242 21.1211 15.1953L18.8359 17.2852L16.7461 18.8086L20.7695 18.5547H29.6758C30.9648 18.5547 31.8828 19.5703 31.8828 20.8984C31.8828 22.2266 30.9648 23.2422 29.6758 23.2422H20.7695L16.7461 23.0078L18.7773 24.5117L21.1211 26.6211C21.5312 26.9727 21.7852 27.5391 21.7852 28.125C21.7852 29.3164 20.9844 30.1758 19.832 30.1758C19.207 30.1758 18.7578 29.9805 18.2891 29.5312L11.2773 22.8125C10.7109 22.2852 10.418 21.6797 10.418 20.8984Z"></path>
+                    </svg>
+                </button>
+                <button
+                    class="b2b-home-slider__button-next"
+                    title={labels.buttonNextTitle}
+                    onclick={handleClickButtonNext}
+                >
+                    <span></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42" class="b2b-home-slider__button-next-svg">
+                        <path d="M21.1211 41.543C32.4492 41.543 41.7461 32.2266 41.7461 20.8984C41.7461 9.58984 32.4297 0.273438 21.1211 0.273438C9.79297 0.273438 0.496094 9.58984 0.496094 20.8984C0.496094 32.2266 9.8125 41.543 21.1211 41.543ZM31.8438 20.8984C31.8438 21.6797 31.5508 22.2852 30.9844 22.8125L23.9727 29.5312C23.5039 29.9805 23.0547 30.1758 22.4297 30.1758C21.2969 30.1758 20.4766 29.3164 20.4766 28.125C20.4766 27.5391 20.7305 26.9727 21.1406 26.6211L23.4844 24.5117L25.5156 23.0078L21.4922 23.2422H12.5859C11.2969 23.2422 10.3789 22.2266 10.3789 20.8984C10.3789 19.5703 11.2969 18.5547 12.5859 18.5547H21.4922L25.5156 18.8086L23.4258 17.2852L21.1406 15.1953C20.75 14.8242 20.4766 14.2578 20.4766 13.6719C20.4766 12.5 21.2969 11.6602 22.4297 11.6602C23.0547 11.6602 23.5039 11.8359 23.9727 12.2852L30.9844 19.0039C31.5703 19.5508 31.8438 20.1562 31.8438 20.8984Z"></path>
+                    </svg>
+                </button>
+            </template>
+
+        </div>
+    </template>
+</template>

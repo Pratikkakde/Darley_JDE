@@ -1,0 +1,122 @@
+<template>
+    <template if:true={showComponent}>
+        <section class="b2b-user-upsert__wrapper slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <button
+                        class="slds-button slds-button_icon slds-modal__close"
+                        title={labels.close}
+                        disabled={isUpdateLoading}
+                        onclick={handleClickModalClose}
+                    >
+                        <lightning-icon
+                            icon-name="utility:close"
+                            alternative-text={labels.close}
+                            variant="inverse"
+                        ></lightning-icon>
+                    </button>
+                    <h2 class="b2b-user-upsert__modal-title">{getModalTitle}</h2>
+                </header>
+
+                <!-- CONTENT -->
+                <div class="slds-modal__content">
+
+                    <!-- UPDATE LOADING -->
+                    <template if:true={isUpdateLoading}>
+                        <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+                    </template>
+                    <h3 class="slds-p-bottom_small">{labels.basicInfo}</h3>
+                    <!-- FIRST NAME -->
+                    <lightning-input
+                        type="text"
+                        data-name="firstName"
+                        name="firstName"
+                        label={labels.firstName}
+                        max-length={maxLength.firstName}
+                        value={firstName}
+                        disabled={isUpdateLoading}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                    ></lightning-input>
+
+                    <!-- LAST NAME -->
+                    <lightning-input
+                        type="text"
+                        data-name="lastName"
+                        name="lastName"
+                        label={labels.lastName}
+                        max-length={maxLength.lastName}
+                        value={lastName}
+                        disabled={isUpdateLoading}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                    ></lightning-input>
+
+                    <!-- EMAIL -->
+                    <lightning-input
+                        type="email"
+                        data-name="email"
+                        name="email"
+                        label={labels.email}
+                        max-length={maxLength.email}
+                        value={email}
+                        disabled={isUpdateLoading}
+                        required
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                        onblur={handleChangeFormElement}
+                    ></lightning-input>
+
+                    <!-- TITLE -->
+                    <lightning-input
+                        type="text"
+                        data-name="title"
+                        name="title"
+                        label={labels.title}
+                        max-length={maxLength.title}
+                        value={title}
+                        disabled={isUpdateLoading}
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                    ></lightning-input>
+
+                    <!-- PHONE NUMBER -->
+                    <lightning-input
+                        type="tel"
+                        data-name="phone"
+                        name="phone"
+                        label={labels.phone}
+                        max-length={maxLength.phone}
+                        value={phone}
+                        disabled={isUpdateLoading}
+                        message-when-value-missing={labels.requiredField}
+                        onchange={handleChangeFormElement}
+                        onblur={handleChangeFormElement}
+                    ></lightning-input>
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="slds-modal__footer">
+                    <button
+                        class="slds-button slds-button_outline-brand"
+                        disabled={isUpdateLoading}
+                        onclick={handleClickModalClose}
+                    >{labels.modalClose}</button>
+                    <button
+                        class="slds-button slds-button_brand"
+                        disabled={isUpdateLoading}
+                        onclick={handleClickModalSubmit}
+                    >{labels.modalSubmit}</button>
+                </div>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+        
+</template>

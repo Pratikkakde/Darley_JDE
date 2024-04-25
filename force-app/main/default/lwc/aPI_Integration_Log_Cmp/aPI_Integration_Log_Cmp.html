@@ -1,0 +1,19 @@
+<template>
+    
+    <lightning-card title="Click On Continue to Re-Hit the API.">
+        
+        <!-- Continue Button -->
+        <lightning-button variant="success" label="Continue" title="Click to Continue" onclick={closeAction} class="slds-m-left_x-small"></lightning-button>
+        
+        <!-- Spinner Code -->
+        <div class="spinLoader">
+            <template if:false={loaded}>
+               <div> {result} </div>
+            </template>
+            <template if:true={loaded}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+        </div>
+      </lightning-card>
+
+</template>

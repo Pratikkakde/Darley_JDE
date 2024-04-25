@@ -1,0 +1,142 @@
+:root {
+    /* FONTS */
+    --dxp-g-root-font-family: 'Poppins', 'Arial', 'Helvetica', sans-serif;
+    --dxp-g-heading-font-family: 'Poppins', 'Arial', 'Helvetica', sans-serif;
+
+    /* HEADER */
+    --b2b-theme-headerShadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    --b2b-theme-headerColor: #231F20;
+
+    /* FOOTER */
+    --b2b-footer-backgroundColor: #231F20;
+
+    /* MY ACCOUNT */
+    --b2b-theme-layoutMyAccountSidebarWidth: 360px;
+    --b2b-theme-layoutMyAccountSidebarBackgroundColor: #F3F3F3;
+
+    /* SPACING */
+    --b2b-theme-containerMaxWidth: var(--dxp-s-section-columns-max-width, 100%);
+    --b2b-theme-contentVerticalPaddings: var(--dxp-s-section-content-spacing-block-start, 0);
+    --b2b-theme-contentHorizontalPaddings: var(--dxp-s-section-content-spacing-inline-start, 0);
+
+    /* SPINNER */
+    --dxp-c-spinner-color-background: rgba(255, 255, 255, 0.75);
+    --dxp-c-spinner-color-foreground: var(--dxp-g-neutral-2);
+
+    /* BUTTON BRAND */
+    --sds-c-button-brand-text-color: var(--dxp-g-brand-contrast);
+    --sds-c-button-brand-text-color-hover: var(--dxp-g-brand-contrast);
+    --sds-c-button-brand-text-color-focus: var(--dxp-g-brand-contrast);
+    --sds-c-button-brand-text-color-active: var(--dxp-g-brand-contrast);
+    --dxp-c-button-brand-transition: color 0.15s linear, border-color 0.15s linear, background-color 0.15s linear;
+
+    /* BUTTON NEUTRAL */
+    --b2b-button-neutral-text-color: rgb(0, 0, 0);
+
+    /* BUTTON OUTLINE */
+    --sds-c-button-outline-brand-text-color-hover: var(--dxp-g-brand-1);
+    --sds-c-button-outline-brand-text-color-focus: var(--dxp-g-brand-1);
+    --sds-c-button-outline-brand-text-color-active: var(--dxp-g-brand-1);
+    --sds-c-button-outline-brand-color-background-hover: rgb(19, 156, 216, 0.07);
+    --sds-c-button-outline-brand-color-background-focus: rgb(19, 156, 216, 0.07);
+    --sds-c-button-outline-brand-color-background-active: rgb(19, 156, 216, 0.07);
+    --dxp-c-button-outline-brand-transition: color 0.15s linear, border-color 0.15s linear, background-color 0.15s linear;
+
+    /* ACTIONS */
+    --b2b-button-action-font-size: 0.875rem;
+    --b2b-button-action-line-height: 1.875rem;
+    --b2b-button-action-font-weight: 700;
+    --b2b-button-action-text-decoration: underline;
+    --b2b-button-action-text-transform: none;
+
+    /* COLOR */
+    --b2b-color-text: rgb(35, 31, 32);
+    --b2b-color-primary: rgb(218, 41, 28);
+    --b2b-color-black: rgb(0, 0, 5);
+    --b2b-color-accent: rgb(35, 97, 146);
+
+    /* SOCIAL COLOR */
+    --b2b-color-twitter: #00AEEF;
+    --b2b-color-facebook: #093C71;
+    --b2b-color-linkedin: #294694;
+    --b2b-color-instagram: #E1306C;
+    --b2b-color-youtube: #FF0000;
+    --b2b-color-yelp: #E00707;
+    
+    /* FORM */
+    --dxp-c-input-text-color-disabled: rgb(118, 113, 107);
+}
+
+@media (max-width: 1023.98px) {
+    :root {
+        /* SPACING */
+        --b2b-theme-containerMaxWidth: var(--dxp-s-section-columns-max-width-tablet, 100%);
+        --b2b-theme-contentVerticalPaddings: var(--dxp-s-section-content-spacing-block-start-tablet, 1.5rem);
+        --b2b-theme-contentHorizontalPaddings: var(--dxp-s-section-content-spacing-inline-start-tablet, 1.5rem);
+    }
+}
+
+@media (max-width: 767.98px) {
+    :root {
+        /* HEADING */
+        --dxp-s-text-heading-extra-large-font-size: 2rem;
+
+        /* SPACING */
+        --b2b-theme-containerMaxWidth: var(--dxp-s-section-columns-max-width-mobile, 100%);
+        --b2b-theme-contentVerticalPaddings: var(--dxp-s-section-content-spacing-block-start-mobile, 1rem);
+        --b2b-theme-contentHorizontalPaddings: var(--dxp-s-section-content-spacing-inline-start-mobile, 0.75rem);
+    }
+}
+
+/* OLDEST CSS VAR */
+:root {
+    /* THEME COLORS */
+    --b2b-colorText: var(--dxp-g-root-contrast, rgba(51, 51, 51, 1));
+    --b2b-colorDetailText: var(--dxp-g-root-contrast-1, rgba(105, 105, 105, 1));
+    --b2b-colorAction: var(--dxp-g-brand, rgba(37, 116, 169, 1));
+    --b2b-colorActionDarker: var(--dxp-g-brand-1, rgba(19, 95, 144, 1));
+    --b2b-colorLink: var(--dxp-g-brand, rgba(37, 116, 169, 1));
+    --b2b-colorLinkDarker: var(--dxp-g-brand-1, rgba(19, 95, 144, 1));
+    --b2b-colorTextInverse: var(--dxp-g-brand-contrast, rgba(255, 255, 255, 1));
+    --b2b-colorBorder: var(--dxp-s-form-element-color-border, rgba(212, 212, 212, 1));
+    --b2b-colorLoginBackground: var(--lwc-LoginBackgroundColor, rgba(244, 244, 244, 1));
+    --b2b-colorLoginContainerBackground: var(--lwc-CardBackgroundColor, rgba(255, 255, 255, 0));
+    --b2b-imageLoginBackground: var(--lwc-LoginBackgroundImage);
+    --b2b-fontFamily: var(--dxp-g-root-font-family, 'Arial'), sans-serif;
+    --b2b-fontFamilyHeader: var(--dxp-g-heading-font-family, 'Arial'), sans-serif;
+
+    /* COLORS */
+    --b2b-colorTextInverseDarker: var(--lwc-colorTextInverse, rgba(238, 238, 238, 1));
+    --b2b-colorTextPlaceholder: var(--lwc-colorTextPlaceholder, rgba(105, 105, 105, 1));
+    --b2b-colorButtonBrandText: var(--lwc-colorTextButtonBrand, rgba(255, 255, 255, 1));
+    --b2b-colorButtonBrandBackground: var(--lwc-colorBackgroundButtonBrand, var(--b2b-colorAction));
+    --b2b-colorButtonBrandBackgroundHover: var(--lwc-colorBackgroundButtonBrandHover, var(--b2b-colorActionDarker));
+    --b2b-colorCode: rgba(214, 51, 132, 1);
+    --b2b-colorWhite: var(--dxp-g-brand-contrast);
+    --b2b-colorBlueLight: rgb(19, 156, 216);
+    --b2b-colorGrey: rgb(107, 107, 107);
+    --b2b-colorGreyLight: rgb(230, 230, 230);
+    --b2b-colorError: rgb(213, 88, 59);
+    --b2b-colorBlueDark: rgb(17, 38, 60);
+    --b2b-gradientMain: radial-gradient(76.68% 146.15% at 49.34% -20.07%, rgb(0, 112, 176) 0%, rgb(0, 79, 127) 31%, rgb(0, 34, 59) 78%, rgb(0, 16, 32) 100%);
+    --b2b-tableTh-backgroundColor: rgb(243, 243, 243);
+    --b2b-tableTd-backgroundColor: rgb(243, 243, 243);
+    --b2b-colorDisabledLight: rgb(243, 243, 243);
+    --b2b-colorDisabled: rgb(201, 201, 201);
+    --b2b-colorDisabledDark: rgb(116, 116, 116);
+
+    --b2b-shadowCard: 0px 2px 15px rgba(0, 0, 0, 0.06);
+    --b2b-checkout-contentMaxWidth: 1250px;
+}
+
+:root {
+    --text-color-gray-1: rgba(0, 0, 0, 0.5);
+    --text-color-gray-2: rgba(109, 110, 113, 1);
+
+    --background-gray-1: rgba(112, 110, 107, 1);
+    --background-gray-2: rgba(214, 217, 219, 1);
+    --background-gray-3: rgba(46, 54, 58, 1);
+    --background-gray-4: rgba(109, 110, 113, 1);
+
+    --background-blue-1: rgba(0, 58, 105, 1);
+}

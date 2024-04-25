@@ -1,0 +1,79 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+    <div class={wrapper}>
+
+        <!-- HEADER -->
+        <div class="b2b-favorite-list__header">
+            <div class="b2b-favorite-list__title dxp-text-heading-small">{labels.title}</div>
+            <div class="b2b-favorite-list__header-actions">
+                <a
+                    href="#"
+                    class="b2b-button_action"
+                    disabled={isCreateListDisabled}
+                    onclick={handleClickCreateList}
+                >{labels.createList}</a>
+            </div>
+        </div>
+
+        <!-- PANEL -->
+        <template if:true={showPanel}>
+            <div class="b2b-favorite-list__panel">
+                <lightning-combobox
+                    label={labels.listName}
+                    value={listId}
+                    options={listOptions}
+                    disabled={isListOptionsDisabled}
+                    onchange={handleChangeList}
+                ></lightning-combobox>
+            </div>
+        </template>
+
+        <!-- BODY -->
+        <div class="b2b-favorite-list__body">
+
+            <!-- LOADING SPINNER -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+            </template>
+
+            <!-- FATAL ERROR -->
+            <c-b2b-alert
+                show={isFatalError}
+                variant="error"
+                message={fatalErrorMessage}
+            ></c-b2b-alert>
+
+            <!-- EMPTY MESSAGE -->
+            <template if:true={showEmptyMessage}>
+                <div class="b2b-favorite-list__empty-message">
+                    <p>{labels.emptyMessageTitle}</p>
+                    <p>{labels.emptyMessageText}</p>
+                </div>
+            </template>
+
+            <template if:true={showFavoriteListDetail}>
+                <c-b2b-favorite-list-detail
+                    is-update-loading={isUpdateLoading}
+                    items-on-page={itemsOnPage}
+                    show-original-price={showOriginalPrice}
+                    effective-account-id={effectiveAccountId}
+                    list-id={listId}
+                    list-name={getListName}
+                    onloading={handleLoading}
+                    onupdatename={handleUpdateName}
+                    onupdatecount={handleUpdateCount}
+                    onupdatelists={handleUpdateLists}
+                ></c-b2b-favorite-list-detail>
+            </template>
+
+        </div>
+
+    </div>
+
+    <!-- FAVORITE LIST UPSERT -->
+    <c-b2b-favorite-list-upsert
+        effective-account-id={effectiveAccountId}
+        onclose={handleCloseFavoriteListUpsert}
+    ></c-b2b-favorite-list-upsert>
+
+</template>

@@ -1,0 +1,108 @@
+:host {
+    display: block;
+}
+
+.b2b-checkout__section-form-wrapper {
+    padding-top: 0;
+    padding-left: 35%;
+}
+
+@media(max-width: 1199.98px) {
+    .b2b-checkout__section-form-wrapper {
+        padding-left: 0;
+    }
+}
+
+.b2b-checkout__section-content c-b2b-payment-item + .b2b-checkout-payment__invoice-my-company {
+    margin-top: 1.5rem;
+}
+
+.b2b-checkout-payment__iframe {
+    width: 100%;
+    height: 280px;
+    border: 0;
+}
+
+/* BUTTONS */
+.b2b-checkout-payment__button-add {
+    margin: 1rem 0;
+}
+
+.b2b-checkout-payment__button-add[data-view-mode="true"] {
+    margin: 0 0 1rem 0;
+}
+
+.b2b-checkout-payment__button-add .slds-button {
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration-line: underline;
+    color: var(--b2b-colorAction);
+    transition: color 0.1s;
+}
+
+.b2b-checkout-payment__button-add svg {
+    display: inline-block;
+    fill: #6D6E71;
+    transition: fill 0.1s;
+}
+
+.b2b-checkout-payment__button-add svg:nth-child(1) {
+    margin-right: 9px;
+}
+
+.b2b-checkout-payment__button-add svg:nth-child(2) {
+    width: 32px;
+    height: 21px;
+    margin-right: 11px;
+}
+
+.b2b-checkout-payment__button-add .slds-button:hover,
+.b2b-checkout-payment__button-add .slds-button:active,
+.b2b-checkout-payment__button-add .slds-button:focus {
+    color: var(--b2b-colorActionDarker);
+}
+
+.b2b-checkout-payment__button-add .slds-button:hover svg,
+.b2b-checkout-payment__button-add .slds-button:active svg,
+.b2b-checkout-payment__button-add .slds-button:focus svg {
+    fill: var(--b2b-colorActionDarker);
+}
+
+@media (max-width: 574.98px) {
+    .b2b-checkout-payment__button-use .b2b-button {
+        width: 100%;
+    }
+}
+
+/* INVOICE MY COMPANY */
+.b2b-checkout-payment__invoice-my-company .slds-form-element__label {
+    padding: 0;
+    font-size: 14px;
+    color: var(--b2b-colorText);
+}
+
+.b2b-checkout-payment__invoice-my-company .slds-checkbox_faux::after {
+    border-color: var(--b2b-colorAction) !important;
+}
+
+.b2b-checkout-payment__invoice-my-company input[type="checkbox"]:focus + .slds-checkbox__label .slds-checkbox_faux,
+.b2b-checkout-payment__invoice-my-company input[type="checkbox"]:focus:checked + .slds-checkbox__label .slds-checkbox_faux {
+    border-color: var(--b2b-colorAction);
+    box-shadow: 0 0 3px var(--b2b-colorAction);
+}
+
+/* PO NUMBER */
+.b2b-checkout-payment__po-number {
+    margin-top: 1rem;
+}
+
+.slds-modal__container {
+    width: 30%;
+    max-width: unset;
+    min-width: unset;
+}
+
+/* PLACE ORDER BUTTON */
+.amazon-pay-button-container {
+    display: none;
+}

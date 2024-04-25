@@ -1,0 +1,194 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+
+    <!-- LOADING SPINNER -->
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+    </template>
+
+    <!-- REQUEST QUOTE DISABLED -->
+    <template if:true={showQuoteDisabled}>
+        <div class="b2b-request-for-quote__message-wrapper">
+            <div class="b2b-request-for-quote__message-title">{labels.warningTitle}</div>
+            <div class="b2b-request-for-quote__message-text">{labels.warningText}</div>
+            <div class="b2b-request-for-quote__buttons">
+                <a
+                    href={getHomeLink}
+                    class="slds-button slds-button_brand"
+                >{labels.continueShopping}</a>
+            </div>
+        </div>
+    </template>
+
+    <!-- SUCCESS INFORMATOIN -->
+    <template if:true={showSuccessInformatoin}>
+        <div class="b2b-request-for-quote__message-wrapper">
+            <div class="b2b-request-for-quote__message-title">{labels.successTitle}</div>
+            <div class="b2b-request-for-quote__message-text">{getSuccessText}</div>
+            <div class="b2b-request-for-quote__buttons">
+                <a
+                    href={getHomeLink}
+                    class="slds-button slds-button_brand"
+                >{labels.continueShopping}</a>
+                <a
+                    href={getQuoteDetailLink}
+                    class="slds-button slds-button_outline-brand"
+                >{labels.quoteDetails}</a>
+            </div>
+        </div>
+    </template>
+
+    <!-- QUOTE DETAILS -->
+    <template if:true={showQuoteDetails}>
+        <div class="b2b-request-for-quote__wrapper">
+            <div class="b2b-request-for-quote__body">
+
+                <!-- TITLE -->
+                <div class="b2b-request-for-quote__title">{labels.title}</div>
+
+                <div class="b2b-request-for-quote__container">
+
+                    <!-- ADDRESSES -->
+                    <div class="b2b-request-for-quote__addresses">
+                        <c-b2b-request-for-quote-addresses
+                            effective-account-id={effectiveAccountId}
+                            onaddresschange={handleAddressChange}
+                        ></c-b2b-request-for-quote-addresses>
+                    </div>
+
+                    <!-- ITEMS -->
+                    <div class="b2b-request-for-quote__items">
+                        <c-b2b-accordion
+                            show={showQuoteItems}
+                            onexpand={handleExpandQuoteItems}
+                        >
+                            <span slot="header" class="b2b-request-for-quote__accordion-header">{labels.quoteItems}</span>
+                            <div slot="content" class="b2b-request-for-quote__accordion-content">
+                                <table>
+                                    <template for:each={items} for:item="item">
+                                        <tr key={item.id}>
+                                            <td data-field="name">
+                                                <span>
+                                                    <a href={item.link} target="_blank">{item.name}</a>
+                                                </span>
+                                            </td>
+                                            <td data-field="sku">
+                                                <span>
+                                                    {labels.sku}&nbsp;
+                                                    <template if:true={item.sku}>{item.sku}</template>
+                                                </span>
+                                            </td>
+                                            <td data-field="quantity">
+                                                <span>
+                                                    {labels.quantity}&nbsp;
+                                                    <template if:true={item.quantity}>{item.quantity}</template>
+                                                </span>
+                                            </td>
+                                            <td data-field="total">
+                                                <span>
+                                                    <lightning-formatted-number
+                                                        value={item.total}
+                                                        format-style="currency"
+                                                        currency-code={currencyIsoCode}
+                                                        minimum-fraction-digits="2"
+                                                        maximum-fraction-digits="2"
+                                                    ></lightning-formatted-number>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                        </c-b2b-accordion>
+                    </div>
+
+                    <!-- MESSAGE -->
+                    <div class="b2b-request-for-quote__message">
+                        <lightning-textarea
+                            name="message"
+                            label={labels.message}
+                            max-length="32000"
+                            value={message}
+                            onchange={handleChangeMessage}
+                        ></lightning-textarea>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- SUMMARY -->
+            <div class="b2b-request-for-quote__sidebar">
+                <div class="b2b-request-for-quote__summary">
+                    <div class="b2b-request-for-quote__summary-title">{labels.titleSummary}</div>
+                    <template for:each={summaryOptions} for:item="item" for:index="index">
+                        <div key={item.key} class="b2b-request-for-quote__summary-item" data-field={item.key}>
+                            <div class="b2b-request-for-quote__summary-label">{item.label}</div>
+                            <div class="b2b-request-for-quote__summary-value">
+                                <lightning-formatted-number
+                                    value={item.value}
+                                    format-style="currency"
+                                    currency-code={currencyIsoCode}
+                                    minimum-fraction-digits="2"
+                                    maximum-fraction-digits="2"
+                                ></lightning-formatted-number>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="b2b-request-for-quote__summary-total b2b-request-for-quote__summary-item">
+                        <div class="b2b-request-for-quote__summary-label">{labels.total}</div>
+                        <div class="b2b-request-for-quote__summary-value">
+                            <template if:true={showTotal}>
+                                <lightning-formatted-number
+                                    value={total}
+                                    format-style="currency"
+                                    currency-code={currencyIsoCode}
+                                    minimum-fraction-digits="2"
+                                    maximum-fraction-digits="2"
+                                ></lightning-formatted-number>
+                            </template>
+                            <template if:false={showTotal}>–</template>
+                        </div>
+                    </div>
+
+                    <!-- TAX EXEMPT -->
+                    <template if:true={showTaxExempt}>
+                        <div class="b2b-request-for-quote__summary-message">
+                            {labels.areYou} <a href="#" onclick={handleClickTaxExempt}>{labels.taxExempt}</a>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="b2b-request-for-quote__buttons">
+                <a
+                    href={getCartLink}
+                    class="slds-button slds-button_outline-brand"
+                >{labels.editQuote}</a>
+                <button
+                    class="slds-button slds-button_brand"
+                    disabled={isSubmitButtonDisabled}
+                    onclick={handleClickSubmit}
+                >{labels.submit}</button>
+            </div>
+
+        </div>
+    </template>
+
+    <!-- MODAL -->
+    <c-b2b-modal
+        is-loading={isModalLoading}
+        onclose={handleCloseModal}
+        onsubmit={handleSumbitModal}
+    >
+        <span slot="content">
+            <c-b2b-tax-exempt
+                customer-tax-information={customerTaxInformation}
+                onsavecustomer={handleSaveCustomer}
+                onclosetaxexemptmodal={handleCloseExemptModal}
+            ></c-b2b-tax-exempt>
+        </span>
+    ></c-b2b-modal>
+
+</template>

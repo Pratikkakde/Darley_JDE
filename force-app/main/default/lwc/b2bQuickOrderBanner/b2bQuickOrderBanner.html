@@ -1,0 +1,24 @@
+<template>
+    <div lwc:dom="manual" class={customCssContainer}></div>
+        <template if:false= {isGuestUser}>
+            <div class={wrapperClass}>
+                <div class="quick-order__container">
+                    <template if:true={getShowTitle}>
+                        <!-- TITLE -->
+                        <div class="b2b-quick-order__title b2b-header-2">
+                            {title}
+                        </div>
+                    </template>
+                    <!-- BANNER BODY-->
+                    <div class="b2b-quick-order__body_group slds-grid">
+                        <!-- BANNER BODY TEXT-->
+                        <div class="b2b-quick-order__body_text">{bannerBody}</div>
+                        <!-- BUTTON -->
+                        <a href={getButtonLink} class="b2b-quick-order__button b2b-button slds-button slds-button_brand">
+                            {buttonLabel}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </template>
+</template>
