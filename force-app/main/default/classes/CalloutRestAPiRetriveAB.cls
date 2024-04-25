@@ -65,12 +65,12 @@ public without sharing class  CalloutRestAPiRetriveAB {
             system.debug('res'+res);
             system.debug('res2'+res.getStatusCode()); 
             String responseBody = res.getBody();
-            
+            Map<String, object> reqBody = (map<String, Object>)json.deserializeUntyped(requestBody);
             // Handle the response
             
             if (res.getStatusCode() == 200) {
                 
-                Map<String, object> reqBody = (map<String, Object>)json.deserializeUntyped(requestBody);
+              
                 Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
                 
                 
