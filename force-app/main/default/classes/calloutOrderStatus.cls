@@ -79,16 +79,8 @@ public class calloutOrderStatus {
             System.debug('Callout error: ' + res.getStatusCode() + ' ' + res.getStatus());
             System.debug('Callout body: ' + res.getBody() );
             String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
+                
             //API Integration Log Generation on success
-            API_Integration_Log__c ail = new API_Integration_Log__c();
-            ail.JSON_Body__c= requestBody;
-            ail.Endpoint__c = endpoint;
-            ail.Status__c = 'Failed';
-            ail.Request_Type__c = 'GET';
-            ail.Response_Body__c = responseBody;
-            ail.Name__c = 'Order data Retrieve from JDE';
-            ail.Object__c = 'Order';
-            
             Exception_Handler.createAilRecordonFail(JSON.serializePretty(reqBody),endpoint,'GET','Order Data Retrieve from JDE','Order',responseBody,callOutError);
 
         }
