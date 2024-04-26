@@ -44,16 +44,16 @@ public class calloutOrderStatus {
             List<Order> updateOrderList = new List<order>();
             if(!OrderData.isEmpty()){
                 for(order Od : OrderData){
-                    if(responseBody.contains('Open')){
+                    if (responseBody.contains('Open')) {
                         Od.StoreStatus__c = 'Open';
                         updateOrderList.add(Od);
-                    }else if(!responseBody.contains('Open') && responseBody.contains('Cancelled')){
+                    } else if (!responseBody.contains('Open') && responseBody.contains('Cancelled')) {
                         Od.StoreStatus__c = 'Cancelled';
                         updateOrderList.add(Od);
-                    }else if(!responseBody.contains('Open') && responseBody.contains('Cancelled') && responseBody.contains('Shipped') ){
+                    } else if (!responseBody.contains('Open') && responseBody.contains('Cancelled') && responseBody.contains('Shipped') ) {
                         Od.StoreStatus__c = 'Shipped';
                         updateOrderList.add(Od);
-                    }else if(responseBody.contains('Shipped') && !responseBody.contains('Cancelled') && !responseBody.contains('Open')){
+                    } else if (responseBody.contains('Shipped') && !responseBody.contains('Cancelled') && !responseBody.contains('Open')) {
                         Od.StoreStatus__c = 'Shipped';
                         updateOrderList.add(Od);
                     }
