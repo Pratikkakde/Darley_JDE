@@ -74,12 +74,11 @@ public class calloutOrderStatus {
             //API Integration Log Generation on success           
             Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(reqBody),endpoint,'GET','Order Data Retrieve from JDE','Order',JSON.serializePretty(responseData));
 
-        } 
-        else {
+        } else {
             // Error handling
             System.debug('Callout error: ' + res.getStatusCode() + ' ' + res.getStatus());
             System.debug('Callout body: ' + res.getBody() );
-            
+            String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
             //API Integration Log Generation on success
             API_Integration_Log__c ail = new API_Integration_Log__c();
             ail.JSON_Body__c= requestBody;
@@ -90,12 +89,8 @@ public class calloutOrderStatus {
             ail.Name__c = 'Order data Retrieve from JDE';
             ail.Object__c = 'Order';
             
-            try{
-                insert ail;
-            } catch(exception ex){
-                system.debug('Error : '+ex.getMessage());
-                
-            }
+            Exception_Handler.createAilRecordonFail(JSON.serializePretty(reqBody),endpoint,'GET','Order Data Retrieve from JDE','Order',responseBody,callOutError);
+
         }
     }   
     
