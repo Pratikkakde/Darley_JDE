@@ -29,6 +29,8 @@ public class calloutOrderStatus {
         system.debug('res2'+res.getStatusCode()); 
         
         String responseBody = res.getBody();
+        Map<String, object> reqBody = (map<String, Object>)json.deserializeUntyped(requestBody);
+
         
         // Handle the response
         if (res.getStatusCode() == 200) {
@@ -67,22 +69,11 @@ public class calloutOrderStatus {
                     system.debug('Error: '+ex.getMessage());
                 }
             }
-            
-            //API Integration Log Generation on success
-            API_Integration_Log__c ail = new API_Integration_Log__c();
-            ail.JSON_Body__c= requestBody;
-            ail.Endpoint__c = endpoint;
-            ail.Status__c = 'Success';
-            ail.Request_Type__c = 'GET';
-            ail.Response_Body__c = responseBody;
-            ail.Name__c = 'Order data Retrieve from JDE';
-            ail.Object__c = 'Order';
-            
-            try{
-                insert ail;
-            } catch(exception ex){    
-                system.debug('Error : '+ex.getMessage());
-            }
+            Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
+
+            //API Integration Log Generation on success           
+            Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(reqBody),endpoint,'GET','Order Data Retrieve from JDE','Order',JSON.serializePretty(responseData));
+
         } 
         else {
             // Error handling
