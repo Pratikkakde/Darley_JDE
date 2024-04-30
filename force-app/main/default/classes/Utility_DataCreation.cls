@@ -63,7 +63,7 @@ public class Utility_DataCreation {
             con.MiddleName = 'Test2';
             con.LastName = 'Test3';
             con.Title = 'Fire';
-            con.MailingStreet = '123 Maple Street Apt 5A Anytown USA 12345 This cozy apartment features modern amenities and a convenient location Situated in a friendly neighborhood it\'s perfect for families or professionals With easy access to parks schools and shopping centers there\'s always something to do nearby Plus our spacious living area and well-equipped kitchen make it ideal for entertaining Don\'t miss out on this fantastic opportunity to call this place home';
+            con.MailingStreet = '123 Maple Street Apt 5A Anytown USA 12345 This cozy apartment features modern amenities and a convenient location ';
             con.MailingCity = 'Houston';
             con.MailingState = 'Texas';
             con.MailingCountry = 'United States';
