@@ -43,7 +43,7 @@ global  class OrderUpdateWebService {
                 }
                 if (!OrdUpdateList.isEmpty()){
                 update OrdUpdateList;
-                returnMessage = 'Success: Account update Succesfully';
+                returnMessage = 'Success: Order update Succesfully';
                 //Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updateOrderInSF','POST','Order Data Update from JDE','Order',returnMessage);
 
                 }
