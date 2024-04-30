@@ -17,4 +17,47 @@ LastModifiedDate	: 30-Apr-24
 @RestResource(urlMapping='/updateOrderInSF')
 global  class OrderUpdateWebService {
   
+    @HttpPost
+    global static String UpdateOrder(){
+        String returnMessage = '';
+        try{
+
+            List<Order> OrdUpdateList = new List<Order> ();
+            Map<String,Object> requestData = (Map<String,object>)JSON.deserializeUntyped(RestContext.request.requestBody.tostring());
+
+            Integer JDE_Order_Number = Integer.valueOf((String)requestData.get('JDE_Order_Number__c'));
+            String Order_Status = (String)requestData.get('Order Status');
+            String Tracking_Number = (String)requestData.get('Tracking Number');
+            String Ship_Date = (String)requestData.get('Ship Date');
+            String Invoice_Date = (String)requestData.get('Invoice Date');
+            String Cancle_date = (String)requestData.get('Cancle Date');
+            String Line_Number = (String)requestData.get('Line Number');
+
+            List<Order> OrderData = [SELECT Id, StoreStatus__c, JDE_Order_Number__c, Tracking_Links__c FROM Order WHERE JDE_Order_Number__c  =: JDE_Order_Number];
+
+            if ( !OrderData.isEmpty()) {
+                for (Order ord: OrderData) {
+                    ord.StoreStatus__c = Order_Status;
+                    ord.Tracking_Links__c =  ord.Tracking_Links__c == Null ? Tracking_Number : ord.Tracking_Links__c;
+                    OrdUpdateList.add(ord);
+                }
+                if (!OrdUpdateList.isEmpty()){
+                update OrdUpdateList;
+                returnMessage = 'Success: Account update Succesfully';
+                //Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updateOrderInSF','POST','Order Data Update from JDE','Order',returnMessage);
+
+                }
+
+            } else {
+                returnMessage = 'Failed: Order was Not found In Salesfore By this JDE Order Number- '+JDE_Order_Number;
+                //Exception_Handler.createAilRecordonFail(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updateOrderInSF','POST','Order Data Update from JDE','Order',returnMessage,returnMessage);
+
+            }
+        } catch(Exception e){
+             returnMessage = '['+e.getStackTraceString()+']: '+'\n'+ +e.getMessage();
+            System.debug('returnMessage --->'+returnMessage);
+            //Exception_Handler.createAilRecordonFail(RestContext.request.requestBody.tostring(),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updateOrderInSF','POST','Order Data Update from JDE','Order',returnMessage,returnMessage);
+        }
+        return returnMessage;
+    }
 }
