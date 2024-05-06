@@ -160,8 +160,7 @@ global class UpdatePriceBookWebService {
                     }
                 }
                 
-            }
-            else{
+            } else {
                 // there is No price book entries found for the product     
                 // Iterate over active Pricebooks
                 for(PriceBook2 pb: [SELECT Id, name,isactive FROM Pricebook2 Where isactive = true AND Name In :priceBookNames ORDER BY IsStandard DESC ]){

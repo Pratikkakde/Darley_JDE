@@ -37,6 +37,13 @@ public class calloutOrderStatus {
             // Successful callout
             
             system.debug('responseBody'+responseBody);
+            Map<String, object> respBody = (map<String, Object>)json.deserializeUntyped(responseBody);
+            Map<String,Object> columns = (map<String,Object>)((map<String,Object>)((map<String,Object>)((map<String,Object>)((Map<String,Object>)(map<String,Object>)respBody.get('ServiceRequest1')).get('fs_DATABROWSE_F4211')).get('data')).get('gridData')).get('columns');
+            system.debug('columns ---> '+columns);
+            String inv_Date = (String)columns.get('F4211_IVD');
+            String Can_Date = (String)columns.get('F4211_CNDJ');
+            String Ship_Date = (String)columns.get('F4211_ADDJ');
+            
             // Process the response body here
             
             //Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
