@@ -32,6 +32,7 @@ public class SalesOrderWrapper {
     
     /*Account data associated with Order*/
     public String Account_id{get;set;} 
+    public String Customer_Name {get;set;} 
     public String Business_Unit{get;set;}
     public String SalesForce_Order_Number{get;set;}
     public String Address_Number{get;set;}

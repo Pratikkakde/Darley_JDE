@@ -51,7 +51,7 @@ public class OrderProductTriggerHandler {
                 }
             }
             
-            List<Order> oderList = [Select id,Payment_Type__c ,AccountId, Account.Primary_Division__c, Account.JDE_Address_Number__c, Account.Payment_Terms2__c,  JDE_Order_Number__c, OrderNumber,
+            List<Order> oderList = [Select id,Payment_Type__c ,AccountId,Account.Name, Account.Primary_Division__c, Account.JDE_Address_Number__c, Account.Payment_Terms2__c,  JDE_Order_Number__c, OrderNumber,
                                     Billingcity, Billingstreet, billingCountry, billingPostalCode, billingState, Account.RecordTypeId, B2BCreditCardId__c, TotalUnitPrice__c, B2BDarleyDollars__c,
                                     Shippingcity, Shippingstreet, ShippingCountry, ShippingPostalCode, ShippingState from Order where id in:orderId];
 
@@ -94,6 +94,7 @@ public class OrderProductTriggerHandler {
                   /************************************************************************************************/
                    
                     wrapperObj.Payment_Terms = ord.Account.Payment_Terms2__c;
+                    wrapperObj.Customer_Name = ord.Account.Name;
                     wrapperObj.Payment_Instrument = '';
                     
                     wrapperObj.Billing_city = ord.billingCity;

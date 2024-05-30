@@ -125,6 +125,9 @@ public class AccountTriggerHandler {
                 if (acc.RecordTypeId == EquipmentCustomer && acc.Sync_with_JDE__c == true && acc.jde_address_number__c != null && acc.JDE_Address_Number__c != accold.JDE_Address_Number__c && accold.JDE_Address_Number__c == null) {
                     sendContactOrderToJDE = true;
                     system.debug('sendContactOrderToJDE= '+sendContactOrderToJDE);
+                }
+                if ( acc.JDE_Guest_Account__c == true &&  acc.jde_address_number__c == '88888' && acc.RecordTypeId == EquipmentCustomer && acc.Sync_with_JDE__c == true) {
+                    sendContactOrderToJDE = true;
                 }   
             }
         }
@@ -132,6 +135,7 @@ public class AccountTriggerHandler {
         String jsonStr = JSON.serialize(wrapperObj).replace('_', ' ');
         String jsonSt = jsonStr.replace('null','""');
         // convert the list of wrapper objects to a JSON string
+       
         system.debug('jasonstring= '+jsonStr); 
         system.debug('jasonstring= '+jsonSt); 
         system.debug('newAccount.recordTypeId= '+newList[0].recordTypeId);
@@ -151,7 +155,6 @@ public class AccountTriggerHandler {
         else {
             system.debug('No Change in Values.');
         }     
-
         //Send Account to JDE if recordtype is changed.       
         if(sendAccountToJDE == true && profileName != 'Salesforce API Only System Integrations'){
             CalloutToRestInsertUpdateAccount.makeCalloutInsert(jsonSt, 'Account', 'Account Insert');

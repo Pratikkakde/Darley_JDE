@@ -58,7 +58,7 @@ public class accountTriggerHandlerServiceClass {
             productCodeMap.put(pro.Id, pro.ProductCode);
         }
 
-        for (Order ord : [SELECT Id, AccountId, Account.Primary_Division__c, Account.JDE_Address_Number__c, Account.Payment_Terms2__c, JDE_Order_Number__c,Payment_Type__c ,OrderNumber,
+        for (Order ord : [SELECT Id, AccountId, Account.Primary_Division__c,Account.Name, Account.JDE_Address_Number__c, Account.Payment_Terms2__c, JDE_Order_Number__c,Payment_Type__c ,OrderNumber,
                           BillingCity, BillingStreet, BillingCountry, BillingPostalCode, BillingState, Account.RecordTypeId, B2BCreditCardId__c, TotalUnitPrice__c, B2BDarleyDollars__c,
                           ShippingCity, ShippingStreet, ShippingCountry, ShippingPostalCode, ShippingState 
                           FROM Order 
@@ -133,6 +133,7 @@ public class accountTriggerHandlerServiceClass {
             wrapperObj.SalesForce_Order_Number = ord.OrderNumber;
             wrapperObj.Account_id = ord.AccountId;
             wrapperObj.Business_Unit = ord.Account.Primary_Division__c;
+            wrapperObj.Customer_Name = ord.Account.Name;
 
             
              // Updated logic for Payment type: If payment type is Amazon Pay, then send Address Number as 70000. 
