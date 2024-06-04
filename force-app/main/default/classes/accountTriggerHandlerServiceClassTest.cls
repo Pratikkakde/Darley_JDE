@@ -226,6 +226,7 @@ public class accountTriggerHandlerServiceClassTest {
         System.assertEquals(1, integrationLogs.size());
         System.assertEquals('Success', integrationLogs[0].Status__c);
     }
+    
     @isTest
     public static void updateJdeAddNum_test() {
         Account acc = Utility_DataCreation.CreateAccountRec(1, 'Equipment Customer')[0];
@@ -233,6 +234,7 @@ public class accountTriggerHandlerServiceClassTest {
         acc.JDE_Guest_Account__c = true;
         insert acc;
     }
+    
     @isTest
     public static void updateJdeAddNum_testElse() {
         Account acc = Utility_DataCreation.CreateAccountRec(1, 'Equipment Customer')[0];
@@ -245,5 +247,82 @@ public class accountTriggerHandlerServiceClassTest {
         acc1.JDE_Guest_Account__c = false;
         update acc1;
     }
-
+    
+    static testMethod void sendEmailOnUpdateAccRecoredTest(){
+        //   Account acc = new Account();
+        //   acc=TestDataUtilClass.returnAccountRec();
+        //   insert acc;
+   
+           Id recordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Vendor').getRecordTypeId();
+               Account acc = new Account();
+                   acc.Name = 'Supplier Name ';
+                     acc.Supplier_Rating__c='A+: Strategic Supplier';
+                     acc.Email_Address_for_RFQ__c='abc123@gmail.com';
+                 //  PDF_Creation__c =true,
+                     acc.RecordTypeId=recordTypeId;
+              insert acc;
+   
+   
+           Account acc2=new Account();
+            acc2.Name = 'Supplier Name 2 ';
+                     acc2.Supplier_Rating__c='A+: Strategic Supplier';
+                     acc2.Email_Address_for_RFQ__c='abc123@gmail.com';
+                     acc2.Email_Address__c='testingEmail@yahoo.com';
+                 //  PDF_Creation__c =true,
+                     acc2.RecordTypeId=recordTypeId;
+              insert acc2;
+   
+              acc2.Email_Address__c='NewTestingEmail@gmail.com';
+             update acc2;
+          // Id recordTypeIdd = Schema.SObjectType.Bid_Tracker__c.getRecordTypeInfosByName().get('TLS').getRecordTypeId();
+    
+            Bid_Tracker__c BidTracker = new Bid_Tracker__c();
+            BidTracker.name='test Name';
+           //BidTracker.RecordTypeId=recordTypeIdd;
+           insert BidTracker;
+            Blob b = Blob.valueOf('Test Data');
+           Attachment attachment = new Attachment();
+           attachment.ParentId = BidTracker.Id;
+           attachment.Name = 'Supplier Name_test value.pdf ';
+           attachment.Body = b;
+           insert attachment;
+   
+    
+          //Id recordTypeIddLead = Schema.SObjectType.Bid_Tracker__c.getRecordTypeInfosByName().get('Customer').getRecordTypeId();
+    
+           Lead ld=new Lead();
+           ld.FirstName='Test';
+           ld.LastName='Name';
+          // ld.RecordTypeId=recordTypeIddLead;
+           ld.Status='Unqualified';
+           ld.Company='test company';
+           ld.Email_Address__c='testemail@gmail.com';
+           insert ld;
+          Id recordTypeIde = Schema.SObjectType.Bid_Line_Item__c.getRecordTypeInfosByName().get('TLS').getRecordTypeId();
+    
+          Bid_Line_Item__c bl = new Bid_Line_Item__c();
+           bl.RFQ_Number__c=BidTracker.id;
+           bl.Bid_Supplier__c=acc.Id;
+           bl.Name='Testing';
+           bl.Regular_vs_Alternative__c='Regular';
+           bl.Supplier_Name_Text__c='huiqwidioq';
+           bl.Weeks_ARO__c='3D';
+           bl.TLSP_Supplier_Extension__c='WSD';
+           bl.Load_Batch_Number__c='2353';
+          //bl.Before_due_date__c=system.today()+7;
+           bl.RecordTypeId=recordTypeIde;
+           bl.Supplier_Part_Number__c='VR-FST-1';	
+           bl.Quote_Numbers__c='test value';
+           bl.Due_Date__c=system.today()+15;
+           bl.Quote_Type__c='Quoted';
+           bl.Item_Description__c='bundle';
+           bl.Status__c='RFQ Ready for DLA';
+           bl.Lead__c=ld.Id;
+          insert bl;
+        acc.Email_Address__c='testemail@gmail.com';
+           test.starttest();
+           update acc;
+           test.stoptest();
+   
+              }
    }
