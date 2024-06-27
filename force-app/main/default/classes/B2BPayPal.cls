@@ -76,6 +76,8 @@ public without sharing class B2BPayPal {
 
         @AuraEnabled public Decimal amount { get; set; }
         @AuraEnabled public Boolean isSaveCard { get; set; }
+        
+        @AuraEnabled public String authCode {get; set; }
 
         private CustomerCardPayment__c customerCardPayment;
         private String token;
@@ -126,6 +128,7 @@ public without sharing class B2BPayPal {
 
             paymentInfo.originalTransactionReferencedId = token;
             payflowResponse =  payflow.authorize(paymentInfo);
+            authCode = payflowResponse.authcode;
 
             if (payflowResponse.result != '0') {
                 throw new B2BPayPalException('An error occurred. Please try again or use a different payment method');

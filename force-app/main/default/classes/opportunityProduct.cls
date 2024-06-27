@@ -90,7 +90,8 @@ public with sharing class opportunityProduct {
                                                from Bundle_Attributes__c 
                                                where (NOT Attributes__r.name LIKE '%QTY') AND Product_Bundle__c =: pumpID AND Required__c= 'R' ORDER BY  Bundle_Sequence__c];
         
-        
+        system.debug('bundleName-->'+ bundleName);
+        system.debug('bundleName size-->'+ bundleName.size());
         for(Bundle_Attributes__c BA : bundleName){
             list<allProductWrapper> allProduct = new list<allProductWrapper>();
             set<string> noDuplicate  = new set<string>();
@@ -233,10 +234,13 @@ public with sharing class opportunityProduct {
             
             if(allProduct.size()==1){
                 for(optallProductWrapper onlySingleOption : allProduct){
+                    
                     if(BA.Is_Numeric__c == 'Y'){
+                        
                         bundlelist.add(new optionalbundleWrapper(Name, BA.id, onlySingleOption.ProductCode, BA.Bundle_Sequence__c, allProduct, alloptComboList, true));
                     }
                     else{
+                        
                         bundlelist.add(new optionalbundleWrapper(Name, BA.id, onlySingleOption.ProductCode, BA.Bundle_Sequence__c, allProduct, alloptComboList, false));
                     }
                 }
@@ -246,6 +250,7 @@ public with sharing class opportunityProduct {
                     bundlelist.add(new optionalbundleWrapper(Name, BA.id, BA.Default_Product__c, BA.Bundle_Sequence__c, allProduct, alloptComboList, true));
                 }
                 else{
+                    
                     bundlelist.add(new optionalbundleWrapper(Name, BA.id, BA.Default_Product__c, BA.Bundle_Sequence__c, allProduct, alloptComboList, false));
                 }
             }
@@ -321,12 +326,13 @@ public with sharing class opportunityProduct {
         
         list<Product_Bundle__c>togetpumpID = [SELECT id, name from Product_Bundle__c where name =:Pumpname];
         string getProductBundleID = togetpumpID[0].id;
+        System.debug('togetpumpID--> '+togetpumpID);
         
         
         String[] bundleParts = productBundleNameString.split(' ');
         System.debug('bundleParts ---> '+bundleParts);
         String firstNumber = bundleParts[0];
-         System.debug('firstNumber---> '+firstNumber);
+        System.debug('firstNumber---> '+firstNumber);
         decimal bunsequencetoLimit = decimal.valueOf(firstNumber);
         
         List<Object> listPriceproduct = (List<Object>) JSON.deserializeUntyped(stringBundlecode);
@@ -353,7 +359,7 @@ public with sharing class opportunityProduct {
         
         list<outerWrapperBSThen> outerThenWrapper = new list<outerWrapperBSThen>();
         
-        list<Product_Bundle_Rule_Engine__c>forandRule=[SELECT id, rule__c, Rule_Seq__c, pump__c, product__r.name, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, Logic_Releationship__c, Is_Conditional_List__c, Is_Blank__c FROM Product_Bundle_Rule_Engine__c WHERE (Logic__c='if' OR Logic__c = 'And') AND Bundle_Sequence__c =: bunsequencetoLimit AND pump__c=:Pumpname AND Logic_Releationship__c ='EQ' ORDER BY JDE_Component__c];
+        list<Product_Bundle_Rule_Engine__c>forandRule=[SELECT id, rule__c, Rule_Seq__c, pump__c, product__r.name, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, Logic_Releationship__c, Is_Conditional_List__c, Is_Blank__c FROM Product_Bundle_Rule_Engine__c WHERE (Logic__c='if' OR Logic__c = 'And') AND Bundle_Sequence__c =:bunsequencetoLimit AND pump__c=:Pumpname AND Logic_Releationship__c ='EQ' ORDER BY JDE_Component__c];
         set<decimal> whenConditionalListTRUE = new set<decimal>();
         list<Rule_Picklist__c> secondForRule0 = [SELECT id,rule__c, Rule_Seq__c, Pump_Bundle__c ,product__r.name, Bundle_Sequence__c, component__c, Component_Type__c
                                                  from rule_picklist__c WHERE component__c =:comboName  AND Pump_Bundle__c=:Pumpname AND Bundle_Sequence__c =: bunsequencetoLimit ORDER BY component__c];
@@ -362,14 +368,15 @@ public with sharing class opportunityProduct {
         if(!forandRule.isEmpty()){
             for(Product_Bundle_Rule_Engine__c forruleNumber :forandRule){
                 if((forruleNumber.JDE_Component__c == comboName)&&(forruleNumber.Is_Conditional_List__c == false)){
-                System.debug('forruleNumber.rule__c---> '+forruleNumber.rule__c);
+                    System.debug('forruleNumber.rule__c---> '+forruleNumber.rule__c);
                     onlyRule.add(forruleNumber.rule__c);
                     
-                     
+                    
                 }
                 
                 if(forruleNumber.Is_Conditional_List__c == true){
                     for(Rule_Picklist__c sr : secondForRule0){
+                        System.debug('sr.rule__c---> '+sr.rule__c +' AND ' +' forruleNumber.rule__c-->>'+ forruleNumber.rule__c);
                         if(sr.rule__c == forruleNumber.rule__c){
                             System.debug('sr.rule__c---> '+sr.rule__c);
                             onlyRule.add(sr.rule__c);
@@ -380,7 +387,7 @@ public with sharing class opportunityProduct {
                     // if(secondForRule0.isEmpty()){
                     //     System.debug('break---> ');
                     //     break;
-                         
+                    
                     // }
                     
                 }
@@ -394,9 +401,9 @@ public with sharing class opportunityProduct {
                 
             }
         }
-        
+        system.debug('all rule number for in thenlogic ...'+onlyRule);
         // onlyRule.clear();
-        // onlyRule.add(8);
+        // onlyRule.add(69);
         
         system.debug('all rule number for in thenlogic ...'+onlyRule);
         system.debug('lenght of all rule number for in thenlogic ...'+onlyRule.size());
@@ -410,24 +417,36 @@ public with sharing class opportunityProduct {
         list<Product_Bundle_Rule_Engine__c > thenList=[SELECT id, name,rule__c, Rule_Seq__c, pump__c, product__r.name, Product_Bundle__c, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, 
                                                        Is_Conditional_List__c, Is_Blank__c, Logic_Releationship__c FROM Product_Bundle_Rule_Engine__c
                                                        WHERE rule__c IN: onlyRule AND pump__c=: Pumpname ORDER BY Rule_Seq__c];
-        
+        System.debug('thenList  --->'+thenList);
+        System.debug('thenList size --->'+thenList.size());
+        system.debug('secondForRule-->'+secondForRule);
+        system.debug('secondForRule size-->'+secondForRule.size());
         map<string, string> defaultMap = new map<string, string>();
+        map<string, string> NeMap = new map<string, string>();
+        Map<String,Default_products__c> fDMap = new Map<String,Default_products__c>();     
+        System.debug('fromDefault Size --->'+fromDefault.Size());
+                                 
         for(Default_products__c dMap : fromDefault){
-            defaultMap.put(dMap.JDE_component__c, dMap.Product_name__c);
+            String defaultMapKey = dMap.JDE_component__c+'-'+dMap.Bundle_Sequence__c;
+            defaultMap.put(defaultMapKey, dMap.Product_name__c);
+            fDMap.put(defaultMapKey,dMap);
         }
+        System.debug('fDMap Size --->'+fDMap.Size());
+
         
         map<string, decimal> secondForRuleMap = new map<string, decimal>();
         for(Rule_Picklist__c sMap : secondForRule){
             String secondForRuleMapKey = sMap.component__c +'-'+ sMap.rule__c;
             secondForRuleMap.put(secondForRuleMapKey, sMap.rule__c);
-       
-            system.debug('Bundle sequence in Map Loop ---> '+sMap.Bundle_Sequence__c);
-            String StringsecondForRuleMap = JSON.serialize(secondForRuleMap);
-            system.debug('secondForRuleMap String i ---> '+StringsecondForRuleMap);
+            
+            // system.debug('Bundle sequence in Map Loop ---> '+sMap.Bundle_Sequence__c);
+            
         }
-       
+        String StringsecondForRuleMap = JSON.serialize(secondForRuleMap);
+        system.debug('secondForRuleMap String i ---> '+StringsecondForRuleMap);
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
-        
+        system.debug('onlyRule--->'+ onlyRule);
+        String fDMapKey ='';
         for( decimal ruleInLoop : onlyRule){
             system.debug('rule number in loop....'+ruleInLoop);
             
@@ -435,44 +454,58 @@ public with sharing class opportunityProduct {
             
             for(Product_Bundle_Rule_Engine__c ThenL : thenList){
                 if(ThenL.rule__c == ruleInLoop){
-
-                    system.debug('thenL...'+ThenL);
-                    system.debug('thenL...'+ThenL.rule__c);
-                    system.debug('ThenL.Logic...'+ThenL.Logic__c);
                     
-                    if((ThenL.Logic__c=='If')||(ThenL.Logic__c=='And')){
+                    //system.debug('thenL...'+ThenL);
+                    system.debug('thenL...'+ThenL.rule__c);
+                    // system.debug('ThenL.Logic...'+ThenL.Logic__c);
+                    
+                    if((ThenL.Logic__c=='If')||(ThenL.Logic__c=='And')||(ThenL.logic__c=='NE')){
                         system.debug('ThenL.Logic__c== ...'+ThenL.Logic__c);
-                        system.debug('ruleInLoop...'+ruleInLoop);
+                        //system.debug('ruleInLoop...'+ruleInLoop);
                         
                         if((ThenL.Is_Conditional_List__c == false)&&(ThenL.Logic_Releationship__c == 'EQ')&&((ThenL.JDE_Component__c != null)||(ThenL.Is_Blank__c == true))){
-                           
-                            system.debug('ThenL.Bundle_Sequence__c--->'+ThenL.Bundle_Sequence__c);
+                            
+                            // system.debug('ThenL.Bundle_Sequence__c--->'+ThenL.Bundle_Sequence__c);
                             mapToCheck.put(ThenL.JDE_Component__c, ThenL.Bundle_Sequence__c);
                             system.debug('map to check. in list is false and relation is EQ ...'+mapToCheck);
                         }
                         
                         if((ThenL.Is_Conditional_List__c == false)&&(ThenL.Logic_Releationship__c == 'NE')){
-                            for(Default_products__c FD : fromDefault){
-                                if((FD.JDE_component__c != null)&&((FD.JDE_component__c != ThenL.JDE_Component__c)||(ThenL.Is_Blank__c == true))&&(FD.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)&&(BScode.containsKey(FD.Bundle_Sequence__c))){
-                                    
-                                    string value = BScode.get(FD.Bundle_Sequence__c);
-                                    if(value == FD.JDE_component__c){
-                                        mapToCheck.put(FD.JDE_component__c, FD.Bundle_Sequence__c);
-                                    }
-                                    system.debug('map to check if condition list is false and relation is NE...'+mapToCheck);
+                            System.debug('inside NE');
+                            if (ThenL.JDE_Component__c == '*BLANK') {
+                                if (bsCode.containsKey(ThenL.Bundle_Sequence__c)) {
+                                    fDMapKey = bsCode.get(ThenL.Bundle_Sequence__c)+'-'+ThenL.Bundle_Sequence__c;
+                                    System.debug('fDMapKey--->'+fDMapKey);
+                                    System.debug('fDMap Contains--->'+fDMap.containsKey(fDMapKey));
+                                    if(fDMap.containsKey(fDMapKey)) {
+                                        System.debug('inside FDMAP');
+                                        Default_products__c FD = fDMap.get(fDMapKey);
+                                        System.debug('FD---> '+FD);
+                                        if((FD.JDE_component__c != null)&&((FD.JDE_component__c != ThenL.JDE_Component__c)||(ThenL.Is_Blank__c == true))&&(FD.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)&&(BScode.containsKey(FD.Bundle_Sequence__c))){
+                                            
+                                            string value = BScode.get(FD.Bundle_Sequence__c);
+                                            if(value == FD.JDE_component__c){
+                                                mapToCheck.put(FD.JDE_component__c, FD.Bundle_Sequence__c);
+                                                System.debug('mapToCheck inside NE ---> '+mapToCheck);
+                                            }
+                                            // system.debug('map to check if condition list is false and relation is NE...'+mapToCheck);
+                                        }
+                                    } 
                                 }
+                               
                             }
+                                                     
                         }
                         
-                        if((ThenL.Is_Conditional_List__c == true)&&(ThenL.Logic_Releationship__c == 'EQ')){
+                        if((ThenL.Is_Conditional_List__c == true)&&(ThenL.Logic_Releationship__c == 'EQ') ){
                             
                             for(Rule_Picklist__c SR : secondForRule){
                                 if((SR.component__c != null)&&(SR.rule__c == ThenL.rule__c)&&(SR.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)&&(BScode.containsKey(SR.Bundle_Sequence__c))){
                                     
                                     string value = BScode.get(SR.Bundle_Sequence__c)+'-'+ruleInLoop;
-            
+                                    
                                     System.debug('value....'+ value);
-                                    System.debug('SR.component__c....'+ SR.component__c);
+                                    //System.debug('SR.component__c....'+ SR.component__c);
                                     System.debug('secondForRuleMap.key present....'+ secondForRuleMap.containsKey(value));
                                     System.debug('secondForRuleMap.get(value)....'+ secondForRuleMap.get(value));
                                     if((secondForRuleMap.containsKey(value))&&(secondForRuleMap.get(value) == ruleInLoop)){
@@ -491,7 +524,7 @@ public with sharing class opportunityProduct {
                                     else{
                                         System.debug('In else cond....');
                                         mapToCheck.put('noCode', 0);
-                                        }
+                                    }
                                     
                                     system.debug('map to check if condition list is ture and relation is EQ...'+mapToCheck);
                                 }
@@ -499,18 +532,34 @@ public with sharing class opportunityProduct {
                         }
                         
                         if((ThenL.Is_Conditional_List__c == true)&&(ThenL.Logic_Releationship__c == 'NE')){
-                            
+                            System.debug('Comes in Cond True And NE ---> ');
                             for(Rule_Picklist__c SR : secondForRule){
                                 if((SR.component__c != null)&&(SR.rule__c == ThenL.rule__c)&&(SR.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)){
-                                    for(Default_products__c FD : fromDefault){
+                                    fDMapKey = ThenL.JDE_Component__c+'-'+ThenL.Bundle_Sequence__c;
+                                    System.debug('fDMapKey --- > '+fDMapKey);
+                                    if (fDMap.containsKey(fDMapKey)) {
+                                        Default_products__c FD = fDMap.get(fDMapKey);
+                                        System.debug('FD ---> '+FD);
+                                        System.debug('SR ---> '+SR);
+                                        System.debug('Bs Code Present ---> '+BScode.containsKey(FD.Bundle_Sequence__c));
                                         if((FD.JDE_component__c != null)&&(FD.JDE_component__c != SR.component__c)&&(FD.Bundle_Sequence__c == SR.Bundle_Sequence__c)&&(BScode.containsKey(FD.Bundle_Sequence__c))){
                                             
                                             string value = BScode.get(FD.Bundle_Sequence__c);
                                             system.debug('value in conditional list true and relation is NE...'+ value);
+                                            System.debug('FD.JDE_component__c ---> '+FD.JDE_component__c);
                                             // if()
                                             if(value == FD.JDE_component__c){
                                                 system.debug('FD.JDE_component__c in if, conditional list true and relation is NE...'+ FD.JDE_component__c);
                                                 mapToCheck.put(FD.JDE_component__c, FD.Bundle_Sequence__c);
+                                                //NeMap.put(FD.JDE_component__c,ThenL.Logic_Releationship__c);
+                                            } 
+                                            String newComp =  BScode.get(ThenL.Bundle_Sequence__c) ;
+                                            system.debug('newComp in NE in conditional list true and relation is NE...'+ newComp);
+                                            System.debug('Sr Component ---> '+SR.component__c);
+                                            if ( (SR.rule__c == ThenL.rule__c) && (SR.Bundle_Sequence__c == ThenL.Bundle_Sequence__c) && (BScode.containsKey(ThenL.Bundle_Sequence__c)) && (newComp == SR.component__c)) {
+                                               System.debug('Ne Matched');
+                                                NeMap.put(SR.component__c,ThenL.Logic_Releationship__c);
+
                                             }
                                             // else{
                                             //     system.debug('FD.JDE_component__c in else,  conditional list true and relation is NE...'+ FD.JDE_component__c);
@@ -521,6 +570,8 @@ public with sharing class opportunityProduct {
                                         //         mapToCheck.put('noCode', 0);
                                         //     }
                                     }
+                                        
+                                    
                                     system.debug('map to check if condition list is true and relation is NE...'+mapToCheck);
                                 }
                             }
@@ -530,6 +581,7 @@ public with sharing class opportunityProduct {
                     
                     Boolean allElementsPresent = true;
                     system.debug('mapToCheck--->'+mapToCheck);
+                    system.debug('BScode--->'+BScode);
                     system.debug('allElementsPresent '+ allElementsPresent);
                     if (!mapToCheck.isEmpty()){
                         for (String key : mapToCheck.keySet()) {
@@ -539,6 +591,13 @@ public with sharing class opportunityProduct {
                                 allElementsPresent = false;
                                 system.debug('allElementsPresent '+ allElementsPresent);
                                 // break;
+                            } 
+                            String NeStrng = NeMap.get(key);
+                            system.debug('allElementsPresent '+ allElementsPresent);
+                            System.debug('NeStrng --->'+NeStrng);
+                            if (NeStrng == 'NE'  ) {
+                                allElementsPresent = false;
+                                system.debug('allElementsPresent '+ allElementsPresent);
                             }
                         }
                         system.debug('mapToCheck is not null...');
@@ -551,21 +610,30 @@ public with sharing class opportunityProduct {
                     system.debug('allElementsPresent '+ allElementsPresent);
                     if (allElementsPresent == true) {
                         system.debug('hey ! All elements of mapToCheck are present in BScode');
+                        System.debug('ThenL --->'+ThenL);
+                        System.debug('thenList  --->'+thenList);
+                        System.debug('thenList size --->'+thenList.size());
+                        System.debug('ThenL.Logic__c --->'+ThenL.Logic__c);
+                        System.debug('ThenL.rule__c --->'+ThenL.rule__c);
+                        System.debug('ruleInLoop--->'+ruleInLoop);
                         if((ThenL.Logic__c=='Then')&&(ThenL.rule__c == ruleInLoop)){
                             system.debug('then bundle seq '+ ThenL.rule__c);
                             if((ThenL.Is_Conditional_List__c == false)&&(ThenL.JDE_Component__c != null)){
-                                system.debug('then bundle seq '+ ThenL.rule__c);
+                                system.debug('ThenL.rule__c '+ ThenL.rule__c);
                                 if(ThenL.product__r.name != null){
                                     system.debug('then bundle seq in (((ThenL.Is_Conditional_List__c == false)&&(ThenL.JDE_Component__c != null)))..... '+ ThenL.Bundle_Sequence__c);
                                     system.debug('ThenL.JDE_Component__c--->'+ThenL.JDE_Component__c);
                                     wholeThen.add(new thenWraper(ThenL.id, ThenL.name, ThenL.Bundle_Sequence__c, ThenL.JDE_Component__c, ThenL.Product__c, ThenL.product__r.name, ThenL.pump__c, ThenL.rule__c, ThenL.Component_Type__c));
                                     system.debug('wholeThen add--->'+wholeThen);
                                 }
+                                
                                 if(ThenL.product__r.name == null){
-                                    
-                                    if(defaultMap.containsKey(ThenL.JDE_Component__c)){
-                                        string productName = defaultMap.get(ThenL.JDE_Component__c);
-                                        system.debug('then bundle seq in ThenL.product__r.name...... '+ ThenL.Bundle_Sequence__c);
+                                    String defaultMapKeyChecker = ThenL.JDE_Component__c+'-'+ThenL.Bundle_Sequence__c;
+                                    System.debug('defaultMapKeyChecker--->'+defaultMapKeyChecker);
+                                    if(defaultMap.containsKey(defaultMapKeyChecker)){
+                                        
+                                        string productName = defaultMap.get(defaultMapKeyChecker);
+                                        system.debug('then bundle seq in ThenL.product__r.name...... '+productName);
                                         system.debug('JDE_Component__c...'+ThenL.JDE_Component__c);
                                         wholeThen.add(new thenWraper(ThenL.id, ThenL.name, ThenL.Bundle_Sequence__c, ThenL.JDE_Component__c, ThenL.Product__c, productName, ThenL.pump__c, ThenL.rule__c, ThenL.Component_Type__c));
                                         system.debug('wholeThen add--->'+wholeThen);
@@ -573,16 +641,18 @@ public with sharing class opportunityProduct {
                                     
                                 }
                             }
-                            
+                            System.debug('ThenL --->'+ThenL);
                             if((ThenL.Is_Conditional_List__c == true)&&(ThenL.JDE_Component__c == null)){
                                 for(Rule_Picklist__c SR2 : secondForRule){
                                     if((SR2.product__r.name != null)&&(SR2.rule__c == ThenL.rule__c)&&(SR2.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)){
                                         system.debug('then bundle seq in ((ThenL.Is_Conditional_List__c == true)&&(ThenL.JDE_Component__c == null))..... '+ SR2.Bundle_Sequence__c);
                                         wholeThen.add(new thenWraper(SR2.id, SR2.name, SR2.Bundle_Sequence__c, SR2.component__c, SR2.Product__c, SR2.product__r.name, SR2.Pump_Bundle__c, SR2.rule__c, SR2.Component_Type__c));   
                                     }
-                                    if((SR2.product__r.name == null)&&(SR2.component__c != null)&&(SR2.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)&&((defaultMap.containsKey(SR2.component__c)))){
+                                    String defaultMapKeyChecker1 = SR2.component__c+'-'+sr2.Bundle_Sequence__c;
+                                    if((SR2.product__r.name == null)&&(SR2.component__c != null)&&(SR2.Bundle_Sequence__c == ThenL.Bundle_Sequence__c) && (SR2.rule__c == ThenL.rule__c) &&((defaultMap.containsKey(defaultMapKeyChecker1)))){
                                         
-                                        string productName = defaultMap.get(SR2.component__c);
+                                        string productName = defaultMap.get(defaultMapKeyChecker1);
+                                        System.debug('productName---->'+productName);
                                         wholeThen.add(new thenWraper(SR2.id, SR2.name, SR2.Bundle_Sequence__c, SR2.component__c, SR2.Product__c, productName, SR2.Pump_Bundle__c, SR2.rule__c, SR2.Component_Type__c));   
                                         system.debug('wholeThen add--->'+wholeThen);
                                         
@@ -619,7 +689,7 @@ public with sharing class opportunityProduct {
                                                        Bundle_Sequence__c IN:bundleSequenceSet ORDER BY Bundle_Sequence__c];
         system.debug('Product bundle-->>>> '+ ProductBundleName);
         for(Bundle_Attributes__c PBName : ProductBundleName){
-            system.debug('Product bundle-  product bundle name id ....->>>> '+ PBName.Product_Bundle__c); 
+            //system.debug('Product bundle-  product bundle name id ....->>>> '+ PBName.Product_Bundle__c); 
         }
         // and Bundle_Sequence__c IN:bundleSequenceSet
         system.debug('wholeThen.....'+wholeThen);
@@ -752,8 +822,398 @@ public with sharing class opportunityProduct {
             this.componentType = componentType;
         }
     }
-    
+
     // ................................................................................
+        //////////////////////////******************************************** PSP 2024 Rule 35 Bug Fix /////////////////////////********************************************/
+        @AuraEnabled
+        public Static list<outerWrapperBSThen> ThenValidate (string comboNames, string Pumpname, string productBundleNameString, string stringBundlecode) {
+            
+            String[] bundleParts = productBundleNameString.split(' ');
+            System.debug('bundleParts ---> '+bundleParts);
+            String firstNumber = bundleParts[0];
+            System.debug('firstNumber---> '+firstNumber);
+            decimal bunsequencetoLimit = decimal.valueOf(firstNumber);
+
+            system.debug('stringBundlecode in ThenValidate...>'+stringBundlecode);
+            List<Object> listPriceproduct = (List<Object>) JSON.deserializeUntyped(stringBundlecode);
+            system.debug('listPriceproduct in forThenLogic...>'+listPriceproduct);
+            Map<String, string> mapBundleCode = new map<string, string>();
+            for (Object obj : listPriceproduct) {
+                Map<String, Object> jsonObj = (Map<String, Object>) obj;
+                String key = (String) jsonObj.get('key');
+                String value = (String) jsonObj.get('value');
+                mapBundleCode.put(key, value);
+            }
+           
+            system.debug('mapBundleCode in forThenLogic...>'+mapBundleCode);
+            list<Product_Bundle__c>togetpumpID = [SELECT id, name from Product_Bundle__c where name =:Pumpname];
+            string getProductBundleID = togetpumpID[0].id;
+            
+            Map<decimal, String> BScode = new Map<decimal, String>();
+            for (String key : mapBundleCode.keySet()) {
+                String[] parts = key.split(' ');
+                String newKey = parts[0].replaceAll('[^0-9.]', '');
+                decimal deciKey = decimal.valueOf(newKey);
+                String newValue = mapBundleCode.get(key);
+                BScode.put(deciKey, newValue);
+            }
+            BScode.put(bunsequencetoLimit, comboNames);
+            system.debug('BS code map....'+BScode);
+            list<outerWrapperBSThen> outerThenWrapper = new list<outerWrapperBSThen>();
+
+            list<Product_Bundle_Rule_Engine__c>forandRule=[SELECT id, rule__c, Rule_Seq__c, pump__c, product__r.name, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, Logic_Releationship__c, Is_Conditional_List__c, Is_Blank__c FROM Product_Bundle_Rule_Engine__c WHERE (Logic__c='if' OR Logic__c = 'And') AND Bundle_Sequence__c In:BsCode.keyset() AND pump__c=:Pumpname AND Logic_Releationship__c ='EQ' ORDER BY JDE_Component__c];
+            set<decimal> whenConditionalListTRUE = new set<decimal>();
+            list<Rule_Picklist__c> secondForRule0 = [SELECT id,rule__c, Rule_Seq__c, Pump_Bundle__c ,product__r.name, Bundle_Sequence__c, component__c, Component_Type__c
+                                                     from rule_picklist__c WHERE component__c In:BsCode.values()  AND Pump_Bundle__c=:Pumpname AND Bundle_Sequence__c In: BsCode.keyset() ORDER BY component__c];
+            System.debug('forandRule size---> ' +forandRule.size());
+            System.debug('secondForRule0 size---> ' +secondForRule0.size());
+            Set<Decimal> onlyRule = new Set<Decimal>();
+            if(!forandRule.isEmpty()){
+                for(Product_Bundle_Rule_Engine__c forruleNumber :forandRule){
+                    String comboName = bsCode.get(forruleNumber.Bundle_Sequence__c);
+                    if((bsCode.containsKey(forruleNumber.Bundle_Sequence__c) && bsCode.get(forruleNumber.Bundle_Sequence__c) == comboName && forruleNumber.JDE_Component__c == comboName)&&(forruleNumber.Is_Conditional_List__c == false)){
+                        System.debug('forruleNumber.rule__c---> '+forruleNumber.rule__c);
+                        onlyRule.add(forruleNumber.rule__c);
+                    }
+                    
+                    if(forruleNumber.Is_Conditional_List__c == true){
+                        for(Rule_Picklist__c sr : secondForRule0){
+                            System.debug('sr.rule__c---> '+sr.rule__c +' AND ' +' forruleNumber.rule__c-->>'+ forruleNumber.rule__c);
+                            if(sr.rule__c == forruleNumber.rule__c){
+                                System.debug('sr.rule__c---> '+sr.rule__c);
+                                onlyRule.add(sr.rule__c);
+                            }
+                            
+                        }
+                        
+                        // if(secondForRule0.isEmpty()){
+                        //     System.debug('break---> ');
+                        //     break;
+                        
+                        // }
+                        
+                    }
+                }
+            }
+            System.debug('onlyRule---> '+onlyRule+'\n'+'onlyRule Size()--->'+onlyRule.size());
+              
+            list<thenWraper> wholeThen = new list <thenWraper>();
+            list <Default_products__c> fromDefault = [SELECT id,Product_name__c, name, Bundle_Sequence__c, JDE_component__c, Component_Type__c FROM Default_products__c 
+                                                      WHERE name =: pumpName ORDER BY JDE_component__c];
+            list<Rule_Picklist__c> secondForRule = [SELECT id, name, rule__c, Rule_Seq__c, Pump_Bundle__c ,product__r.name, Bundle_Sequence__c, component__c, Component_Type__c
+                                                    from rule_picklist__c WHERE Pump_Bundle__c=:Pumpname AND rule__c IN: onlyRule ORDER BY Rule_Seq__c];
+            
+            list<Product_Bundle_Rule_Engine__c > thenList=[SELECT id, name,rule__c, Rule_Seq__c, pump__c, product__r.name, Product_Bundle__c, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, 
+                                                           Is_Conditional_List__c, Is_Blank__c, Logic_Releationship__c FROM Product_Bundle_Rule_Engine__c
+                                                           WHERE rule__c IN: onlyRule AND pump__c=: Pumpname ORDER BY Rule_Seq__c];
+            
+            System.debug('thenList  --->'+thenList);
+            System.debug('thenList size --->'+thenList.size());
+            system.debug('secondForRule-->'+secondForRule);
+            system.debug('secondForRule size-->'+secondForRule.size());
+            map<string, string> defaultMap = new map<string, string>();
+            map<string, string> NeMap = new map<string, string>();
+            Map<String,Default_products__c> fDMap = new Map<String,Default_products__c>();     
+        System.debug('fromDefault Size --->'+fromDefault.Size());
+                                 
+        for(Default_products__c dMap : fromDefault){
+            String defaultMapKey = dMap.JDE_component__c+'-'+dMap.Bundle_Sequence__c;
+            defaultMap.put(defaultMapKey, dMap.Product_name__c);
+            fDMap.put(defaultMapKey,dMap);
+        }
+        System.debug('fDMap Size --->'+fDMap.Size());
+            
+            map<string, decimal> secondForRuleMap = new map<string, decimal>();
+            for(Rule_Picklist__c sMap : secondForRule){
+                String secondForRuleMapKey = sMap.component__c +'-'+ sMap.rule__c;
+                secondForRuleMap.put(secondForRuleMapKey, sMap.rule__c);
+                
+                // system.debug('Bundle sequence in Map Loop ---> '+sMap.Bundle_Sequence__c);
+                // String StringsecondForRuleMap = JSON.serialize(secondForRuleMap);
+                // system.debug('secondForRuleMap String i ---> '+StringsecondForRuleMap);
+            }
+            
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+            system.debug('onlyRule--->'+ onlyRule);
+            String fDMapKey ='';
+            for( decimal ruleInLoop : onlyRule){
+                system.debug('rule number in loop....'+ruleInLoop);
+                
+                map<string, decimal> mapToCheck = new map<string, decimal>();
+                
+                for(Product_Bundle_Rule_Engine__c ThenL : thenList){
+                    if(ThenL.rule__c == ruleInLoop){
+                        
+                        //system.debug('thenL...'+ThenL);
+                        system.debug('thenL...'+ThenL.rule__c);
+                        // system.debug('ThenL.Logic...'+ThenL.Logic__c);
+                        
+                        if((ThenL.Logic__c=='If')||(ThenL.Logic__c=='And')){
+                            system.debug('ThenL.Logic__c== ...'+ThenL.Logic__c);
+                            //system.debug('ruleInLoop...'+ruleInLoop);
+                            
+                            if((ThenL.Is_Conditional_List__c == false)&&(ThenL.Logic_Releationship__c == 'EQ')&&((ThenL.JDE_Component__c != null)||(ThenL.Is_Blank__c == true))){
+                                
+                                // system.debug('ThenL.Bundle_Sequence__c--->'+ThenL.Bundle_Sequence__c);
+                                mapToCheck.put(ThenL.JDE_Component__c, ThenL.Bundle_Sequence__c);
+                                system.debug('map to check. in list is false and relation is EQ ...'+mapToCheck);
+                            }
+                            
+                            if((ThenL.Is_Conditional_List__c == false)&&(ThenL.Logic_Releationship__c == 'NE')){
+                                fDMapKey = ThenL.JDE_Component__c+'-'+ThenL.Bundle_Sequence__c;
+                                if (fDMap.containsKey(fDMapKey)) {
+                                    Default_products__c FD = fDMap.get(fDMapKey);
+                                    if((FD.JDE_component__c != null)&&((FD.JDE_component__c != ThenL.JDE_Component__c)||(ThenL.Is_Blank__c == true))&&(FD.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)&&(BScode.containsKey(FD.Bundle_Sequence__c))){
+                                        
+                                        string value = BScode.get(FD.Bundle_Sequence__c);
+                                        if(value == FD.JDE_component__c){
+                                            mapToCheck.put(FD.JDE_component__c, FD.Bundle_Sequence__c);
+                                        }
+                                        // system.debug('map to check if condition list is false and relation is NE...'+mapToCheck);
+                                    }
+                                
+                                }
+
+                            }
+                            
+                            if((ThenL.Is_Conditional_List__c == true)&&(ThenL.Logic_Releationship__c == 'EQ') ){
+                                
+                                for(Rule_Picklist__c SR : secondForRule){
+                                    if((SR.component__c != null)&&(SR.rule__c == ThenL.rule__c)&&(SR.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)&&(BScode.containsKey(SR.Bundle_Sequence__c))){
+                                        
+                                        string value = BScode.get(SR.Bundle_Sequence__c)+'-'+ruleInLoop;
+                                        
+                                        //System.debug('value....'+ value);
+                                        //System.debug('SR.component__c....'+ SR.component__c);
+                                        //System.debug('secondForRuleMap.key present....'+ secondForRuleMap.containsKey(value));
+                                        System.debug('secondForRuleMap.get(value)....'+ secondForRuleMap.get(value));
+                                        if((secondForRuleMap.containsKey(value))&&(secondForRuleMap.get(value) == ruleInLoop)){
+                                            system.debug('secondForRuleMap.containsKey(value)...'+secondForRuleMap.containsKey(value));
+                                            List<String> ValueCheckList = value.split('-');
+                                            String ValueCheck = ValueCheckList[1];
+                                            if(ValueCheckList[0] == SR.component__c){
+                                                System.debug('In if cond....');
+                                                mapToCheck.put(SR.component__c, SR.Bundle_Sequence__c);
+                                            }
+                                            // else if(!secondForRuleMap.containsKey(value)){
+                                            // System.debug('In else if cond....');
+                                            // mapToCheck.put('noCode', 0);
+                                            // }
+                                        }
+                                        else{
+                                            System.debug('In else cond....');
+                                            mapToCheck.put('noCode', 0);
+                                        }
+                                        
+                                        system.debug('map to check if condition list is ture and relation is EQ...'+mapToCheck);
+                                    }
+                                }
+                            }
+                            
+                            if((ThenL.Is_Conditional_List__c == true)&&(ThenL.Logic_Releationship__c == 'NE')){
+                                System.debug('Comes in Cond True And NE ---> ');
+                                for(Rule_Picklist__c SR : secondForRule){
+                                    if((SR.component__c != null)&&(SR.rule__c == ThenL.rule__c)&&(SR.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)){
+                                        fDMapKey = ThenL.JDE_Component__c+'-'+ThenL.Bundle_Sequence__c;
+                                        if (fDMap.containsKey(fDMapKey)) {
+                                            Default_products__c FD = fDMap.get(fDMapKey);
+                                            if((FD.JDE_component__c != null)&&(FD.JDE_component__c != SR.component__c)&&(FD.Bundle_Sequence__c == SR.Bundle_Sequence__c)&&(BScode.containsKey(FD.Bundle_Sequence__c))){
+                                                
+                                                string value = BScode.get(FD.Bundle_Sequence__c);
+                                                system.debug('value in conditional list true and relation is NE...'+ value);
+                                                System.debug('FD.JDE_component__c ---> '+FD.JDE_component__c);
+                                                // if()
+                                                if(value == FD.JDE_component__c){
+                                                    system.debug('FD.JDE_component__c in if, conditional list true and relation is NE...'+ FD.JDE_component__c);
+                                                    mapToCheck.put(FD.JDE_component__c, FD.Bundle_Sequence__c);
+                                                    //NeMap.put(FD.JDE_component__c,ThenL.Logic_Releationship__c);
+                                                } 
+                                                String newComp =  BScode.get(ThenL.Bundle_Sequence__c) ;
+                                                system.debug('newComp in NE in conditional list true and relation is NE...'+ newComp);
+                                                System.debug('Sr Component ---> '+SR.component__c);
+                                                if ( (SR.rule__c == ThenL.rule__c) && (SR.Bundle_Sequence__c == ThenL.Bundle_Sequence__c) && (BScode.containsKey(ThenL.Bundle_Sequence__c)) && (newComp == SR.component__c)) {
+                                                   System.debug('Ne Matched');
+                                                    NeMap.put(SR.component__c,ThenL.Logic_Releationship__c);
+    
+                                                }
+                                                // else{
+                                                //     system.debug('FD.JDE_component__c in else,  conditional list true and relation is NE...'+ FD.JDE_component__c);
+                                                //     mapToCheck.put('noCode', 0);
+                                                // }
+                                            }
+                                            //  else{
+                                            //         mapToCheck.put('noCode', 0);
+                                            //     }
+                                        
+                                        system.debug('map to check if condition list is true and relation is NE...'+mapToCheck);
+                                        }
+                                            
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                        Boolean allElementsPresent = true;
+                        system.debug('mapToCheck--->'+mapToCheck);
+                        system.debug('BScode--->'+BScode);
+                        system.debug('allElementsPresent '+ allElementsPresent);
+                        if (!mapToCheck.isEmpty()){
+                            for (String key : mapToCheck.keySet()) {
+                                decimal value = mapToCheck.get(key);
+                                system.debug('value---> '+ value);
+                               
+                                if (!BScode.containsKey(value) || !BScode.get(value).equals(key)) {
+                                    allElementsPresent = false;
+                                    system.debug('allElementsPresent '+ allElementsPresent);
+                                    // break;
+                                
+                            }
+                                String NeStrng = NeMap.get(key);
+                                system.debug('allElementsPresent '+ allElementsPresent);
+                                System.debug('NeStrng --->'+NeStrng);
+                                if (NeStrng == 'NE'  ) {
+                                    allElementsPresent = false;
+                                    system.debug('allElementsPresent '+ allElementsPresent);
+                                }
+                            }
+                            system.debug('mapToCheck is not null...');
+                            system.debug('allElementsPresent '+ allElementsPresent);
+                        } else { 
+                            system.debug('mapToCheck is NULL...');
+                            allElementsPresent = false;
+                        }
+                        system.debug('allElementsPresent '+ allElementsPresent);
+                        if (allElementsPresent == true) {
+                            system.debug('hey ! All elements of mapToCheck are present in BScode');
+                            System.debug('ThenL --->'+ThenL);
+                            System.debug('thenList  --->'+thenList);
+                            System.debug('thenList size --->'+thenList.size());
+                            System.debug('ThenL.Logic__c --->'+ThenL.Logic__c);
+                            System.debug('ThenL.rule__c --->'+ThenL.rule__c);
+                            System.debug('ruleInLoop--->'+ruleInLoop);
+                            if((ThenL.Logic__c=='Then')&&(ThenL.rule__c == ruleInLoop) && (!bsCode.containsKey(ThenL.Bundle_Sequence__c))){
+                                system.debug('then bundle seq '+ ThenL.rule__c);
+                                if((ThenL.Is_Conditional_List__c == false)&&(ThenL.JDE_Component__c != null)){
+                                    system.debug('ThenL.rule__c '+ ThenL.rule__c);
+                                    if(ThenL.product__r.name != null){
+                                        system.debug('then bundle seq in (((ThenL.Is_Conditional_List__c == false)&&(ThenL.JDE_Component__c != null)))..... '+ ThenL.Bundle_Sequence__c);
+                                        system.debug('ThenL.JDE_Component__c--->'+ThenL.JDE_Component__c);
+                                        wholeThen.add(new thenWraper(ThenL.id, ThenL.name, ThenL.Bundle_Sequence__c, ThenL.JDE_Component__c, ThenL.Product__c, ThenL.product__r.name, ThenL.pump__c, ThenL.rule__c, ThenL.Component_Type__c));
+                                        system.debug('wholeThen add--->'+wholeThen);
+                                    }
+                                    if(ThenL.product__r.name == null){
+                                        String defaultMapKeyChecker = ThenL.JDE_Component__c+'-'+ThenL.Bundle_Sequence__c;
+                                        System.debug('defaultMapKeyChecker--->'+defaultMapKeyChecker);
+                                        if(defaultMap.containsKey(defaultMapKeyChecker)){
+                                            string productName = defaultMap.get(defaultMapKeyChecker);
+                                            system.debug('then bundle seq in ThenL.product__r.name...... '+productName);
+                                            system.debug('JDE_Component__c...'+ThenL.JDE_Component__c);
+                                            wholeThen.add(new thenWraper(ThenL.id, ThenL.name, ThenL.Bundle_Sequence__c, ThenL.JDE_Component__c, ThenL.Product__c, productName, ThenL.pump__c, ThenL.rule__c, ThenL.Component_Type__c));
+                                            system.debug('wholeThen add--->'+wholeThen);
+                                        }
+                                        
+                                    }
+                                }
+                                
+                                if((ThenL.Is_Conditional_List__c == true)&&(ThenL.JDE_Component__c == null)){
+                                    for(Rule_Picklist__c SR2 : secondForRule){
+                                        if((SR2.product__r.name != null)&&(SR2.rule__c == ThenL.rule__c)&&(SR2.Bundle_Sequence__c == ThenL.Bundle_Sequence__c)){
+                                            system.debug('then bundle seq in ((ThenL.Is_Conditional_List__c == true)&&(ThenL.JDE_Component__c == null))..... '+ SR2.Bundle_Sequence__c);
+                                            wholeThen.add(new thenWraper(SR2.id, SR2.name, SR2.Bundle_Sequence__c, SR2.component__c, SR2.Product__c, SR2.product__r.name, SR2.Pump_Bundle__c, SR2.rule__c, SR2.Component_Type__c));   
+                                        }
+                                        String defaultMapKeyChecker1 = SR2.component__c+'-'+sr2.Bundle_Sequence__c;
+                                        if((SR2.product__r.name == null)&&(SR2.component__c != null)&&(SR2.Bundle_Sequence__c == ThenL.Bundle_Sequence__c) && (SR2.rule__c == ThenL.rule__c) &&((defaultMap.containsKey(defaultMapKeyChecker1)))){
+                                            string productName = defaultMap.get(defaultMapKeyChecker1);
+                                            System.debug('productName---->'+productName);
+                                            wholeThen.add(new thenWraper(SR2.id, SR2.name, SR2.Bundle_Sequence__c, SR2.component__c, SR2.Product__c, productName, SR2.Pump_Bundle__c, SR2.rule__c, SR2.Component_Type__c));   
+                                            system.debug('wholeThen add--->'+wholeThen);
+                                        }
+                                    }
+                                }
+                            }
+                        } 
+                        else {
+                            system.debug('Not all elements of mapToCheck are present in BScode.');
+                        }
+                    }
+                }
+                system.debug('final map to check...'+mapToCheck);
+            }
+            system.debug('whole then data...>'+ wholeThen);
+    
+            set<decimal> bundleSequenceSet = new set<decimal>();
+            set<decimal> ruleTestSet = new set<decimal>();
+            for(thenWraper forBS : wholeThen){
+                // system.debug('forBS.....'+forBS);
+                bundleSequenceSet.add(forBS.BSeq);
+                ruleTestSet.add(forBS.rule);
+            }
+            system.debug('bundleSequenceSet.....'+bundleSequenceSet);
+        system.debug('ruleTestSet.....'+ruleTestSet);
+        system.debug('getProductBundleID.....'+getProductBundleID);
+        
+        list<Bundle_Attributes__c>ProductBundleName = [SELECT id, name, Bundle_Sequence__c, Product_Bundle__c 
+                                                       from Bundle_Attributes__c 
+                                                       where Product_Bundle__c =: getProductBundleID And
+                                                       Bundle_Sequence__c IN:bundleSequenceSet ORDER BY Bundle_Sequence__c];
+        system.debug('Product bundle-->>>> '+ ProductBundleName);
+        for(Bundle_Attributes__c PBName : ProductBundleName){
+            //system.debug('Product bundle-  product bundle name id ....->>>> '+ PBName.Product_Bundle__c); 
+        }
+        // and Bundle_Sequence__c IN:bundleSequenceSet
+        system.debug('wholeThen.....'+wholeThen);
+        system.debug('wholeThen size.....'+wholeThen.size());
+        for(Bundle_Attributes__c PN :ProductBundleName ){
+            list<innerWrapperBSThen> productOfAnd = new list<innerWrapperBSThen>();
+            list<innerThenOptions> optionOfAnd = new list<innerThenOptions>();
+            set<string> andJDEname  = new set<string>();
+            
+            for(thenWraper AL : wholeThen){
+                if(AL.BSeq == PN.Bundle_Sequence__c){
+                    
+                    if (!andJDEname.contains(AL.componentCode)) {
+                        
+                        andJDEname.add(AL.componentCode);
+                        
+                        productOfAnd.add(new innerWrapperBSThen(AL.productname, AL.componentCode));
+                        optionOfAnd.add(new innerThenOptions('('+AL.componentCode+') '+AL.productname, AL.componentCode));
+                        
+                    }
+                }
+            }
+            
+            if(productOfAnd.size()<1){
+                productOfAnd.add(new innerWrapperBSThen('NO selection','*BLANK'));
+                optionOfAnd.add(new innerThenOptions('NO selection','*BLANK'));
+            }
+            
+            string Name = PN.Bundle_Sequence__c+'  '+PN.name;
+            if(productOfAnd.size()==1){
+                for(innerWrapperBSThen onlyOne : productOfAnd){
+                    
+                    outerThenWrapper.add(new outerWrapperBSThen(Name,PN.id, PN.Bundle_Sequence__c, onlyOne.Productcode, productOfAnd, optionOfAnd));
+                  
+                }
+            }
+            else{
+                outerThenWrapper.add(new outerWrapperBSThen(Name,PN.id, PN.Bundle_Sequence__c, Null,productOfAnd, optionOfAnd));
+            } 
+            
+        }
+        
+        system.debug('stringBundlecode in ThenValidate...>'+stringBundlecode);
+        system.debug('outerThenWrapper.....'+outerThenWrapper);
+
+        return outerThenWrapper;
+            
+            
+    
+        } 
+        
+        
+    
+        //////////////////////////******************************************** PSP 2024 Rule 35 Bug Fix /////////////////////////********************************************/
     
     // for redo selection .....=============================>>>>>>>>>>>>>>
     
@@ -772,23 +1232,38 @@ public with sharing class opportunityProduct {
         
         decimal bunsequencetoLimit = decimal.valueOf(firstNumber);
         list<Product_Bundle_Rule_Engine__c>forandRule=[SELECT id, rule__c, Rule_Seq__c, pump__c, product__r.name, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, Logic_Releationship__c, Is_Conditional_List__c, Is_Blank__c FROM Product_Bundle_Rule_Engine__c WHERE (Logic__c='if' OR Logic__c = 'And') AND JDE_Component__c =: comboName AND pump__c=:Pumpname AND Logic_Releationship__c ='EQ' ORDER BY JDE_Component__c];
+        System.debug('FornadRule Size ---->'+forandRule.Size());
         if(!forandRule.isEmpty()){
             for(Product_Bundle_Rule_Engine__c forruleNumber :forandRule){
                 onlyRule.add(forruleNumber.rule__c);
+                System.debug('Rule Number --->'+forruleNumber.rule__c);
+                System.debug('Inside True ---> '+forruleNumber.Is_Conditional_List__c);
                 if(forruleNumber.Is_Conditional_List__c == true){
+                    System.debug('Inside True ---> '+forruleNumber.Is_Conditional_List__c);
                     list<Rule_Picklist__c> secondForRule = [SELECT id,rule__c, Rule_Seq__c, Pump_Bundle__c ,product__r.name, Bundle_Sequence__c, component__c, Component_Type__c
                                                             from rule_picklist__c WHERE component__c =:comboName  AND Pump_Bundle__c=:Pumpname AND rule__c =:forruleNumber.rule__c AND Bundle_Sequence__c =: forruleNumber.Bundle_Sequence__c ORDER BY component__c];
-                    
+                    System.debug('secondForRule Size ---->'+secondForRule.Size());
                     if(secondForRule.isEmpty()){
                         list<Product_Bundle_Rule_Engine__c>forandRuleFromBlank=[SELECT id, rule__c, Rule_Seq__c, pump__c, product__r.name, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, Logic_Releationship__c, Is_Conditional_List__c, Is_Blank__c FROM Product_Bundle_Rule_Engine__c WHERE (Logic__c='if' OR Logic__c = 'And') AND Bundle_Sequence__c =: bunsequencetoLimit AND pump__c=:Pumpname AND Is_Blank__c = true AND Logic_Releationship__c = 'NE' ORDER BY JDE_Component__c];
                         
                         onlyRule.add(forandRuleFromBlank[0].rule__c);
                     }
                     for(Rule_Picklist__c sr : secondForRule){
+                        System.debug('sr.rule__c --->'+sr.rule__c);
                         onlyRule.add(sr.rule__c);   
                     }
                 }
-            }
+            } 
+        } else {
+            list<Rule_Picklist__c> secondForRule = [SELECT id,rule__c, Rule_Seq__c, Pump_Bundle__c ,product__r.name, Bundle_Sequence__c, component__c, Component_Type__c
+                                                    from rule_picklist__c WHERE component__c =:comboName  AND Pump_Bundle__c=:Pumpname  ORDER BY component__c];
+                System.debug('secondForRule Size ---->'+secondForRule.Size());
+                if(!secondForRule.isEmpty()){
+                    for (Rule_Picklist__c RP : secondForRule) {
+                        onlyRule.add(RP.rule__c);
+                    }
+                   
+                }
         }
         
         list<Product_Bundle_Rule_Engine__c>forNERule=[SELECT id, rule__c, Rule_Seq__c, pump__c, product__r.name, Bundle_Sequence__c, JDE_Component__c, Logic__c, Component_Type__c, Logic_Releationship__c, Is_Conditional_List__c, Is_Blank__c FROM Product_Bundle_Rule_Engine__c WHERE (Logic__c='if' OR Logic__c = 'And') AND Bundle_Sequence__c =: bunsequencetoLimit AND pump__c=:Pumpname AND Logic_Releationship__c ='NE' AND JDE_Component__c !=: comboName ORDER BY JDE_Component__c];
@@ -1297,6 +1772,7 @@ public with sharing class opportunityProduct {
                     system.debug('requiredproducts.productcode....'+requiredproducts.productcode);
                     system.debug('requiredproducts.productName....'+requiredproducts.productName);
                     list<Product2>productList = [SELECT id, name, ProductCode FROM Product2 WHERE ProductCode =: requiredproducts.productcode];
+                    if (!productList.isEmpty()) {
                     system.debug('productList[0].id...'+productList[0].id);
                     List<PriceBookEntry> pEntries = [Select id, product2.name, product2.id, ProductCode, Unitprice from Pricebookentry where pricebook2.name = 'Pump Price Book' and product2.id =: productList[0].id];
                     //  List<PriceBookEntry> pEntries = [select id, product2.name,product2.id, ProductCode, Unitprice from Pricebookentry where pricebook2.name = 'Pump Price Book' and ProductCode = ' ABC '];
@@ -1312,16 +1788,20 @@ public with sharing class opportunityProduct {
                         qli.Discount = requiredproducts.discount;
                         lstQLI.add(qli);
                         beforeReturn.add(qlist[0].id);
-                    }
-                    else{
+                    } else {
                         //  forReturn =  'No ID';
                         string errorElement = requiredproducts.productName + ' '+ '('+requiredproducts.productcode+')';
                         system.debug('errorElement'+errorElement);
                         missingProductName.add(errorElement);
                         system.debug('missingProductName'+missingProductName);
                         
-                    }
-                    
+                     }
+                } else {
+                    string errorElement = requiredproducts.productName + ' '+ '('+requiredproducts.productcode+')';
+                        system.debug('errorElement'+errorElement);
+                        missingProductName.add(errorElement);
+                        system.debug('missingProductName'+missingProductName);
+                }
                     
                 }  
                 
@@ -1347,8 +1827,8 @@ public with sharing class opportunityProduct {
     }
     
     public class quotepriceWrapperrequired{
-        @AuraEnabled 
-        public String Bundleattribute {get;set;}
+        @AuraEnabled
+        public String Bundleattribute {get;set;} 
         @AuraEnabled 
         public string bundleid {get;set;}
         @AuraEnabled

@@ -5,6 +5,8 @@ public without sharing class B2BCheckoutOrderSummary {
     @AuraEnabled public Decimal promotion { get; set; }
     @AuraEnabled public Decimal orderTotal { get; set; }
     @AuraEnabled public Decimal totalChargeAmount { get; set; }
+    
+    public static boolean taxesCalculated = false;
 
 
     public B2BCheckoutOrderSummary(Id cartId) {
@@ -22,25 +24,29 @@ public without sharing class B2BCheckoutOrderSummary {
     }
 
     public static void calculateTaxes(Id cartId) {
-        List<Id> cartItemIds = new List<Id>();
-        Set<Id> taxableCartItemIds = new Set<Id>();
-        Id accountId;
-        for (CartItem cartItem : [
-            SELECT Id, Sku, TotalPrice, Type, Product2.Name, Product2.B2BTaxExempt__c, Cart.TotalProductAmount, Cart.AccountId
-            FROM CartItem
-            WHERE CartId = :cartId
-            AND Type = 'Product'
-            ORDER BY CreatedDate DESC
-        ]) {
-            accountId = cartItem.Cart.AccountId;
-            cartItemIds.add(cartItem.Id);
-            if (cartItem.Product2.B2BTaxExempt__c == false) {
-                taxableCartItemIds.add(cartItem.Id);
-            }
-        }
+        if (!taxesCalculated) {
+        	List<Id> cartItemIds = new List<Id>();
+        	Set<Id> taxableCartItemIds = new Set<Id>();
+        	Id accountId;
+        	for (CartItem cartItem : [
+            	SELECT Id, Sku, TotalPrice, Type, Product2.Name, Product2.B2BTaxExempt__c, Cart.TotalProductAmount, Cart.AccountId
+            	FROM CartItem
+            	WHERE CartId = :cartId
+            	AND Type = 'Product'
+            	ORDER BY CreatedDate DESC
+        	]) {
+            	accountId = cartItem.Cart.AccountId;
+            	cartItemIds.add(cartItem.Id);
+            	if (cartItem.Product2.B2BTaxExempt__c == false) {
+                	taxableCartItemIds.add(cartItem.Id);
+            	}
+        	}
 
-        if (isAccountTaxable(accountId) && !taxableCartItemIds.isEmpty()) {
-            createCartTaxes(cartId);
+        	if (isAccountTaxable(accountId) && !taxableCartItemIds.isEmpty()) {
+            	createCartTaxes(cartId);
+        	}
+            
+            taxesCalculated = true;
         }
 
     }

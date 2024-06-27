@@ -1,23 +1,28 @@
-/******************************************************************************************************************************************************
-
-Name 			    : Exception_HandlerTest
-Author 			    : Pratik Kakade
-Purpose			    : This Apex test class is designed to test the functionality of the Exception_Handler class.
-                      Exception_Handler class. It covers scenarios such as successful insert
-
-Description		    : This test class contains comprehensive test cases to validate the behavior of the  Exception_Handler class. 
-                      It covers scenarios such as successful insert. 
-			     
-Version			    : 1.1
-Change Log		    : Change by Pratik - 11 Jan 2024
-Test Class  		: Exception_Handler
-CreateDate		    : 11 jan 2024
-LastModifiedDate	: 11 jan 2024
-
-******************************************************************************************************************************************************/
- 
-
-
+/**
+* Class Name: Exception_HandlerTest
+* Purpose:
+*   This Apex test class is designed to test the functionality of the Exception_Handler class.
+*   It includes test methods to ensure that the Api integration record is  correctly inserting or not 
+*   
+* Description:
+*   This test class contains comprehensive test cases to validate the behavior of the 
+*   Exception_Handler class. It covers scenarios such as successful insert
+*
+* TestClass for
+*   Exception_Handler
+*
+* @author
+*   Melonleaf Consulting
+*
+* @version
+*   1.0
+*
+* @created on
+*   Date: 11 Jan 2024
+*
+* Change Log:
+*   Pratik Kakade - 11 Jan 2024 - Developed the first version of the test class.
+*/
 @isTest
 public  class Exception_HandlerTest {
 @isTest

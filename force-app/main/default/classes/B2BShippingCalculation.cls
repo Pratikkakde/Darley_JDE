@@ -1,5 +1,5 @@
 public class B2BShippingCalculation {
-    private static final String CART_ITEM_DELIVERY_NAME = 'Delivery Cart Item';
+    private static final String CART_ITEM_DELIVERY_NAME = 'Shipping Charges';
     private static final Decimal SHIPPING_COST_PERCENTAGE =  0.03;
     
     public static void calculateShipping(String cartId){

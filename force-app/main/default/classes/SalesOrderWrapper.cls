@@ -102,6 +102,7 @@ public class SalesOrderWrapper {
         public String SFCardName;
         public String SFAuthCode;
         public String SFAuthID;
+        public String SFCCExpDate;
     }
    
 }

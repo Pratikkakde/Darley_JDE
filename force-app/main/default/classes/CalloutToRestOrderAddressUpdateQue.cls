@@ -58,6 +58,7 @@ public class CalloutToRestOrderAddressUpdateQue implements Queueable, Database.A
             
             //Queue another job to update cc data to jde.
             if(!Test.isRunningTest() && inCCDet == true){
+                System.debug('called CalloutToRestOrderCCUpdateQue');
                 System.enqueueJob(new CalloutToRestOrderCCUpdateQue(newOrdList, oldOrdList));    
             }    
         }
@@ -87,48 +88,25 @@ public class CalloutToRestOrderAddressUpdateQue implements Queueable, Database.A
         system.debug('Response Status: '+res);
         system.debug('Response StatusCode: '+res.getStatusCode()); 
         String responseBody = res.getBody();
-        
+        Map<String, object> resquestData = (map<String, Object>)json.deserializeUntyped(wrapperList);
+       
+
         // Handle the response
         if (res.getStatusCode() == 200) {
             // Successful callout    
-            system.debug('responseBody'+responseBody);
-            // Process the response body here
-            
+            Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
+            system.debug('responseBody'+responseBody);            
             //API Integration Log Generation on success
-            API_Integration_Log__c ail = new API_Integration_Log__c();
-            ail.JSON_Body__c= wrapperList;
-            ail.Endpoint__c = endpoint;
-            ail.Status__c = 'Success';
-            ail.Request_Type__c = 'POST';
-            ail.Response_Body__c = responseBody;
-            ail.Name__c = ObjOpperation;
-            ail.Object__c = ObjectName;
+            Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(resquestData),endpoint,'POST',ObjOpperation,ObjectName,JSON.serializePretty(responseData));
             
-            try{
-                insert ail;
-            } catch(exception ex){ 
-                system.debug('Error : '+ex.getMessage());
-            } 
-        } 
-        else {
-            // Error handling
+           
+        } else {
             System.debug('Callout error: ' + res.getStatusCode() + ' ' + res.getStatus());
-            
+            String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
+
             //API Integration Log Generation on Failure
-            API_Integration_Log__c ail = new API_Integration_Log__c();
-            ail.JSON_Body__c= wrapperList;
-            ail.Endpoint__c = endpoint;
-            ail.Status__c = 'Failed';
-            ail.Request_Type__c = 'POST';
-            ail.Response_Body__c = responseBody;
-            ail.Name__c = ObjOpperation;
-            ail.Object__c = ObjectName;
-            
-            try{
-                insert ail;
-            } catch(exception ex){
-                system.debug('Error : '+ex.getMessage());
-            }
+            Exception_Handler.createAilRecordonFail(JSON.serializePretty(resquestData),endpoint,'POST',ObjOpperation,ObjectName,responseBody,callOutError);
+
         } 
     }
 }

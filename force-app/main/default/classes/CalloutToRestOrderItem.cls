@@ -14,9 +14,9 @@ Test Class              : CalloutToRestOrderItemTest
 CreateDate              : 26 Sept 2023
 LastModifiedDate        : 14 March 2024
 ******************************************************************************************************************************************************/
-
 public class CalloutToRestOrderItem {
-       
+    
+        
     // Method for making callouts to insert sales orders
     //@future (callout=true)
     // Parameters:
@@ -56,14 +56,12 @@ public class CalloutToRestOrderItem {
         // Handle the response
         if (res.getStatusCode() == 200) {
             // Successful callout
-            //API Integration Log Generation on success 
-             Map<String, Object> resdata = (Map<String, Object>) JSON.deserializeUntyped(responseBody);   
-             Map<String, Object> reqsdata = (Map<String, Object>) JSON.deserializeUntyped(wrapperList);       
-            Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(reqsdata), endpoint, 'POST', ObjOpperation, ObjectName,JSON.serializePretty(resdata));
+            //API Integration Log Generation on success           
+            Exception_Handler.createAilRecordonSuccess(wrapperList, endpoint, 'POST', ObjOpperation, ObjectName, responseBody);
             
             system.debug('responseBody'+responseBody);
             // Process the response body here
-          
+            Map<String, Object> resdata = (Map<String, Object>) JSON.deserializeUntyped(responseBody);
             Integer order_number = (Integer)resdata.get('Order Number');
             //String order_status = (string)resdata.get('status');
             system.debug('order_number: '+order_number);
@@ -83,11 +81,9 @@ public class CalloutToRestOrderItem {
             
             // Error handling            
             //API Integration Log Generation on Fail
-           // Map<String, Object> resdata = (Map<String, Object>) JSON.deserializeUntyped(responseBody);  
-            Map<String, Object> resqdata = (Map<String, Object>) JSON.deserializeUntyped(wrapperList); 
             String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
             System.debug('Callout error: ' + res.getStatusCode() + '\n ' + res.getStatus());
-            Exception_Handler.createAilRecordonFail(JSON.serializePretty(resqdata), endpoint, 'POST', ObjOpperation, ObjectName, responseBody, callOutError);
+            Exception_Handler.createAilRecordonFail(wrapperList, endpoint, 'POST', ObjOpperation, ObjectName, responseBody, callOutError);
         }
     }
     

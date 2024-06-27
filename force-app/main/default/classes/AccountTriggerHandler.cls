@@ -58,6 +58,7 @@ public class AccountTriggerHandler {
                     CalloutToRestInsertUpdateAccount.makeCalloutInsert(jsonSt, 'Account', 'Account Insert');
                 }
             }
+            // handle logic here, such as validation or field manipulation
         }        
     }
 
@@ -101,8 +102,10 @@ public class AccountTriggerHandler {
                 //------------------------------Address Split Logic Ends here--------------------------------------//
                 populateWrapper(acc, wrapperObj);
                 
-                    //Old Version of Account Record.
+                // map other fields as needed
+                // add the wrapper object to the list
                     Account accOld = oldRecMap.get(acc.id); 
+                   //Old Version of Account Record.
                 
                 if ( acc.Id == accOld.Id && acc.Name == accOld.Name && acc.Primary_Division__c == accOld.Primary_Division__c && acc.BillingStreet == accOld.BillingStreet && acc.BillingCity == accOld.BillingCity && acc.BillingState == accOld.BillingState && acc.BillingCountry == accOld.BillingCountry && acc.BillingPostalCode == accOld.BillingPostalCode && acc.Phone == accOld.Phone && acc.ShippingStreet == accOld.ShippingStreet && acc.ShippingCity == accOld.ShippingCity && acc.ShippingState == accOld.ShippingState && acc.ShippingCountry == accOld.ShippingCountry && acc.ShippingPostalCode == accOld.ShippingPostalCode && acc.Region__c == accOld.Region__c && acc.Primary_POC_Email__c == accOld.Primary_POC_Email__c && acc.Payment_Terms2__c == accOld.Payment_Terms2__c && acc.Customer_Distribution_Channel__c == accOld.Customer_Distribution_Channel__c && acc.Credit_Limit__c == accOld.Credit_Limit__c && acc.Adjustment_Schedule__c == accOld.Adjustment_Schedule__c && acc.Customer_Price_Group__c == accOld.Customer_Price_Group__c && acc.JDE_Guest_Account__c == accOld.JDE_Guest_Account__c)
                 {
@@ -169,13 +172,7 @@ public class AccountTriggerHandler {
         //}      
         
     }  
-     /**
-     *  Method to split adress and add it in a wrapper 
-     * 
-     * @param Address Addresss to split and populate in wrapperObj
-     * @param wrapperObj WrabberObj to populate address values in wrapper
-     * @param type states Addres is which type Is it Billling or Shipping
-     */
+    //Method to split adress and add it in a wrapper 
     public static void splitAddress(String address, AccountWrapper wrapperObj, String type) {
         List<String> splitStrings = new List<String>();
         Integer maxLength = 30;  // Maximum length of each split substring 
@@ -189,12 +186,7 @@ public class AccountTriggerHandler {
         
         wrapperObj.setAddressFields(type, splitStrings);
     }
-    /**
-     *  Method to populate wrapper 
-     * 
-     * @param acc Account info to to set it populate it into wrpper
-     * @param wrapperObj WrabberObj to populate address values in wrapper
-     */
+    // Method to populate wrapper
     public static void populateWrapper(Account acc, AccountWrapper wrapperObj) {
         wrapperObj.Alpha_Name = acc.Name;
         wrapperObj.Business_Unit = acc.Primary_Division__c;
@@ -221,11 +213,7 @@ public class AccountTriggerHandler {
         wrapperObj.Customer_Price_Group = acc.Customer_Price_Group__c;
         wrapperObj.Address_Number = acc.JDE_Address_Number__c;
     }
-    /**
-     * Method to update RecordType // BeforeInsert 
-     * 
-     * @param newList List of newly inserted Account records
-     */
+    //Method to update RecordType // BeforeInsert
     public static void changeRecordType(List<Account> newList){
         if(!newList.isEmpty()){
             //Id profileId = UserInfo.getProfileId();
@@ -237,18 +225,6 @@ public class AccountTriggerHandler {
             string Pump_Customer = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('Pump Customer').getRecordTypeId();
             if(!newList.isEmpty()){
                 for(Account acc : newList){
-                    if(acc.Region__c == '*Blanks'){
-                        acc.Region__c = null;
-                    }
-                    if(acc.Customer_Distribution_Channel__c == '*Blanks'){
-                        acc.Customer_Distribution_Channel__c = null;
-                    }
-                    if(acc.Customer_Price_Group__c == '*Blanks'){
-                        acc.Customer_Price_Group__c = null;
-                    }
-                    if(acc.Adjustment_Schedule__c == '*Blanks'){
-                        acc.Adjustment_Schedule__c = null;
-                    }
                     if(acc.Primary_Division__c == 'Equipment' || acc.Primary_Division__c == '' ){
                         acc.RecordTypeId = Equipment_Customer;
                     }else if(acc.Primary_Division__c == 'Defense'){
@@ -260,13 +236,8 @@ public class AccountTriggerHandler {
             }
         }
     } 
-      /** 
-     * method to update JDE address Number based on JDE guest Account value. //Before Insert and Before Update. Method to handle after update trigger event for Account records.
-     * 
-     * @param newList List of newly updated Account records
-     * @param oldRecMap Map of old Account records
-     */
- 
+    
+    //method to update JDE address Number based on JDE guest Account value. //Before Insert and Before Update.
     public static void updateJdeAddNum(List<Account> newList, Map<id,Account> accOldMap){
         if(!newList.isEmpty()){
             for(account acc : newList){

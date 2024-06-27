@@ -20,28 +20,32 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
                 AccountId = ord.AccountId;
                 accRecordTypeId = ord.Account.RecordTypeId;
                 System.debug('accRecordTypeId:= '+accRecordTypeId);
-                }
-            
             }
+            
+        }
         
         
-		List<Account> acc = [SELECT Id, Name, RecordTypeId From Account WHERE Id =:AccountId ];
+        List<Account> acc = [SELECT Id, Name, RecordTypeId From Account WHERE Id =:AccountId ];
         //List<CustomerCardPayment__c> CCdetail = [Select Id, Contact__c, Contact__r.Name, Card_Type__c, Card_Last_Four__c  from CustomerCardPayment__c where id=: creCardId];
         SalesOrderWrapper.creditCardDetail wrapperObj = new SalesOrderWrapper.creditCardDetail();
         if(!newList.isEmpty() && !acc.isEmpty()){
             for(order ord : newList){    
+                system.debug('ord --->'+ord);
                 if(ord.B2BGrandTotal__c !=null && ord.JDE_Order_Number__c != null && ord.B2BCreditCardName__c != null){
                     wrapperObj.orderNumber = string.valueOf(ord.JDE_Order_Number__c);
                     wrapperObj.SFAmount = string.valueOf(ord.B2BGrandTotal__c);
                     wrapperObj.SFCCNumber = ord.B2BCreditCardName__c.right(4);
                     wrapperObj.SFCustomerName = acc[0].Name;
                     wrapperObj.SFCardName = ord.B2BCreditCardName__c.substringBefore(' ');
-                    wrapperObj.SFAuthCode = '';
+                    //System.debug('Auth Code'+ord.B2B_CreditCard_AuthCode__c);
+                    //System.debug('Exp Date'+ord.B2B_CreditCard_ExpDate__c);
+                    wrapperObj.SFAuthCode = ord.B2B_CreditCard_AuthCode__c;
+                    wrapperObj.SFCCExpDate = ord.B2B_CreditCard_ExpDate__c;
                     wrapperObj.SFAuthID = ord.Payment_Transaction_Id__c;
                 }
             }
         }
-        
+        system.debug('JSON String:= '+JSON.serialize(wrapperObj));
         // convert the wrapper objects to a JSON string
         String jsonStr = JSON.serialize(wrapperObj).replace('_', ' ');
         String jsonSt = jsonStr.replace('null', '""');
@@ -81,53 +85,22 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
         system.debug('Response Status: '+res);
         system.debug('Response StatusCode: '+res.getStatusCode()); 
         String responseBody = res.getBody();
-        
-        // Handle the response
+        Map<String, object> resquestData = (map<String, Object>)json.deserializeUntyped(wrapperList);
+      
         if (res.getStatusCode() == 200) {
-            // Successful callout
-            
             system.debug('responseBody'+responseBody);
-            // Process the response body here
-            
-            
+            Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
+
             //API Integration Log Generation on success
-            API_Integration_Log__c ail = new API_Integration_Log__c();
-            ail.JSON_Body__c= wrapperList;
-            ail.Endpoint__c = endpoint;
-            ail.Status__c = 'Success';
-            ail.Request_Type__c = 'POST';
-            ail.Response_Body__c = responseBody;
-            ail.Name__c = ObjOpperation;
-            ail.Object__c = ObjectName;
-            
-            try{
-                insert ail;
-            } catch(exception ex){ 
-                system.debug('Error : '+ex.getMessage());
-            }
-            
-            
-        }
-        else {
+            Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(resquestData),endpoint,'POST',ObjOpperation,ObjectName,JSON.serializePretty(responseData));
+        } else {
             // Error handling
             System.debug('Callout error: ' + res.getStatusCode() + ' ' + res.getStatus());
+            String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
             
             //API Integration Log Generation on Failure
-            API_Integration_Log__c ail = new API_Integration_Log__c();
-            ail.JSON_Body__c= wrapperList;
-            ail.Endpoint__c = endpoint;
-            ail.Status__c = 'Failed';
-            ail.Request_Type__c = 'POST';
-            ail.Response_Body__c = responseBody;
-            ail.Name__c = ObjOpperation;
-            ail.Object__c = ObjectName;
+            Exception_Handler.createAilRecordonFail(JSON.serializePretty(resquestData),endpoint,'POST',ObjOpperation,ObjectName,responseBody,callOutError);
             
-            try{
-                insert ail;
-            } catch(exception ex){
-                system.debug('Error : '+ex.getMessage());
-            }
-            //}
         }
     }
     

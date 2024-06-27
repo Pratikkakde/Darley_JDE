@@ -29,21 +29,12 @@ public class calloutOrderStatus {
         system.debug('res2'+res.getStatusCode()); 
         
         String responseBody = res.getBody();
-        Map<String, object> reqBody = (map<String, Object>)json.deserializeUntyped(requestBody);
-
         
         // Handle the response
         if (res.getStatusCode() == 200) {
             // Successful callout
             
             system.debug('responseBody'+responseBody);
-            Map<String, object> respBody = (map<String, Object>)json.deserializeUntyped(responseBody);
-            Map<String,Object> columns = (map<String,Object>)((map<String,Object>)((map<String,Object>)((map<String,Object>)((Map<String,Object>)(map<String,Object>)respBody.get('ServiceRequest1')).get('fs_DATABROWSE_F4211')).get('data')).get('gridData')).get('columns');
-            system.debug('columns ---> '+columns);
-            String inv_Date = (String)columns.get('F4211_IVD');
-            String Can_Date = (String)columns.get('F4211_CNDJ');
-            String Ship_Date = (String)columns.get('F4211_ADDJ');
-            
             // Process the response body here
             
             //Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
@@ -53,16 +44,16 @@ public class calloutOrderStatus {
             List<Order> updateOrderList = new List<order>();
             if(!OrderData.isEmpty()){
                 for(order Od : OrderData){
-                    if (responseBody.contains('Open')) {
+                    if(responseBody.contains('Open')){
                         Od.StoreStatus__c = 'Open';
                         updateOrderList.add(Od);
-                    } else if (!responseBody.contains('Open') && responseBody.contains('Cancelled')) {
+                    }else if(!responseBody.contains('Open') && responseBody.contains('Cancelled')){
                         Od.StoreStatus__c = 'Cancelled';
                         updateOrderList.add(Od);
-                    } else if (!responseBody.contains('Open') && responseBody.contains('Cancelled') && responseBody.contains('Shipped') ) {
+                    }else if(!responseBody.contains('Open') && responseBody.contains('Cancelled') && responseBody.contains('Shipped') ){
                         Od.StoreStatus__c = 'Shipped';
                         updateOrderList.add(Od);
-                    } else if (responseBody.contains('Shipped') && !responseBody.contains('Cancelled') && !responseBody.contains('Open')) {
+                    }else if(responseBody.contains('Shipped') && !responseBody.contains('Cancelled') && !responseBody.contains('Open')){
                         Od.StoreStatus__c = 'Shipped';
                         updateOrderList.add(Od);
                     }
@@ -76,20 +67,44 @@ public class calloutOrderStatus {
                     system.debug('Error: '+ex.getMessage());
                 }
             }
-            Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
-
-            //API Integration Log Generation on success           
-            Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(reqBody),endpoint,'GET','Order Data Retrieve from JDE','Order',JSON.serializePretty(responseData));
-
-        } else {
+            
+            //API Integration Log Generation on success
+            API_Integration_Log__c ail = new API_Integration_Log__c();
+            ail.JSON_Body__c= requestBody;
+            ail.Endpoint__c = endpoint;
+            ail.Status__c = 'Success';
+            ail.Request_Type__c = 'GET';
+            ail.Response_Body__c = responseBody;
+            ail.Name__c = 'Order data Retrieve from JDE';
+            ail.Object__c = 'Order';
+            
+            try{
+                insert ail;
+            } catch(exception ex){    
+                system.debug('Error : '+ex.getMessage());
+            }
+        } 
+        else {
             // Error handling
             System.debug('Callout error: ' + res.getStatusCode() + ' ' + res.getStatus());
             System.debug('Callout body: ' + res.getBody() );
-            String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
-                
+            
             //API Integration Log Generation on success
-            Exception_Handler.createAilRecordonFail(JSON.serializePretty(reqBody),endpoint,'GET','Order Data Retrieve from JDE','Order',responseBody,callOutError);
-
+            API_Integration_Log__c ail = new API_Integration_Log__c();
+            ail.JSON_Body__c= requestBody;
+            ail.Endpoint__c = endpoint;
+            ail.Status__c = 'Failed';
+            ail.Request_Type__c = 'GET';
+            ail.Response_Body__c = responseBody;
+            ail.Name__c = 'Order data Retrieve from JDE';
+            ail.Object__c = 'Order';
+            
+            try{
+                insert ail;
+            } catch(exception ex){
+                system.debug('Error : '+ex.getMessage());
+                
+            }
         }
     }   
     
