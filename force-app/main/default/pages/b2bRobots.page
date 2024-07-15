@@ -1,6 +1,6 @@
 <apex:page contentType="text/plain">
     User-agent: *
-    Disallow: /# disallow indexing of all pages
+    Allow: /
     Disallow: /login/
     Disallow: /SelfRegister/
     Disallow: /CheckPasswordResetEmail/
@@ -18,8 +18,5 @@
     Disallow: /quote-detail/
     Disallow: /quick-order/
     Disallow: /favorite-list/
-    #Allow: /shop/
-    #Allow: /contact-us/
-    #Allow: /global-search/
-    Sitemap: https://darley.my.site.com/shop/sitemap.xml
+    Sitemap: https://shop.darley.com/sitemap.xml
 </apex:page>

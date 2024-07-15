@@ -146,8 +146,8 @@ public without sharing class B2BCheckoutPlaceOrder {
             ShippingState = webCart.B2BCheckoutShippingAddress__r.State,
             ShippingPostalCode = webCart.B2BCheckoutShippingAddress__r.PostalCode,
             ShippingCountry = webCart.B2BCheckoutShippingAddress__r.Country,
-            B2B_CreditCard_ExpDate__c = creditCard.expirationDate,
-            B2B_CreditCard_AuthCode__c = creditCard.authCode
+            B2B_CreditCard_ExpDate__c = creditCard == null ? '' :creditCard.expirationDate,
+            B2B_CreditCard_AuthCode__c = creditCard == null ? '' :creditCard.authCode
         );
         update order;
 

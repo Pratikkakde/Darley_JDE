@@ -1,0 +1,436 @@
+<!--
+@description       : 
+@author            : ChangeMeIn@UserSettingsUnder.SFDoc
+@group             : 
+@last modified on  : 08-04-2023
+@last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+	<template if:true={showcmp}>
+		<!-- xlat Table Button -->
+
+		<div class="button-container">
+			<div class="spaceDiv">
+				<lightning-button variant="brand" label="Xlat Table" title="Primary action" onclick={handleXlat}
+					class="slds-m-left_meduim"></lightning-button>
+			</div>
+			<br>
+			<!-- Email(WildCard) -->
+			<div class="spaceDiv">
+				<lightning-button variant="brand" label="Email" title="Primary action" onclick={handleEmail}
+					class="slds-m-left_meduim"></lightning-button>
+			</div>
+			<br>
+			<!-- Part Number -->
+			<div class="spaceDiv">
+
+				<lightning-button variant="brand" label="Part Number" title="Primary action" onclick={handlePartNumber}
+					class="slds-m-left_meduim"></lightning-button>
+			</div>
+
+			<!-- google button -->
+			<div class="spaceDiv">
+				<lightning-button variant="brand" label="Google" title="Primary action" onclick={handleGoogle}
+					class="slds-m-left_meduim"></lightning-button>
+			</div>
+
+
+			<!-- Lead button -->
+			<div class="spaceDiv">
+				<lightning-button variant="brand" label="lead" title="Primary action" onclick={handleLead}
+					class="slds-m-left_meduim"></lightning-button>
+			</div>
+
+		</div>
+
+		<br />
+		<template if:true={showXlatInput}>
+			<div>
+				<lightning-input onchange={handleKeyChange} label="Xlat-Table" name="enter-search" type="search"
+					value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
+			</div>
+			<br>
+		</template>
+
+
+		<!-- manufacturer part number -->
+		<template if:true={showPartNumberInput}>
+			<div>
+				<lightning-input onchange={handlePartNumbersearch} label="Manufacturer Part Number" name="enter-search"
+					type="search" value={ParentName}
+					style="color:grey; width: 300px; font-weight : bold"></lightning-input>
+			</div>
+
+
+		</template>
+
+		<!-- Email -->
+		<template if:true={showEmailInput}>
+			<div>
+				<lightning-input onchange={handleEmailSearch} label="Email" name="enter-search" type="search"
+					value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
+			</div>
+			<br>
+		</template>
+
+		<!-- lead -->
+		<template if:true={showLeadInput}>
+			<div>
+				<lightning-input onchange={handleLeadSearch} label="Lead" name="enter-search" type="search"
+					value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
+			</div>
+			<br>
+		</template>
+
+
+
+		<!-- datatable of xlat obj -->
+
+		<br>
+		<template if:true={xlatRecord}>
+			<div style="margin-bottom: 20px;">
+				<lightning-button if:true={showUpdateButton} variant="brand" label="Update Record"
+					onclick={selectXlat}></lightning-button>
+			</div>
+			<!-- <lightning-card variant="Narrow" class="cardstyle"> -->
+			<template if:true={ParentNameList.length}>
+				<div style="border: 1px solid rgb(229, 229, 229);">
+					<div class="slds-table--header-fixed_container " style="height:300px;">
+						<div class="slds-scrollable" style="height:100%;">
+
+							<table class=" slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-scrollable">
+								<!-- Header start here -->
+
+								<thead>
+									<tr class="slds-line-height_reset" style="height:35px;">
+										<template if:true={showCheckbox}>
+
+										</template>
+										<th class="slds-cell-wrap" scope="col" style="width: 60px;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-left_x-small"
+												title="Parent">Parent
+											</div>
+										</th>
+										<th class="slds-cell-wrap" scope="col" style="width: 60px;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-left_x-small"
+												title="Child">
+												Child
+											</div>
+										</th>
+										<!-- <template if:true={xlatRecord.Account__r}> -->
+											<th class="slds-cell-wrap" scope="col" style="width: 60px;">
+												<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-left_x-small"
+													title="Related Account">
+													Related Account
+												</div>
+											</th>
+										<!-- </template> -->
+										<!-- <template if:true={xlatRecord.Lead__r}> -->
+
+											<th class="slds-cell-wrap" scope="col" style="width: 60px;">
+												<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-left_x-small"
+													title="Related Lead">
+													Related Lead
+												</div>
+											</th>
+										<!-- </template> -->
+
+									</tr>
+								</thead>
+								<!-- Body of the Vehicle Table start here -->
+								<tbody>
+									<template for:each={ParentNameList} for:item="xlatRecord">
+										<tr class="slds-hint-parent" key={xlatRecord.Id}>
+
+											<template if:true={showCheckbox}>
+												<td data-label="Parent" class="slds-cell-wrap">
+													<!-- <lightning-input
+												type="checkbox" value={xlatRecord.Id} name={xlatRecord.Id}
+												data-check={xlatRecord.Id} data-key="singleSelectColumnCheckbox"
+												onchange={handleSingleCheckboxSelect}>
+											</lightning-input> -->
+													<lightning-input type="checkbox" value={xlatRecord.Id}
+														data-id1={xlatRecord.Name} data-id={xlatRecord.Id}
+														data-key="singleSelectColumnCheckbox"
+														onchange={handleSingleCheckboxSelect}>
+													</lightning-input>
+
+
+												</td>
+											</template>
+
+											<td data-label="Parent" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="Parent">
+													{xlatRecord.Name}
+												</div>
+											</td>
+											<td data-label="child" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="child">
+													{xlatRecord.Child__c}
+												</div>
+											</td>
+												<td data-label="child" class="slds-cell-wrap">
+													<div class="slds-line-clamp" title="child">
+														<template if:true={xlatRecord.Account__r}>
+
+														{xlatRecord.Account__r.Name}
+													</template>
+
+													</div>
+												</td>
+												<td data-label="child" class="slds-cell-wrap">
+													<div class="slds-line-clamp" title="child">
+														<template if:true={xlatRecord.Lead__r}>
+{xlatRecord.Lead__r.Name}
+</template>
+</div>
+												</td>
+
+										</tr>
+									</template>
+								</tbody>
+								
+							</table>
+
+
+
+
+
+						</div>
+					</div>
+
+					<!-- </lightning-card> -->
+				</div>
+			</template>
+
+			<template if:false={ParentNameList.length}>
+				<div class="noRecords">
+					No Records of XLAT have been found.
+				</div>
+			</template>
+		</template>
+		<br>
+
+		<!-- Manufacturer Part Number -->
+
+
+		<template if:true={bidRecord}>
+			<template if:true={partNumberList.length}>
+				<lightning-card variant="Narrow">
+					<div class="slds-table--header-fixed_container " style="height:300px;">
+						<div class="slds-scrollable" style="height:100%;">
+							<table class=" slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered
+							slds-table--header-fixed">
+								<!-- Header start here -->
+								<thead>
+									<tr class="slds-line-height_reset">
+
+										<th class="slds-cell-wrap" scope="col" style="width: 40%;">
+											<div class="slds-line-clamp slds-cell-fixed "
+												title="Manufacturer Part Number">
+												Supplier Name
+											</div>
+										</th>
+										<th class="slds-cell-wrap" scope="col" style="width: 50%;">
+											<div class="slds-line-clamp slds-cell-fixed" title="Supplier Name">
+												Manufacturer
+												Part Number
+
+											</div>
+										</th>
+
+									</tr>
+								</thead>
+								<!--Body of the bid Table start here -->
+								<tbody>
+									<template for:each={partNumberList} for:item="bidRecord" for:index="index">
+										<tr class="slds-hint-parent" key={bidRecord.Id}>
+
+											<td data-label="Manufacturer Part Number" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="Manufacturer Part Number">
+													{bidRecord.Supplier_Name_Text__c}
+												</div>
+											</td>
+											<td data-label="Supplier Name" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="child">
+													{bidRecord.Supplier_Part_Number__c}
+
+												</div>
+											</td>
+										</tr>
+									</template>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</lightning-card>
+
+			</template>
+
+			<template if:false={partNumberList.length}>
+				<div class="noRecords">
+					No Records of Part Number have been found.
+				</div>
+			</template>
+
+		</template>
+
+
+		<br>
+
+		<!-- lead filter -->
+
+
+		<template if:true={leadRecord}>
+			<div style="margin-bottom: 20px;">
+				<lightning-button if:true={showLeadUpdateButton} variant="brand" label="Update Record Lead"
+					onclick={selectLead}></lightning-button>
+			</div>
+			<template if:true={leadList.length}>
+				<div style="border: 1px solid rgb(229, 229, 229);">
+					<div class="slds-table--header-fixed_container " style="height:300px; ">
+						<div class="slds-scrollable" style="height:100%;">
+							<table class=" slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered
+						slds-table--header-fixed" style=" table-layout: fixed">
+								<!-- Header start here -->
+								<thead>
+									<tr class="slds-line-height_reset">
+										<template if:true={showLeadCheckbox}>
+
+											<th class="slds-cell-wrap" scope="col" style="width: 10%;">
+
+
+											</th>
+										</template>
+
+
+
+										<th class="slds-cell-wrap" scope="col" style="width: 50%;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-right_xx-small "
+												title="Email"> Lead Name
+											</div>
+										</th>
+										<th class="slds-cell-wrap" scope="col" style="width: 50%;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-left_x-small"
+												title="Supplier Name">
+												Lead Account
+											</div>
+										</th>
+
+									</tr>
+								</thead>
+								<!--Body of the bid Table start here -->
+								<tbody>
+									<template for:each={leadList} for:item="leadRecord" for:index="index">
+										<tr class="slds-hint-parent" key={leadRecord.Id}>
+
+											<template if:true={showLeadCheckbox}>
+												<td data-label="Lead" class="slds-cell-wrap">
+													<!-- <lightning-input type="checkbox" value={xlatRecord.Id} name={xlatRecord.Id}
+												data-check={xlatRecord.Id} data-key="singleSelectColumnCheckbox"
+												onchange={handleSingleCheckboxSelect}>
+											</lightning-input> -->
+													<lightning-input type="checkbox" value={leadRecord.Id}
+														data-id={leadRecord.Id} data-id1={leadRecord.Name}
+														name={leadRecord.Id} data-key="singleLeadSelectColumnCheckbox"
+														onchange={handleLeadCheckboxSelect}>
+													</lightning-input>
+
+
+												</td>
+											</template>
+
+
+
+											<td data-label="Manufacturer Part Number" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="Manufacturer Part Number">
+													{leadRecord.Name}
+												</div>
+											</td>
+											<td data-label="Supplier Name" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="child">
+													{leadRecord.Company}
+
+												</div>
+											</td>
+										</tr>
+									</template>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</template>
+
+			<template if:false={leadList.length}>
+				<div class="noRecords" style="margin-bottom:50px; margin-top:-20px;">
+					No records of Lead have been found.
+				</div>
+			</template>
+		</template>
+
+		<!-- Email filter -->
+
+
+		<template if:true={emailRecord}>
+			<template if:true={emailList.length}>
+				<div style="border: 1px solid rgb(229, 229, 229);">
+					<div class="slds-table--header-fixed_container " style="height:300px; ">
+						<div class="slds-scrollable" style="height:100%;">
+							<table class=" slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered
+						slds-table--header-fixed" style=" table-layout: fixed">
+								<!-- Header start here -->
+								<thead>
+									<tr class="slds-line-height_reset">
+
+										<th class="slds-cell-wrap" scope="col" style="width: 40%;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-right_xx-small "
+												title="Email"> Supplier Name
+											</div>
+										</th>
+										<th class="slds-cell-wrap" scope="col" style="width: 60%;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-left_x-small"
+												title="Supplier Name">
+												Email
+											</div>
+										</th>
+
+									</tr>
+								</thead>
+								<!--Body of the bid Table start here -->
+								<tbody>
+									<template for:each={emailList} for:item="bidRecord" for:index="index">
+										<tr class="slds-hint-parent" key={bidRecord.Id}>
+
+											<td data-label="Manufacturer Part Number" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="Manufacturer Part Number">
+													{bidRecord.Name}
+												</div>
+											</td>
+											<td data-label="Supplier Name" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="child">
+													{bidRecord.Email_Address__c}
+
+												</div>
+											</td>
+										</tr>
+									</template>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</template>
+
+			<template if:false={emailList.length}>
+				<div class="noRecords" style="margin-bottom:50px; margin-top:-20px;">
+					No records of Email have been found.
+				</div>
+			</template>
+		</template>
+
+
+
+	</template>
+</template>

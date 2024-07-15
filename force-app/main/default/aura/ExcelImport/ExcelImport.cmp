@@ -1,0 +1,38 @@
+<aura:component controller="ExcelImportController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" description="Component to import .xlsx files in Lightning">
+
+ 
+<ltng:require scripts="{!$Resource.ExcelReaderPlugin}"/>
+<aura:registerEvent name="onImport" type="c:ExcelImportEvent"/>
+<aura:attribute name="content" type="String" />
+<aura:attribute name="file" type="Object" />
+<aura:attribute name="recordTypeMap" type="Map" default="" />
+<aura:attribute name="label" type="String" description="Label for input" default="Import Excel File" required="false"/>
+<aura:attribute name="class" type="String" description="Additional styles" required="false"/>
+<aura:attribute name="variant" type="String" description="Input variant" required="false" default="standard"/>
+<aura:attribute name="required" type="Boolean" description="Shows if input is mandatory" default="false"/>
+<aura:attribute name="disabled" type="Boolean" description="Displays input disabled" default="false"/>
+<aura:attribute name="accept" type="String" default=".xls,.xlsx"/>
+
+<aura:attribute name="stretchedDropzone" type="Boolean" description="Makes dropzone stretchable" default="false"/>
+<aura:attribute name="isLoading" type="Boolean" default="false" access="private"/>
+
+<aura:attribute name="fileSizeThreshold" type="Integer" description="Max file size in bytes, default 10mb" default="10000000" required="false"/>
+<aura:attribute name="messageFileSizeExceeded" type="String" default="File size exceeded" required="false"/>
+<aura:attribute name="messageNoFileSpecified" type="String" default="No file specified" required="false"/>
+
+    <lightning:card  title="Upload Excel File">
+       <p class="slds-p-around_medium">
+        <lightning:input type="file"
+                         label="{!v.label}"
+                         class="{!v.class
+                                + (v.stretchedDropzone ? ' bigger-drop-zone' : '')
+                                + (v.isLoading ? ' drop-zone-loading' : '')}"
+                         variant="{!v.variant}"
+                         required="{!v.required}"
+                         disabled="{!v.disabled}"
+                         onchange="{!c.onTableImport}"
+                         multiple="false"
+                         accept="{!v.accept}"/>
+           </p> 
+    </lightning:card>
+</aura:component>

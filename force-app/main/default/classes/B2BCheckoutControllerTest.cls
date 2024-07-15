@@ -545,7 +545,7 @@ private without sharing class B2BCheckoutControllerTest {
             B2BCheckoutController.calculateShipping(webCart.Id);
             Test.stopTest();
 
-            List<CartItem> cartItems = [SELECT Id FROM CartItem WHERE CartId =: webCart.Id AND Name = 'Delivery Cart Item' ];
+            List<CartItem> cartItems = [SELECT Id FROM CartItem WHERE CartId =: webCart.Id AND Name = 'Shipping Charges' ];
             System.assertEquals(1, cartItems.size(),'One charge item must be created.');
         }
     }

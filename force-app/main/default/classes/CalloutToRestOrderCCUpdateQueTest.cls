@@ -52,8 +52,10 @@ public class CalloutToRestOrderCCUpdateQueTest {
         od.Pricebook2Id= pricebookList[0].id;
         od.BillingStreet ='123 park evenue';
         od.shippingstreet= '123 Grand Evenue';
-        od.Payment_Transaction_Id__c = 'AB1786JKHSDF';
+        //od.Payment_Transaction_Id__c = 'AB1786JKHSDF';
         od.B2BCreditCardName__c = 'Visa ending in 1111';
+        od.B2B_CreditCard_ExpDate__c = '25-5';
+        od.B2B_CreditCard_AuthCode__c = '1234';
         
         insert od;
         
@@ -73,7 +75,7 @@ public class CalloutToRestOrderCCUpdateQueTest {
         insert oi;
         
         
-        List<order> odList = [SELECT Id, JDE_Order_Number__c, B2BGrandTotal__c,B2BCreditCardId__c, B2BCreditCardName__c, Account.RecordTypeId, Account.Name, Payment_Transaction_Id__c FROM Order];
+        List<order> odList = [SELECT Id, JDE_Order_Number__c, B2BGrandTotal__c,B2B_CreditCard_ExpDate__c, B2B_CreditCard_AuthCode__c, B2BCreditCardId__c, B2BCreditCardName__c, Account.RecordTypeId, Account.Name, Payment_Transaction_Id__c FROM Order];
         
         
         // Create a mock response for successful callout
@@ -145,8 +147,10 @@ public class CalloutToRestOrderCCUpdateQueTest {
         od.Pricebook2Id= pricebookList[0].id;
         od.BillingStreet ='123 park evenue';
         od.shippingstreet= '123 Grand Evenue';
-        od.B2BCreditCardId__c = ccp.id;
+        //od.B2BCreditCardId__c = ccp.id;
         od.B2BCreditCardName__c = 'Visa ending in 1111';
+        od.B2B_CreditCard_ExpDate__c = '25-5';
+		od.B2B_CreditCard_AuthCode__c = '1234';
         
         insert od;
         
@@ -168,7 +172,7 @@ public class CalloutToRestOrderCCUpdateQueTest {
         insert oi;
         
         
-        List<order> odList = [SELECT Id, JDE_Order_Number__c, B2BGrandTotal__c,B2BCreditCardId__c, B2BCreditCardName__c, Account.RecordTypeId, Account.Name, Payment_Transaction_Id__c FROM Order];
+        List<order> odList = [SELECT Id, JDE_Order_Number__c, B2BGrandTotal__c,B2BCreditCardId__c, B2B_CreditCard_ExpDate__c, B2B_CreditCard_AuthCode__c,B2BCreditCardName__c, Account.RecordTypeId, Account.Name, Payment_Transaction_Id__c FROM Order];
         system.debug('Account RecordTypeId: '+odList[0].Account.RecordTypeId);
         List<CustomerCardPayment__c> CCdetail = [Select Id, Contact__c, Contact__r.Name, Card_Type__c, Card_Last_Four__c  from CustomerCardPayment__c where id =: ccp.Id];
         

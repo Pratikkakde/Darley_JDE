@@ -1,0 +1,81 @@
+.button-container{
+    display: flex;
+  /* justify-content: space-between; */
+}
+.spaceDiv{
+  padding-left : 20px;
+}
+
+
+/* .slds-table {
+  width: 100%;
+  table-layout: fixed;
+}
+.slds-cell-wrap {
+  width: 50%;
+  /* box-sizing: border-box; */
+
+  /* Add some padding to the table cells */
+.slds-table_cell-buffer td {
+  padding: 8px;
+}
+
+/* Set background color for the table header */
+.slds-table--header-fixed_container thead {
+  /* background-color: #4CAF50; Green color for the header */
+  color: #FFFFFF; /* White text color for the header */
+}
+
+/* Style the table header cells */
+.slds-table--header-fixed_container th {
+  font-weight: bold;
+}
+
+/* Add a border around the table */
+.slds-table {
+  border-collapse: collapse;
+  border: 2px solid #FFFFFF;; /* Green border around the table */
+}
+
+/* Style the buttons */
+.lightning-button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  /* background-color: #4CAF50; Green color for the buttons */
+  color: #FFFFFF; /* White text color for the buttons */
+  border-radius: 5px;
+  padding: 8px 15px;
+  transition: background-color 0.3s ease; /* Add smooth transition on hover */
+}
+
+/* Hover effect on buttons */
+.lightning-button:hover {
+  /* background-color: #45a049; Darker green color on hover */
+  cursor: pointer;
+}
+
+/* Alternate row background color for better readability */
+.slds-table--header-fixed_container tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray background for even rows */
+}
+
+/* Animation for table rows */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.slds-table--header-fixed_container tbody tr {
+  animation: fadeIn 0.5s ease; /* Fade-in animation for each row */
+}
+
+.noRecords{
+ 
+  text-align: center;
+  margin: 10px;
+  font-weight: 700;
+}

@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta
             name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1" />
+            content="width=device-width, initial-scale=1" />
         <meta
             name="lwr-revised"
             content="236.0" />
@@ -21,10 +21,12 @@
             }
         </style>
         
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">!function(){const e={documentCreateElement:Document.prototype.createElement,elementSetAttribute:Element.prototype.setAttribute,elementAttachShadow:Element.prototype.attachShadow,elementAppendChild:Element.prototype.appendChild,htmlelementAddEventListener:Element.prototype.addEventListener,iframeContentDocumentGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentDocument").get,iframeContentWindowGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentWindow").get};Object.freeze(e),Object.defineProperty(window,"originalDomApis",{writable:!1,value:e});const t=window.frames;Object.defineProperty(window,"frames",{get:function(){const e=[];for(let n=0;n<t.length;n++)try{t[n].frameElement.getRootNode().nodeType===Node.DOCUMENT_FRAGMENT_NODE||e.push(t[n])}catch(o){e.push(t[n])}return e.length===t.length?t:e}})}();</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">!function(){"use strict";window.isBrowserSupportedByWebruntime=function(){const n="performance"in window&&"mark"in window.performance,e="customElements"in window;return n&&e}()}();
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">!function(){const e={documentCreateElement:Document.prototype.createElement,elementSetAttribute:Element.prototype.setAttribute,elementAttachShadow:Element.prototype.attachShadow,elementAppendChild:Element.prototype.appendChild,htmlelementAddEventListener:Element.prototype.addEventListener,iframeContentDocumentGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentDocument").get,iframeContentWindowGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentWindow").get};Object.freeze(e),Object.defineProperty(window,"originalDomApis",{writable:!1,value:e});const t=window.frames;Object.defineProperty(window,"frames",{get:function(){const e=[];for(let n=0;n<t.length;n++)try{t[n].frameElement.getRootNode().nodeType===Node.DOCUMENT_FRAGMENT_NODE||e.push(t[n])}catch(o){e.push(t[n])}return e.length===t.length?t:e}})}();</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">!function(){"use strict";window.isBrowserSupportedByWebruntime=function(){const n="performance"in window&&"mark"in window.performance,e="customElements"in window;return n&&e}()}();
 </script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">globalThis.LWR = globalThis.LWR || {};
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">globalThis.lwcRuntimeFlags = globalThis.lwcRuntimeFlags || {};
+globalThis.lwcRuntimeFlags.DISABLE_NATIVE_CUSTOM_ELEMENT_LIFECYCLE = true;
+globalThis.LWR = globalThis.LWR || {};
 globalThis.LWR.customInit = (lwr) => {
 
         LWR.define('@app/apexApiBasePath', [], function() { return "webruntime/api"; });
@@ -36,7 +38,7 @@ globalThis.LWR.customInit = (lwr) => {
         LWR.define('@app/isPreviewMode', [], function() { return false; });
         LWR.define('@app/routes', [], function() { return [{"label":"Service Not Available","isPublic":true,"viewId":"7c5e79ab-1083-42ea-8b2b-bd1726947025","hasVanityURL":false,"patternMap":{},"id":"ecf64f0b-0507-442c-a2da-3454dcb34e42","path":"/maintenance.html","view":"serviceNotAvailable","isRoot":true,"isDefault":true,"page":{"type":"comm__namedPage","attributes":{"name":"Service_Not_Available"}}}]; });
         LWR.define('@app/uiBasePath', [], function() { return ""; });
-        LWR.define('@app/versionKey', [], function() { return "0DB4U0000004Ev9:9"; });
+        LWR.define('@app/versionKey', [], function() { return "0DB4U0000004Ev9:8"; });
         LWR.define('@app/viewToThemeLayoutMap', [], function() { return {"serviceNotAvailable":"snaThemeLayout"}; });
         LWR.define('@salesforce/i18n/lang', [], function() { return "en_US"; });
         LWR.define('@salesforce/site/Id', [], function() { return "0DM4U0000008X97WAE"; });
@@ -45,21 +47,21 @@ LWR.define('@salesforce/user/Id', ['@app/user'], function(m) { return (m && type
 LWR.define('@salesforce/user/isGuest', ['@app/user'], function(m) { return (m && typeof m === 'object' && 'default' in m ? m.default : m)['isGuest'] });
 lwr.initializeApp();
 globalThis.process = { env: { NODE_ENV: "dev" } };};</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">globalThis.LWR = globalThis.LWR || {};
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">globalThis.LWR = globalThis.LWR || {};
 Object.assign(globalThis.LWR, {
-  "bootstrapModule": "@lwrjs/app-service/communities_app/module/amd/v/0_11_15",
+  "bootstrapModule": "@lwrjs/app-service/communities_app/module/amd/v/0_12_3",
   "autoBoot": false,
   "rootComponents": [
     "webruntime/app/v/1"
   ],
   "requiredModules": [
-    "lwc/v/5_0_10",
-    "@lwrjs/app-service/communities_app/module/amd/v/0_11_15"
+    "lwc/v/6_4_5",
+    "@lwrjs/app-service/communities_app/module/amd/v/0_12_3"
   ],
   "importMappings": {
     "default": "webruntime/component/latest/prod/en_US/",
     "imports": {
-      "/webruntime/component/latest/prod/en_US/lwc": "webruntime/framework/3d8282afab/prod/lwr_lwc",
+      "/webruntime/component/latest/prod/en_US/lwc": "webruntime/framework/9ba80e8cfc/prod/lwr_lwc",
       "@app/csrfToken": "webruntime/module/@app/csrfToken",
       "@app/loginPath": "webruntime/module/@app/loginPath",
       "@app/user": "webruntime/module/@app/user",
@@ -71,104 +73,131 @@ Object.assign(globalThis.LWR, {
       "@salesforce/user/isGuest": "webruntime/module/@salesforce/user/isGuest",
       "@salesforce/userPermission/": "webruntime/perm/",
       "@udd/": "webruntime/module/@udd/",
-      "@view/serviceNotAvailable": "webruntime/view/dfd0093828eacd5b0bb5cc650dae47d5/prod/en_US/serviceNotAvailable_view",
-      "@view/snaThemeLayout": "webruntime/view/53ab460191aa87d9c6274fb0f43ab1c8/prod/en_US/snaThemeLayout_view",
-      "mobileruntime/hybridAppManager": "webruntime/framework/a05a9dfaec/prod/lwr_mobile",
-      "o11y/collectors": "webruntime/component/ccd028bc4886422b46ea4137c960983d/prod/en_US/o11y/collectors_cmp",
-      "o11y/simple_collector": "webruntime/component/d4b210b75ecb11f2c53e69aaaaf9c61f/prod/en_US/o11y/simple_collector_cmp"
+      "@view/serviceNotAvailable": "webruntime/view/1e3b976b585edf5f6fd649829639835c/prod/en_US/serviceNotAvailable_view",
+      "@view/snaThemeLayout": "webruntime/view/ad70bbb1dea9940b6193ab9c2384969f/prod/en_US/snaThemeLayout_view",
+      "mobileruntime/hybridAppManager": "webruntime/framework/eb7a41a312/prod/lwr_mobile",
+      "o11y/collectors": "webruntime/component/46f97ca8bea46afec53088ea76710058/prod/en_US/o11y/collectors_cmp",
+      "o11y/simple_collector": "webruntime/component/d137ddb37201de9745d64c8fd795a6ca/prod/en_US/o11y/simple_collector_cmp"
     }
   }
 });</script>
-        <script src="webruntime/framework/4437cc0a76/prod/lwr_loader"></script>
-        <script src="webruntime/framework/832fba0eb8/prod/lwr_bootstrap"></script>
-        <script src="webruntime/framework/1d650695d2/prod/lwr_app_bootstrap_hook"></script>
-        <script src="webruntime/framework/3d8282afab/prod/lwr_lwc"></script>
-        <script src="webruntime/framework/2ead63e8e3/prod/lwr_app"></script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('lwc', ['lwc/v/5_0_10'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">
+        <script src="webruntime/framework/0b9f2b1a68/prod/lwr_loader"></script>
+        <script src="webruntime/framework/9a14c95f9c/prod/lwr_bootstrap"></script>
+        <script src="webruntime/framework/63c7580b38/prod/lwr_app_bootstrap_hook"></script>
+        <script src="webruntime/framework/9ba80e8cfc/prod/lwr_lwc"></script>
+        <script src="webruntime/framework/317eb89f0f/prod/lwr_app"></script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('lwc', ['lwc/v/6_4_5'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">
         LWR.define('@app/authenticationCookieName', [], function() { return "__Secure-has-sid"; });
         LWR.define('@app/extraRouteParams', [], function() { return {}; });
         LWR.define('@app/isMobileAppMode', [], function() { return false; });
         LWR.define('@app/user', [], function() { return {"isGuest":true,"id":null,"csrfToken":null}; });
         LWR.define('@salesforce/user/Id', [], function() { return null; });
         LWR.define('@salesforce/user/isGuest', [], function() { return true; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/apexApiBasePath/v/1', ['@app/apexApiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/apiBasePath/v/1', ['@app/apiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/authenticationCookieName/v/1', ['@app/authenticationCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/basePath/v/1', ['@app/basePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/csrfToken/v/1', ['@app/csrfToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/deployTarget/v/1', ['@app/deployTarget'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/extraRouteParams/v/1', ['@app/extraRouteParams'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/guestUuidCookieName/v/1', ['@app/guestUuidCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/isDesignMode/v/1', ['@app/isDesignMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/isMobileAppMode/v/1', ['@app/isMobileAppMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/isPreviewMode/v/1', ['@app/isPreviewMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/o11yApiEndpoint/v/1', ['@app/o11yApiEndpoint'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/o11yConfiguration/v/1', ['@app/o11yConfiguration'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/o11yFalconEnabled/v/1', ['@app/o11yFalconEnabled'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/o11yGuestToken/v/1', ['@app/o11yGuestToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/o11ySamplingRate/v/1', ['@app/o11ySamplingRate'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/routes/v/1', ['@app/routes'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/uiBasePath/v/1', ['@app/uiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/user/v/1', ['@app/user'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/versionKey/v/1', ['@app/versionKey'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@app/viewToThemeLayoutMap/v/1', ['@app/viewToThemeLayoutMap'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@salesforce/i18n/lang/v/1', ['@salesforce/i18n/lang'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('@salesforce/site/Id/v/1', ['@salesforce/site/Id'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script type="text/javascript" nonce="e4def1a0-4b6c-47cb-8859-aad7b54bf5ff">LWR.define('webruntime/dispatcher/v/1', ['webruntime/dispatcher'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
-        <script src="webruntime/view/dfd0093828eacd5b0bb5cc650dae47d5/prod/en_US/serviceNotAvailable_view"></script>
-        <script src="webruntime/view/53ab460191aa87d9c6274fb0f43ab1c8/prod/en_US/snaThemeLayout_view"></script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/apexApiBasePath/v/1', ['@app/apexApiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/apiBasePath/v/1', ['@app/apiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/authenticationCookieName/v/1', ['@app/authenticationCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/basePath/v/1', ['@app/basePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/csrfToken/v/1', ['@app/csrfToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/deployTarget/v/1', ['@app/deployTarget'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/extraRouteParams/v/1', ['@app/extraRouteParams'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/guestUuidCookieName/v/1', ['@app/guestUuidCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/isDesignMode/v/1', ['@app/isDesignMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/isMobileAppMode/v/1', ['@app/isMobileAppMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/isPreviewMode/v/1', ['@app/isPreviewMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/o11yApiEndpoint/v/1', ['@app/o11yApiEndpoint'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/o11yConfiguration/v/1', ['@app/o11yConfiguration'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/o11yFalconEnabled/v/1', ['@app/o11yFalconEnabled'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/o11yGuestToken/v/1', ['@app/o11yGuestToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/o11ySamplingRate/v/1', ['@app/o11ySamplingRate'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/routes/v/1', ['@app/routes'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/uiBasePath/v/1', ['@app/uiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/user/v/1', ['@app/user'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/versionKey/v/1', ['@app/versionKey'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@app/viewToThemeLayoutMap/v/1', ['@app/viewToThemeLayoutMap'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@salesforce/i18n/lang/v/1', ['@salesforce/i18n/lang'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('@salesforce/site/Id/v/1', ['@salesforce/site/Id'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="5a0a0be3-45e5-4b53-87f8-7ab5a6ed456c">LWR.define('webruntime/dispatcher/v/1', ['webruntime/dispatcher'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script src="webruntime/view/1e3b976b585edf5f6fd649829639835c/prod/en_US/serviceNotAvailable_view"></script>
+        <script src="webruntime/view/ad70bbb1dea9940b6193ab9c2384969f/prod/en_US/snaThemeLayout_view"></script>
         <link rel="icon" href="sfsites/c/cms/delivery/media/MCT25JVUDP5RC2DJGZYW2ZV2PGBI?width=32&height=32">
         <link rel="apple-touch-icon" href="sfsites/c/cms/delivery/media/MCT25JVUDP5RC2DJGZYW2ZV2PGBI?width=180&height=180">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900"><style type="text/css" id="webruntime-branding">:root{--dxp-g-success:#58bb62;--dxp-g-brand:rgb(237, 27, 45);--dxp-s-text-heading-medium-letter-spacing:0em;--dxp-s-text-heading-small-text-decoration:none;--dxp-s-dropdown-text-color:rgb(35, 31, 32);--dxp-s-text-heading-extra-large-line-height:1.4;--dxp-s-button-large-font-size:1rem;--dxp-g-warning-contrast-3:#fff;--dxp-s-button-small-radius-border:0px;--dxp-s-body-font-size:0.875rem;--dxp-s-dropdown-color-background:var(--dxp-g-root);--dxp-s-body-small-text-decoration:none;--dxp-s-text-heading-large-line-height:1.4;--dxp-g-neutral-contrast-3:#fff;--dxp-s-button-color-hover:rgb(218, 41, 28);--dxp-s-text-heading-medium-text-transform:none;--dxp-g-neutral-contrast-2:#000;--dxp-g-neutral-contrast-1:#000;--dxp-s-button-font-size:0.875rem;--dxp-s-button-letter-spacing:0em;--dxp-s-button-color-focus-contrast:#fff;--dxp-g-warning-contrast-2:#fff;--dxp-g-warning-contrast-1:#000;--dxp-s-link-text-color-1:rgba(8, 8, 8, 0.9);--dxp-g-info:#0070d2;--dxp-g-root:rgb(255, 255, 255);--dxp-g-root-contrast-1:rgb(8, 8, 8);--dxp-g-root-contrast:#1c1c1c;--dxp-g-root-contrast-2:rgb(0, 0, 0);--dxp-g-root-contrast-3:rgb(0, 0, 0);--dxp-s-header-content-max-width:1440px;--dxp-s-section-columns-max-width:1440px;--dxp-s-button-text-transform:none;--dxp-s-body-line-height:1.2;--dxp-s-body-text-decoration:none;--dxp-s-section-content-spacing-inline-end-mobile:0.75rem;--dxp-s-body-text-transform:none;--dxp-s-text-heading-medium-font-style:normal;--dxp-g-warning-2:rgb(145, 111, 15);--dxp-g-warning-3:rgb(34, 26, 3);--dxp-s-form-element-color-border:rgb(221, 219, 218);--dxp-g-warning-1:rgb(219, 167, 22);--dxp-s-header-content-max-width-mobile:none;--dxp-s-text-heading-large-letter-spacing:0em;--dxp-s-body-font-style:normal;--dxp-s-body-letter-spacing:0em;--dxp-g-warning-contrast:#000;--dxp-s-body-small-font-style:normal;--dxp-s-text-heading-small-font-style:normal;--dxp-s-text-heading-medium-line-height:1.4;--dxp-s-column-spacer-size:2.5rem;--dxp-s-text-heading-extra-large-letter-spacing:0em;--dxp-s-text-heading-large-text-transform:none;--dxp-s-text-heading-large-font-size:2.25rem;--dxp-s-text-heading-small-color:var(--dxp-g-root-contrast);--dxp-s-section-content-spacing-block-start:1.875rem;--dxp-s-html-font-size-mobile:1rem;--dxp-s-section-content-spacing-inline-end:2.5rem;--dxp-s-body-small-font-weight:400;--dxp-s-button-font-family:"Poppins";--dxp-s-form-element-color-background:rgb(255, 255, 255);--dxp-g-offline-3:rgb(0, 0, 0);--dxp-g-offline-2:rgb(7, 7, 7);--dxp-g-offline-1:rgb(48, 48, 48);--dxp-s-button-font-weight:600;--dxp-s-body-font-weight:400;--dxp-s-body-small-line-height:1.2;--dxp-g-offline:#444444;--dxp-s-button-small-font-size:0.75rem;--dxp-s-text-heading-extra-large-text-decoration:none;--dxp-s-button-radius-border:0px;--dxp-g-success-contrast:#000;--dxp-s-text-heading-small-font-size:1.125rem;--dxp-s-button-font-style:normal;--dxp-s-body-small-text-transform:none;--dxp-g-brand-contrast-1:rgb(255, 255, 255);--dxp-s-component-wrapper-spacer-size-mobile:1rem;--dxp-s-text-heading-small-line-height:1.4;--dxp-s-section-content-spacing-block-end:1.875rem;--dxp-g-brand-contrast-3:rgb(255, 255, 255);--dxp-s-button-color-hover-contrast:#fff;--dxp-g-brand-contrast-2:rgb(255, 255, 255);--dxp-g-brand-1:rgb(207, 16, 33);--dxp-g-brand-2:rgb(131, 10, 21);--dxp-g-warning:#eab930;--dxp-g-success-3:rgb(9, 21, 10);--dxp-g-brand-3:rgb(18, 1, 3);--dxp-g-success-2:rgb(44, 108, 51);--dxp-g-success-1:rgb(68, 166, 78);--dxp-s-link-text-color-hover:rgb(218, 41, 28);--dxp-s-text-heading-small-font-family:"Poppins";--dxp-s-column-spacer-size-mobile:0.75rem;--dxp-g-offline-contrast-3:#fff;--dxp-s-text-heading-large-font-style:normal;--dxp-g-offline-contrast-2:#fff;--dxp-g-info-contrast-3:#fff;--dxp-s-body-small-font-size:0.75rem;--dxp-g-destructive-1:rgb(162, 48, 43);--dxp-s-button-color-active:rgb(218, 41, 28);--dxp-s-text-heading-small-text-transform:none;--dxp-g-offline-contrast-1:#fff;--dxp-s-section-content-spacing-inline-start-mobile:0.75rem;--dxp-s-section-content-spacing-block-end-mobile:1rem;--dxp-g-info-contrast:#fff;--dxp-s-html-font-size:1rem;--dxp-s-body-font-family:"Poppins";--dxp-s-link-text-color:rgba(28, 28, 28, 0.9);--dxp-s-link-text-decoration-focus:underline;--dxp-g-destructive-2:rgb(97, 29, 26);--dxp-g-neutral:#ecebea;--dxp-g-destructive-3:rgb(1, 0, 0);--dxp-g-info-contrast-1:#fff;--dxp-s-dropdown-text-color-hover:rgb(35, 31, 32);--dxp-g-info-contrast-2:#fff;--dxp-s-text-heading-extra-large-font-family:"Poppins";--dxp-s-form-element-label-color:rgb(35, 31, 32);--dxp-s-text-heading-large-font-family:"Poppins";--dxp-s-text-heading-extra-large-font-weight:700;--dxp-s-text-heading-medium-text-decoration:none;--dxp-s-text-heading-extra-large-font-style:normal;--dxp-s-button-large-padding:1.25rem;--dxp-s-text-heading-small-font-weight:700;--dxp-s-text-heading-large-font-weight:700;--dxp-g-info-2:rgb(0, 47, 88);--dxp-s-form-element-text-color:rgb(35, 31, 32);--dxp-g-info-3:rgb(0, 0, 0);--dxp-g-destructive-contrast:#fff;--dxp-s-text-heading-medium-font-weight:700;--dxp-g-info-1:rgb(0, 90, 169);--dxp-g-destructive-contrast-1:#fff;--dxp-g-neutral-contrast:#000;--dxp-s-dropdown-color-background-hover:rgb(221, 219, 218);--dxp-g-destructive-contrast-2:#fff;--dxp-g-root-1:rgb(235, 235, 235);--dxp-g-destructive-contrast-3:#fff;--dxp-g-root-2:rgb(194, 194, 194);--dxp-s-section-content-spacing-inline-start:2.5rem;--dxp-g-root-3:rgb(133, 133, 133);--dxp-s-button-color-1:rgb(207, 16, 33);--dxp-s-body-text-color:var(--dxp-g-root-contrast);--dxp-s-footer-content-max-width-mobile:none;--dxp-g-brand-contrast:rgb(255, 255, 255);--dxp-s-button-color:var(--dxp-g-brand);--dxp-s-form-element-width-border:1px;--dxp-g-neutral-3:rgb(118, 113, 107);--dxp-s-body-small-text-color:var(--dxp-g-root-contrast);--dxp-g-neutral-2:rgb(178, 174, 170);--dxp-s-text-heading-extra-large-color:var(--dxp-g-root-contrast);--dxp-g-neutral-1:rgb(217, 215, 213);--dxp-s-button-color-active-contrast:#fff;--dxp-g-success-contrast-3:#fff;--dxp-g-success-contrast-2:#fff;--dxp-s-button-line-height:2.1;--dxp-s-site-logo-url:url(sfsites/c/cms/delivery/media/MCOFYHHNLHVJCW7F7BV5MR7DB5LQ);--dxp-s-text-heading-extra-large-font-size:2.625rem;--dxp-s-button-large-radius-border:0px;--dxp-g-success-contrast-1:#000;--dxp-s-form-element-radius-border:0px;--dxp-s-component-wrapper-spacer-size:2.5rem;--dxp-s-link-text-decoration:none;--dxp-s-text-heading-medium-font-size:1.5rem;--dxp-g-destructive:#c23934;--dxp-s-dropdown-color-border:rgb(221, 219, 218);--dxp-s-button-color-contrast:#000;--dxp-s-section-columns-max-width-mobile:none;--dxp-g-offline-contrast:#fff;--dxp-s-text-heading-medium-color:var(--dxp-g-root-contrast);--dxp-s-button-small-padding:1rem;--dxp-s-text-heading-large-color:var(--dxp-g-root-contrast);--dxp-s-text-heading-large-text-decoration:none;--dxp-s-link-text-decoration-hover:underline;--dxp-s-button-color-focus:rgb(218, 41, 28);--dxp-s-button-padding:1rem;--dxp-s-text-heading-medium-font-family:"Poppins";--dxp-s-site-logo-path:sfsites/c/cms/delivery/media/MCOFYHHNLHVJCW7F7BV5MR7DB5LQ;--dxp-s-footer-content-max-width:1440px;--dxp-s-body-small-font-family:"Poppins";--dxp-s-text-heading-small-letter-spacing:0em;--dxp-s-body-small-letter-spacing:0em;--dxp-s-section-content-spacing-block-start-mobile:1rem;--dxp-s-text-heading-extra-large-text-transform:none;}</style> <!-- General -->
-<!-- <link rel="shortcut icon" href="assets/favicon.ico?0DB4U0000004Ev9:9" /> Remove standart favicon -->
-<link rel="stylesheet" href="assets/css/font-awesome.css?0DB4U0000004Ev9:9" />
-<link rel="stylesheet" href="assets/css/theme.css?0DB4U0000004Ev9:9" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900"><style type="text/css" id="webruntime-branding">:root{--dxp-g-brand:rgb(237, 27, 45);--dxp-s-text-heading-medium-letter-spacing:0em;--dxp-s-form-element-text-font-family:"Salesforce Sans";--dxp-s-form-element-spacing-horizontal-start:12px;--dxp-s-text-heading-small-text-decoration:none;--dxp-s-dropdown-text-color:rgb(35, 31, 32);--dxp-s-form-element-caption-text-font-family:"Salesforce Sans";--dxp-s-form-element-spacing-block-start:0px;--dxp-g-neutral-contrast-3:#fff;--dxp-s-text-heading-medium-text-transform:none;--dxp-g-neutral-contrast-2:#000;--dxp-g-neutral-contrast-1:#000;--dxp-s-button-color-focus-contrast:#fff;--dxp-s-link-text-color-1:rgba(8, 8, 8, 0.9);--dxp-s-form-element-label-font-style:normal;--dxp-g-info:#0070d2;--dxp-g-root:rgb(255, 255, 255);--dxp-s-form-element-caption-text-font-weight:400;--dxp-s-body-line-height:1.2;--dxp-s-button-large-padding-block-end:0rem;--dxp-s-body-text-decoration:none;--dxp-s-section-content-spacing-inline-end-mobile:0.75rem;--dxp-s-form-element-text-font-weight:400;--dxp-s-text-heading-medium-font-style:normal;--dxp-s-form-checkbox-color-background-checked:var(--dxp-s-form-checkbox-color-background);--dxp-g-warning-2:rgb(145, 111, 15);--dxp-g-warning-3:rgb(34, 26, 3);--dxp-s-form-element-color-border:rgb(221, 219, 218);--dxp-g-warning-1:rgb(219, 167, 22);--dxp-s-header-content-max-width-mobile:none;--dxp-s-text-heading-large-letter-spacing:0em;--dxp-s-button-padding-inline-end:1rem;--dxp-s-body-font-style:normal;--dxp-g-warning-contrast:#000;--dxp-s-form-element-text-text-transform:none;--dxp-s-button-large-padding-inline-start:1.25rem;--dxp-s-text-heading-medium-line-height:1.4;--dxp-s-column-spacer-size:2.5rem;--dxp-s-text-heading-large-text-transform:none;--dxp-s-text-heading-extra-large-letter-spacing:0em;--dxp-s-text-heading-large-font-size:2.25rem;--dxp-s-form-element-text-font-style:normal;--dxp-s-button-font-family:"Poppins";--dxp-s-form-element-placeholder-text-color:var(--dxp-g-neutral-3);--dxp-s-form-element-color-background:rgb(255, 255, 255);--dxp-s-button-padding-block-start:0rem;--dxp-s-button-font-weight:600;--dxp-s-body-font-weight:400;--dxp-s-body-small-line-height:1.2;--dxp-g-offline:#444444;--dxp-s-button-small-font-size:0.75rem;--dxp-s-button-radius-border:0px;--dxp-s-button-small-padding-block-end:0rem;--dxp-s-component-wrapper-spacer-size-mobile:1rem;--dxp-s-form-element-label-font-size:1rem;--dxp-s-text-heading-small-line-height:1.4;--dxp-s-section-content-spacing-block-end:1.875rem;--dxp-g-success-3:rgb(9, 21, 10);--dxp-g-warning:#eab930;--dxp-g-success-2:rgb(44, 108, 51);--dxp-g-success-1:rgb(68, 166, 78);--dxp-s-button-small-padding-inline-end:1rem;--dxp-s-column-spacer-size-mobile:0.75rem;--dxp-s-text-heading-small-font-family:"Poppins";--dxp-s-text-heading-large-font-style:normal;--dxp-g-info-contrast-3:#fff;--dxp-s-form-checkbox-color-border-checked:var(--dxp-s-form-checkbox-color-border);--dxp-s-button-color-active:rgb(218, 41, 28);--dxp-s-section-content-spacing-inline-start-mobile:0.75rem;--dxp-s-section-content-spacing-block-end-mobile:1rem;--dxp-s-html-font-size:1rem;--dxp-s-body-font-family:"Poppins";--dxp-s-link-text-decoration-focus:underline;--dxp-g-info-contrast-1:#fff;--dxp-s-dropdown-text-color-hover:rgb(35, 31, 32);--dxp-g-info-contrast-2:#fff;--dxp-s-text-heading-extra-large-font-family:"Poppins";--dxp-s-text-heading-medium-text-decoration:none;--dxp-s-form-element-label-line-height:1.5;--dxp-s-text-heading-small-font-weight:700;--dxp-s-text-heading-large-font-weight:700;--dxp-s-form-element-text-color:rgb(35, 31, 32);--dxp-g-destructive-contrast:#fff;--dxp-s-form-checkbox-radius-border:0px;--dxp-g-destructive-contrast-1:#fff;--dxp-g-destructive-contrast-2:#fff;--dxp-g-root-1:rgb(235, 235, 235);--dxp-g-destructive-contrast-3:#fff;--dxp-g-root-2:rgb(194, 194, 194);--dxp-s-section-content-spacing-inline-start:2.5rem;--dxp-g-root-3:rgb(133, 133, 133);--dxp-s-button-color-1:rgb(207, 16, 33);--dxp-s-form-element-color-background-active:var(--dxp-s-form-element-color-background);--dxp-s-body-text-color:var(--dxp-g-root-contrast);--dxp-s-footer-content-max-width-mobile:none;--dxp-g-brand-contrast:rgb(255, 255, 255);--dxp-s-form-element-width-border:1px;--dxp-s-body-small-text-color:var(--dxp-g-root-contrast);--dxp-s-form-checkbox-width-border:1px;--dxp-s-button-color-active-contrast:#fff;--dxp-s-button-line-height:2.1;--dxp-s-button-small-padding-inline-start:1rem;--dxp-s-site-logo-url:url(sfsites/c/cms/delivery/media/MCOFYHHNLHVJCW7F7BV5MR7DB5LQ);--dxp-s-form-element-color-border-focus:var(--dxp-g-brand);--dxp-s-button-large-radius-border:0px;--dxp-s-form-element-radius-border:0px;--dxp-s-form-element-text-color-focus:var(--dxp-s-form-element-text-color);--dxp-g-destructive:#c23934;--dxp-s-dropdown-color-border:rgb(221, 219, 218);--dxp-g-offline-contrast:#fff;--dxp-s-text-heading-large-color:var(--dxp-g-root-contrast);--dxp-s-button-large-padding-block-start:0rem;--dxp-s-link-text-decoration-hover:underline;--dxp-s-button-color-focus:rgb(218, 41, 28);--dxp-s-form-element-text-line-height:1.5;--dxp-s-form-element-caption-text-line-height:1.5;--dxp-s-site-logo-path:sfsites/c/cms/delivery/media/MCOFYHHNLHVJCW7F7BV5MR7DB5LQ;--dxp-s-body-small-font-family:"Poppins";--dxp-s-body-small-letter-spacing:0em;--dxp-s-text-heading-extra-large-text-transform:none;--dxp-s-form-element-label-text-transform:none;--dxp-g-success:#58bb62;--dxp-s-form-checkbox-color-background:var(--dxp-s-form-element-color-background);--dxp-s-form-element-label-letter-spacing:0;--dxp-s-form-element-label-font-weight:400;--dxp-s-text-heading-extra-large-line-height:1.4;--dxp-g-warning-contrast-3:#fff;--dxp-s-button-large-font-size:1rem;--dxp-s-button-small-radius-border:0px;--dxp-s-body-font-size:0.875rem;--dxp-s-dropdown-color-background:var(--dxp-g-root);--dxp-s-body-small-text-decoration:none;--dxp-s-text-heading-large-line-height:1.4;--dxp-s-button-color-hover:rgb(218, 41, 28);--dxp-s-button-font-size:0.875rem;--dxp-s-button-letter-spacing:0em;--dxp-g-warning-contrast-2:#fff;--dxp-g-warning-contrast-1:#000;--dxp-s-button-padding-inline-start:1rem;--dxp-g-root-contrast-1:rgb(8, 8, 8);--dxp-g-root-contrast:#1c1c1c;--dxp-g-root-contrast-2:rgb(0, 0, 0);--dxp-g-root-contrast-3:rgb(0, 0, 0);--dxp-s-header-content-max-width:1440px;--dxp-s-section-columns-max-width:1440px;--dxp-s-form-element-spacing-block-end:0px;--dxp-s-button-text-transform:none;--dxp-s-body-text-transform:none;--dxp-s-form-element-label-font-family:"Salesforce Sans";--dxp-s-form-checkbox-color-border:var(--dxp-s-form-element-color-border);--dxp-s-form-element-caption-text-text-transform:none;--dxp-s-body-letter-spacing:0em;--dxp-s-form-element-caption-text-letter-spacing:0;--dxp-s-body-small-font-style:normal;--dxp-s-text-heading-small-font-style:normal;--dxp-s-text-heading-small-color:var(--dxp-g-root-contrast);--dxp-s-section-content-spacing-block-start:1.875rem;--dxp-s-html-font-size-mobile:1rem;--dxp-s-section-content-spacing-inline-end:2.5rem;--dxp-s-body-small-font-weight:400;--dxp-g-offline-3:rgb(0, 0, 0);--dxp-g-offline-2:rgb(7, 7, 7);--dxp-g-offline-1:rgb(48, 48, 48);--dxp-s-text-heading-extra-large-text-decoration:none;--dxp-g-success-contrast:#000;--dxp-s-text-heading-small-font-size:1.125rem;--dxp-s-button-font-style:normal;--dxp-s-body-small-text-transform:none;--dxp-g-brand-contrast-1:rgb(255, 255, 255);--dxp-g-brand-contrast-3:rgb(255, 255, 255);--dxp-s-button-color-hover-contrast:#fff;--dxp-g-brand-contrast-2:rgb(255, 255, 255);--dxp-g-brand-1:rgb(207, 16, 33);--dxp-g-brand-2:rgb(131, 10, 21);--dxp-g-brand-3:rgb(18, 1, 3);--dxp-s-link-text-color-hover:rgb(218, 41, 28);--dxp-g-offline-contrast-3:#fff;--dxp-g-offline-contrast-2:#fff;--dxp-s-button-small-padding-block-start:0rem;--dxp-s-body-small-font-size:0.75rem;--dxp-g-destructive-1:rgb(162, 48, 43);--dxp-g-offline-contrast-1:#fff;--dxp-s-text-heading-small-text-transform:none;--dxp-g-info-contrast:#fff;--dxp-s-link-text-color:rgba(28, 28, 28, 0.9);--dxp-g-neutral:#ecebea;--dxp-g-destructive-2:rgb(97, 29, 26);--dxp-g-destructive-3:rgb(1, 0, 0);--dxp-s-form-element-label-color:rgb(35, 31, 32);--dxp-s-text-heading-extra-large-font-weight:700;--dxp-s-text-heading-large-font-family:"Poppins";--dxp-s-text-heading-extra-large-font-style:normal;--dxp-s-form-element-text-font-size:1rem;--dxp-s-button-large-padding:1.25rem;--dxp-g-info-2:rgb(0, 47, 88);--dxp-g-info-3:rgb(0, 0, 0);--dxp-s-text-heading-medium-font-weight:700;--dxp-g-info-1:rgb(0, 90, 169);--dxp-g-neutral-contrast:#000;--dxp-s-dropdown-color-background-hover:rgb(221, 219, 218);--dxp-s-button-color:var(--dxp-g-brand);--dxp-g-neutral-3:rgb(118, 113, 107);--dxp-g-neutral-2:rgb(178, 174, 170);--dxp-s-text-heading-extra-large-color:var(--dxp-g-root-contrast);--dxp-g-neutral-1:rgb(217, 215, 213);--dxp-g-success-contrast-3:#fff;--dxp-g-success-contrast-2:#fff;--dxp-s-text-heading-extra-large-font-size:2.625rem;--dxp-s-form-element-caption-text-font-size:0.75rem;--dxp-s-form-element-spacing-horizontal-end:16px;--dxp-g-success-contrast-1:#000;--dxp-s-component-wrapper-spacer-size:2.5rem;--dxp-s-button-large-padding-inline-end:1.25rem;--dxp-s-link-text-decoration:none;--dxp-s-text-heading-medium-font-size:1.5rem;--dxp-s-button-padding-block-end:0rem;--dxp-s-button-color-contrast:#000;--dxp-s-section-columns-max-width-mobile:none;--dxp-s-text-heading-medium-color:var(--dxp-g-root-contrast);--dxp-s-button-small-padding:1rem;--dxp-s-text-heading-large-text-decoration:none;--dxp-s-form-element-caption-text-font-style:normal;--dxp-s-button-padding:1rem;--dxp-s-text-heading-medium-font-family:"Poppins";--dxp-s-footer-content-max-width:1440px;--dxp-s-text-heading-small-letter-spacing:0em;--dxp-s-form-element-text-letter-spacing:0;--dxp-s-section-content-spacing-block-start-mobile:1rem;--dxp-g-brand-h:355;--dxp-g-brand-s:85%;--dxp-g-brand-l:52%;--dxp-g-brand-a:1.0;--dxp-s-dropdown-text-color-h:345;--dxp-s-dropdown-text-color-s:6%;--dxp-s-dropdown-text-color-l:13%;--dxp-s-dropdown-text-color-a:1.0;--dxp-s-button-color-focus-contrast-h:0;--dxp-s-button-color-focus-contrast-s:0%;--dxp-s-button-color-focus-contrast-l:100%;--dxp-s-button-color-focus-contrast-a:1.0;--dxp-g-info-h:208;--dxp-g-info-s:100%;--dxp-g-info-l:41%;--dxp-g-info-a:1.0;--dxp-g-root-h:0;--dxp-g-root-s:0%;--dxp-g-root-l:100%;--dxp-g-root-a:1.0;--dxp-s-form-element-color-border-h:20;--dxp-s-form-element-color-border-s:4%;--dxp-s-form-element-color-border-l:86%;--dxp-s-form-element-color-border-a:1.0;--dxp-g-warning-contrast-h:0;--dxp-g-warning-contrast-s:0%;--dxp-g-warning-contrast-l:0%;--dxp-g-warning-contrast-a:1.0;--dxp-s-form-element-color-background-h:0;--dxp-s-form-element-color-background-s:0%;--dxp-s-form-element-color-background-l:100%;--dxp-s-form-element-color-background-a:1.0;--dxp-g-offline-h:0;--dxp-g-offline-s:0%;--dxp-g-offline-l:27%;--dxp-g-offline-a:1.0;--dxp-g-warning-h:44;--dxp-g-warning-s:82%;--dxp-g-warning-l:55%;--dxp-g-warning-a:1.0;--dxp-s-button-color-active-h:4;--dxp-s-button-color-active-s:77%;--dxp-s-button-color-active-l:48%;--dxp-s-button-color-active-a:1.0;--dxp-s-dropdown-text-color-hover-h:345;--dxp-s-dropdown-text-color-hover-s:6%;--dxp-s-dropdown-text-color-hover-l:13%;--dxp-s-dropdown-text-color-hover-a:1.0;--dxp-s-form-element-text-color-h:345;--dxp-s-form-element-text-color-s:6%;--dxp-s-form-element-text-color-l:13%;--dxp-s-form-element-text-color-a:1.0;--dxp-g-destructive-contrast-h:0;--dxp-g-destructive-contrast-s:0%;--dxp-g-destructive-contrast-l:100%;--dxp-g-destructive-contrast-a:1.0;--dxp-g-brand-contrast-h:0;--dxp-g-brand-contrast-s:0%;--dxp-g-brand-contrast-l:100%;--dxp-g-brand-contrast-a:1.0;--dxp-s-button-color-active-contrast-h:0;--dxp-s-button-color-active-contrast-s:0%;--dxp-s-button-color-active-contrast-l:100%;--dxp-s-button-color-active-contrast-a:1.0;--dxp-g-destructive-h:2;--dxp-g-destructive-s:58%;--dxp-g-destructive-l:48%;--dxp-g-destructive-a:1.0;--dxp-s-dropdown-color-border-h:20;--dxp-s-dropdown-color-border-s:4%;--dxp-s-dropdown-color-border-l:86%;--dxp-s-dropdown-color-border-a:1.0;--dxp-g-offline-contrast-h:0;--dxp-g-offline-contrast-s:0%;--dxp-g-offline-contrast-l:100%;--dxp-g-offline-contrast-a:1.0;--dxp-s-button-color-focus-h:4;--dxp-s-button-color-focus-s:77%;--dxp-s-button-color-focus-l:48%;--dxp-s-button-color-focus-a:1.0;--dxp-g-success-h:126;--dxp-g-success-s:42%;--dxp-g-success-l:54%;--dxp-g-success-a:1.0;--dxp-s-button-color-hover-h:4;--dxp-s-button-color-hover-s:77%;--dxp-s-button-color-hover-l:48%;--dxp-s-button-color-hover-a:1.0;--dxp-g-root-contrast-h:0;--dxp-g-root-contrast-s:0%;--dxp-g-root-contrast-l:11%;--dxp-g-root-contrast-a:1.0;--dxp-g-success-contrast-h:0;--dxp-g-success-contrast-s:0%;--dxp-g-success-contrast-l:0%;--dxp-g-success-contrast-a:1.0;--dxp-s-button-color-hover-contrast-h:0;--dxp-s-button-color-hover-contrast-s:0%;--dxp-s-button-color-hover-contrast-l:100%;--dxp-s-button-color-hover-contrast-a:1.0;--dxp-s-link-text-color-hover-h:4;--dxp-s-link-text-color-hover-s:77%;--dxp-s-link-text-color-hover-l:48%;--dxp-s-link-text-color-hover-a:1.0;--dxp-g-info-contrast-h:0;--dxp-g-info-contrast-s:0%;--dxp-g-info-contrast-l:100%;--dxp-g-info-contrast-a:1.0;--dxp-s-link-text-color-h:0;--dxp-s-link-text-color-s:0%;--dxp-s-link-text-color-l:11%;--dxp-s-link-text-color-a:0.9;--dxp-g-neutral-h:30;--dxp-g-neutral-s:5%;--dxp-g-neutral-l:92%;--dxp-g-neutral-a:1.0;--dxp-s-form-element-label-color-h:345;--dxp-s-form-element-label-color-s:6%;--dxp-s-form-element-label-color-l:13%;--dxp-s-form-element-label-color-a:1.0;--dxp-g-neutral-contrast-h:0;--dxp-g-neutral-contrast-s:0%;--dxp-g-neutral-contrast-l:0%;--dxp-g-neutral-contrast-a:1.0;--dxp-s-dropdown-color-background-hover-h:20;--dxp-s-dropdown-color-background-hover-s:4%;--dxp-s-dropdown-color-background-hover-l:86%;--dxp-s-dropdown-color-background-hover-a:1.0;--dxp-s-button-color-contrast-h:0;--dxp-s-button-color-contrast-s:0%;--dxp-s-button-color-contrast-l:0%;--dxp-s-button-color-contrast-a:1.0;}</style> <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TZJZXH6D');</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "mcnm34ij63");</script>
+<!-- Bing Webmaster Tools Validation -->
+<meta name="msvalidate.01" content="FB817BF920AF039E7F99BBD61C13EAE9" />
+
+<!-- General -->
+<!-- <link rel="shortcut icon" href="assets/favicon.ico?0DB4U0000004Ev9:8" /> Remove standart favicon -->
+<link rel="stylesheet" href="assets/css/font-awesome.css?0DB4U0000004Ev9:8" />
+<link rel="stylesheet" href="assets/css/theme.css?0DB4U0000004Ev9:8" />
 
 <!-- webruntime-branding-shared stylesheets -->
-<link rel="stylesheet" href="assets/styles/salesforce-lightning-design-system.min.css?0DB4U0000004Ev9:9" />
-<link rel="stylesheet" href="assets/styles/dxp-site-spacing-styling-hooks.min.css?0DB4U0000004Ev9:9" />
-<link rel="stylesheet" href="assets/styles/dxp-styling-hooks.min.css?0DB4U0000004Ev9:9" />
-<link rel="stylesheet" href="assets/styles/dxp-slds-extensions.min.css?0DB4U0000004Ev9:9" />
-<link rel="stylesheet" href="assets/themes/alpine.css?0DB4U0000004Ev9:9" />
+<link rel="stylesheet" href="assets/styles/salesforce-lightning-design-system.min.css?0DB4U0000004Ev9:8" />
+<link rel="stylesheet" href="assets/styles/dxp-site-spacing-styling-hooks.min.css?0DB4U0000004Ev9:8" />
+<link rel="stylesheet" href="assets/styles/dxp-styling-hooks.min.css?0DB4U0000004Ev9:8" />
+<link rel="stylesheet" href="assets/styles/dxp-slds-extensions.min.css?0DB4U0000004Ev9:8" />
+<link rel="stylesheet" href="assets/themes/alpine.css?0DB4U0000004Ev9:8" />
 
-<!-- Darley CSS -->
-<link rel="stylesheet" href="sfsites/c/resource/darleyStyling?0DB4U0000004Ev9:9" />
+<!-- Darley CSS File -->
+<link rel="stylesheet" href="sfsites/c/resource/darleyStyling?0DB4U0000004Ev9:8" />
 
 <script type="text/javascript" src="sfsites/c/resource/b2bStyle/js/header.js" defer></script>
 <script type="text/javascript" src=https://www.socialintents.com/api/socialintents.1.3.js#2c9fab35825c7bc40182647e75650910 async="async"></script>
 <style>
-    .max-width-1440 {
-		max-width: 1440px;
-        display: block;
-        width: 100%;
-        margin: 0 auto;
+	.max-width-1440 {
+    	max-width: 1440px;
+    	display: block;
+    	width: 100%;
+    	margin: 0 auto;
 	}
-    .centerContent {
-        text-align: center;
+	.centerContent {
+    	text-align: center;
+	}
+	.properCasing {
+    	text-transform: none !important;
+	}
+	.removeBorder {
+    	border: none !important;	
+    	box-shadow: none !important;
+    	-webkit-box-shadow: none !important;
+	}
+	pimly-pimly-product-asset-carousel {
+    	margin-bottom: none !important;
+	}
+	pimly-pimly-related-products .slds-card, pimly-pimly-product-asset-carousel .slds-card {
+    	border: none !important;
+    	box-shadow: none !important;;
+    	-webkit-box-shadow: none !important;        
+	}
+	div[pimly-pimlyproductassetcarousel_pimlyproductassetcarousel] {
+    	max-width: 600px;
+	}
+	lightning-layout[pimly-pimlyproductassetcarousel_pimlyproductassetcarousel] lightning-layout-item {
+    	height: 100px;
+    	width: 100px;
+	}
+	div[c-b2bfeaturedproducts_b2bfeaturedproducts].dxp-text-heading-xlarge, div[c-b2bfeaturedbrands_b2bfeaturedbrands].dxp-text-heading-xlarge, h1.dxp-text-heading-xlarge {
+    	font-weight: 600 !important;
+	}
+	img[pimly-pimlyproducttile_pimlyproducttile] {
+    	border: none !important;
+	}
+	img[pimlyproductassetcarousel_pimlyproductassetcarousel] {	
+	    max-height: 600px !important;
+	}
+    commerce_search-product-card commerce-action-button button {
+        color: white !important;
+    } 
+    commerce_search-product-card commerce-action-link a {
+        color: white !important;
     }
-    .properCasing {
-        text-transform: none !important;
-    }
-    .removeBorder {
-        border: none !important;
-        box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-    }
-    pimly-pimly-related-products .slds-card, pimly-pimly-product-asset-carousel .slds-card {
-        border: none !important;
-        box-shadow: none !important;;
-        -webkit-box-shadow: none !important;        
-    }
-    div[pimly-pimlyproductassetcarousel_pimlyproductassetcarousel] {
-        max-width: 600px;
-        max-height: 600px;
-    }
-    lightning-layout[pimly-pimlyproductassetcarousel_pimlyproductassetcarousel] lightning-layout-item {
-        height: 100px;
-        width: 100px;
+    button[data-id="amazon-pay"] {
+        display: none !important;
     }
 </style>
     </head>

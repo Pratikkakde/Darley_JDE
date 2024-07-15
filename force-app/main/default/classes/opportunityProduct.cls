@@ -1744,13 +1744,19 @@ public with sharing class opportunityProduct {
         list< RecordType> RecType = [SELECT Id FROM RecordType WHERE SobjectType = 'Quote' and DeveloperName = 'Pump']; 
         list<pricebook2> pumppricebook = [SELECT IsActive ,Description, IsStandard, Id, Name, SystemModstamp FROM Pricebook2 WHERE IsActive=True and Name='Pump Price Book'];   
         Quote qo=new Quote();
+        System.debug('Opportunityid --->'+Opportunityid);
+        System.debug('RecType --->'+RecType[0].Id);
+        System.debug('pumppricebook --->'+pumppricebook[0].Id);
+        System.debug('maincmp --->'+maincmp); 
+        System.debug('quoteDescrip --->'+quoteDescrip);
+        System.debug('totalPrice --->'+totalPrice);
         qo.RecordTypeId=RecType[0].Id;
         qo.Pricebook2Id= pumppricebook[0].Id ;         
         qo.OpportunityId=Opportunityid;
         qo.Name=maincmp;
         qo.Status='Draft';
         qo.Description = quoteDescrip;
-        // qo.Discount_On_Total__c = totalDiscount;
+        //qo.Discount_On_Total__c = totalDiscount;
         qo.Total_Price_w_Total_Discount__c = totalPrice;
         qlist.add(qo);
         

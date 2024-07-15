@@ -13,7 +13,7 @@ private class B2BShippingCalculationTest {
         System.runAs(communityUser) {
              B2BShippingCalculation.calculateShipping(cart.Id);
         }
-        List<CartItem> cartItems = [SELECT Id FROM CartItem WHERE CartId =: cart.Id AND Name = 'Delivery Cart Item' ];
+        List<CartItem> cartItems = [SELECT Id FROM CartItem WHERE CartId =: cart.Id AND Name = 'Shipping Charge' ];
         System.assertEquals(1, cartItems.size(),'One charge item must be created.');
     }
 }

@@ -1,0 +1,352 @@
+<apex:page renderAs="pdf" applyHtmlTag="false" showHeader="false" sidebar="false" cache="true" readOnly="true" controller="RFQpdfCreation" extensions="RFQpdfCreation" >
+    
+    
+    
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+            <style>
+                
+                @page { size: a4 Landscape ;
+                margin-top: 3.5cm;
+                margin-left: 1.2cm;
+                margin-right: 1.2cm;
+                margin-bottom: 1.8cm;
+                
+                
+                @top-center
+                {
+                content: element(header); 
+                height: 40px;
+                margin-bottom:50px;
+                
+                
+                }
+                
+                @bottom-right { font-weight : bold; 
+                border-top: 1px solid black;
+                }
+                
+                @bottom-left { font-weight : bold;border-top: 1px solid black;
+                
+                content: counter(page);
+                counter-increment : page 1;
+                content: "Page | " counter(page) ;
+                }
+                
+                @bottom-center { font-weight : bold;border-top: 1px solid black;
+                content: "You Serve Others. We Serve You. ";
+                }
+                
+                }
+                
+                table { page-break-inside:avoid; }
+                tr    { page-break-inside:avoid; page-break-after:auto; }
+                
+                
+                
+                div.footer {
+                display: block;
+                text align :center;
+                
+                padding: 5px;
+                position: running(footer);
+                border-top: 1px solid black;
+                }
+                div.header {
+                display: block;
+                text-align: center;
+                font-size: 70px;
+                height: 500px; /* Adjust the height value as needed */
+                position: running(header);
+                margin:10px;
+                }
+                
+                div.page{
+                display: block;
+                border-top: 1px solid black;
+                
+                }
+                .custom-underline {
+                color: black; /* Text color */
+                text-decoration: underline red; /* Underline in red */
+                } 
+                
+                .top-section {
+                font-size: 70px;
+                height: 500px; /* Adjust the height value as needed */
+                height: 500px;
+                /* Additional styling properties */
+                }
+                
+                .page-break-before {
+                }
+                
+            </style>
+            
+            <div class="header" style = "text-align: center; margin-top:20px ; margin-bottom: 20px ">
+                <apex:image value="{!$Resource.DarLeyLogo}" width="100" height="100" />
+                
+                
+            </div>
+        </head>
+        <body >         
+            <table width="100%"  class="custom-top-margin" style="text-align: center;" >
+                <!--<tr>
+<td ><apex:image id="theImage" value="{!$Resource.DarLeyLogo}" width="60" height="60" /></td>
+</tr>-->
+                <tr>
+                    <td style="font-size:14px; font-weight: bold; font-family: 'Arial';">Corporate Headquarters </td>
+                </tr> 
+                <tr>
+                    <td style="font-size:10px ;font-weight: bold">325 SPRING LAKE DRIVE  •  Itasca,IL 60143  •  USA   </td>
+                </tr>
+                <tr>
+                    <td style="font-size:10px;font-weight: bold">630-735-3500 • www.darley.com   </td>
+                </tr>
+            </table>
+            <br/>
+            
+            
+            <table width="65%" style = "float: left;" >
+                <tr>
+                    <td style="font-size:15px;  font-weight: bold;">Provide the quote for the each part number below: </td>
+                </tr>
+                <tr>
+                    <td style="font-size:13px">•  Darley Cost(each) </td>
+                    <td style="font-size:13px; padding-right:70px">•  TAA Compliant? (Yes or No)</td>
+                </tr>
+                <tr>
+                    <td style="font-size:13px">•  Mfg Estimated Shipping ($ value)</td>
+                    <td style="font-size:13px;padding-right:70px">•  RFID Required? (Yes or No)</td>
+                </tr>
+                <tr>
+                    <td style="font-size:13px">•  Partial Shipments Allowed?(Yes Or No)</td>
+                    <td style="font-size:13px; padding-right:70px">•  Lead Time (Weeks ARO)</td>
+                </tr>
+                <tr>
+                    <td style="font-size:13px">•  Does Berry Apply? Product contains textiles (Yes or No)</td>
+                    <td style="font-size:13px; padding-right:70px;">•  Required Minimum Order Qty </td>
+                </tr>
+                <tr>
+                    <td style="font-size:13px">•  Berry Amendment Compliant? (Yes or No)</td>
+                    <td style="font-size:13px; padding-right:70px">•  EAR Controlled? (Yes or No) </td>
+                </tr>
+                <tr>
+                    <td style="font-size:13px">•   Country of Origin</td>
+                    <td style="font-size:13px; padding-right:70px">•  ITAR Controlled?(Yes or No) </td>
+                    
+                </tr>
+                <tr>
+                    <td style="font-size:13px">•  Weights and Dimensions (per line)</td>
+                    <td style="font-size:13px; padding-right:70px">•  If Kitting is applicable provide breakdown </td>
+                    
+                </tr>
+                
+            </table>
+            <br/>
+            
+            
+            
+            <table width="35%" style="float: right;">
+                <tr>
+                    <td style="font-size: 13px; font-weight: bold; text-align: right;">RFQ NUMBER:</td>
+                    <td styleClass="custom-underline" style="font-size: 13px; color: red; font-weight: bold; text-align: left;">{!rfqNUmber}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 13px; font-weight: bold; text-align: right;">TODAY'S DATE:</td>
+                    <td style="font-size: 13px; color: red; font-weight: bold; text-align: left;">
+                        {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="font-size: 13px; font-weight: bold; text-align: right;">RESPOND NO LATER THAN:</td>
+                    <td style="font-size: 13px; color: red; font-weight: bold; text-align: left;"> {!beforeDueDateString}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 13px; font-weight: bold; text-align: right;">QUOTE VALIDITY:</td>
+                    <td style="font-size: 13px; color: red; font-weight: bold; text-align: left;">_____________</td>
+                </tr>
+                <tr style="background-color: yellow;">
+                    <td style="font-size: 13px; font-weight: bold; text-align: right;">PAYMENT TERM:</td>
+                    <td style="font-size: 13px; color: red; font-weight: bold; text-align: left;">____________ </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px; font-style: italic;">*Pricing must be valid for at least 60 days</td>
+                </tr>
+            </table>
+            
+            
+            
+            <br/>
+            <br/>
+            <br/>
+            <br/> 
+            <br/>
+            <br/>
+            <br/>
+         
+
+            
+            <br/>
+               <table width="100%" style="float: right;" >
+                <tr>
+                    <td style="font-size: 13px; color: red; font-weight: bold;">*All Quotes Should be Provided in Official Company Letterhead</td>
+
+                </tr>
+                      <tr>
+                                        <td style="font-size: 13px; color: Black; font-weight: bold;">Manufacturer : {!supplierName}</td>
+
+                </tr>
+            
+            </table>
+            
+            <apex:outputPanel rendered="{!boolenStrign}">
+                
+                <table  class="custom-top-margin" width="100%" cellspacing="0"  style="-fs-table-paginate:paginate; margin-top:35px" >
+                    
+                    <tr style="font-size: 11px; height: 25px; color: white; font-weight: bold; display:table-header-group;" >
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Item ID</td>
+                       <!-- <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Manufacturer</td>-->
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Part#</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Description</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Additional Information</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">UOM</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Qty</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Delivery Destination </td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Requested Delivery</td>
+                        
+                        <!-- <apex:outputPanel rendered="{!NOT(hasSupplierUnitPrice)}">-->
+                        
+                        
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Is Contract Price Valid? </td>
+                        <!-- <td bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;" 
+rendered="{!hasSupplierUnitPrice}">
+Darley Price
+</td> -->
+                    </tr>
+                    
+                    
+                    
+                    <apex:repeat value="{!recordList}" var="record"  >
+                        
+                        <tr style="font-size: 13px; height: 30px;"  >
+                            <!--RFQ Item ID-->
+                            <td scope="col" style="border: 0.2px solid black; ">{!record.Line_Item_ID__c}</td>
+                            <!--Supplier Name 
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Bid_Supplier__r.Name}</td>-->
+                            <!--Part # 
+<apex:outputPanel rendered="{!NOT(ISBLANK(record.boolenStrign))}">-->
+                            
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Supplier_Part_Number__c}</td>
+                            
+                            <!--Description -->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Item_Description__c}</td>       
+                            
+                            <!--Additional Information-->
+                            <td scope="col" style="border: 0.2px solid black; "> {!record.Additional_Information__c} </td>
+                            <!--UON-->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Unit_of_Issue__c} </td>
+                            <!--Quantity -->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Quantity__c}</td>
+                            
+                            <!--Delievery Destination-->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Delivery_Address__c} </td>
+                            
+                            <!--Requested Delievery Date-->
+                            <td scope="col" style="border: 0.2px solid black;">{!requestedDeliverDate}</td>
+                            <!--Supplier unit price-->
+                            
+                            <!--  <apex:outputPanel rendered="{!AND(NOT(ISBLANK(record.PEL_Price_Cost__c)), record.PEL_Price_Cost__c >0)}">-->
+                            
+                            <td scope="col" style="border: 0.2px solid black;">
+                                <apex:outputText value="{0, number, currency}">
+                                    <apex:param value="{!record.PEL_Price_Cost__c}" />
+                                </apex:outputText>
+                            </td>
+                            <!--<td scope="col" style="border: 0.2px solid black;" 
+rendered="{!hasSupplierUnitPrice}">
+{!record.PEL_Price_Cost__c}
+</td>-->
+                        </tr>
+                        
+                    </apex:repeat>
+                    
+                </table>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(boolenStrign)}">
+                
+                <table  class="custom-top-margin" width="100%" cellspacing="0"  style="-fs-table-paginate:paginate; margin-top:35px" >
+                    
+                    <tr style="font-size: 11px; height: 25px; color: white; font-weight: bold; display:table-header-group;" >
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Item ID</td>
+                       <!--  <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Manufacturer</td>-->
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Part#</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Description</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">Additional Information</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black; ">UOM</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Qty</td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Delivery Destination </td>
+                        <td  bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;">Requested Delivery Date </td>
+                        
+                        <!-- <apex:outputPanel rendered="{!NOT(hasSupplierUnitPrice)}">-->
+                        
+                        
+                        <!-- <td bgcolor="black" scope="col" style="text-align:center;border: 0.2px solid black;" 
+rendered="{!hasSupplierUnitPrice}">
+Darley Price
+</td> -->
+                    </tr>
+                    
+                    
+                    
+                    <apex:repeat value="{!recordList}" var="record"  >
+                        
+                        <tr style="font-size: 13px; height: 30px;"  >
+                            <!--RFQ Item ID-->
+                            <td scope="col" style="border: 0.2px solid black; ">{!record.Line_Item_ID__c}</td>
+                            <!--Supplier Name
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Bid_Supplier__r.Name}</td> -->
+                            <!--Part # 
+                            <apex:outputPanel rendered="{!NOT(ISBLANK(record.boolenStrign))}">-->
+                            
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Supplier_Part_Number__c}</td>
+                            
+                            <!--Description -->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Item_Description__c}</td>       
+                            
+                            <!--Additional Information-->
+                            <td scope="col" style="border: 0.2px solid black; "> {!record.Additional_Information__c} </td>
+                            <!--UOM-->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Unit_of_Issue__c} </td>
+                            <!--Quantity -->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Quantity__c}</td>
+                            
+                            <!--Delievery Destination-->
+                            <td scope="col" style="border: 0.2px solid black;">{!record.Delivery_Address__c} </td>
+                            
+                            <!--Requested Delievery Date-->
+                            <td scope="col" style="border: 0.2px solid black;">{!requestedDeliverDate}</td>
+                            <!--Supplier unit price-->
+                            
+                            <!--  <apex:outputPanel rendered="{!AND(NOT(ISBLANK(record.PEL_Price_Cost__c)), record.PEL_Price_Cost__c >0)}">-->
+                            
+                            <!--<td scope="col" style="border: 0.2px solid black;" 
+rendered="{!hasSupplierUnitPrice}">
+{!record.PEL_Price__c}
+</td>-->
+                        </tr>
+                        
+                    </apex:repeat>
+                    
+                </table>
+            </apex:outputPanel>
+            
+            
+        </body>
+        
+        
+    </html>
+    
+</apex:page>

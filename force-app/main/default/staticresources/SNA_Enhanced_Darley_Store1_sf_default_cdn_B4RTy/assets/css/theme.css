@@ -1,3 +1,7 @@
+:root {
+  --com-c-theme-version: 1;
+}
+
 b2c_lite_commerce-external-layout b2c_lite_commerce-store-logo-cms img {
   padding-top: var(--dxp-g-spacing-xlarge);
   padding-bottom: var(--dxp-g-spacing-xlarge);

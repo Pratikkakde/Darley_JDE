@@ -6,7 +6,7 @@ import forThenLogic from '@salesforce/apex/opportunityProduct.forThenLogic';
 import bundlenameRefresh from '@salesforce/apex/opportunityProduct.bundlenameRefresh';
 import reqBundle from '@salesforce/apex/opportunityProduct.reqBundle';
 import OptBundle from '@salesforce/apex/opportunityProduct.OptBundle';
-
+import ThenValidate from '@salesforce/apex/opportunityProduct.ThenValidate';
 
 export default class QuickActionModal extends LightningElement {
    
@@ -17,7 +17,8 @@ export default class QuickActionModal extends LightningElement {
     @track productList=[];
     thenlogic=[];
     arraySelectedProduct = [];
-    arrayForPricerule = [];
+    @track arrayForPricerule = [];
+    @track arrayForPriceruleafterrefresh = [];
      @api productID;
      @api back;
      @api reqdata;
@@ -37,7 +38,7 @@ export default class QuickActionModal extends LightningElement {
     selectedProductName;
     selectedProductId;
     productDetailsData;
-    priceRuleArrayInString
+    @track priceRuleArrayInString
     sendingreqlist=[];
     showProductData =  false;
     showSearchList = true;
@@ -48,9 +49,11 @@ export default class QuickActionModal extends LightningElement {
     MainAttributeListOptions=[];
     ifANddata = [];
     then = [];
+    thenValidate=[];
     showCombox = false;
     showSelectbutton= true;
     ifandlist=[];
+    @track reqReserved =[];
     SecondarySelectedProductId;
     rulechild=false;
     onlyproductId=[];
@@ -63,6 +66,8 @@ export default class QuickActionModal extends LightningElement {
     isThenLoaded = false;
     showcombobox = false;
     showPriceCard = false;
+    forthencall = true;
+    isrefresh = false ;
     codeToRefresh;
     reservedReq =[];
     reservedOpt = [];
@@ -147,6 +152,8 @@ allReqiredData(){
             
         this.ifandlist = result;
         this.allReqData =  result;
+        this.reqReserved = [...result.map(item => ({...item}))];
+        console.log('reqReserved--->', this.reqReserved);
         this.reservedReq = JSON.parse(JSON.stringify(result));
         }
     for(let i=0; i<this.ifandlist.length; i++){
@@ -163,6 +170,7 @@ allReqiredData(){
       }
 
       this.priceRuleArrayInString = JSON.stringify(this.arrayForPricerule);
+      console.log('Def Data ---->' ,this.priceRuleArrayInString);
       this.allOptionalData();
       this.error = undefined;
         
@@ -190,13 +198,13 @@ allOptionalData(){
                        this.arrayForPricerule = [...this.arrayForPricerule];
                     }
                     else{
+                      
                         this.arrayForPricerule.push({'key':this.allOptData[i].name,'value':this.allOptData[i].value});
                     }
             }
           }
     
           this.priceRuleArrayInString = JSON.stringify(this.arrayForPricerule);
-
        this.shownextbutton =  true;
        this.isLoaded= false;
         this.error = undefined;
@@ -207,112 +215,230 @@ allOptionalData(){
 }
 
 
-forThenLogicmethod(){
-    forThenLogic({comboName:this.SecondarycomboProductName ,Pumpname:this.selectedProductName, productBundleNameString : this.mainbundlename, stringBundlecode:this.priceRuleArrayInString})
-    .then((result) => {
-          this.then = result;
-          console.log('Then Data --->', this.then);
-          this.ifandlist.forEach((item1) => {
-             //Find matching item in list2
-            let item2 = this.then.find((item2) => item1.Bname == item2.name);
-            if (item2) {
-                console.log('insideThenlogic');
-               item1.forcombo = item2.innerLabelOptions;
-               item1.value = item2.value;
-                
-            }
-          });
-          this.allReqData = [];
-           this.allReqData =  this.ifandlist;
+forThenLogicmethod() {
+    console.log('arrayForPricerule before then ....', this.arrayForPricerule);
+    console.log('priceRuleArrayInString - insidethen --->',this.priceRuleArrayInString);
+    forThenLogic({
+            comboName: this.SecondarycomboProductName,
+            Pumpname: this.selectedProductName,
+            productBundleNameString: this.mainbundlename,
+            stringBundlecode: this.priceRuleArrayInString
+        })
+        .then((result) => {
+            this.then = result;
+            console.log('Then Data --->', this.then);
+            const shallowCopiesleftThen = this.ifandlist.map(item => ({ ...item }));
 
-           this.optlist.forEach((item1) => {
-            let item2 = this.then.find((item2) => item1.name == item2.name);
-            if (item2) {
-               console.log('insideThenlogic');
-               
-              item1.forcombo
-             = item2.innerLabelOptions;
-               
-           }
-         });
-         this.allOptData = [];
-         this.allOptData =  this.optlist;
+            shallowCopiesleftThen.forEach((item1) => {
+                //Find matching item in list2
+                let item2 = this.then.find((item2) => item1.Bname == item2.name);
+                if (item2) {
+                    console.log('insideThenlogic');
+                    item1.forcombo = item2.innerLabelOptions;
+                    item1.ProductName = item2.thenProductName;
+                    item1.value = item2.value;
 
-        for(let i=0; i<this.allReqData.length; i++){
-            if(this.allReqData[i].value != null){
-                let index = this.arrayForPricerule.find(a=> a.key == this.allReqData[i].Bname);
-            if(index != undefined){
-                index.value = this.allReqData[i].value;
-                this.arrayForPricerule = [...this.arrayForPricerule];
+                }
+            });
+
+            this.ifandlist = [...shallowCopiesleftThen];
+            this.allReqData = [];
+            this.allReqData = this.ifandlist;
+            console.log('reqData After then update--->', this.allReqData);
+
+
+            this.optlist.forEach((item1) => {
+                let item2 = this.then.find((item2) => item1.name == item2.name);
+                if (item2) {
+                    console.log('insideThenlogic');
+                    item1.forcombo = item2.innerLabelOptions;
+
+                }
+            });
+            this.allOptData = [];
+            this.allOptData = this.optlist;
+            this.arrayForPricerule = [];
+            this.arrayForPricerule = this.arrayForPriceruleafterrefresh;
+            console.log('allReqData before modify ---> ',this.allReqData);
+
+            for (let i = 0; i < this.allReqData.length; i++) {
+                if (this.allReqData[i].value != null) {
+                    let index = this.arrayForPricerule.find(a => a.key == this.allReqData[i].Bname);
+                    if (index != undefined) {
+                        index.value = this.allReqData[i].value;
+                        this.arrayForPricerule = [...this.arrayForPricerule];
+                    } else {
+                        this.arrayForPricerule.push({
+                            'key': this.allReqData[i].Bname,
+                            'value': this.allReqData[i].value
+                        });
+                    }
+                }
+
             }
-            else{
-                this.arrayForPricerule.push({'key':this.allReqData[i].Bname,'value':this.allReqData[i].value});
-            }
-            }
-            
-        }
-   
+            console.log('priceRuleArrayInString inside then before modify ....', this.priceRuleArrayInString);
+            console.log('arrayForPricerule inside then before modify ....', this.arrayForPricerule);
+           
             this.priceRuleArrayInString = JSON.stringify(this.arrayForPricerule);
-            console.log('string....',this.priceRuleArrayInString);
+            console.log('priceRuleArrayInString inside then....', this.priceRuleArrayInString);
+           
+
+            this.error = undefined;
+
+            // Call ThenValidate method after forThenLogic has completed
+            return ThenValidate({
+                comboNames: this.SecondarycomboProductName,
+                Pumpname: this.selectedProductName,
+                productBundleNameString: this.mainbundlename,
+                stringBundlecode: this.priceRuleArrayInString
+            });
+        })
+        .then((result) => {
+           
+
+            console.log('this.mainbundlename ---> ',this.mainbundlename);
+           // result = result.filter(item => item.name !== this.mainbundlename);
+            this.thenValidate = result;
+
+            console.log('Then validate Data --->', this.thenValidate);
+
+
+            const shallowCopiesleftThen = this.ifandlist.map(item => ({ ...item })); 
+            shallowCopiesleftThen.forEach((item1) => {
+                //Find matching item in list2
+                let item2 = this.thenValidate.find((item2) => item1.Bname == item2.name);
+                if (item2) {
+                    console.log('item1.value ---> ',item1.value);
+                    console.log('inside ThenValidate logic');
+                    item1.forcombo = item2.innerLabelOptions;
+                    item1.ProductName = item2.thenProductName;
+                    item1.value = item2.value;
+
+                }
+            });
+            this.ifandlist = [...shallowCopiesleftThen];
+            this.allReqData = [];
+            this.allReqData = this.ifandlist;
+            console.log('reqData After then validate update--->', this.allReqData);
+            this.arrayForPricerule = [];
+            this.arrayForPricerule = this.arrayForPriceruleafterrefresh;
+            console.log('reqReserved--->', this.reqReserved);
+
+
+            this.optlist.forEach((item1) => {
+                let item2 = this.thenValidate.find((item2) => item1.name == item2.name);
+                if (item2) {
+                    console.log('inside ThenValidate logic');
+                    item1.forcombo = item2.innerLabelOptions;
+
+                }
+            });
+            this.allOptData = [];
+            this.allOptData = this.optlist;
+            console.log('arrayForPricerule inside then before mdf....', this.arrayForPricerule);
+            for (let i = 0; i < this.allReqData.length; i++) {
+                if (this.allReqData[i].value != null) {
+                    console.log('allReqData bName ---> ',this.allReqData[i].Bname);
+                    let index = this.arrayForPricerule.find(a => a.key == this.allReqData[i].Bname);
+                    if (index != undefined) {
+                        index.value = this.allReqData[i].value;
+                        this.arrayForPricerule = [...this.arrayForPricerule];
+                    } else {
+                        this.arrayForPricerule.push({
+                            'key': this.allReqData[i].Bname,
+                            'value': this.allReqData[i].value
+                        });
+                    }
+                }
+
+            }
+            console.log('arrayForPricerule inside then aft mdf....', this.arrayForPricerule);
+            this.priceRuleArrayInString = JSON.stringify(this.arrayForPricerule);
+            console.log('priceRuleArrayInString inside then opt....', this.priceRuleArrayInString);
             this.isThenLoaded = false;
-      
-        this.error = undefined;
-    })
-    .catch((error) => {
-        this.error = error;
-    });
+
+            this.error = undefined;
+        })
+        .catch((error) => {
+            this.error = error;
+        });
 }
+
 
 
 // ..........to refresh data , when user change there selection ..................................
 
-bundlenameMethod(){
-    bundlenameRefresh({comboName:this.codeToRefresh ,Pumpname:this.selectedProductName, productBundleNameString : this.mainbundlename})
-    .then((result)=>{
-        let data = result;        
-        let tempArray = [];
-        let tempArray2 = [];
-        data.forEach((item1) => {
-        let item2 = this.reservedReq.find((item2) => item1.Bundle_Sequence__c == item2.BSProductBundle);
-        tempArray.push(item2);
-         });
+bundlenameMethod() {
+    return new Promise((resolve, reject) => {
+        console.log('arrayForPricerule in refresh before---->', this.arrayForPricerule);
+        bundlenameRefresh({
+            comboName: this.codeToRefresh,
+            Pumpname: this.selectedProductName,
+            productBundleNameString: this.mainbundlename
+        })
+        .then((result) => {
+            let data = result;
+            console.log('Data in refresh--->' + data);
+            console.log('ReservedData in refresh--->' + this.reservedReq);
+            let tempArray = [];
+            let tempArray2 = [];
+            data.forEach((item1) => {
+                let item2 = this.reservedReq.find((item2) => item1.Bundle_Sequence__c == item2.BSProductBundle);
+                if (item2 !== undefined) {
+                    tempArray.push(item2);
+                }
+            });
 
-         this.ifandlist.forEach((ifandlistItem) => {
+            this.reqReserved.forEach(item1 => {
+                let item2 = tempArray.find(item2 => item1.Bname === item2.Bname);
+                if (item2) {
+                    item1.forcombo = item2.forcombo;
+                    item1.ProductName = item2.ProductName;
+                    item1.value =  item2.value;
+                   
+                }
+            });
+
+            tempArray.forEach(tempItem => {
+                this.arrayForPricerule = this.arrayForPricerule.filter(item => item.key !== tempItem.Bname);
+            });
+            console.log('arrayForPricerule after filter ---> ',this.arrayForPricerule);
             
-            let tempArrayitem = tempArray.find((tempArrayitem) => ifandlistItem.Bname == tempArrayitem?.Bname);
-            if (tempArrayitem) {
-               ifandlistItem.forcombo = tempArrayitem.forcombo;
-               ifandlistItem.value = tempArrayitem.value;
-               
-           }
-         });
+            this.allReqData = [];
+            this.allReqData = this.reqReserved;
+            this.ifandlist = this.reqReserved;
+          
+            console.log('allReqData after refresh --->',this.allReqData);
+            let arrforPriceRuleShallowCopy = [...this.arrayForPricerule];
+            this.arrayForPriceruleafterrefresh = arrforPriceRuleShallowCopy;
+            this.arrayForPricerule = [];
+            this.priceRuleArrayInString = '';
+            this.priceRuleArrayInString = JSON.stringify(arrforPriceRuleShallowCopy);
+            console.log('priceRuleArrayInString - after filter --->',this.priceRuleArrayInString);
+            data.forEach((itemA) => {
+                let itemB = this.reservedOpt.find((itemB) => itemA.Bundle_Sequence__c == itemB.BSProductBundle);
+                if (itemB !== undefined) {
+                    tempArray2.push(itemB);
+                }
+            });
 
-           this.allReqData = [];
-           this.allReqData =  this.ifandlist;
+            this.optlist.forEach((optlistItem) => {
+                let tempArrayitem2 = tempArray2.find((tempArrayitem2) => optlistItem.name == tempArrayitem2?.name);
+                if (tempArrayitem2) {
+                    optlistItem.forcombo = tempArrayitem2.forcombo;
+                    optlistItem.value = tempArrayitem2.value;
+                }
+            });
 
-           data.forEach((itemA) => {
-            
-            let itemB = this.reservedOpt.find((itemB) => itemA.Bundle_Sequence__c == itemB.BSProductBundle);
-            tempArray2.push(itemB);
-         });
+            this.allOptData = [];
+            this.allOptData = this.optlist;
+          
 
-         this.optlist.forEach((optlistItem) => {
-            
-            let tempArrayitem2 = tempArray2.find((tempArrayitem2) => optlistItem.name == tempArrayitem2?.name);
-            if (tempArrayitem2) {
-                optlistItem.forcombo = tempArrayitem2.forcombo;
-                optlistItem.value = tempArrayitem2.value;
-               
-           }
-         });
-
-           this.allOptData = [];
-           this.allOptData =  this.optlist;
-
-        this.error = undefined;
-    })
-    .catch((error) => {
-        this.error = error;
+            resolve(); // Resolve the promise after bundlenameMethod completes successfully
+        })
+        .catch((error) => {
+            reject(error); // Reject the promise if there's an error
+        });
     });
 }
 
@@ -355,37 +481,77 @@ SelectProduct(){
     }
 
 selectrequired(event){
-    this.isThenLoaded = true; 
-    this.SecondarycomboProductName = event.target.value;
-    let codeasvalue = this.SecondarycomboProductName;
-    this.mainbundlename = event.target.name;
-    let bundlename = this.mainbundlename;
-    let index = this.arrayForPricerule.find(a=> a.key == bundlename);
-    if(index != undefined){
-    this.codeToRefresh = index.value;
-    this.bundlenameMethod();
-    index.value = codeasvalue;
-    this.arrayForPricerule = [...this.arrayForPricerule];
-    }
-     else{
-        this.arrayForPricerule.push({'key':bundlename, 'value':codeasvalue});
-     }
-    
-   var selectedproductsVar = this.allReqData.find(ele  => ele.Bname == bundlename).id;
-    let selectedelement = this.allReqData.find(ele  => ele.id == selectedproductsVar);
-    if(selectedelement!= undefined){
-         selectedelement.value = this.SecondarycomboProductName;
-        this.allReqData = [...this.allReqData];
-        this.ifandlist = this.allReqData;
-       
-     }
-    
-    this.priceRuleArrayInString = JSON.stringify(this.arrayForPricerule);
-    this.forThenLogicmethod();
-    this.forThenLogicPriceRuleMethod();
+        this.isThenLoaded = true; 
+        this.SecondarycomboProductName = event.target.value;
 
-  
-}
+        let codeasvalue = this.SecondarycomboProductName;
+        this.mainbundlename = event.target.name;
+        let bundlename = this.mainbundlename;
+        console.log('bundlename---> ',bundlename);
+        console.log('arrayForPricerule inside selectrequired---> ',this.arrayForPricerule);
+        let index = this.arrayForPricerule.find(a=> a.key == bundlename);
+        console.log('index---> ',index);
+        if(index != undefined){
+        this.codeToRefresh = index.value;
+        this.forthencall = false;
+        this.isrefresh = true;
+        this.bundlenameMethod()
+            .then(() => {
+                
+                var selectedproductsVar = this.allReqData.find(ele  => ele.Bname == bundlename).id;
+                let selectedelement = this.allReqData.find(ele  => ele.id == selectedproductsVar);
+                if(selectedelement!= undefined){
+                    console.log('selectedelement ---> ',selectedelement);
+                    selectedelement.value = this.SecondarycomboProductName;
+                    this.allReqData = [...this.allReqData];
+                    this.ifandlist = this.allReqData;
+                console.log('priceRuleArrayInString---> ',this.priceRuleArrayInString);
+                this.forThenLogicmethod();
+                this.forThenLogicPriceRuleMethod();
+
+                   
+                 }
+            })
+            console.log('arrayForPricerule inside required before modify  --->',this.arrayForPricerule);
+            if( this.isrefresh == true){
+                this.arrayForPricerule = this.arrayForPriceruleafterrefresh;
+            }
+          
+
+        this.arrayForPricerule = this.arrayForPricerule.map((item) => {
+            if (item.key === bundlename) {
+              return { ...item, value: codeasvalue };
+            }
+            return item;
+          });
+          console.log('arrayForPricerule after refresh --->',this.arrayForPricerule);
+        }
+         else{
+            this.arrayForPricerule.push({'key':bundlename, 'value':codeasvalue});
+         }
+        
+         if (this.forthencall == true) {
+       var selectedproductsVar = this.allReqData.find(ele  => ele.Bname == bundlename).id;
+        let selectedelement = this.allReqData.find(ele  => ele.id == selectedproductsVar);
+        if(selectedelement!= undefined){
+            console.log('selectedelement ---> ',selectedelement);
+            selectedelement.value = this.SecondarycomboProductName;
+            this.allReqData = [...this.allReqData];
+            this.ifandlist = this.allReqData;
+           
+         }
+    
+        this.priceRuleArrayInString = JSON.stringify(this.arrayForPricerule);
+        console.log('forthencall---> ',this.forthencall);
+      
+        this.forThenLogicmethod();
+        console.log('arrayForPricerule---> after then called ',this.arrayForPricerule);
+        this.forThenLogicPriceRuleMethod();
+        }
+        //console.log('this.arrayForPricerule---> after refresh ',this.arrayForPricerule);
+    
+      
+    }
 
 reqOnchange(event){
     let manualInput = event.target.value;

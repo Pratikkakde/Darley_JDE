@@ -18,7 +18,6 @@ trigger B2BAccountTrigger on Account (before insert, before update, before delet
         }
         when AFTER_UPDATE{
             AccountTriggerHandler.handleAfterUpdate(Trigger.new, trigger.oldMap); 
-            AccountTriggerHandler.AccountTriggerHandler.handleAfterUpdate(Trigger.new, trigger.oldMap);
         }
     }
 }
