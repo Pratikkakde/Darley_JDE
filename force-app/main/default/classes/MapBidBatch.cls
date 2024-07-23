@@ -179,8 +179,10 @@ global class MapBidBatch implements Database.Batchable<sObject>,Database.Statefu
         for ( Supplier_XLAT__c xlatRecords : [SELECT Name,Child__c,Lead__c,Account__c,Account__r.Name, Account__r.Send_Questionnarie__c, Lead__r.Name, Account__r.Payment_Terms_Bid_Tracker__c,
                                               Lead__r.Company,Account__r.Prime_Supplier__c ,Active__c, Lead__r.Prime_Supplier__c,Lead__r.Payment_Terms_Bid_Tracker__c 
                                               FROM Supplier_XLAT__c WHERE Child__c IN: putManufacturerInXlat AND Active__c = true]){ 
+                                                  
                                                   mapXlat.put(xlatRecords.Child__c.toLowerCase(), xlatRecords);
                                                   accountListXlat.add(xlatRecords.Account__r.name);
+                                                  system.debug('xlatRecords.Account__r.name-->'+xlatRecords.Account__r.name);
                                                   
                                               }
         
@@ -1160,6 +1162,7 @@ System.debug('Rating Account---->'+FandXRatingAccount.contains(mapXlat.get(recor
                 } else {
                     for(Database.Error err : sr.getErrors()) {
                         System.debug(err.getStatusCode() + ' : ' +err.getMessage() + ' : ' + err.getFields());
+                        system.debug('error'+err);
                     }
                 }
             }

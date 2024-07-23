@@ -54,8 +54,11 @@ public class accountTriggerHandlerServiceClass {
         }
 
         Map<Id, String> productCodeMap = new Map<Id, String>();
-        for (Product2 pro : [SELECT Id, ProductCode FROM Product2 WHERE Id IN :productId]) {
+        Map<Id, String> branchPlantMap = new Map<Id, String>();
+
+        for (Product2 pro : [SELECT Id, ProductCode,Branch_Plant__c FROM Product2 WHERE Id IN :productId]) {
             productCodeMap.put(pro.Id, pro.ProductCode);
+            branchPlantMap.put(pro.ID,pro.Branch_Plant__c);
         }
 
         for (Order ord : [SELECT Id, AccountId, Account.Primary_Division__c,Account.Name, Account.JDE_Address_Number__c, Account.Payment_Terms2__c, JDE_Order_Number__c,Payment_Type__c ,OrderNumber,
@@ -89,6 +92,8 @@ public class accountTriggerHandlerServiceClass {
               
                     orderDet.Quantity = String.valueOf(oi.Quantity);
                     orderDet.Item_Number = productCodeMap.get(oi.Product2Id);
+                    orderDet.Branch_Plant = branchPlantMap.get(oi.Product2Id);
+
                     orderDet.Line_Number = String.valueOf(oi.LineNumber);
                     orderDet.Unit_Price = String.valueOf(oi.UnitPrice);
                     orderDet.Extended_Price = String.valueOf(ExtendedPrice);

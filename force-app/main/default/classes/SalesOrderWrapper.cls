@@ -48,6 +48,8 @@ public class SalesOrderWrapper {
         Public String Extended_Price;
         Public String Discount_Price;
         Public String Extended_Discount;
+        public String Branch_Plant{get;set;}
+
     }
     
      /*SalesOrderWrapper.updateOrderQtyDetail is used when orderItem quantity is updated in salesforce*/ 
@@ -57,6 +59,7 @@ public class SalesOrderWrapper {
         public String Item_Number{get;set;} 
         public string Line_Number{get;set;}
         public String Quantity_Ordered{get;set;}
+        public String Branch_Plant{get;set;}
     }
    
     /*SalesOrderWrapper.updateNewLineItem is used when new orderItem is added/updated for existing order in salesforce*/ 

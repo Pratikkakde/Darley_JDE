@@ -5,7 +5,7 @@ public class productTriggerHandler {
         set<string> vendorSet = new set<string>();
         if(!proList.isEmpty()){
             for(product2 prd : proList){
-                vendorSet.add(prd.vendor__c);   
+                vendorSet.add(prd.vendor__c);
             }
         }
         system.debug('vendorNameSet: '+vendorSet);
@@ -13,10 +13,10 @@ public class productTriggerHandler {
         if(!vendorSet.isEmpty()){
             List<Account> accList = [select id, name from Account where Name In: vendorSet];
             if(!accList.isEmpty()){
-            for(Account acc1 : accList){
-                accIDMap.put(acc1.Name , acc1.id);
+                for(Account acc1 : accList){
+                    accIDMap.put(acc1.Name , acc1.id);
+                }
             }
-        }
         }
         
         if(!proList.isEmpty()){
@@ -36,25 +36,30 @@ public class productTriggerHandler {
                 }
             }
         }
-    } 
+    }
     
-     public static void changeRecordType(List<product2> newList){
+    public static void changeRecordType(List<product2> newList){
         if(!newList.isEmpty()){
             //Id profileId = UserInfo.getProfileId();
             //String profileName =[Select Id, Name from Profile where Id=:profileId].Name;
             
             //if(profileName == 'Salesforce API Only System Integrations'){
-                string Defense = Schema.Sobjecttype.product2.getRecordTypeInfosByName().get('Defense').getRecordTypeId();
-                string Equipment_Products = Schema.Sobjecttype.product2.getRecordTypeInfosByName().get('Equipment Products').getRecordTypeId();
-                string Pump = Schema.Sobjecttype.product2.getRecordTypeInfosByName().get('Pump').getRecordTypeId();
-                String Innovation = Schema.Sobjecttype.product2.getRecordTypeInfosByName().get('Innovation').getRecordTypeId();
-
+                
+                    Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Product2.getRecordTypeInfosByName();
+                
+                
                 for(product2 pro : newList){
-                    if(pro.Branch_Plant__c != '' && pro.Branch_Plant__c == '400'){
-                        pro.RecordTypeId = Equipment_Products;
+                    if (pro.Record_Type__c != '' && pro.Record_Type__c == 'Equipment') {
+                        pro.recordtypeId = recordTypes.get('Equipment Products').getRecordTypeId();
+                    } else if (pro.Record_Type__c != '' && pro.Record_Type__c == 'Defense') {
+                        pro.recordtypeId = recordTypes.get('Defense').getRecordTypeId();
+                    } else if (pro.Record_Type__c != '' && pro.Record_Type__c == 'Pump') {
+                        pro.recordtypeId = recordTypes.get('Pump').getRecordTypeId();
+                    }else{
+                        pro.recordtypeId = recordTypes.get('Other').getRecordTypeId();
                     }
                 //}
             }
         }
-     }
+    }
 }

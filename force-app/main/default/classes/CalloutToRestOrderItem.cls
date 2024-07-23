@@ -57,7 +57,7 @@ public class CalloutToRestOrderItem {
         if (res.getStatusCode() == 200) {
             // Successful callout
             //API Integration Log Generation on success           
-            Exception_Handler.createAilRecordonSuccess(wrapperList, endpoint, 'POST', ObjOpperation, ObjectName, responseBody);
+            Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(reqdata), endpoint, 'POST', ObjOpperation, ObjectName, responseBody);
             
             system.debug('responseBody'+responseBody);
             // Process the response body here
@@ -83,7 +83,7 @@ public class CalloutToRestOrderItem {
             //API Integration Log Generation on Fail
             String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
             System.debug('Callout error: ' + res.getStatusCode() + '\n ' + res.getStatus());
-            Exception_Handler.createAilRecordonFail(wrapperList, endpoint, 'POST', ObjOpperation, ObjectName, responseBody, callOutError);
+            Exception_Handler.createAilRecordonFail(JSON.serializePretty(reqdata), endpoint, 'POST', ObjOpperation, ObjectName, responseBody, callOutError);
         }
     }
     
@@ -118,14 +118,14 @@ public class CalloutToRestOrderItem {
         system.debug('Response Status: '+res);
         system.debug('Response StatusCode: '+res.getStatusCode()); 
         String responseBody = res.getBody();
-        
+        Map<String,Object> reqBody = (Map<String,Object>)JSON.deserializeUntyped(wrapperList);
         // Handle the response
         if (res.getStatusCode() == 200) {
             // Successful callout
             system.debug('responseBody'+responseBody);
             // Process the response body here
             //API Integration Log Generation on success    
-            Exception_Handler.createAilRecordonSuccess(wrapperList, endpoint, 'POST', ObjOpperation, ObjectName, responseBody);
+            Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(reqBody), endpoint, 'POST', ObjOpperation, ObjectName, responseBody);
             
             
         } else {
@@ -133,7 +133,7 @@ public class CalloutToRestOrderItem {
             //API Integration Log Generation on Failure
             String callOutError = 'StatusCode: '+ res.getStatusCode() + '\n '+ 'Status: '+res.getStatus();
             System.debug('Callout error: ' + res.getStatusCode() + ' ' + res.getStatus());
-            Exception_Handler.createAilRecordonFail(wrapperList, endpoint, 'POST', ObjOpperation, ObjectName, responseBody, callOutError);
+            Exception_Handler.createAilRecordonFail(JSON.serializePretty(reqBody), endpoint, 'POST', ObjOpperation, ObjectName, responseBody, callOutError);
 
         }   
     }

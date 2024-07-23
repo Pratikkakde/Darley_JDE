@@ -41,13 +41,16 @@ public class OrderProductTriggerHandler {
                 }
             }
             
-            List<Product2> prodList = [Select id, productCode, JDE_Part_Number__c from Product2 where id in:productId ];
+            List<Product2> prodList = [Select id, productCode, JDE_Part_Number__c,Branch_Plant__c from Product2 where id in:productId ];
             
             Map<Id, String> productCodeMap = new map<Id,String>();
+            Map<Id, String> branchPlantMap = new Map<Id, String>();
+
             
             if(!prodList.isEmpty()){
                 for(product2 pro : prodList){
                     productCodeMap.put(pro.id, pro.ProductCode); 
+                    branchPlantMap.put(pro.id, pro.Branch_Plant__c);
                 }
             }
             
@@ -120,7 +123,8 @@ public class OrderProductTriggerHandler {
                                 orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
                                 orderDet.Extended_Price = string.valueOf(NonFreightExtPrice);
                                 orderDet.Discount_Price = string.valueOf(NonFreightExtPrice);
-                                
+                                orderDet.Branch_Plant = branchPlantMap.get(oi.Product2Id);
+
                                 orderDetList.add(orderDet);
                             }
                             
@@ -234,14 +238,18 @@ public class OrderProductTriggerHandler {
                 }
             }
             
-            List<Product2> prodList = [Select id, productCode, JDE_Part_Number__c from Product2 where id in:productId ];
+            List<Product2> prodList = [Select id, productCode, JDE_Part_Number__c,Branch_Plant__c from Product2 where id in:productId ];
             List<order> ordList = [Select id, JDE_Order_Number__c, Account.RecordTypeId from order where id in:orderId ];
             Map<Id, String> productCodeMap = new map<Id,String>();
             Map<Id, String> jdeOrdNumMap = new map<Id,String>();
+            Map<Id, String> branchPlantMap = new Map<Id, String>();
+
             
             if(!prodList.isEmpty()){
                 for(product2 pro : prodList){
                     productCodeMap.put(pro.id, pro.ProductCode); 
+                    branchPlantMap.put(pro.ID,pro.Branch_Plant__c);
+
                 }
             }
             
@@ -259,6 +267,7 @@ public class OrderProductTriggerHandler {
                     ordUpd.Item_Number = productCodeMap.get(oli.Product2Id);
                     ordUpd.Order_Number = jdeOrdNumMap.get(oli.OrderId);
                     ordUpd.Line_Number = string.valueOf(oli.LineNumber);
+                    ordUpd.Branch_Plant = branchPlantMap.get(oli.Product2Id);
                     ordUpd.Order_Type = 'S5';
                 }
             }

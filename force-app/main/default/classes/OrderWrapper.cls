@@ -31,6 +31,7 @@ public class OrderWrapper {
         public String Billing_PostalCode;
         public String Billing_Country; 
         
+        
         /*Account data associated with Order*/
         public String Account_id{get;set;} 
         public String Business_Unit{get;set;}
@@ -49,5 +50,6 @@ public class OrderWrapper {
         public String Item_Number{get;set;} 
         public String Unit_Price{get;set;}
         public string Line_Number{get;set;}
+        public String Branch_Plant{get;set;}
     }
 }

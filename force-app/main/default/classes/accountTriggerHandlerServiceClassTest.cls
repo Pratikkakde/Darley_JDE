@@ -2,9 +2,9 @@
 Name                    : AccountTriggerHandlerServiceClassTest
 Author                  : Pratik Kakade
 Purpose                 : This Apex class is designed to test the functionality of the AccountTriggerHandlerServiceClass, which handles callouts for inserting and updating sales orders, as well as contacts. 
-It facilitates communication with an external system (JDE_Integration) to perform operations related to sales orders and contact information.
+						  It facilitates communication with an external system (JDE_Integration) to perform operations related to sales orders and contact information.
 Description             : This test class verifies the behavior of methods in the AccountTriggerHandlerServiceClass by simulating different scenarios such as successful and unsuccessful callouts, and updating 
-account details. It creates test data, mocks callout responses, and asserts the expected outcomes.
+						  account details. It creates test data, mocks callout responses, and asserts the expected outcomes.
 Version                 : 1.2
 Change Log              : Modified by Pratik Kakade on 23 April 2024
 Test Class for          : AccountTriggerHandlerServiceClass, AccountTriggerHandler
