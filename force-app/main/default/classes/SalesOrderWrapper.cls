@@ -43,11 +43,11 @@ public class SalesOrderWrapper {
     public class OrderItems {
         public String Quantity{get;set;} 
         public String Item_Number{get;set;} 
-        public String Unit_Price{get;set;}
+        //public String Unit_Price{get;set;}
         public string Line_Number{get;set;} 
-        Public String Extended_Price;
+        //Public String Extended_Price;
         Public String Discount_Price;
-        Public String Extended_Discount;
+        //Public String Extended_Discount;
         public String Branch_Plant{get;set;}
 
     }

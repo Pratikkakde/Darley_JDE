@@ -619,7 +619,7 @@ export default class B2bCheckout extends NavigationMixin(LightningElement) {
         } else {
             this.billingAddresses = [];
         }
-
+        console.log('Billing Addresses:', JSON.stringify(this.billingAddresses, null, 2));
         this.sameAddresses = IS.true(addresses.isSameWithBilling) ? true : false;
 
         // Check same ids and if billing list is empty

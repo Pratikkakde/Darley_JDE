@@ -1,7 +1,23 @@
+/******************************************************************************************************************************************************
+
+Name                : UpdatePriceBookWebService
+    Author              : Pratik Kakade
+    Purpose             : This Apex class provides a RESTful web service endpoint for updating or inserting PricebookEntry records in Salesforce.
+    Description         : The UpdatePriceBookWebService class processes incoming HTTP POST requests containing product and price information.
+    It updates existing PricebookEntry records or inserts new ones if they do not exist.
+    The class ensures that the PricebookEntry records are updated with the correct price data based on the provided input.
+    It handles various scenarios such as updating entries for multiple price books, inserting new entries when none exist, and logging success or failure of the operations.
+    Version             : 1.2
+    Change Log          : Created by Pratik Kakade - 26 Jul 2024
+    Test Class          : UpdatePriceBookWebServiceTest
+    CreateDate          : 13 Oct 2023
+    LastModifiedDate    : 26 Jul 2024
+    
+ ******************************************************************************************************************************************************/
 @RestResource(urlMapping='/updatePriceBook')
 global class UpdatePriceBookWebService {
     
-    public class ItemWrapper { 
+    public class ItemWrapper {
         public String secondItemNumber { get; set; }
         public String thirdItemNumber { get; set; }
         public String description { get; set; }
@@ -19,45 +35,30 @@ global class UpdatePriceBookWebService {
         public String available { get; set; }
         public String onHand { get; set; }
         public String committed { get; set; }
-        public String backorder { get; set; }    
+        public String backorder { get; set; }
     }
-    
     
     @HttpPost
     global static String updatePriceBook() {
+        
+        Map<String,Object> requestData = (Map<String,Object>)JSON.deserializeUntyped(RestContext.request.requestBody.toString());
         String returnMessage ;
-        String secondItemNumber ;
-        String thirdItemNumber;
-        String unitCost;
-        String unitPrice;
-        String baseDISTI;
-        String baseDISTII;
-        String baseDISTIII;
-        String baseDISTIV;
-        String baseDISTV;
-        String baseDISTVI;
-        String available ;
-        String onHand; 
-        String committed;
-        String backorder;
-        
-        ItemWrapper pricedata = (ItemWrapper)System.JSON.deserialize(RestContext.request.requestBody.tostring(), ItemWrapper.class);
-        system.debug('pricedata'+pricedata);
-        
-        secondItemNumber = pricedata.secondItemNumber;
-        thirdItemNumber = pricedata.thirdItemNumber;
-        unitCost = pricedata.unitCost;
-        unitPrice = pricedata.unitPrice;        
-        baseDISTI = pricedata.baseDISTI;
-        baseDISTII = pricedata.baseDISTII;
-        baseDISTIII = pricedata.baseDISTIII;
-        baseDISTIV = pricedata.baseDISTIV;
-        baseDISTV = pricedata.baseDISTV;
-        baseDISTVI = pricedata.baseDISTVI;
-        available = pricedata.available ;
-        onHand = pricedata.onHand; 
-        committed = pricedata.committed;
-        backorder = pricedata.backorder;        
+        String secondItemNumber = String.valueOf(requestData.get('secondItemNumber'));
+        String thirdItemNumber = String.valueOf(requestData.get('thirdItemNumber'));
+        String unitCost =  String.valueOf(requestData.get('unitCost'));
+        String unitPrice =  String.valueOf(requestData.get('unitPrice'));
+        String baseDISTI =  String.valueOf(requestData.get('baseDISTI'));
+        String baseDISTII =  String.valueOf(requestData.get('baseDISTII'));
+        String baseDISTIII =  String.valueOf(requestData.get('baseDISTIII'));
+        String baseDISTIV =  String.valueOf(requestData.get('baseDISTIV'));
+        String baseDISTV =  String.valueOf(requestData.get('baseDISTV'));
+        String baseDISTVI =  String.valueOf(requestData.get('baseDISTVI'));
+        String available =  String.valueOf(requestData.get('available'));
+        String onHand =  String.valueOf(requestData.get('onHand'));
+        String committed =  String.valueOf(requestData.get('committed'));
+        String backorder =  String.valueOf(requestData.get('backorder'));
+        String RuralMetro =  String.valueOf(requestData.get('baseRuralMetro'));
+        String basePump =  String.valueOf(requestData.get('basePump'));
         
         // Query the product based on secondItemNumber
         map<Id,String> pbMap = new map<id,String>();
@@ -69,52 +70,55 @@ global class UpdatePriceBookWebService {
         
         //Set of string of PriceBook Name
         Set<String> priceBookNames = new Set<String>();
-        for(PriceBookName__mdt pbName : [SELECT Name__c From PriceBookName__mdt]){
+        for(PriceBookName__mdt pbName : [SELECT Name__c,isActive__c From PriceBookName__mdt WHERE isActive__c = TRUE Order BY Order__c]){
             priceBookNames.add(pbName.Name__c);
         }
         
-        //Map of PriceBook Name with price; 
+        //Map of PriceBook Name with price;
         System.debug('baseDISTI--->'+baseDISTI);
-            Map<String, Decimal> priceBookUnitPrices = new Map<String, Decimal>();
+        Map<String, Decimal> priceBookUnitPrices = new Map<String, Decimal>();
         if(String.isNotBlank(baseDISTI)){
             priceBookUnitPrices.put('Dist I Price Book',Decimal.valueOf(baseDISTI));
         }
         if(String.isNotBlank(baseDISTII)){
             priceBookUnitPrices.put('Dist II Price Book',Decimal.valueOf(baseDISTII));
         }
-         if(String.isNotBlank(baseDISTIII)){
+        if(String.isNotBlank(baseDISTIII)){
             priceBookUnitPrices.put('Dist III Price Book',Decimal.valueOf(baseDISTIII));
         }
-         if(String.isNotBlank(baseDISTIV)){
+        if(String.isNotBlank(baseDISTIV)){
             priceBookUnitPrices.put('Dist IV Price Book',Decimal.valueOf(baseDISTIV));
         }
-         if(String.isNotBlank(baseDISTV)){
+        if(String.isNotBlank(baseDISTV)){
             priceBookUnitPrices.put('Dist V Price Book',Decimal.valueOf(baseDISTV));
         }
-         if(String.isNotBlank(baseDISTVI)){
+        if(String.isNotBlank(baseDISTVI)){
             priceBookUnitPrices.put('Dist VI Price Book',Decimal.valueOf(baseDISTVI));
         }
-         if(String.isNotBlank(unitPrice)){
-            priceBookUnitPrices.put('Enhanced Darley Store Price Book',Decimal.valueOf(unitPrice));
-             priceBookUnitPrices.put('Standard Price Book',Decimal.valueOf(unitPrice));
-             priceBookUnitPrices.put('Pump Price Book',Decimal.valueOf(unitPrice));
-             priceBookUnitPrices.put('Equipment Price Book',Decimal.valueOf(unitPrice));
+        if(String.isNotBlank(RuralMetro)){
+            priceBookUnitPrices.put('Rural Metro',Decimal.valueOf(RuralMetro));
         }
-                
+        if(String.isNotBlank(basePump)){
+            priceBookUnitPrices.put('Pump Price Book',Decimal.valueOf(basePump));
+        }
+        if(String.isNotBlank(unitPrice)){
+            priceBookUnitPrices.put('Enhanced Darley Store Price Book',Decimal.valueOf(unitPrice));
+            priceBookUnitPrices.put('Standard Price Book',Decimal.valueOf(unitPrice));
+            priceBookUnitPrices.put('Equipment Price Book',Decimal.valueOf(unitPrice));
+        }
+        
         system.debug('priceBookNames--->'+priceBookNames);
-        system.debug('priceBookUnitPrices--->'+priceBookUnitPrices);
+        system.debug('priceBookUnitPrices--->'+priceBookUnitPrices.get('Pump Price Book'));
         
         List<Pricebook2> Pblist= [SELECT Id, Name, IsActive FROM Pricebook2 WHERE IsActive = True  AND Name IN :priceBookNames];
         for(Pricebook2 pb : Pblist){
             pbMap.put(pb.Id,pb.name);
             allPricebookIds.add(pb.Id);
         }
-        
         List<Product2> products = (List<Product2>) Database.query('SELECT Id, ProductCode FROM Product2 WHERE ProductCode = :prCode LIMIT 1');
         if (!products.isEmpty()) {
             Product2 prod = products[0];
             System.debug(prod);
-            
             
             //Query existing entries for the product
             List<PricebookEntry> existingEntries = [SELECT Pricebook2Id, Pricebook2.Name, Pricebook2.isActive, ProductCode, product2Id, product2.JDE_Part_Number__c, IsActive 
@@ -123,7 +127,7 @@ global class UpdatePriceBookWebService {
             
             system.debug('pricebookEntries= '+existingEntries);
             if(!existingEntries.isEmpty()){
-                // Add piceBookEntries in Map 
+                // Add piceBookEntries in Map
                 for (PricebookEntry existingEntry : existingEntries) {
                     existingEntriesMap.put(existingEntry.Pricebook2Id, existingEntry);
                 }
@@ -133,16 +137,14 @@ global class UpdatePriceBookWebService {
                     
                     if (existingEntry != null && pbMap.get(pricebookId) != null ) {
                         if(unitCost != null && priceBookUnitPrices.get(pbMap.get(pricebookId)) != null && unitCost.trim() != '' ){
-                            existingEntry.Standard_Cost__c = decimal.valueOf(unitCost);  
+                            existingEntry.Standard_Cost__c = decimal.valueOf(unitCost);
                         }
                         if(priceBookUnitPrices.containsKey(pbMap.get(pricebookId))){
                             existingEntry.UnitPrice = priceBookUnitPrices.get(pbMap.get(pricebookId));
                         }
                         pbeToUpdate.add(existingEntry);
                         System.debug('pbeToUpdate --->'+pbeToUpdate);
-                        
-                        
-                    } else {
+                    } else if(priceBookUnitPrices.get(pbMap.get(pricebookId)) != null) {
                         PricebookEntry newEntry = new PricebookEntry();
                         newEntry.Pricebook2Id = pricebookId;
                         newEntry.Product2Id = prod.id;
@@ -152,36 +154,50 @@ global class UpdatePriceBookWebService {
                             newEntry.Standard_Cost__c = decimal.valueOf(unitCost);
                         }
                         if(priceBookUnitPrices.containsKey(pbMap.get(pricebookId)) != null){
-                               newEntry.UnitPrice = priceBookUnitPrices.get(pbMap.get(pricebookId)); 
-                         }
-                        
+                            newEntry.UnitPrice = priceBookUnitPrices.get(pbMap.get(pricebookId));
+                        }
                         pbeToUpdate.add(newEntry);
                         //System.debug('pbeToUpdate --->'+pbeToUpdate);
                     }
                 }
-                
             }
             else{
-                // there is No price book entries found for the product     
+                // there is No price book entries found for the product
                 // Iterate over active Pricebooks
                 for(PriceBook2 pb: [SELECT Id, name,isactive FROM Pricebook2 Where isactive = true AND Name In :priceBookNames ORDER BY IsStandard DESC ]){
                     
-                    PricebookEntry pbstdEntry = new PricebookEntry(); 
-                    if(pb.name == pbMap.get(pb.id) ){
+                    PricebookEntry pbstdEntry = new PricebookEntry();
+                    if(pb.name == pbMap.get(pb.id)&& priceBookUnitPrices.get(pbMap.get(pb.id)) == null && pb.name== 'Standard Price Book'){
+                        pbstdEntry.product2Id = prod.id;
+                        
+                        pbstdEntry.isActive = false;
+                        pbstdEntry.UseStandardPrice = false;
+                        pbstdEntry.Pricebook2Id = pb.id;
+                        if(String.isNotBlank(unitCost)){
+                            pbstdEntry.Standard_Cost__c = priceBookUnitPrices.get('Pump Price Book');
+                        }
+                        System.debug('Is contains Key -->'+priceBookUnitPrices.containsKey('Pump Price Book'));
+                        if(priceBookUnitPrices.containsKey('Pump Price Book')){
+                            System.debug('Is contains Key -->'+priceBookUnitPrices.containsKey(pbMap.get(pb.id)));
+                            System.debug('Get Unit cost --->'+priceBookUnitPrices.get('Pump Price Book'));
+                            pbstdEntry.UnitPrice = priceBookUnitPrices.get('Pump Price Book');
+                        }
+                        insertPriceBookEntryList.add(pbstdEntry);
+                    }
+                    else if(pb.name == pbMap.get(pb.id)&& priceBookUnitPrices.get(pbMap.get(pb.id)) != null ){
                         pbstdEntry.product2Id = prod.id;
                         
                         pbstdEntry.isActive = true;
-                        pbstdEntry.UseStandardPrice = false;    
+                        pbstdEntry.UseStandardPrice = false;
                         pbstdEntry.Pricebook2Id = pb.id;
                         if(String.isNotBlank(unitCost)){
                             pbstdEntry.Standard_Cost__c = decimal.valueOf(unitCost);
                         }
                         if(priceBookUnitPrices.containsKey(pbMap.get(pb.id))){
-                        pbstdEntry.UnitPrice = priceBookUnitPrices.get(pbMap.get(pb.id));
+                            pbstdEntry.UnitPrice = priceBookUnitPrices.get(pbMap.get(pb.id));
                         }
                         insertPriceBookEntryList.add(pbstdEntry);
                     }
-                    
                 }
                 system.debug('insertPriceBookEntryList---> '+insertPriceBookEntryList);
                 // Check if there are new Pricebook Entries to insert
@@ -190,90 +206,32 @@ global class UpdatePriceBookWebService {
                         // Insert the new Pricebook Entries
                         insert insertPriceBookEntryList;
                         returnMessage = 'PriceBookEntries are succesfully inserted ';
-                        API_Integration_Log__c ail = new API_Integration_Log__c();
-                        ail.JSON_Body__c = RestContext.request.requestBody.tostring();
-                        ail.Endpoint__c = URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook';
-                        ail.Status__c = 'Success';
-                        ail.Request_Type__c = 'POST';
-                        ail.Response_Body__c = returnMessage;
-                        ail.Name__c = 'updatePricebook webservice';
-                        ail.Object__c = 'Price Book Entry';
+                        Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook','POST','Update Pricebook from JDE','Price Book Entry',returnMessage);
                         
-                        try{
-                            insert ail;    
-                        } 
-                        catch(exception ex){    
-                            system.debug('Error : '+ex.getMessage());   
-                        }
                     }catch(exception ex){
                         system.debug('Error: '+ex.getMessage());
-                        returnMessage = 'Failed to insert pricebook Entries';
-                        API_Integration_Log__c ail = new API_Integration_Log__c();
-                        ail.JSON_Body__c = RestContext.request.requestBody.tostring();
-                        ail.Endpoint__c = URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook';
-                        ail.Status__c = 'Failed';
-                        ail.Request_Type__c = 'POST';
-                        ail.Response_Body__c = returnMessage;
-                        ail.Name__c = 'updatePricebook webservice';
-                        ail.Object__c = 'Price Book Entry';
-                        
-                        try{
-                            insert ail;    
-                        } 
-                        catch(exception ex1){    
-                            system.debug('Error : '+ex1.getMessage());   
-                        }
+                        returnMessage = 'Failed to insert pricebook Entries'+ex.getMessage();
+                        Exception_Handler.createAilRecordonFail(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook','POST','Update Pricebook from JDE','Price Book Entry',returnMessage,returnMessage);
                     }
                 }
-                
             }
             System.debug('pbeToUpdate--> '+pbeToUpdate);
             if(pbeToUpdate.size()>0){
                 try{
                     upsert pbeToUpdate;
                     returnMessage = 'PriceBookEntries are succesfully updated ';
-                    API_Integration_Log__c ail = new API_Integration_Log__c();
-                    ail.JSON_Body__c = RestContext.request.requestBody.tostring();
-                    ail.Endpoint__c = URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook';
-                    ail.Status__c = 'Success';
-                    ail.Request_Type__c = 'POST';
-                    ail.Response_Body__c = returnMessage;
-                    ail.Name__c = 'updatePricebook webservice';
-                    ail.Object__c = 'Price Book Entry';
+                    Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook','POST','Update Pricebook from JDE','Price Book Entry',returnMessage);
                     
-                    try{
-                        insert ail;    
-                    } 
-                    catch(exception ex){    
-                        system.debug('Error : '+ex.getMessage());   
-                    }
                 }catch(exception ex){
                     system.debug('Error: '+ex.getMessage());
                     returnMessage = 'Failed';
-                    API_Integration_Log__c ail = new API_Integration_Log__c();
-                    ail.JSON_Body__c = RestContext.request.requestBody.tostring();
-                    ail.Endpoint__c = URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook';
-                    ail.Status__c = 'Failed';
-                    ail.Request_Type__c = 'POST';
-                    ail.Response_Body__c = returnMessage;
-                    ail.Name__c = 'updatePricebook webservice';
-                    ail.Object__c = 'Price Book Entry';
-                    ail.Fatal_Errors__c = ex.getMessage();
-                    
-                    try{
-                        insert ail;    
-                    } 
-                    catch(exception ex1){    
-                        system.debug('Error : '+ex1.getMessage());   
-                    }
+                    Exception_Handler.createAilRecordonFail(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook','POST','Update Pricebook from JDE','Price Book Entry',returnMessage,returnMessage);
                 }
             }
-            
-        } else {
-            returnMessage = 'No product found for the given product code.Check the product code.';  
         }
-        return returnMessage; 
-        
-    }   
-    
+        else {
+            returnMessage = 'No product found for the given product code.Check the product code.';
+        }
+        return returnMessage;
+    }
 }

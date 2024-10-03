@@ -56,7 +56,7 @@ export default class B2bRequestForQuoteButton extends NavigationMixin(LightningE
         if (this.isLoading) {
             event.preventDefault();
         } else if (this.communityURL) {
-            window.open(this.communityURL + '/' + REQUEST_FOR_QUOTE_ROUTE, '_self');
+            window.open(this.communityURL + REQUEST_FOR_QUOTE_ROUTE, '_self');
         }
     }
 

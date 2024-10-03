@@ -1,0 +1,135 @@
+<template>
+    <!-- <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="medium"></lightning-spinner>
+    </template> -->
+    <lightning-card  icon-name="utility:upload" title = "Upload Files">
+        <div  class="slds-m-around_medium">
+            <lightning-input type="file" 
+            accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf"
+            label="Import Attachment" onchange={openfileUpload}></lightning-input>
+        </div>
+        <template if:true={fileData}>
+            <p>{fileData.filename}</p>
+        </template>
+        <!-- checkbox -->
+         <template if:true = {showCombobox}>
+        <div class="slds-m-around_medium">
+            <lightning-input type="checkbox" checked ={uploadtoDla} label="Upload to DLA" onclick={handleCheck}></lightning-input>
+        </div> 
+
+        <!-- Label picklist -->
+         <div class="slds-m-around_medium">
+            <lightning-combobox
+          class ="inputCombobox"  
+        name="Label"
+        label="Label"
+        placeholder="Choose Label"
+        value={labelPicklist}
+        onchange={handlePicklist}
+        options={options}
+        
+    >
+    </lightning-combobox>
+    
+        </div> 
+        <!-- lightning button  -->
+        <lightning-button variant="brand" label="submit" title="Submit" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    </template>
+   
+    </lightning-card>
+   
+    <!-- -------------------------------lightning data table----------------------------------------  -->
+  
+        <!-- <lightning-card >
+                <lightning-button 
+                   
+                    label = "Submit"
+                    slot="actions"
+                    onclick={handledataSubmit}>
+                </lightning-button>
+           
+                
+    
+            <div class="slds-p-around_x-small">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr class=""> -->
+                                <!-- pdf Name -->
+                                <!-- <th class="slds-size_3-of-10" scope="col">
+                                    <div class="slds-truncate" title="Name">Name</div>
+                                </th> -->
+                                <!-- Upload to DLA -->
+                                <!-- <th class="slds-size_3-of-10" scope="col">
+                                    <div class="slds-truncate" title="Upload to DLA">Upload to DLA</div>
+                                </th> -->
+                                <!-- Delete Attachment -->
+                                <!-- <th class="slds-size_3-of-10" scope="col">
+                                    <div class="slds-truncate" title="Delete Attachment">Delete Attachment</div>
+                                </th>
+                                
+                            </tr>
+                        </thead> -->
+                        <!-- body of data table  -->
+                     <!-- <tbody>
+                        <template for:each={contentVersionList} for:item="contentVersionRecord" for:index="index">
+                                        <tr class="slds-hint-parent" key={contentVersionRecord.Id}>
+                                         
+                                        <td data-label="Title"  class="slds-size_3-of-10">
+                                                <div class="slds-line-clamp" title="Title">
+                                                    
+                                                    {contentVersionRecord.Title}
+                                                </div>
+                                            </td> -->
+                                            <!-- upload to dla  -->
+                                            <!-- <td data-label="upload Attachment" class="slds-size_3-of-10">
+                                                <div class="slds-line-clamp" title="upload attachment ">
+                                                    <lightning-input type="checkbox" data-id={contentVersionRecord.Id}
+                                                    checked ={contentVersionRecord.Upload_to_DLA__c}
+                                                        disabled= {contentVersionRecord.Upload_to_DLA__c}
+                                                         onclick={handleuploadcheckbox} ></lightning-input>
+                                                     
+                                                         
+        
+                                                </div>
+                                            </td> -->
+                                            <!-- delete Attachment -->
+                                            <!-- <td data-label="Delete Attachment" class="slds-size_3-of-10">
+                                                <div class="slds-line-clamp" title="Delete Attachment">
+                                                    <lightning-input type="checkbox" data-id={contentVersionRecord.Id}
+                                                   
+                                                    checked ={contentVersionRecord.Delete_Attachment__c}
+                                                         disabled={contentVersionRecord.Delete_Attachment__c}
+                                                         onclick={handledeletecheckbox}></lightning-input>
+                                                    
+        
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                
+            
+                               
+    </lightning-card> -->
+    <!-- Lightning Data Table -->
+     <br>
+     
+     <template if:true={showDataTable}>
+        <lightning-card icon-name="utility:display_text" title="Existing Pdf" >
+     <lightning-datatable
+        
+          key-field="Id"
+          data={contentVersionList}
+          columns={columns}
+          onsave={handleSave}
+          draft-values={draftValues}
+          hide-checkbox-column
+        >
+        </lightning-datatable>
+    
+</lightning-card>
+</template>
+    </template>

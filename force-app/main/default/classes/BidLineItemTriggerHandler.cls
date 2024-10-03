@@ -21,8 +21,12 @@ public  class BidLineItemTriggerHandler {
    If Supplier PartNumber and Suplier of Bid Line  matches which products Vendor part number and Supplier then we are pulling the cost from that.
    Also checking the Quantity From the metdata and pulling related price.
 /******************************************************************************************************************************************************/
-    public static void pullingDarleyCostFromPriceBookEntry(List<Bid_line_item__c> lineItemList, Map<Id, Bid_line_item__c> mapOldvalueBidLIne){
-
+public static void pullingDarleyCostFromPriceBookEntry(List<Bid_line_item__c> lineItemList, Map<Id, Bid_line_item__c> mapOldvalueBidLIne){
+//system.debug(!isExecuted);
+        //if(!isExecuted){
+           // database.executeBatch(new mapbidbatch());
+            //isExecuted=true;
+        //}
         Set<Id> setAcId = new Set<Id>();
         Set<String> setsuppliefrpart = new Set<String>();
         If (mapOldvalueBidLIne == null) {
@@ -48,23 +52,21 @@ public  class BidLineItemTriggerHandler {
                                                           }
                                                       }
             }
-            
         }
-     
         Map<String,Pre_Define_Price_Rule_Criteria__mdt>  mapStrPreDefineMDT = new Map<String,Pre_Define_Price_Rule_Criteria__mdt>();
         For (Pre_Define_Price_Rule_Criteria__mdt preDe : [SELECT DeveloperName, MasterLabel, Price_1__c, Price_2__c FROM Pre_Define_Price_Rule_Criteria__mdt] ) {
             mapStrPreDefineMDT.put(preDe.MasterLabel,preDe);
         }
-
+ 
         System.debug('setAcId+++....'+setAcId);
         System.debug('setsuppliefrpart------>.>>'+setsuppliefrpart);
         Map<String,PricebookEntry> mapvendorIdAndVendor = new Map<String,PricebookEntry>();
         Id recordTypePrdDefense = Schema.SObjectType.Product2.getRecordTypeInfosByName().get('Defense').getRecordTypeId();
         If(!setAcId.isEmpty() && !setsuppliefrpart.isEmpty()){
             For(PricebookEntry varPriceBook :  [SELECT Price_Effective_From__c, Cost_Last_Updated__c, Discount__c, IsArchived, Product2.Vendor_Account__c, 
-                                                    Product2.Vendor_Account__r.Name,
-                                               Product2.Vendor_Part_Number__c, ProductCode, SystemModstamp, UseStandardPrice, IsActive, UnitPrice, Product2Id, Pricebook2Id, Name, Id FROM PricebookEntry
-                                                WHERE Product2Id In (SELECT Id  FROM Product2 WHERE Vendor_Account__c IN : setAcId AND Vendor_Part_Number__c IN : setsuppliefrpart AND recordTypeId =: recordTypePrdDefense )
+                                                Product2.Vendor_Account__r.Name, Cost_Option_1_Defense__c, Cost_Option_2_Defense__c,
+                                                Product2.Vendor_Part_Number__c, ProductCode, SystemModstamp, UseStandardPrice, IsActive, UnitPrice, Product2Id, Pricebook2Id, Name, Id FROM PricebookEntry
+                                                WHERE Product2Id In (SELECT Id  FROM Product2 WHERE Vendor_Account__c IN : setAcId AND Vendor_Part_Number__c IN : setsuppliefrpart AND recordTypeId =: recordTypePrdDefense AND Supplier_Predefined_Item__c = true)
                                                 AND Pricebook2Id IN (SELECT Id FROM  Pricebook2 WHERE IsStandard = true)  ]){
                                                     mapvendorIdAndVendor.put(varPriceBook.Product2.Vendor_Account__c+varPriceBook.Product2.Vendor_Part_Number__c,varPriceBook);
                                                 }  
@@ -74,28 +76,23 @@ public  class BidLineItemTriggerHandler {
                 If(mapvendorIdAndVendor.containsKey(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c)){
                     IF(mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).UnitPrice != null){
                         IF (mapStrPreDefineMDT.containsKey(mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Product2.Vendor_Account__r.Name)){
-                            
                             IF (bidLinevar.Quantity__c < mapStrPreDefineMDT.get(mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Product2.Vendor_Account__r.Name).Price_1__c ){
                                 bidLinevar.Unit_Cost__c = mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).UnitPrice;//Standard_Cost__c is Darley cost
                             } else if (bidLinevar.Quantity__c < mapStrPreDefineMDT.get(mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Product2.Vendor_Account__r.Name).Price_2__c) {
-                                bidLinevar.Unit_Cost__c = mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Price_1__c;//Standard_Cost__c is Darley cost
+                                bidLinevar.Unit_Cost__c = mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Cost_Option_1_Defense__c;//Standard_Cost__c is Darley cost
                             } else if (bidLinevar.Quantity__c >= mapStrPreDefineMDT.get(mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Product2.Vendor_Account__r.Name).Price_2__c) {
-                                bidLinevar.Unit_Cost__c = mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Price_2__c;//Standard_Cost__c is Darley cost
+                                bidLinevar.Unit_Cost__c = mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).Cost_Option_2_Defense__c;//Standard_Cost__c is Darley cost
                             }
-                            
                         } else {
                             bidLinevar.Unit_Cost__c=mapvendorIdAndVendor.get(bidLinevar.Bid_Supplier__c+bidLinevar.Supplier_Part_Number__c).UnitPrice;//Standard_Cost__c is Darley cost
                         system.debug('Unit Cost '+bidLinevar.Unit_Cost__c);
                         }
-                  
                     }
                 }
             }
         }
-        
-        
+
     }
-    
     
     
 /******************************************************************************************************************************************************
@@ -501,12 +498,14 @@ Criteria: After Insert And After Update
             Bid_Group_Items__c varBidGroup = new Bid_Group_Items__c();
 
              If (mapIDSetS.containsKey((Id)argValue.get('Bid_Group_Items__c'))){
+                 system.debug('In If');
                  If (mapIDSetS.get((Id)argValue.get('Bid_Group_Items__c')) ==(Integer)argValue.get('varId')){
                      
                      varBidGroup.IsRunning__c = True;
                  }
              }
             If(argValue.get('Bid_Group_Items__c')!=null){
+                system.debug('IN IF 511-->');
                 varBidGroup.ID=(Id)argValue.get('Bid_Group_Items__c');
             }
              

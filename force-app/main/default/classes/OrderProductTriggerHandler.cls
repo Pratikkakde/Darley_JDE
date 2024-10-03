@@ -120,8 +120,8 @@ public class OrderProductTriggerHandler {
                                 orderDet.Quantity = String.valueOf(oi.Quantity);
                                 orderDet.Item_Number = productCodeMap.get(oi.Product2Id);
                                 orderDet.Line_Number = string.valueOf(oi.LineNumber);
-                                orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
-                                orderDet.Extended_Price = string.valueOf(NonFreightExtPrice);
+                                //orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
+                                //orderDet.Extended_Price = string.valueOf(NonFreightExtPrice);
                                 orderDet.Discount_Price = string.valueOf(NonFreightExtPrice);
                                 orderDet.Branch_Plant = branchPlantMap.get(oi.Product2Id);
 
@@ -140,10 +140,10 @@ public class OrderProductTriggerHandler {
                                 orderDet.Quantity = String.valueOf(oi.Quantity);
                                 orderDet.Item_Number = productCodeMap.get(oi.Product2Id);
                                 orderDet.Line_Number = string.valueOf(oi.LineNumber);
-                                orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
-                                orderDet.Extended_Price = string.valueOf(ExtendedPrice);
+                               // orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
+                                //orderDet.Extended_Price = string.valueOf(ExtendedPrice);
                                 orderDet.Discount_Price = string.valueOf(DiscountPrice);
-                                orderDet.Extended_Discount = string.valueOf(ExtendedDiscount);
+                               // orderDet.Extended_Discount = string.valueOf(ExtendedDiscount);
                                 
                                 system.debug('#Line: '+oi.LineNumber+', Product Code: '+productCodeMap.get(oi.Product2Id)+', UnitPrice: '+oi.UnitPrice+', Quantity: '+oi.Quantity+', Extended Price: '+ExtendedPrice+', Discount Price: '+DiscountPrice+', Extended-Discount: '+ExtendedDiscount);
                                 orderDetList.add(orderDet);
@@ -155,14 +155,14 @@ public class OrderProductTriggerHandler {
                                 orderDet.Quantity = String.valueOf(oi.Quantity);
                                 orderDet.Item_Number = productCodeMap.get(oi.Product2Id);
                                 orderDet.Line_Number = string.valueOf(oi.LineNumber);
-                                orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
-                                orderDet.Extended_Price = string.valueOf(FreightExtendedPrice);
+                                //orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
+                                //orderDet.Extended_Price = string.valueOf(FreightExtendedPrice);
                                 orderDet.Discount_Price = string.valueOf(FreightExtendedPrice);
                                 
                                 orderDetList.add(orderDet);
                             }
                             
-                            system.debug('Product Code: '+productCodeMap.get(oi.Product2Id)+', Calculated UnitPrice := '+orderDet.Unit_Price);
+                            //system.debug('Product Code: '+productCodeMap.get(oi.Product2Id)+', Calculated UnitPrice := '+orderDet.Unit_Price);
                         }
                     }
                     if(ord.B2BDarleyDollars__c != null){
@@ -201,7 +201,7 @@ public class OrderProductTriggerHandler {
                                 SalesOrderWrapper.Order_Detail order_Det = new SalesOrderWrapper.Order_Detail();
                                 order_Det.quantity = String.valueOf(oli.Quantity);
                                 order_Det.Item_Number= productCodeMap.get(oli.Product2Id);
-                                order_Det.Unit_Price = String.valueOf(oli.UnitPrice);
+                                //order_Det.Unit_Price = String.valueOf(oli.UnitPrice);
                                 order_Det.Line_Number = string.valueOf(oli.LineNumber);
                                 order_DetList.add(order_Det);
                             }
@@ -243,18 +243,16 @@ public class OrderProductTriggerHandler {
             Map<Id, String> productCodeMap = new map<Id,String>();
             Map<Id, String> jdeOrdNumMap = new map<Id,String>();
             Map<Id, String> branchPlantMap = new Map<Id, String>();
-
             
-            if(!prodList.isEmpty()){
+            if (!prodList.isEmpty()){
                 for(product2 pro : prodList){
                     productCodeMap.put(pro.id, pro.ProductCode); 
                     branchPlantMap.put(pro.ID,pro.Branch_Plant__c);
-
                 }
             }
             
             String accRecordTypeId;
-            if(!ordList.isEmpty()){
+            if  (!ordList.isEmpty()) {
                 for(order ord : ordList){
                     jdeOrdNumMap.put(ord.id, string.valueOf(ord.JDE_Order_Number__c)); 
                     accRecordTypeId = ord.Account.RecordTypeId;
@@ -281,8 +279,7 @@ public class OrderProductTriggerHandler {
                 if(ordList[0].JDE_Order_Number__c != null && accRecordTypeId == EquipmentCustomer){
                     CalloutToRestOrderItem.makeUpdateCallout(jsonStr1, 'Order Product', 'OrderItem Quantity Change');
                 }
-            }
-            
+            }           
         }
     }
     

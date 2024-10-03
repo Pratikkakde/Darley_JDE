@@ -35,6 +35,25 @@ public class SearchComponentLwc {
         
     }
     
+       @AuraEnabled(cacheable=true)
+    public static list<Account>searchAccount( string strAccounts){
+        system.debug('strAccounts'+strAccounts);
+        if(strAccounts!=''){
+            
+            String keyString = strAccounts+'%';
+            system.debug('string-->'+strAccounts);
+            list<Account>listAccount = [Select Id, Name , Supplier_Rating__c  from Account where Name like: keyString AND RecordType.name ='Vendor'];
+            system.debug('listAccount-->'+listAccount);
+            return listAccount;  
+        }
+        else{
+            list<Account> listAccount = new list<Account>() ;
+            system.debug('else');
+            return listAccount;
+        }
+        
+    }
+    
     @AuraEnabled(cacheable=true)
     public static list<Bid_Line_Item__c> searchPartNumber( string strPartNumber){
         // list<Bid_Line_Item__c> lstBidTracker = new list<Bid_Line_Item__c>();

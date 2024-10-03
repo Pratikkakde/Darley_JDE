@@ -12,13 +12,15 @@ LastModifiedDate    : 19 Feb 2024
 
 public class Utility_DataCreation {
     
-    /**
+/***************************************************************************************************************************************************************************************************************************** Method        : CreateAccountRec
+* 
 * Method        : CreateAccountRec
 * Purpose       : Creates a specified number of Account records with the given record type.
 * Parameters    :- numRecord: The number of account records to create
 *                - recTyp: The record type of the accounts to be created
 * Returns       :- List<Account>: The list of created account records
-*/
+****************************************************************************************************************************************************************************************************************************/
+    
     public static List<Account> CreateAccountRec(Integer numRecord, String recTyp) {
         // Retrieve the record type ID based on the provided record type name
         String recTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(recTyp).getRecordTypeId();
@@ -50,11 +52,17 @@ public class Utility_DataCreation {
             );
             accList.add(acc);
         }
-        
-        // Return the list of created account records
-        return accList;
+                return accList;
     }
     
+/***************************************************************************************************************************************************************************************************************************** Method        : CreateAccountRec
+* 
+* Method        : createCotactAccoCiatedWithAccount
+* Purpose       : Creates a specified number of contact records with releted to he account.
+* Parameters    :- numRecord: The number of account records to create
+* Returns       :- List<Contact>: The list of created Contact records
+****************************************************************************************************************************************************************************************************************************/
+   
     public static  List<Contact> createCotactAccoCiatedWithAccount(Integer numRec, String accId){
         List<Contact> conList = new List<Contact> ();
         for (Integer i = 0; i<numRec; i++) {
@@ -74,6 +82,14 @@ public class Utility_DataCreation {
         return conList ; 
     }
     
+/***************************************************************************************************************************************************************************************************************************** Method        : CreateAccountRec
+* 
+* Method         : CreteProducts
+* Purpose       : Creates a specified number of Product records.
+* Parameters    :- numRecord: The number of account records to create
+* Returns       :- List<Product2>: The list of created Product records
+****************************************************************************************************************************************************************************************************************************/
+    
     public static  List<Product2>  CreteProducts (integer numRec){
         
         List<Product2> productsList = new List<Product2> ();
@@ -89,6 +105,15 @@ public class Utility_DataCreation {
         
         return productsList;
     }
+    
+/***************************************************************************************************************************************************************************************************************************** Method        : CreateAccountRec
+* 
+* Method         : CreteProducts2
+* Purpose       : Creates a specified number of Product records.
+* Parameters    :- numRecord: The number of account records to create
+* Returns       :- List<Product2>: The list of created Product records
+****************************************************************************************************************************************************************************************************************************/
+ 
     public static  List<Product2>  CreteProducts2 (integer numRec){
         
         List<Product2> productsList = new List<Product2> ();
@@ -104,12 +129,15 @@ public class Utility_DataCreation {
         
         return productsList;
     }
-    /**
+    
+/****************************************************************************************************************************************************************************************************************************
+
 * Method         : createJsonData
 * Purpose        : Creates JSON data for integration purposes based on the provided account ID.
 * Parameters     : accId: The ID of the account for which JSON data is to be generated
 * Returns        : Map<String, Object>: The generated JSON data as a map
-*/
+****************************************************************************************************************************************************************************************************************************/
+    
     public static Map<String, Object> createJsonData(String accId) {
         // Initialize a map to store the JSON data
         Map<String, Object> requestData = new Map<String, Object>{
@@ -133,12 +161,12 @@ public class Utility_DataCreation {
                     return requestData;
     }
     
-    /**
-* Method         : createSameJsonData
+/***************************************************************************************************************************************************************************************************************************** Method         : createSameJsonData
 * Purpose        : Creates JSON data with the same attributes for integration purposes based on the provided account ID.
 * Parameters     : accId: The ID of the account for which JSON data is to be generated
 * Returns        : Map<String, Object>: The generated JSON data as a map
-*/
+****************************************************************************************************************************************************************************************************************************/
+    
     public static Map<String, Object> createSameJsonData(String accId) {
         // Initialize a map to store the JSON data
         Map<String, Object> requestData = new Map<String, Object>{
@@ -162,13 +190,14 @@ public class Utility_DataCreation {
                     return requestData;
     }
     
-    /**
+/*****************************************************************************************************************************************************************************************************************************
 * Method          : createOrder
 * Purpose         : Creates a specified number of Order records associated with the provided account ID.
 * Parameters      : accId: The ID of the account for which order records are to be created
 *                   numRecords: The number of order records to create
 * Returns         : List<Order>: The list of created order records
-*/
+****************************************************************************************************************************************************************************************************************************/
+    
     public static List<Order> createOrder(String accId, Integer numRecords, String pbId) {
         // Initialize a list to store the created order records
         List<Order> orderList = new List<Order>();
@@ -195,6 +224,16 @@ public class Utility_DataCreation {
         // Return the list of created order records
         return orderList;
     }
+    
+/*****************************************************************************************************************************************************************************************************************************
+* Method          : createOrderwithDarleyDollers
+* Purpose         : Creates a specified number of Order records associated with the provided account ID.
+* Parameters      : accId: The ID of the account for which order records are to be created
+*                   numRecords: The number of order records to create
+*                   pbId: PricebokkId
+* Returns         : List<Order>: The list of created order records
+****************************************************************************************************************************************************************************************************************************/
+    
     public static List<Order> createOrderwithDarleyDollers(String accId, Integer numRecords, String pbId) {
         // Initialize a list to store the created order records
         List<Order> orderList = new List<Order>();
@@ -223,6 +262,17 @@ public class Utility_DataCreation {
         // Return the list of created order records
         return orderList;
     }
+    
+/*****************************************************************************************************************************************************************************************************************************
+* Method          : createOrderItem
+* Purpose         : Creates a specified number of Orderitem records associated with the provided Order.
+* Parameters      : odList: OrderLis to link Order Item with Order.
+*                   numRecords: The number of order records to create
+*                   prdList: ProductList
+*                   pbEntryid: PriceBookentryId
+* Returns         : List<Order>: The list of created order records
+****************************************************************************************************************************************************************************************************************************/
+    
     public static List<orderitem> createOrderItem (Integer numRec, List<Order> odList, List<Product2> prdList, String pbEntryid){
         
         List<orderitem> ordItem = new List<orderitem>();

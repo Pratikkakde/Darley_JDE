@@ -2033,6 +2033,13 @@ community_navigation-tile-menu-item .comm-tile-menu__item-image {
     padding-left: 18px;
 }
 
+/* Adding CSS class for cart quantity */
+.cart-quantity {
+    font-weight: 400 !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+
 @media screen and (max-width: 1024.98px) {
 
     .slds-modal__content.slds-modal__content_has-hidden-footer .slds-col + .slds-col {

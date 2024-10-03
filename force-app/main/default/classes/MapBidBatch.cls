@@ -1125,10 +1125,10 @@ System.debug('Rating Account---->'+FandXRatingAccount.contains(mapXlat.get(recor
             } else {
                 Bid_Group_Items__c bidGroupItem = new Bid_Group_Items__c();
                 If(bidLineVar.Bid_Supplier__c != null ){
-                    bidGroupItem.Name = 'Group-' + bidLineVar.Supplier_Name_Text__c;
+                    bidGroupItem.Name = bidLineVar.Supplier_Name_Text__c;
                     bidGroupItem.Supplier__c = bidLineVar.Bid_Supplier__c;
                 } else { 
-                    bidGroupItem.Name = 'Group-' + bidLineVar.Supplier_Name_Text__c;
+                    bidGroupItem.Name = bidLineVar.Supplier_Name_Text__c;
                     bidGroupItem.Lead__c = bidLineVar.lead__c;
                     
                 }

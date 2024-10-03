@@ -3,6 +3,7 @@ import searchXlat from '@salesforce/apex/SearchComponentLwc.searchXlat';
 import searchPartNumber from '@salesforce/apex/SearchComponentLwc.searchPartNumber';
 import serachEmail from '@salesforce/apex/SearchComponentLwc.serachEmail';
 import searchLead from '@salesforce/apex/SearchComponentLwc.searchLead';
+import searchAccount from '@salesforce/apex/SearchComponentLwc.searchAccount';
 import updateSupplierCleanup from '@salesforce/apex/SearchComponentLwc.updateSupplierCleanup';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
@@ -25,18 +26,21 @@ export default class LightningSearchCmp extends LightningElement {
   email = '';
   emailList = [];
   lead = '';
+  Account = '';
   leadList = [];
+  accountList = [];
   parentClickedId;
   xlatRecord = false;  // display the xlatatble 
   bidRecord = false;//// display the paertnumber table
   emailRecord = false;   //// display the Email table
   leadRecord = false //display the lead table
+  accountRecord = false; // display the Account table 
   partNumberClickedId;
   showXlatInput = false;   // on click of button shows the Xlat input field
   showPartNumberInput = false; // on click of button shows the partnumber input field  
   showEmailInput = false; // on click of button shows the Email input field
   showLeadInput = false; // on click of button shows the lead input field
-
+  showAccountInput = false; // on click of button shows the account input field
   @api recordId;
   @track field1Value;
   @track field2Value;
@@ -44,6 +48,7 @@ export default class LightningSearchCmp extends LightningElement {
   @track field3Value; //contains Supplier_Status__c
   xlatId;
   leadId;
+  timer;
 
   showcmp = false;// if status is new or pending then only show the table
   showCheckbox = false; // shows the checkbox for xlatTable
@@ -51,6 +56,8 @@ export default class LightningSearchCmp extends LightningElement {
 
   showLeadCheckbox = false; // shows the checkbox for LeadTable
   showLeadUpdateButton = false //button to update the record of supplier cleanup from Lead
+
+
 
 
 
@@ -62,6 +69,8 @@ export default class LightningSearchCmp extends LightningElement {
     this.emailRecord = false
     this.showLeadInput = false;
     this.leadRecord = false;
+    this.accountRecord = false;
+    this.showAccountInput = false;
 
   }
 
@@ -75,6 +84,8 @@ export default class LightningSearchCmp extends LightningElement {
     this.bidRecord = false;
     this.showLeadInput = false;
     this.leadRecord = false;
+    this.accountRecord = false;
+    this.showAccountInput = false;
   }
 
   handleEmail() {
@@ -86,6 +97,8 @@ export default class LightningSearchCmp extends LightningElement {
     this.showUpdateButton = false;
     this.bidRecord = false;
     this.leadRecord = false;
+    this.accountRecord = false;
+    this.showAccountInput = false;
   }
 
   handleLead() {
@@ -97,108 +110,129 @@ export default class LightningSearchCmp extends LightningElement {
     this.bidRecord = false;
     this.emailRecord = false;
     this.showLeadInput = true;
-
+    this.accountRecord = false;
+    this.showAccountInput = false;
     console.log('handlelead')
     console.log('emailRecord' + this.emailRecord)
 
   }
 
+  handleAccount() {
+    this.showPartNumberInput = false;
+    this.showXlatInput = false;
+    this.showEmailInput = false;
+    this.xlatRecord = false;
+    this.showUpdateButton = false;
+    this.bidRecord = false;
+    this.emailRecord = false;
+    this.showLeadInput = false;
+    this.showAccountInput = true;
+    this.leadRecord = false;
+
+  }
+
   handleKeyChange(event) {
 
+window.clearTimeout(this.timer);
+console.log('clear',this.timer)
 
     this.parentName = event.target.value;
+    
 
     if (this.parentName != '') {
       this.xlatRecord = true;
       this.bidRecord = false;
+    
+   this.timer= setTimeout(() => {
+      this.getXlatdata();
+    }, 500);
+    console.log('timer',this.timer)
     }
     else {
       this.xlatRecord = false;
     }
   }
 
+ getXlatdata(){
+  searchXlat({strXlatName: this.parentName})
+.then(data =>{
+  console.log('xlatData', data);
+  this.ParentNameList = data;
+  console.log('ParentNameList', JSON.parse(JSON.stringify(this.ParentNameList)));
 
-  @wire(searchXlat, { strXlatName: '$parentName' })
-  retrieveXlat({ error, data }) {
-
-    if (data) {
-      console.log('data', data);
-
-      this.ParentNameList = data;
-
-      console.log('ParentNameList', JSON.parse(JSON.stringify(this.ParentNameList)));
-
-
-    }
-    else if (error) {
-      console.log('Error', error);
-      //   console.log('error',JSON.parse(JSON.stringify(error)));
-
-    }
-
-  }
-
-
+})
+.catch(error =>{
+  console.log('Error', error);
+})
+  
+ }
+  
 
   // Manufacturer part Number data 
   handlePartNumbersearch(event) {
+    window.clearTimeout(this.timer);
+     console.log('clear',this.timer)
     this.partNumber = event.target.value;
     if (this.partNumber != '') {
       this.bidRecord = true;
       this.xlatRecord = false;
       this.emailRecord = false;
+      this.timer= setTimeout(() => {
+        this.getPartNumber();
+      }, 500);
+      console.log('timer',this.timer)
     }
     else {
       this.bidRecord = false;
     }
     console.log('partnumber', this.partNumber);
   }
+//get manufacturer part number
+ getPartNumber(){
+ searchPartNumber({ strPartNumber: this.partNumber })
+ .then(data =>{
+    console.log('partnumberData',data);
+    let uniqueArray = data.reduce((accumulator, current) => {
 
+      if (!accumulator[current.Supplier_Part_Number__c]) {
+
+        accumulator[current.Supplier_Part_Number__c] = current;
+
+      }
+
+      return accumulator;
+
+    }, {});
+
+
+
+    uniqueArray = Object.values(uniqueArray);
+
+    console.log(uniqueArray);
+
+   
+      this.partNumberList = uniqueArray;
+ })
+ .catch(error =>{
+  console.log('error',error);
+ })
+}
  
-  @wire(searchPartNumber, { strPartNumber: '$partNumber' })
-  retrievePartNumber({ error, data }) {
-
-    if (data) {
-      console.log('data1', data)
-      let uniqueArray = data.reduce((accumulator, current) => {
-
-        if (!accumulator[current.Supplier_Part_Number__c]) {
-
-          accumulator[current.Supplier_Part_Number__c] = current;
-
-        }
-
-        return accumulator;
-
-      }, {});
-
-
-
-      uniqueArray = Object.values(uniqueArray);
-
-      console.log(uniqueArray);
-
-     
-        this.partNumberList = uniqueArray;
-      
-
-    }
-    else if (error) {
-      console.log('Error', error);
-    }
-  }
-  //-----------------------------
-
+  //-----------------------------lead.......................
   handleLeadSearch(event) {
     console.log('inlead')
-
+     window.clearTimeout(this.timer)
     this.lead = event.target.value;
     if (this.lead != '') {
+     
       this.bidRecord = false;
       this.xlatRecord = false;
       this.emailRecord = false;
       this.leadRecord = true;
-
+      this.accountRecord = false;
+      this.timer = setTimeout(() => {
+        this.getLead()
+      }, 500);
       console.log('inleadif')
     }
     else {
@@ -208,39 +242,68 @@ export default class LightningSearchCmp extends LightningElement {
     }
     console.log('lead', this.lead);
   }
+//get all the lead data 
+  getLead(){
+    searchLead({strLeads:this.lead })
+    .then(data =>{
+      console.log('leadData',data)
+      this.leadList = data;
+       console.log('leadlist', JSON.parse(JSON.stringify(this.leadList)));
+    })
+    .catch(error =>{
+      console.log('error',error)
+    })
+  }
 
   
 
-  @wire(searchLead, { strLeads: '$lead' })
-  retrievePartNumber2({ error, data }) {
+  //.........Account................................//
 
-    if (data) {
-      
-        this.leadList = data;
-      
-
-
-      console.log('leadlist', JSON.parse(JSON.stringify(this.leadList)));
-      console.log(' this.xlatId', this.xlatId)
+  handleAccountSearch(event) {
+    console.log('inAccount')
+    window.clearTimeout(this.timer)
+    this.Account = event.target.value;
+    if (this.Account != '') {
+      this.bidRecord = false;
+      this.xlatRecord = false;
+      this.emailRecord = false;
+      this.accountRecord = true;
+      this.leadRecord = false;
+      console.log('inaccountif')
+      this.timer = this.timer = setTimeout(() => {
+        this.getAccount()
+      }, 500);
+      console.log('inacc')
     }
-    else if (error) {
-      console.log('Error', error);
-    }
+    else {
+      console.log('inaccountelse')
 
+      this.accountRecord = false;
+    
+    }
+    console.log('account', this.Account);
+  }
+//geyaccount data 
+  getAccount(){
+    searchAccount({strAccounts: this.Account})
+    .then(data =>{
+      console.log('data',data);
+      this.accountList = data;
+      console.log('accountList', JSON.parse(JSON.stringify(this.accountList)));
+
+    })
+    .catch(error =>{
+      console.log('error',error);
+    })
   }
 
-  //.................google button....................
-  handleGoogle() {
-    this.showUpdateButton = false;
 
-    window.open('https://www.google.com', '_blank');
-  }
 
   //.....................Email...........................//
 
   handleEmailSearch(event) {
     console.log('inemail')
-
+     window.clearTimeout(this.timer)
     this.email = event.target.value;
     if (this.email != '') {
       this.bidRecord = false;
@@ -252,24 +315,24 @@ export default class LightningSearchCmp extends LightningElement {
       console.log('inemailelse')
 
       this.emailRecord = false;
+      this.timer = setTimeout(() => {
+        this.getEmail()
+      }, 500);
     }
     console.log('email', this.email);
   }
-
+  //get email
+getEmail(){
+  serachEmail({emails: this.email})
+  .then(data =>{
+    this.emailList = data;
+  })
+  .catch(error =>{
+    console.log('Error', error);
+  })
+}
  
-  @wire(serachEmail, { emails: '$email' })
-  retrievePartNumber1({ error, data }) {
-
-    if (data) {
-      
-        this.emailList = data;
-      
-    }
-    else if (error) {
-      console.log('Error', error);
-    }
-
-  }
+ 
 
   fields = ['supplier_cleanup__c.Status__c', 'supplier_cleanup__c.Supplier_Status__c'];
 

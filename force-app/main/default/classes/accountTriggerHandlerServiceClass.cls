@@ -95,10 +95,10 @@ public class accountTriggerHandlerServiceClass {
                     orderDet.Branch_Plant = branchPlantMap.get(oi.Product2Id);
 
                     orderDet.Line_Number = String.valueOf(oi.LineNumber);
-                    orderDet.Unit_Price = String.valueOf(oi.UnitPrice);
-                    orderDet.Extended_Price = String.valueOf(ExtendedPrice);
+                   // orderDet.Unit_Price = String.valueOf(oi.UnitPrice);
+                    //orderDet.Extended_Price = String.valueOf(ExtendedPrice);
                     orderDet.Discount_Price = String.valueOf(DiscountPrice);
-                    orderDet.Extended_Discount = String.valueOf(ExtendedDiscount);
+                    //orderDet.Extended_Discount = String.valueOf(ExtendedDiscount);
 
                     orderDetList.add(orderDet);
                 } else if (oi.OrderId == ord.Id && productCodeMap.containsKey(oi.Product2Id) && productCodeMap.get(oi.Product2Id) != 'Freight' && ord.B2BDarleyDollars__c != null) {
@@ -112,10 +112,10 @@ public class accountTriggerHandlerServiceClass {
                     orderDet.Quantity = String.valueOf(oi.Quantity);
                     orderDet.Item_Number = productCodeMap.get(oi.Product2Id);
                     orderDet.Line_Number = string.valueOf(oi.LineNumber);
-                    orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
-                    orderDet.Extended_Price = string.valueOf(ExtendedPrice);
+                    //orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
+                    //orderDet.Extended_Price = string.valueOf(ExtendedPrice);
                     orderDet.Discount_Price = string.valueOf(DiscountPrice);
-                    orderDet.Extended_Discount = string.valueOf(ExtendedDiscount);
+                    //orderDet.Extended_Discount = string.valueOf(ExtendedDiscount);
                     
                     system.debug('#Line: '+oi.LineNumber+', Product Code: '+productCodeMap.get(oi.Product2Id)+', UnitPrice: '+oi.UnitPrice+', Quantity: '+oi.Quantity+', Extended Price: '+ExtendedPrice+', Discount Price: '+DiscountPrice+', Extended-Discount: '+ExtendedDiscount);
                     orderDetList.add(orderDet);
@@ -124,8 +124,8 @@ public class accountTriggerHandlerServiceClass {
                     orderDet.Quantity = String.valueOf(oi.Quantity);
                     orderDet.Item_Number = productCodeMap.get(oi.Product2Id);
                     orderDet.Line_Number = string.valueOf(oi.LineNumber);
-                    orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
-                    orderDet.Extended_Price = string.valueOf(FreightExtendedPrice);
+                    //orderDet.Unit_Price = string.valueOf(oi.UnitPrice);
+                    //orderDet.Extended_Price = string.valueOf(FreightExtendedPrice);
                     orderDet.Discount_Price = string.valueOf(FreightExtendedPrice);
                     
                     orderDetList.add(orderDet);

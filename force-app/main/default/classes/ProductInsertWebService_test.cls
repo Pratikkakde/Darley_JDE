@@ -17,7 +17,7 @@ public class ProductInsertWebService_test {
     
     @istest
     public static void AddProduct_test(){
-        String reqBody = '{"ProductCode": "12345", "Vendor_Part_Number__c": "123", "Name": "Test From Postman", "Description": "Test for owner name", "JDE_Stocking_Type__c": "112234", "StockKeepingUnit": "112234", "Quantity_Available__c": "12", "Vendor__c": "123", "Branch_Plant__c": "Equipment","Record_Type_Calculation":"Defense"}';
+        String reqBody = '{"ProductCode": "12345", "Vendor_Part_Number__c": "123", "Name": "Test From Postman", "Description": "Test for owner name", "JDE_Stocking_Type__c": "112234", "StockKeepingUnit": "112234", "Quantity_Available__c": "12", "Vendor__c": "123", "Branch_Plant__c": "Equipment","Record_Type_Calculation":"Defense","JDE_Part_Number__c:" : "TEST1111"}';
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
         RestRequest request = new RestRequest();
         request.requestUri = '/updateOrderInSF';
@@ -31,7 +31,7 @@ public class ProductInsertWebService_test {
     
     @istest
     public static void AddProduct_test01(){
-        String reqBody = '{"ProductCode": "12345", "Vendor_Part_Number__c": "123", "Name": "Test From Postman", "Description": "Test for owner name", "JDE_Stocking_Type__c": "112235", "StockKeepingUnit": "112235", "Quantity_Available__c": "12", "Vendor__c": "123", "Branch_Plant__c": "Defense","Record_Type_Calculation":"Defense"}';
+        String reqBody = '{"ProductCode": "12345", "Vendor_Part_Number__c": "123", "Name": "Test From Postman", "Description": "Test for owner name", "JDE_Stocking_Type__c": "112235", "StockKeepingUnit": "112235", "Quantity_Available__c": "12", "Vendor__c": "123", "Branch_Plant__c": "Defense","Record_Type_Calculation":"Defense","JDE_Part_Number__c:" : "TEST1111"}';
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
         RestRequest request = new RestRequest();
         request.requestUri = '/updateOrderInSF';
@@ -47,7 +47,7 @@ public class ProductInsertWebService_test {
         Product2 pr = Utility_DataCreation.CreteProducts(1)[0];
         pr.StockKeepingUnit = '112236';
         insert pr;
-        String reqBody = '{"ProductCode": "12345", "Vendor_Part_Number__c": "123", "Name": "Test From Postman", "Description": "Test for owner name", "JDE_Stocking_Type__c": "112236", "StockKeepingUnit": "112236", "Quantity_Available__c": "12", "Vendor__c": "123", "Branch_Plant__c": "Pump"}';
+        String reqBody = '{"ProductCode": "12345", "Vendor_Part_Number__c": "123", "Name": "Test From Postman", "Description": "Test for owner name", "JDE_Stocking_Type__c": "112236", "StockKeepingUnit": "112236", "Quantity_Available__c": "12", "Vendor__c": "123", "Branch_Plant__c": "Pump","JDE_Part_Number__c:" : "TEST1111"}';
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
         RestRequest request = new RestRequest();
         request.requestUri = '/updateOrderInSF';

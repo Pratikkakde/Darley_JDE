@@ -8,10 +8,21 @@
 <template>
 	<template if:true={showcmp}>
 		<!-- xlat Table Button -->
-
-		<div class="button-container">
-			<div class="spaceDiv">
+           <div class="button-container slds-grid slds-gutters">
+			<div class="spaceDiv ">
 				<lightning-button variant="brand" label="Xlat Table" title="Primary action" onclick={handleXlat}
+					class="slds-m-left_meduim"></lightning-button>
+			</div>
+           <br>
+		   		<!-- Account button -->
+			<div class="spaceDiv">
+				<lightning-button variant="brand" label="Account" title="Primary action" onclick={handleAccount}
+					class="slds-m-left_meduim"></lightning-button>
+			</div>
+			<br>
+           <!-- Lead button -->
+			<div class="spaceDiv">
+				<lightning-button variant="brand" label="lead" title="Primary action" onclick={handleLead}
 					class="slds-m-left_meduim"></lightning-button>
 			</div>
 			<br>
@@ -28,18 +39,7 @@
 					class="slds-m-left_meduim"></lightning-button>
 			</div>
 
-			<!-- google button -->
-			<div class="spaceDiv">
-				<lightning-button variant="brand" label="Google" title="Primary action" onclick={handleGoogle}
-					class="slds-m-left_meduim"></lightning-button>
-			</div>
-
-
-			<!-- Lead button -->
-			<div class="spaceDiv">
-				<lightning-button variant="brand" label="lead" title="Primary action" onclick={handleLead}
-					class="slds-m-left_meduim"></lightning-button>
-			</div>
+	
 
 		</div>
 
@@ -52,7 +52,30 @@
 			<br>
 		</template>
 
-
+<!-- Account -->
+<template if:true={showAccountInput}>
+	<div>
+		<lightning-input onchange={handleAccountSearch} label="Account" name="enter-search" type="search"
+			value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
+	</div>
+	<br>
+</template>
+<!-- lead -->
+<template if:true={showLeadInput}>
+	<div>
+		<lightning-input onchange={handleLeadSearch} label="Lead" name="enter-search" type="search"
+			value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
+	</div>
+	<br>
+</template>
+<!-- Email -->
+<template if:true={showEmailInput}>
+	<div>
+		<lightning-input onchange={handleEmailSearch} label="Email" name="enter-search" type="search"
+			value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
+	</div>
+	<br>
+</template>
 		<!-- manufacturer part number -->
 		<template if:true={showPartNumberInput}>
 			<div>
@@ -63,26 +86,6 @@
 
 
 		</template>
-
-		<!-- Email -->
-		<template if:true={showEmailInput}>
-			<div>
-				<lightning-input onchange={handleEmailSearch} label="Email" name="enter-search" type="search"
-					value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
-			</div>
-			<br>
-		</template>
-
-		<!-- lead -->
-		<template if:true={showLeadInput}>
-			<div>
-				<lightning-input onchange={handleLeadSearch} label="Lead" name="enter-search" type="search"
-					value={ParentName} style="color:grey; width: 300px; font-weight : bold"></lightning-input>
-			</div>
-			<br>
-		</template>
-
-
 
 		<!-- datatable of xlat obj -->
 
@@ -366,6 +369,72 @@
 			<template if:false={leadList.length}>
 				<div class="noRecords" style="margin-bottom:50px; margin-top:-20px;">
 					No records of Lead have been found.
+				</div>
+			</template>
+		</template>
+
+		
+		<!-- Account filter -->
+
+
+		<template if:true={accountRecord}>
+			
+			<template if:true={accountList.length}>
+				<div style="border: 1px solid rgb(229, 229, 229);">
+					<div class="slds-table--header-fixed_container " style="height:300px; ">
+						<div class="slds-scrollable" style="height:100%;">
+							<table class=" slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered
+						slds-table--header-fixed" style=" table-layout: fixed">
+								<!-- Header start here -->
+								<thead>
+									<tr class="slds-line-height_reset">
+										
+                                         <th class="slds-cell-wrap" scope="col" style="width: 50%;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-right_xx-small "
+												title="Account Name"> Account Name
+											</div>
+										</th>
+										<th class="slds-cell-wrap" scope="col" style="width: 50%;">
+											<div class="slds-line-clamp slds-cell-fixed slds-p-top_x-small slds-p-left_x-small"
+												title="Supplier Rating">
+												Supplier Rating
+											</div>
+										</th>
+
+									</tr>
+								</thead>
+								<!--Body of the bid Table start here -->
+								<tbody>
+									<template for:each={accountList} for:item="accountRecord" for:index="index">
+										<tr class="slds-hint-parent" key={accountRecord.Id}>
+
+											
+
+
+
+											<td data-label="Account Name" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="Manufacturer Part Number">
+													{accountRecord.Name}
+												</div>
+											</td>
+											<td data-label="Supplier Rating" class="slds-cell-wrap">
+												<div class="slds-line-clamp" title="child">
+													{accountRecord.Supplier_Rating__c}
+
+												</div>
+											</td>
+										</tr>
+									</template>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</template>
+
+			<template if:false={accountList.length}>
+				<div class="noRecords" style="margin-bottom:50px; margin-top:-20px;">
+					No records of Account have been found.
 				</div>
 			</template>
 		</template>

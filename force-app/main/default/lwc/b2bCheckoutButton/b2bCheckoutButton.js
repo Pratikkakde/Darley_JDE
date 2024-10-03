@@ -35,7 +35,7 @@ export default class B2BCheckoutButton extends LightningElement {
         if (this.isLoading || this.isButtonDisabled) {
             event.preventDefault();
         } else if (this.communityURL) {
-            window.open(this.communityURL + '/checkout', '_self');
+            window.open(this.communityURL + 'checkout', '_self');
         }
     }
 
