@@ -249,54 +249,57 @@ public class AccountTriggerHandler {
             }
         }
     } 
-
-/******************************************************************************************************************************************************
+  /******************************************************************************************************************************************************
     This method is call when the email field is updated and also when the email is add to the previous fields 
 ******************************************************************************************************************************************************/
-public static void sendEmailOnUpdatethefieldEmailAddresses(List<Account> accListEmailUpdate,Map<Id, Account> oldMapAccRecord){
-    Map<Id, String> accListEmailUpdateId = new Map<Id, String>();
-    Id recordTypeId = Schema.SObjectType.Bid_Line_Item__c.getRecordTypeInfosByName().get('TLS').getRecordTypeId();
-    If(!accListEmailUpdate.isEmpty()){
-        For(Account acc : accListEmailUpdate){
-            // ccheque the record is having the old value is null and the acc recored is having the new email added to the fields 
-            If(oldMapAccRecord.get(acc.id).Email_Address__c==null && acc.Email_Address__c!= null){// it fire when the fields is empty and user is add the email to null fields 
-                accListEmailUpdateId.put(acc.id,acc.Email_Address__c);
-            } else if (oldMapAccRecord.get(acc.id).Email_Address__c!=null && acc.Email_Address__c!= null) {//when the user add the new Email to the old email 
-                If (acc.Email_Address__c.length()> oldMapAccRecord.get(acc.Id).Email_Address__c.length()){
-                    //accListEmailUpdateId.put(acc.Id,acc.Email_Address__c.remove(oldMapAccRecord.get(acc.id).Email_Address__c).removeStart(';'));
+    public static void sendEmailOnUpdatethefieldEmailAddresses(List<Account> accListEmailUpdate,Map<Id, Account> oldMapAccRecord){
+        Map<Id, String> accListEmailUpdateId = new Map<Id, String>();
+        Id recordTypeId = Schema.SObjectType.Bid_Line_Item__c.getRecordTypeInfosByName().get('TLS').getRecordTypeId();
+        If(!accListEmailUpdate.isEmpty()){
+            For(Account acc : accListEmailUpdate){
+                // ccheque the record is having the old value is null and the acc recored is having the new email added to the fields 
+                If(oldMapAccRecord.get(acc.id).Email_Address__c==null && acc.Email_Address__c!= null){// it fire when the fields is empty and user is add the email to null fields 
+                    accListEmailUpdateId.put(acc.id,acc.Email_Address__c);
+                } else if (oldMapAccRecord.get(acc.id).Email_Address__c!=null && acc.Email_Address__c!= null) {//when the user add the new Email to the old email 
+                    If (acc.Email_Address__c.length()> oldMapAccRecord.get(acc.Id).Email_Address__c.length()){
+                        //accListEmailUpdateId.put(acc.Id,acc.Email_Address__c.remove(oldMapAccRecord.get(acc.id).Email_Address__c).removeStart(';'));
+                    }
                 }
             }
         }
-    }
-    Map<Id,Bid_line_item__c> mapBidLineAccoiuntId = new  Map<Id,Bid_line_item__c>();
-    Map<String,Bid_line_item__c> mapBidLineNamewith = new Map<String,Bid_line_item__c>();
-   If(!accListEmailUpdateId.isEmpty()){
-        For(Bid_Line_Item__c bidVar :[SELECT  Id, Name, RecordTypeId, Bid_Supplier__c, Lead__c,Status__c,RFQ_Number__r.Contract__c ,Supplier_Name_Text__c, Quote_Numbers__c, 
-                                      Before_due_date__c, Due_Date__c, Lead__r.Email_Address__c,Lead__r.Company,Bid_Supplier__r.Email_Address__c,Bid_Supplier__r.Name, RFQ_Number__r.Owner.Email
-                                      FROM Bid_Line_Item__c
-                                      WHERE Bid_Supplier__c IN :accListEmailUpdateId.keyset() AND Due_Date__c > TODAY AND RecordType.Id=:recordTypeId AND Quote_Type__c='Quoted' ]){
-                                          bidVar.Bid_Supplier__r.Email_Address__c= accListEmailUpdateId.get(bidVar.Bid_Supplier__c);  
-                                          system.debug('the email fields in the '+accListEmailUpdateId.get(bidVar.Bid_Supplier__c));
-                                          If(bidVar.Lead__r.Email_Address__c!=null){
-                                              bidVar.Lead__r.Email_Address__c=accListEmailUpdateId.get(bidVar.Bid_Supplier__c);
+        Map<Id,Bid_line_item__c> mapBidLineAccoiuntId = new  Map<Id,Bid_line_item__c>();
+        Map<String,Bid_line_item__c> mapBidLineNamewith = new Map<String,Bid_line_item__c>();
+       If(!accListEmailUpdateId.isEmpty()){
+            For(Bid_Line_Item__c bidVar :[SELECT  Id, Name, RFQ_Number__r.Name,RecordTypeId, Bid_Supplier__c, Lead__c,Status__c,RFQ_Number__r.Contract__c ,Supplier_Name_Text__c, Quote_Numbers__c, Bid_Group_Items__c,RFQ_Number__r.Due_Date__c,
+                                          Before_due_date__c, Due_Date__c, Lead__r.Email_Address__c,Lead__r.Company,Bid_Supplier__r.Email_Address__c,Bid_Supplier__r.Name, RFQ_Number__r.Owner.Email,RFQ_Number__r.Owner.Name
+                                          FROM Bid_Line_Item__c
+                                          WHERE Bid_Supplier__c IN :accListEmailUpdateId.keyset() AND Due_Date__c > TODAY AND RecordType.Id=:recordTypeId AND Quote_Type__c!='No Quote' ]){
+                                          
+                                              bidVar.Bid_Supplier__r.Email_Address__c= accListEmailUpdateId.get(bidVar.Bid_Supplier__c);  
+                                              system.debug('the email fields in the '+accListEmailUpdateId.get(bidVar.Bid_Supplier__c));
+                                              If(bidVar.Lead__r.Email_Address__c!=null){
+                                                  bidVar.Lead__r.Email_Address__c=accListEmailUpdateId.get(bidVar.Bid_Supplier__c); 
 
-                                          }
-                                          mapBidLineAccoiuntId.put(bidVar.RFQ_Number__c,bidVar);
-                                          mapBidLineNamewith.put(bidVar.Bid_Supplier__r.Name+'_'+bidVar.Quote_Numbers__c+'.pdf',bidVar);
-                                      } 
-    }
-    Map<Attachment,Bid_Line_Item__c> mapAttchBidLine = new Map<Attachment,Bid_Line_Item__c>();
-    If(!mapBidLineAccoiuntId.isEmpty()){
-        for (Attachment attchVar :[SELECT Id, parentID, Name, Body, ContentType FROM Attachment WHERE ParentID In : mapBidLineAccoiuntId.keyset() AND Name IN : mapBidLineNamewith.keySet() ]){
-            If (mapBidLineNamewith.containsKey(attchVar.Name)){
-                mapAttchBidLine.put(attchVar,mapBidLineNamewith.get(attchVar.Name));
+                                              }
+                                              mapBidLineAccoiuntId.put(bidVar.RFQ_Number__c,bidVar);
+                                              mapBidLineNamewith.put(bidVar.Bid_Supplier__r.Name+'_'+bidVar.Quote_Numbers__c+'.pdf',bidVar);
+                                          } 
+        }
+        Map<Attachment,Bid_Line_Item__c> mapAttchBidLine = new Map<Attachment,Bid_Line_Item__c>();
+        If(!mapBidLineAccoiuntId.isEmpty()){
+            for (Attachment attchVar :[SELECT Id, parentID, Name, Body, ContentType FROM Attachment WHERE ParentID In : mapBidLineAccoiuntId.keyset() AND Name IN : mapBidLineNamewith.keySet() ]){
+                If (mapBidLineNamewith.containsKey(attchVar.Name)){
+                    mapAttchBidLine.put(attchVar,mapBidLineNamewith.get(attchVar.Name));
+                }
             }
         }
+        If(!mapAttchBidLine.isEmpty()){
+            // for the code sorthing calling the second method and passing the Attachment to the method 
+            System.debug('Map of bid line item and '+mapAttchBidLine);
+            Lead_trigger_Handler.sendEmailTotheSupplierWithAttachMent(mapAttchBidLine);
+        }
     }
-    If(!mapAttchBidLine.isEmpty()){
-        // for the code sorthing calling the second method and passing the Attachment to the method 
-        System.debug('Map of bid line item and '+mapAttchBidLine);
-        Lead_trigger_Handler.sendEmailTotheSupplierWithAttachMent(mapAttchBidLine);
-    }
-}
+    
+ 
+    
 }

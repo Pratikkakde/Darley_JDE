@@ -42,6 +42,7 @@
                                 prd.Quantity_Commited__c = Integer.valueOf(requestData.get('committed'));
                                 prd.Quantity_Backorder__c = Integer.valueOf(requestData.get('backorder'));
                                 prd.Line_Type__c = String.valueOf(requestData.get('LineType'));
+                                prd.Quote_Description__c = String.valueOf(requestData.get('Description'));
                                 try{
                                     update prd ;
                                 returnMessage = '{\n'+'\"Status\":\"Product Update Successfully\",\n'+'\"Product Id\": '+prd.Id+'\n}';
@@ -70,6 +71,8 @@
                         pr.Quantity_Commited__c = Integer.valueOf(requestData.get('committed'));
                         pr.Quantity_Backorder__c = Integer.valueOf(requestData.get('backorder'));
                         pr.Line_Type__c = String.valueOf(requestData.get('LineType'));
+                        pr.Quote_Description__c = String.valueOf(requestData.get('Description'));
+                        pr.Description = String.valueOf(requestData.get('Description'));
                         try{
                             insert pr ;
                         returnMessage = '{\n'+'\"Status\":\"Product Insert Successfully\",\n'+'\"Product Id\": '+pr.Id+'\n}';

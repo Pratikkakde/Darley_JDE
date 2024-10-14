@@ -115,7 +115,7 @@ global class UpdatePriceBookWebService {
             pbMap.put(pb.Id,pb.name);
             allPricebookIds.add(pb.Id);
         }
-        List<Product2> products = (List<Product2>) Database.query('SELECT Id, ProductCode FROM Product2 WHERE ProductCode = :prCode LIMIT 1');
+        List<Product2> products = (List<Product2>) Database.query('SELECT Id, ProductCode FROM Product2 WHERE ProductCode = :prCode AND Manual_Price_Update__c = false LIMIT 1');
         if (!products.isEmpty()) {
             Product2 prod = products[0];
             System.debug(prod);
