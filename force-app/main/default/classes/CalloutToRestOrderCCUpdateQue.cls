@@ -1,3 +1,10 @@
+/**
+ * @description       :
+ * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @group             :
+ * @last modified on  : 11-07-2024
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ **/
 public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.AllowsCallouts {
     
     public List<order> newList;
@@ -9,7 +16,7 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
     }
     
     public void execute(QueueableContext context) {
-        //your code including the callout  
+        //your code including the callout
         Id creCardId ;
         String accRecordTypeId;
         String AccountId;
@@ -21,21 +28,17 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
                 accRecordTypeId = ord.Account.RecordTypeId;
                 System.debug('accRecordTypeId:= '+accRecordTypeId);
             }
-            
-        }
-        
-        
-        List<Account> acc = [SELECT Id, Name, RecordTypeId From Account WHERE Id =:AccountId ];
+        }      List<Account> acc = [SELECT Id, Name, RecordTypeId From Account WHERE Id =:AccountId ];
         //List<CustomerCardPayment__c> CCdetail = [Select Id, Contact__c, Contact__r.Name, Card_Type__c, Card_Last_Four__c  from CustomerCardPayment__c where id=: creCardId];
         SalesOrderWrapper.creditCardDetail wrapperObj = new SalesOrderWrapper.creditCardDetail();
-        if(!newList.isEmpty() && !acc.isEmpty()){
-            for(order ord : newList){    
+        if(!newList.isEmpty() ){
+            for(order ord : newList){
                 system.debug('ord --->'+ord);
                 if(ord.B2BGrandTotal__c !=null && ord.JDE_Order_Number__c != null && ord.B2BCreditCardName__c != null){
                     wrapperObj.orderNumber = string.valueOf(ord.JDE_Order_Number__c);
                     wrapperObj.SFAmount = string.valueOf(ord.B2BGrandTotal__c);
                     wrapperObj.SFCCNumber = ord.B2BCreditCardName__c.right(4);
-                    wrapperObj.SFCustomerName = acc[0].Name;
+                    wrapperObj.SFCustomerName = ord.Payment_Type__c != 'Invoice' && ord.Cardholder_Name__c != 'Failed to capture cardholder name' ? ord.Cardholder_Name__c:'';
                     wrapperObj.SFCardName = ord.B2BCreditCardName__c.substringBefore(' ');
                     //System.debug('Auth Code'+ord.B2B_CreditCard_AuthCode__c);
                     //System.debug('Exp Date'+ord.B2B_CreditCard_ExpDate__c);
@@ -62,12 +65,12 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
                 system.debug('JDE_Order_Number__c: '+newList[0].JDE_Order_Number__c);
                 
                 calloutToUpdateCcDetails(jsonSt, 'Order-Credit Card', 'CreditCard Detail to JDE');
-            }   
+            }
         }
     }
     
     public static void calloutToUpdateCcDetails(String wrapperList, String ObjectName, String ObjOpperation){
-        //String endpoint = 'https://jdeuxdv1.darley.com:4444/jderest/v3/orchestrator/ACBM_ORCH_autoCreateCCPrepaymentRecord'; 
+        //String endpoint = 'https://jdeuxdv1.darley.com:4444/jderest/v3/orchestrator/ACBM_ORCH_autoCreateCCPrepaymentRecord';
         String endpoint = 'callout:JDE_Integration/ACBM_ORCH_autoCreateCCPrepaymentRecord';
         HttpRequest req = new HttpRequest();
         req.setTimeout(85000);
@@ -75,7 +78,7 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
         req.setMethod('POST');
         req.setHeader('Content-Type', 'application/json');
         
-        // Define the request body 
+        // Define the request body
         system.debug('wrapperList'+ wrapperList);
         req.setBody(wrapperList);
         
@@ -83,14 +86,14 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
         Http http = new Http();
         HTTPResponse res = http.send(req);
         system.debug('Response Status: '+res);
-        system.debug('Response StatusCode: '+res.getStatusCode()); 
+        system.debug('Response StatusCode: '+res.getStatusCode());
         String responseBody = res.getBody();
         Map<String, object> resquestData = (map<String, Object>)json.deserializeUntyped(wrapperList);
-      
+        
         if (res.getStatusCode() == 200) {
             system.debug('responseBody'+responseBody);
             Map<String, object> responseData = (map<String, Object>)json.deserializeUntyped(responseBody);
-
+            
             //API Integration Log Generation on success
             Exception_Handler.createAilRecordonSuccess(JSON.serializePretty(resquestData),endpoint,'POST',ObjOpperation,ObjectName,JSON.serializePretty(responseData));
         } else {

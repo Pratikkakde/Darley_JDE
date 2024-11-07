@@ -42,7 +42,7 @@
                                 prd.Quantity_Commited__c = Integer.valueOf(requestData.get('committed'));
                                 prd.Quantity_Backorder__c = Integer.valueOf(requestData.get('backorder'));
                                 prd.Line_Type__c = String.valueOf(requestData.get('LineType'));
-                                prd.Quote_Description__c = String.valueOf(requestData.get('Description'));
+                               // prd.Quote_Description__c = String.valueOf(requestData.get('Description'));
                                 try{
                                     update prd ;
                                 returnMessage = '{\n'+'\"Status\":\"Product Update Successfully\",\n'+'\"Product Id\": '+prd.Id+'\n}';
@@ -53,7 +53,7 @@
                             System.debug('returnMessage --->'+returnMessage);
                             Exception_Handler.createAilRecordonFail(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updateOrderInSF','POST','Product Update from JDE','Product',returnMessage,returnMessage);
                         }
-                        
+
                     }else{
                         Product2 pr = new Product2();
                         pr.ProductCode = String.valueOf(requestData.get('ProductCode'));
