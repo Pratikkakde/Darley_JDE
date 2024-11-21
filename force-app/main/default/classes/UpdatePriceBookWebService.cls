@@ -167,7 +167,7 @@ global class UpdatePriceBookWebService {
                 for(PriceBook2 pb: [SELECT Id, name,isactive FROM Pricebook2 Where isactive = true AND Name In :priceBookNames ORDER BY IsStandard DESC ]){
                     
                     PricebookEntry pbstdEntry = new PricebookEntry();
-                    if(pb.name == pbMap.get(pb.id)&& priceBookUnitPrices.get(pbMap.get(pb.id)) == null && pb.name== 'Standard Price Book'){
+                    if(pb.name == pbMap.get(pb.id)&& priceBookUnitPrices.get(pbMap.get(pb.id)) == null && pb.name == 'Standard Price Book'){
                         pbstdEntry.product2Id = prod.id;
                         
                         pbstdEntry.isActive = false;
@@ -224,7 +224,7 @@ global class UpdatePriceBookWebService {
                     
                 }catch(exception ex){
                     system.debug('Error: '+ex.getMessage());
-                    returnMessage = 'Failed';
+                    returnMessage = 'Failed '+ex.getMessage();
                     Exception_Handler.createAilRecordonFail(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updatePriceBook','POST','Update Pricebook from JDE','Price Book Entry',returnMessage,returnMessage);
                 }
             }

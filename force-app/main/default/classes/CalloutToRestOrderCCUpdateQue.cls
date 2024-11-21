@@ -43,7 +43,7 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
                     //System.debug('Auth Code'+ord.B2B_CreditCard_AuthCode__c);
                     //System.debug('Exp Date'+ord.B2B_CreditCard_ExpDate__c);
                     wrapperObj.SFAuthCode = ord.B2B_CreditCard_AuthCode__c;
-                    wrapperObj.SFCCExpDate = ord.B2B_CreditCard_ExpDate__c;
+                    wrapperObj.SFCCExpDate = ord.B2B_CreditCard_ExpDate__c;f
                     wrapperObj.SFAuthID = ord.Payment_Transaction_Id__c;
                 }
             }
@@ -53,17 +53,12 @@ public class CalloutToRestOrderCCUpdateQue implements Queueable, Database.Allows
         String jsonStr = JSON.serialize(wrapperObj).replace('_', ' ');
         String jsonSt = jsonStr.replace('null', '""');
         system.debug('JSON String:= '+jsonSt);
-        
-        
         String EquipmentCustomer = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('Equipment Customer').getRecordTypeId();
-        
         system.debug('JDE_Order_Number__c: '+newList[0].JDE_Order_Number__c);
-        
         //Creating New Order with orderLineItems in JDE.
         if(!newList.isEmpty() && !acc.isEmpty()){
             if(newList[0].JDE_Order_Number__c != null && acc[0].RecordTypeId == EquipmentCustomer){
                 system.debug('JDE_Order_Number__c: '+newList[0].JDE_Order_Number__c);
-                
                 calloutToUpdateCcDetails(jsonSt, 'Order-Credit Card', 'CreditCard Detail to JDE');
             }
         }
