@@ -1,10 +1,10 @@
 /**
- * @description       :
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
- * @group             :
- * @last modified on  : 11-18-2024
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
- **/
+* @description       :
+* @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+* @group             :
+* @last modified on  : 11-26-2024
+* @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+**/
 public class Quote_Handler {
     public static void requirecontactrole(list<quote> triggernew){
         list<opportunity> opplist=[select id from opportunity where id not in (select opportunityid from OpportunityContactRole)];
@@ -44,7 +44,6 @@ public class Quote_Handler {
         map<id,decimal> oppidmap=new map<id,decimal>();
         Map<Id, Id> quoteMap = new Map<Id, Id>();
         //  Id devRecordTypeId = Schema.SObjectType.quote.getRecordTypeInfosByName().get('Equipment').getRecordTypeId();
-        
         Set<String> recTypeId = new Set<String> ();
         for (RecordType recType : [Select Id  From RecordType  Where SobjectType = 'Quote' and (DeveloperName ='Pump' or  DeveloperName ='Equipment')]){
             recTypeId.add(recType.Id);
@@ -52,26 +51,23 @@ public class Quote_Handler {
         //      system.debug('RecType'+RecType);
         for(quote q:triggernew){
             if(q.opportunityid!=null && (q.TotalPrice!=null ||triggeroldmaplist.get(q.id).TotalPrice!=q.TotalPrice)  && recTypeId.contains(q.RecordTypeId)){
-                    quoteMap.put(q.Id, q.OpportunityId);
-                
+                quoteMap.put(q.Id, q.OpportunityId);
                 oppidmap.put(q.OpportunityId, q.TotalPrice);
                 system.debug('oppidmap'+oppidmap);
                 quoteid.add(q.OpportunityId);
                 system.debug('quoteid'+quoteid);
             }
         }
-        System.enqueueJob(new syncQuote(quoteMap));
-        
+       // System.enqueueJob(new syncQuote(quoteMap));
         list<opportunity> opplist=[select id,amount from opportunity where  id in :quoteid ];
         system.debug('opplist'+ opplist);
         for(opportunity opp :opplist){
-            // opp.amount=oppidmap.get(opp.id);
+            opp.amount=oppidmap.get(opp.id);
             system.debug('opp.amount'+opp.amount);
-            
         }
         update opplist;
-        
     }
+    
     public static void quoteDarleyCostupdate(list<quote> triggernew,Map<id,quote> triggeroldmaplist ){
         set<id> quoteid=new set<id>();
         map<id,decimal> oppidmap=new map<id,decimal>();
