@@ -25,8 +25,9 @@
                         
                         String returnMessage = '';
                         try{
-                            Map<String,Object> requestData = (Map<String,Object>)JSON.deserializeuntyped(RestContext.request.RequestBody.tostring());
-                            System.debug('requestData ----> '+requestData);
+                            Map<String,Object> requestData = (Map<String,Object>)JSON.deserializeUntyped(RestContext.request.RequestBody.toString());
+                            String JDE_Part_Number = String.valueOf(requestData.get('JDE_Part_Number__c'));
+                            System.debug('requestData : ' + requestData);
                             String ProdSKU = String.valueOf(requestData.get('StockKeepingUnit'));
                             List<Product2> prdList= [SELECT id ,Vendor_Part_Number__c,JDE_Stocking_Type__c,Quantity_Available__c,Vendor__c, Record_Type__c, Quantity_On_Hand__c, Quantity_Commited__c, Quantity_Backorder__c, Line_Type__c FROM Product2 WHERE StockKeepingUnit =:ProdSKU];
                             if (!prdList.isEmpty()){
@@ -42,7 +43,7 @@
                                 prd.Quantity_Commited__c = Integer.valueOf(requestData.get('committed'));
                                 prd.Quantity_Backorder__c = Integer.valueOf(requestData.get('backorder'));
                                 prd.Line_Type__c = String.valueOf(requestData.get('LineType'));
-                               // prd.Quote_Description__c = String.valueOf(requestData.get('Description'));
+                                // prd.Quote_Description__c = String.valueOf(requestData.get('Description'));
                                 try{
                                     update prd ;
                                 returnMessage = '{\n'+'\"Status\":\"Product Update Successfully\",\n'+'\"Product Id\": '+prd.Id+'\n}';
@@ -53,7 +54,7 @@
                             System.debug('returnMessage --->'+returnMessage);
                             Exception_Handler.createAilRecordonFail(JSON.serializePretty(requestData),URL.getOrgDomainUrl().toExternalForm()+'/services/apexrest/updateOrderInSF','POST','Product Update from JDE','Product',returnMessage,returnMessage);
                         }
-
+                        
                     }else{
                         Product2 pr = new Product2();
                         pr.ProductCode = String.valueOf(requestData.get('ProductCode'));
@@ -66,13 +67,14 @@
                         pr.Vendor__c = String.valueOf(requestData.get('Vendor__c'));
                         pr.Branch_Plant__C = String.valueOf(requestData.get('Branch_Plant__C'));
                         pr.Record_Type__c = String.valueOf(requestData.get('Record_Type_Calculation'));
-                        pr.JDE_Part_Number__c = String.valueOf(requestData.get('JDE_Part_Number__c'));
+                        pr.JDE_Part_Number__c = JDE_Part_Number;
                         pr.Quantity_On_Hand__c = Integer.valueOf(requestData.get('onHand'));
                         pr.Quantity_Commited__c = Integer.valueOf(requestData.get('committed'));
                         pr.Quantity_Backorder__c = Integer.valueOf(requestData.get('backorder'));
                         pr.Line_Type__c = String.valueOf(requestData.get('LineType'));
                         pr.Quote_Description__c = String.valueOf(requestData.get('Name')) +' '+String.valueOf(requestData.get('Description'));
                         pr.Description = String.valueOf(requestData.get('Name')) +' '+String.valueOf(requestData.get('Description'));
+                        pr.pimly__Admin_Name__c = JDE_Part_Number;
                         try{
                             insert pr ;
                         returnMessage = '{\n'+'\"Status\":\"Product Insert Successfully\",\n'+'\"Product Id\": '+pr.Id+'\n}';
